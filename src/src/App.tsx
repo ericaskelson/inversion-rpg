@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CharacterSelect } from './components/CharacterSelect';
+import { CharacterCreator } from './components/CharacterCreator';
 import { ScenarioPlayer } from './components/ScenarioPlayer';
 import type { Character, ScenarioBundle, GameState } from './types/game';
 import './App.css';
@@ -7,7 +7,7 @@ import './App.css';
 type AppState =
   | { phase: 'loading' }
   | { phase: 'error'; message: string }
-  | { phase: 'character-select' }
+  | { phase: 'character-creation' }
   | { phase: 'playing'; gameState: GameState };
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
       })
       .then((data: ScenarioBundle) => {
         setScenarios(data);
-        setAppState({ phase: 'character-select' });
+        setAppState({ phase: 'character-creation' });
       })
       .catch(err => {
         setAppState({ phase: 'error', message: err.message });
@@ -36,7 +36,7 @@ function App() {
     return start?.id ?? null;
   };
 
-  const handleCharacterSelect = (character: Character) => {
+  const handleCharacterComplete = (character: Character) => {
     const startId = findStartScenario();
     if (!startId) {
       setAppState({ phase: 'error', message: 'No start scenario found' });
@@ -67,7 +67,7 @@ function App() {
   };
 
   const handleRestart = () => {
-    setAppState({ phase: 'character-select' });
+    setAppState({ phase: 'character-creation' });
   };
 
   // Render based on state
@@ -84,8 +84,8 @@ function App() {
     );
   }
 
-  if (appState.phase === 'character-select') {
-    return <CharacterSelect onSelect={handleCharacterSelect} />;
+  if (appState.phase === 'character-creation') {
+    return <CharacterCreator onComplete={handleCharacterComplete} />;
   }
 
   if (appState.phase === 'playing' && scenarios) {

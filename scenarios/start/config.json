@@ -1,6 +1,11 @@
 {
   "id": "start",
   "isStart": true,
+  "startConfig": {
+    "minFate": null,
+    "maxFate": null,
+    "chance": 100
+  },
   "choices": [
     {
       "text": "Head to the tavern—you could use a drink",

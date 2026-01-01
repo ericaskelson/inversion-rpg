@@ -1,0 +1,235 @@
+{
+  "diplomacy-fail": {
+    "id": "diplomacy-fail",
+    "isEnding": true,
+    "endingTitle": "Thrown Out",
+    "choices": [],
+    "content": "# Words Fail\n\n\"I don't want your pity!\" he roars, your offered drink slapped from your hand. The mug shatters against the floor.\n\nYour attempt to calm him only made things worse. Now he's angrier, and the whole tavern is watching.\n\nMarta's hand closes on a cudgel behind the bar. \"Take it outside. Now. Both of you.\"\n\nYou're escorted out with the drunk, finding yourself in the cold evening air with a belligerent stranger and dwindling options.\n\n**[END - Thrown Out]**\n"
+  },
+  "diplomacy-success": {
+    "id": "diplomacy-success",
+    "isEnding": true,
+    "endingTitle": "The Peacemaker",
+    "choices": [],
+    "content": "# Words Like Honey\n\nYou catch his wrist mid-swing, not stopping it but redirecting it, guiding him into a seat beside you.\n\n\"Easy, friend. I can see you've had a hard day. Let me buy you a drink—the good stuff, not that watered swill.\"\n\nSomething in your voice cuts through the ale-fog in his brain. His shoulders slump, the fight draining out of him.\n\n\"Sorry,\" he mumbles. \"Lost my farm last month. Been drinking ever since.\"\n\nBy the night's end, you've heard his whole story, helped him find a lead on work, and made a friend in low places. Marta watches with quiet approval.\n\n**[END - The Peacemaker]**\n"
+  },
+  "fight-lose": {
+    "id": "fight-lose",
+    "isEnding": true,
+    "endingTitle": "The Humbled Stranger",
+    "choices": [],
+    "content": "# Knocked Down\n\nThe drunk's fist catches you square in the temple. Stars explode across your vision and the floor rushes up to meet you.\n\nYou come to moments later—or maybe minutes—with Marta standing over you, a bucket of cold water dripping from your face.\n\n\"Out,\" she says flatly. \"Both of you. I don't care who started it.\"\n\nYou stumble into the evening air, pride bruised worse than your face. The drunk is already snoring against the tavern wall.\n\nTomorrow is another day. Hopefully one with fewer fists.\n\n**[END - The Humbled Stranger]**\n"
+  },
+  "fight-win": {
+    "id": "fight-win",
+    "isEnding": true,
+    "endingTitle": "The Brawler's Welcome",
+    "choices": [],
+    "content": "# Victor\n\nYour fist connects solidly with his jaw. The drunk's eyes roll back and he crumples like a puppet with cut strings, unconscious before he hits the sawdust floor.\n\nThe tavern erupts in cheers—or at least, the part of it that bet on you does. Marta looks at you with newfound respect, sliding a fresh ale across the bar.\n\n\"On the house. Anyone who can shut Gorm up with one punch drinks free tonight.\"\n\nYou've made a name for yourself in Millbrook. Whether that's a good thing remains to be seen.\n\n**[END - The Brawler's Welcome]**\n"
+  },
+  "forest-path": {
+    "id": "forest-path",
+    "isEnding": true,
+    "endingTitle": "The Wanderer",
+    "choices": [],
+    "content": "# Thornwood's Edge\n\nThe forest swallows you whole. Within a dozen steps, the sounds of the village fade to nothing, replaced by rustling leaves and distant birdcall.\n\nThe path is overgrown but passable. Shafts of golden light pierce the canopy, illuminating dancing motes of pollen—or something more magical.\n\nYou walk until dusk, finding nothing but peace and the strange contentment of solitude. Sometimes the journey itself is the destination.\n\nAs night falls, you make camp beneath an ancient oak. Tomorrow, the path continues.\n\n**[END - The Wanderer]**\n"
+  },
+  "hidden-path": {
+    "id": "hidden-path",
+    "isEnding": true,
+    "endingTitle": "The Hidden Road",
+    "choices": [],
+    "content": "# The Secret Way\n\nYour keen eye catches it—the signpost doesn't quite sit right. One of the directional signs can pivot, and beneath it, worn runes are carved into the wood.\n\nYou rotate the sign, and the air shimmers. A fourth path reveals itself, one that wasn't there before, leading neither to village nor forest but somewhere... else.\n\nThe path is paved with stones that glow faintly in the fading light. Wherever this leads, it's not on any map.\n\nWith a smile, you step forward. Adventure, it seems, was waiting for you to notice it.\n\n**[END - The Hidden Road]**\n"
+  },
+  "start": {
+    "id": "start",
+    "isStart": true,
+    "choices": [
+      {
+        "text": "Head to the tavern—you could use a drink",
+        "outcomes": [
+          {
+            "condition": "default",
+            "next": "tavern-enter"
+          }
+        ]
+      },
+      {
+        "text": "The forest beckons with promises of adventure",
+        "outcomes": [
+          {
+            "condition": "default",
+            "next": "forest-path"
+          }
+        ]
+      },
+      {
+        "text": "Wait... there's something odd about that signpost",
+        "available": {
+          "requires": {
+            "attribute": "cunning",
+            "op": ">=",
+            "value": 3
+          }
+        },
+        "outcomes": [
+          {
+            "condition": "default",
+            "next": "hidden-path"
+          }
+        ]
+      }
+    ],
+    "content": "# The Crossroads\n\nYou stand at a weathered crossroads as the afternoon sun casts long shadows across the dirt path. A wooden signpost, its paint long faded, points in three directions.\n\nTo the west, smoke rises from chimneys—the village of Millbrook and its infamous tavern, The Rusty Nail. To the east, the dark treeline of Thornwood Forest looms, full of whispered dangers and forgotten treasures.\n\nThe wind carries the faint sound of laughter from the village, mingled with birdsong from the forest edge.\n\nWhat calls to you?\n"
+  },
+  "tavern-bar": {
+    "id": "tavern-bar",
+    "choices": [
+      {
+        "text": "Stand your ground—you were here first",
+        "outcomes": [
+          {
+            "condition": "default",
+            "next": "tavern-confrontation"
+          }
+        ]
+      },
+      {
+        "text": "Offer to buy him a drink to smooth things over",
+        "outcomes": [
+          {
+            "condition": {
+              "trait": "silver-tongued"
+            },
+            "next": "diplomacy-success"
+          },
+          {
+            "condition": "default",
+            "next": "diplomacy-fail"
+          }
+        ]
+      },
+      {
+        "text": "Quietly relocate to a corner table",
+        "outcomes": [
+          {
+            "condition": "default",
+            "next": "tavern-corner"
+          }
+        ]
+      }
+    ],
+    "content": "# At the Bar\n\nYou settle onto a worn wooden stool. The barkeep—Marta, according to the regulars—slides over without a word, one eyebrow raised in question.\n\n\"Ale, mead, or something stronger?\" Her voice is gravel and smoke. \"We've also got stew if you've got coin and an iron stomach.\"\n\nBefore you can answer, the drunk from the entrance staggers over and slams into your shoulder, sloshing his drink across the bar.\n\n\"Hey! You're in my spot!\" he slurs, though you're quite certain there are a dozen empty stools.\n"
+  },
+  "tavern-confrontation": {
+    "id": "tavern-confrontation",
+    "choices": [
+      {
+        "text": "Meet his fist with your own",
+        "outcomes": [
+          {
+            "condition": {
+              "attribute": "strength",
+              "op": ">=",
+              "value": 3
+            },
+            "next": "fight-win"
+          },
+          {
+            "condition": "default",
+            "next": "fight-lose"
+          }
+        ]
+      },
+      {
+        "text": "Duck and try to defuse the situation",
+        "outcomes": [
+          {
+            "condition": {
+              "trait": "silver-tongued"
+            },
+            "next": "diplomacy-success"
+          },
+          {
+            "condition": {
+              "attribute": "charisma",
+              "op": ">=",
+              "value": 4
+            },
+            "next": "diplomacy-success"
+          },
+          {
+            "condition": "default",
+            "next": "diplomacy-fail"
+          }
+        ]
+      },
+      {
+        "text": "Sidestep and slip out the back door",
+        "available": {
+          "chance": 0.4
+        },
+        "outcomes": [
+          {
+            "condition": {
+              "attribute": "cunning",
+              "op": ">=",
+              "value": 2
+            },
+            "next": "forest-path"
+          },
+          {
+            "condition": "default",
+            "next": "fight-lose"
+          }
+        ]
+      }
+    ],
+    "content": "# Confrontation\n\nThe drunk squares up, swaying dangerously. He's bigger than he looked from across the room—a former farmhand, maybe, with thick arms and a nose that's been broken more than once.\n\n\"Think you're better than me?\" he growls, loud enough that the tavern falls quiet. Marta sighs heavily behind the bar but makes no move to intervene. This isn't her first rodeo.\n\nThe other patrons watch with the hungry anticipation of people who've had too little entertainment lately.\n\nThe drunk throws a wild haymaker.\n"
+  },
+  "tavern-corner": {
+    "id": "tavern-corner",
+    "isEnding": true,
+    "endingTitle": "The Observer",
+    "choices": [],
+    "content": "# The Quiet Corner\n\nYou claim a table in the shadows, back to the wall, watching the room. Old habits.\n\nFrom here you can see everything—the merchants finalizing their deal with a handshake, Marta slipping something to the hooded figure along with their drink, and the drunk finally collapsing into a chair near the fire.\n\nA serving girl brings you an ale without being asked. \"You look like you needed one,\" she says with a knowing smile.\n\nThe evening passes peacefully. Sometimes the best adventures are the ones you don't have.\n\n**[END - The Observer]**\n"
+  },
+  "tavern-enter": {
+    "id": "tavern-enter",
+    "choices": [
+      {
+        "text": "Make your way to the bar",
+        "outcomes": [
+          {
+            "condition": "default",
+            "next": "tavern-bar"
+          }
+        ]
+      },
+      {
+        "text": "Find a quiet corner to observe",
+        "outcomes": [
+          {
+            "condition": "default",
+            "next": "tavern-corner"
+          }
+        ]
+      },
+      {
+        "text": "Shoulder past the drunk—you have no patience for fools",
+        "available": {
+          "requires": {
+            "trait": "hot-headed"
+          }
+        },
+        "outcomes": [
+          {
+            "condition": "default",
+            "next": "tavern-confrontation"
+          }
+        ]
+      }
+    ],
+    "content": "# The Rusty Nail\n\nYou push open the heavy oak door and step into The Rusty Nail. The tavern is surprisingly busy for this hour—farmers nursing ales after a long day, a group of merchants arguing over prices, and in the corner, a hooded figure who definitely isn't watching you.\n\nThe bar is tended by a heavyset woman with forearms like ham hocks, polishing a glass with practiced indifference. A fire crackles in the hearth, and the smell of stew fills the air.\n\nA drunk patron stumbles near the entrance, not quite blocking your path but clearly unstable.\n"
+  }
+}

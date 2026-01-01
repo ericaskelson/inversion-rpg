@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type {
   AppearanceConfig,
   AppearanceSelections,
@@ -157,13 +157,14 @@ export function AppearanceSelector({
   characterSex,
   onUpdate,
 }: AppearanceSelectorProps) {
-  // Determine current step based on what's selected
-  const currentStep: AppearanceStep = useMemo(() => {
+  // Track current step explicitly (allows navigating back without losing selections)
+  const [currentStep, setCurrentStep] = useState<AppearanceStep>(() => {
+    // Initialize to the first incomplete step
     if (!selections.build) return 'build';
     if (!selections.skinTone) return 'skinTone';
     if (!selections.hairColor) return 'hairColor';
     return 'portrait';
-  }, [selections]);
+  });
 
   // Filter portraits based on selections and sex
   const filteredPortraits = useMemo(() => {
@@ -179,32 +180,26 @@ export function AppearanceSelector({
   }, [config.portraits, selections, characterSex]);
 
   const handleStepClick = (step: AppearanceStep) => {
-    // Clear selections from this step forward
-    const newSelections = { ...selections };
-    const stepIndex = STEPS.findIndex(s => s.id === step);
-
-    STEPS.slice(stepIndex).forEach(s => {
-      switch (s.id) {
-        case 'build': newSelections.build = undefined; break;
-        case 'skinTone': newSelections.skinTone = undefined; break;
-        case 'hairColor': newSelections.hairColor = undefined; break;
-        case 'portrait': newSelections.portraitId = undefined; break;
-      }
-    });
-
-    onUpdate(newSelections);
+    // Just navigate to the step without clearing selections
+    setCurrentStep(step);
   };
 
   const handleBuildSelect = (id: BuildType) => {
-    onUpdate({ ...selections, build: id, skinTone: undefined, hairColor: undefined, portraitId: undefined });
+    onUpdate({ ...selections, build: id });
+    // Auto-advance to next step
+    setCurrentStep('skinTone');
   };
 
   const handleSkinToneSelect = (id: SkinTone) => {
-    onUpdate({ ...selections, skinTone: id, hairColor: undefined, portraitId: undefined });
+    onUpdate({ ...selections, skinTone: id });
+    // Auto-advance to next step
+    setCurrentStep('hairColor');
   };
 
   const handleHairColorSelect = (id: HairColor) => {
-    onUpdate({ ...selections, hairColor: id, portraitId: undefined });
+    onUpdate({ ...selections, hairColor: id });
+    // Auto-advance to next step
+    setCurrentStep('portrait');
   };
 
   const handlePortraitSelect = (id: string) => {

@@ -24,6 +24,51 @@ export type AttributeId =
 // CHARACTER CREATION TYPES
 // ============================================
 
+// ============================================
+// APPEARANCE SYSTEM
+// ============================================
+
+export type BuildType = 'slim' | 'average' | 'athletic' | 'muscular' | 'heavy';
+export type SkinTone = 'pale' | 'fair' | 'tan' | 'olive' | 'brown' | 'dark';
+export type HairColor = 'blonde' | 'brown' | 'black' | 'red' | 'gray' | 'white' | 'bald';
+
+export interface AppearanceOption {
+  id: string;
+  name: string;
+  description: string;
+  image?: string;
+  traits?: string[];
+  attributes?: Partial<Record<AttributeId, number>>;
+  fate?: number;
+}
+
+export interface Portrait {
+  id: string;
+  name: string;
+  image: string;
+  build: BuildType;
+  skinTone: SkinTone;
+  hairColor: HairColor;
+  sex: 'male' | 'female';
+  traits?: string[];
+  fate?: number;
+}
+
+export interface AppearanceConfig {
+  builds: (AppearanceOption & { id: BuildType })[];
+  skinTones: (AppearanceOption & { id: SkinTone })[];
+  hairColors: (AppearanceOption & { id: HairColor })[];
+  portraits: Portrait[];
+}
+
+// Appearance selections stored in builder state
+export interface AppearanceSelections {
+  build?: BuildType;
+  skinTone?: SkinTone;
+  hairColor?: HairColor;
+  portraitId?: string;
+}
+
 // Category IDs
 export type CategoryId =
   | 'sex'
@@ -83,6 +128,7 @@ export interface CharacterBuilderState {
   name: string;
   currentCategoryIndex: number;
   selections: Record<CategoryId, string[]>; // category -> selected option IDs
+  appearanceSelections: AppearanceSelections; // Special handling for appearance
   // Derived values (recalculated on each change)
   calculatedFate: number;
   calculatedAttributes: Record<AttributeId, number>;

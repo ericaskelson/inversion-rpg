@@ -42,8 +42,12 @@ function OptionCard({ option, selected, available, canSelect, onToggle }: Option
       className={`option-card ${selected ? 'selected' : ''} ${
         option.isDrawback ? 'drawback' : ''
       } ${!available ? 'unavailable' : ''} ${imageUrl ? 'has-image' : ''}`}
-      style={imageUrl ? { '--option-bg-image': `url(${imageUrl})` } as React.CSSProperties : undefined}
     >
+      {imageUrl && (
+        <div className="option-image-container">
+          <img src={imageUrl} alt={option.name} className="option-image" />
+        </div>
+      )}
       <div className="option-card-content">
         <h3 className="option-name">
           {option.name}

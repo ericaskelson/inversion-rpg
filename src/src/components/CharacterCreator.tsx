@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
-import type { Character, CategoryConfig, CharacterBuilderState } from '../types/game';
+import type { Character, CategoryConfig, CharacterBuilderState, AppearanceSelections } from '../types/game';
 import { characterCreationData } from '../data/characterCreation';
+import { appearanceConfig } from '../data/appearanceConfig';
 import {
   createInitialBuilderState,
   toggleOption,
@@ -11,9 +12,11 @@ import {
   buildCharacter,
   describeFate,
   describeAttribute,
+  updateAppearanceSelections,
 } from '../engine/characterBuilder';
 import { CategorySelector } from './CategorySelector';
 import { CharacterSummary } from './CharacterSummary';
+import { AppearanceSelector } from './AppearanceSelector';
 
 interface CharacterCreatorProps {
   onComplete: (character: Character) => void;
@@ -26,12 +29,19 @@ export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
   const categories = characterCreationData.categories;
   const currentCategory = categories[currentCategoryIndex];
 
+  // Determine character sex from selections (default to male if not selected)
+  const characterSex = (state.selections.sex?.[0] === 'female' ? 'female' : 'male') as 'male' | 'female';
+
   const handleToggleOption = useCallback((optionId: string, category: CategoryConfig) => {
     setState(prev => toggleOption(optionId, category, prev, characterCreationData));
   }, []);
 
   const handleNameChange = useCallback((name: string) => {
     setState(prev => ({ ...prev, name }));
+  }, []);
+
+  const handleAppearanceUpdate = useCallback((selections: AppearanceSelections) => {
+    setState(prev => updateAppearanceSelections(selections, prev, appearanceConfig));
   }, []);
 
   const handlePrevCategory = () => {
@@ -56,6 +66,9 @@ export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
   const canGoNext = isCategoryComplete(currentCategory, state);
   const isLastCategory = currentCategoryIndex === categories.length - 1;
   const canFinish = isCharacterComplete(characterCreationData, state);
+
+  // Check if current category is appearance (uses special selector)
+  const isAppearanceCategory = currentCategory.id === 'appearance';
 
   return (
     <div className="character-creator">
@@ -91,13 +104,22 @@ export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
             ))}
           </nav>
 
-          <CategorySelector
-            category={currentCategory}
-            state={state}
-            onToggle={handleToggleOption}
-            isOptionAvailable={(opt) => isOptionAvailable(opt, currentCategory, state)}
-            isOptionSelected={(optId) => isOptionSelected(optId, currentCategory.id, state)}
-          />
+          {isAppearanceCategory ? (
+            <AppearanceSelector
+              config={appearanceConfig}
+              selections={state.appearanceSelections}
+              characterSex={characterSex}
+              onUpdate={handleAppearanceUpdate}
+            />
+          ) : (
+            <CategorySelector
+              category={currentCategory}
+              state={state}
+              onToggle={handleToggleOption}
+              isOptionAvailable={(opt) => isOptionAvailable(opt, currentCategory, state)}
+              isOptionSelected={(optId) => isOptionSelected(optId, currentCategory.id, state)}
+            />
+          )}
 
           <div className="creator-navigation">
             <button

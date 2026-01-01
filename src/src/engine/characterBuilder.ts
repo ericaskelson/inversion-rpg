@@ -7,6 +7,8 @@ import type {
   OptionRequirement,
   CharacterBuilderState,
   CharacterCreationData,
+  AppearanceSelections,
+  AppearanceConfig,
 } from '../types/game';
 
 // Default attribute values
@@ -40,6 +42,7 @@ export function createInitialBuilderState(): CharacterBuilderState {
       spells: [],
       gear: [],
     },
+    appearanceSelections: {},
     calculatedFate: 0,
     calculatedAttributes: { ...DEFAULT_ATTRIBUTES },
     calculatedTraits: [],
@@ -66,6 +69,49 @@ function getSelectedOptions(
   }
 
   return options;
+}
+
+/**
+ * Calculate appearance-related effects
+ */
+function getAppearanceEffects(
+  selections: AppearanceSelections,
+  config: AppearanceConfig
+): { fate: number; attributes: Partial<Record<AttributeId, number>>; traits: string[] } {
+  let fate = 0;
+  const attributes: Partial<Record<AttributeId, number>> = {};
+  const traits: string[] = [];
+
+  if (selections.build) {
+    const build = config.builds.find(b => b.id === selections.build);
+    if (build) {
+      fate += build.fate ?? 0;
+      if (build.attributes) {
+        for (const [attr, value] of Object.entries(build.attributes)) {
+          attributes[attr as AttributeId] = (attributes[attr as AttributeId] ?? 0) + value;
+        }
+      }
+      if (build.traits) traits.push(...build.traits);
+    }
+  }
+
+  if (selections.hairColor) {
+    const hair = config.hairColors.find(h => h.id === selections.hairColor);
+    if (hair) {
+      fate += hair.fate ?? 0;
+      if (hair.traits) traits.push(...hair.traits);
+    }
+  }
+
+  if (selections.portraitId) {
+    const portrait = config.portraits.find(p => p.id === selections.portraitId);
+    if (portrait) {
+      fate += portrait.fate ?? 0;
+      if (portrait.traits) traits.push(...portrait.traits);
+    }
+  }
+
+  return { fate, attributes, traits };
 }
 
 /**
@@ -105,6 +151,55 @@ export function recalculateDerivedValues(
 
   return {
     ...state,
+    calculatedFate: fate,
+    calculatedAttributes: attributes,
+    calculatedTraits: Array.from(traitSet),
+  };
+}
+
+/**
+ * Update appearance selections and recalculate derived values
+ */
+export function updateAppearanceSelections(
+  selections: AppearanceSelections,
+  state: CharacterBuilderState,
+  appearanceConfig: AppearanceConfig
+): CharacterBuilderState {
+  // Get the effects from the OLD appearance selections
+  const oldEffects = state.appearanceSelections
+    ? getAppearanceEffects(state.appearanceSelections, appearanceConfig)
+    : { fate: 0, attributes: {}, traits: [] };
+
+  // Get the effects from the NEW appearance selections
+  const newEffects = getAppearanceEffects(selections, appearanceConfig);
+
+  // Calculate the new derived values by removing old and adding new
+  let fate = state.calculatedFate - oldEffects.fate + newEffects.fate;
+
+  const attributes = { ...state.calculatedAttributes };
+  // Remove old appearance attributes
+  for (const [attr, value] of Object.entries(oldEffects.attributes)) {
+    attributes[attr as AttributeId] -= value;
+  }
+  // Add new appearance attributes
+  for (const [attr, value] of Object.entries(newEffects.attributes)) {
+    attributes[attr as AttributeId] += value;
+  }
+
+  // Update traits
+  const traitSet = new Set(state.calculatedTraits);
+  // Remove old appearance traits
+  for (const trait of oldEffects.traits) {
+    traitSet.delete(trait);
+  }
+  // Add new appearance traits
+  for (const trait of newEffects.traits) {
+    traitSet.add(trait);
+  }
+
+  return {
+    ...state,
+    appearanceSelections: selections,
     calculatedFate: fate,
     calculatedAttributes: attributes,
     calculatedTraits: Array.from(traitSet),
@@ -253,6 +348,14 @@ export function isCategoryComplete(
   category: CategoryConfig,
   state: CharacterBuilderState
 ): boolean {
+  // Special handling for appearance category
+  if (category.id === 'appearance') {
+    // Appearance is complete when build, skinTone, and hairColor are selected
+    // Portrait is optional (might not have any matching portraits yet)
+    const { build, skinTone, hairColor } = state.appearanceSelections || {};
+    return !!(build && skinTone && hairColor);
+  }
+
   const selections = state.selections[category.id] || [];
   return selections.length >= category.minPicks;
 }

@@ -217,16 +217,122 @@ There should always be at least one starting scenario with:
 
 This ensures every character can start somewhere.
 
-## File Structure
+## File Structure (Current)
 
 ```
 inverse-rpg/
-  src/                  # Web app source
-  scenarios/            # Scenario content folders
-  tools/                # Python content generation scripts
-  build/                # Build output
-  CLAUDE.md             # This file
+  CLAUDE.md                    # This file
+  open-dev.bat                 # Opens browser to localhost:5173
+  start-server.bat             # Starts the Vite dev server
+
+  src/                         # Vite + React + TypeScript web app
+    src/
+      components/
+        AppearanceSelector.tsx # Multi-step wizard for Build/Skin/Hair/Portrait
+        CategorySelector.tsx   # Generic option grid for most categories
+        CharacterCreator.tsx   # Main character creation orchestrator
+        CharacterSummary.tsx   # Sidebar showing current stats/traits
+        ScenarioPlayer.tsx     # Plays through scenarios (not yet integrated)
+      data/
+        characterCreation.ts   # All category options (Sex, Race, Culture, etc.)
+        appearanceConfig.ts    # Build/Skin/Hair options + portrait metadata
+      engine/
+        characterBuilder.ts    # State management, calculations, validation
+        conditions.ts          # Scenario condition evaluation
+      types/
+        game.ts                # All TypeScript interfaces
+      App.tsx                  # Main app component
+      App.css                  # All styles
+    public/
+      images/options/          # Option card images (sex-male.png, race-*.png, etc.)
+      scenarios.json           # Compiled scenario bundle
+
+  scenarios/                   # Scenario content folders (one per scenario)
+  tools/
+    build-scenarios.js         # Compiles scenarios/ into scenarios.json
 ```
+
+## Current Implementation State
+
+### Working Features
+- **Character Creator UI** - Full 12-category flow with navigation
+- **Fate System** - Calculated from all selections, shown descriptively
+- **Attributes** - Hidden numeric values, shown as descriptions (Weak/Average/Strong)
+- **Traits** - Boolean tags collected from selections
+- **Prerequisites** - Options can require traits, attributes, or other selections
+- **Option Images** - 1:1 aspect ratio images on option cards with hover zoom
+- **Subcategories** - Options grouped within categories (e.g., Martial/Magic skills)
+
+### Appearance System
+Special multi-step wizard (not using CategorySelector):
+1. **Build** - Affects attributes (Slim: +AGI/-STR, Muscular: +2 STR/-AGI + intimidating)
+2. **Skin Tone** - Cosmetic only
+3. **Hair Color** - Some grant traits (Red/White = "distinctive")
+4. **Portrait** - Filtered by Build + Skin + Hair + Sex + Race (not yet generated)
+
+Portrait combinations: 5 builds × 6 skins × 7 hair × 2 sexes × 5 races = **2,100 portraits needed**
+
+### Key Types (in types/game.ts)
+- `CharacterOption` - Standard option with id, name, description, fate, attributes, traits, requires, image, subcategory
+- `CategoryConfig` - Category definition with id, name, minPicks, maxPicks, options[]
+- `AppearanceSelections` - { build, skinTone, hairColor, portraitId }
+- `Portrait` - Tagged with build, skinTone, hairColor, sex (+ race to be added)
+- `CharacterBuilderState` - Current selections, calculated values
+
+### Data Files
+- `characterCreation.ts` - Exports `characterCreationData` with all 12 categories
+- `appearanceConfig.ts` - Exports `appearanceConfig` with builds, skinTones, hairColors, portraits[]
+
+---
+
+## NEXT TASK: Character Options Editor
+
+### Goal
+GUI editor for character creation options, integrated into the web app with edit mode toggle.
+
+### Plan
+1. **Convert data to JSON** - Change characterCreation.ts and appearanceConfig.ts to import from JSON files
+   - `src/src/data/characterCreation.json`
+   - `src/src/data/appearanceConfig.json`
+   - TS files become thin wrappers that import and type-assert the JSON
+
+2. **Create editor server** - Simple Express server (~50 lines) at `tools/editor-server.js`
+   - `GET /api/character-creation` - Returns characterCreation.json
+   - `PUT /api/character-creation` - Writes to characterCreation.json
+   - `GET /api/appearance-config` - Returns appearanceConfig.json
+   - `PUT /api/appearance-config` - Writes to appearanceConfig.json
+   - Runs on port 3001 (Vite is on 5173)
+
+3. **Add Edit Mode to UI**
+   - Toggle button in header: "Edit Mode: ON/OFF"
+   - When ON, each option card shows Edit/Delete buttons
+   - "Add Option" button at end of each category/subcategory
+   - Clicking Edit opens inline form or modal with all fields
+   - Changes POST to editor server immediately
+
+4. **Update dev scripts**
+   - `npm run dev` - Starts Vite only (normal mode)
+   - `npm run dev:edit` - Starts both Vite and editor server
+
+### Editor UI Needs
+For each CharacterOption:
+- id (auto-generated or manual)
+- name (text)
+- description (textarea)
+- subcategory (dropdown of existing + new)
+- image (file picker or text path)
+- fate (number, can be negative)
+- attributes (key-value pairs for strength/agility/etc)
+- traits (tag list)
+- requires (complex - trait/attribute/selection requirements)
+- incompatibleWith (list of option IDs)
+- isDrawback (checkbox)
+
+For AppearanceConfig:
+- builds, skinTones, hairColors (similar to options)
+- portraits (list with build/skin/hair/sex tags)
+
+---
 
 ## Commits
 

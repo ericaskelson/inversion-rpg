@@ -1,0 +1,27 @@
+{
+  "id": "start",
+  "isStart": true,
+  "choices": [
+    {
+      "text": "Head to the tavern—you could use a drink",
+      "outcomes": [
+        { "condition": "default", "next": "tavern-enter" }
+      ]
+    },
+    {
+      "text": "The forest beckons with promises of adventure",
+      "outcomes": [
+        { "condition": "default", "next": "forest-path" }
+      ]
+    },
+    {
+      "text": "Wait... there's something odd about that signpost",
+      "available": {
+        "requires": { "attribute": "cunning", "op": ">=", "value": 3 }
+      },
+      "outcomes": [
+        { "condition": "default", "next": "hidden-path" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "tavern-bar",
+  "choices": [
+    {
+      "text": "Stand your ground—you were here first",
+      "outcomes": [
+        { "condition": "default", "next": "tavern-confrontation" }
+      ]
+    },
+    {
+      "text": "Offer to buy him a drink to smooth things over",
+      "outcomes": [
+        { "condition": { "trait": "silver-tongued" }, "next": "diplomacy-success" },
+        { "condition": "default", "next": "diplomacy-fail" }
+      ]
+    },
+    {
+      "text": "Quietly relocate to a corner table",
+      "outcomes": [
+        { "condition": "default", "next": "tavern-corner" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "tavern-confrontation",
+  "choices": [
+    {
+      "text": "Meet his fist with your own",
+      "outcomes": [
+        { "condition": { "attribute": "strength", "op": ">=", "value": 3 }, "next": "fight-win" },
+        { "condition": "default", "next": "fight-lose" }
+      ]
+    },
+    {
+      "text": "Duck and try to defuse the situation",
+      "outcomes": [
+        { "condition": { "trait": "silver-tongued" }, "next": "diplomacy-success" },
+        { "condition": { "attribute": "charisma", "op": ">=", "value": 4 }, "next": "diplomacy-success" },
+        { "condition": "default", "next": "diplomacy-fail" }
+      ]
+    },
+    {
+      "text": "Sidestep and slip out the back door",
+      "available": {
+        "chance": 0.4
+      },
+      "outcomes": [
+        { "condition": { "attribute": "cunning", "op": ">=", "value": 2 }, "next": "forest-path" },
+        { "condition": "default", "next": "fight-lose" }
+      ]
+    }
+  ]
+}

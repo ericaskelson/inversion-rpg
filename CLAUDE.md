@@ -50,13 +50,70 @@ Separate tooling for:
 - Validation and linting
 - Human review workflow
 
-## Character System (TBD)
+## Character System
 
-How character traits influence scenarios:
-- Stat checks? (deterministic or probabilistic)
-- Path unlocking/blocking?
-- Flavor text variations?
-- Combination effects?
+Characters have two types of characteristics:
+
+### Attributes (Numeric)
+- Numeric values (may not be displayed as raw numbers to player)
+- Used for deterministic threshold checks (e.g., strength > 3)
+- Examples: Strength, Charisma, Cunning, etc. (TBD)
+
+### Traits (Boolean/Tags)
+- Named qualities the character has or doesn't have
+- Examples: "hot-headed", "noble-born", "scarred", "silver-tongued"
+- Can be gained/lost during scenarios
+
+### How They Influence Scenarios
+- **Deterministic checks** - no dice rolls, outcomes based on meeting thresholds
+- **Path gating** - some choices only available with certain traits/stats
+- **Branching outcomes** - same choice leads to different results based on character
+- **Random availability** - some choices appear only X% of the time (rare)
+
+## Scenario Config Schema
+
+```json
+{
+  "id": "tavern-confrontation",
+  "choices": [
+    {
+      "text": "Throw a punch",
+      "available": {
+        "requires": { "trait": "hot-headed" }
+      },
+      "outcomes": [
+        { "condition": { "attribute": "strength", "op": ">", "value": 3 }, "next": "fight-win" },
+        { "condition": "default", "next": "fight-lose" }
+      ]
+    },
+    {
+      "text": "Try to talk them down",
+      "outcomes": [
+        { "condition": { "trait": "silver-tongued" }, "next": "diplomacy-success" },
+        { "condition": "default", "next": "diplomacy-fail" }
+      ]
+    },
+    {
+      "text": "Slip away unnoticed",
+      "available": {
+        "chance": 0.3
+      },
+      "outcomes": [
+        { "condition": "default", "next": "escape" }
+      ]
+    }
+  ]
+}
+```
+
+### Schema Notes
+- `available`: conditions for the choice to appear (optional)
+  - `requires`: trait/attribute requirements
+  - `chance`: random availability (0.0-1.0)
+- `outcomes`: array of possible destinations, evaluated in order
+  - First matching condition wins
+  - `"default"` matches anything (use as fallback)
+- Conditions can check traits (has/doesn't have) or attributes (comparisons)
 
 ## File Structure
 

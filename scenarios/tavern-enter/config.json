@@ -1,0 +1,26 @@
+{
+  "id": "tavern-enter",
+  "choices": [
+    {
+      "text": "Make your way to the bar",
+      "outcomes": [
+        { "condition": "default", "next": "tavern-bar" }
+      ]
+    },
+    {
+      "text": "Find a quiet corner to observe",
+      "outcomes": [
+        { "condition": "default", "next": "tavern-corner" }
+      ]
+    },
+    {
+      "text": "Shoulder past the drunk—you have no patience for fools",
+      "available": {
+        "requires": { "trait": "hot-headed" }
+      },
+      "outcomes": [
+        { "condition": "default", "next": "tavern-confrontation" }
+      ]
+    }
+  ]
+}

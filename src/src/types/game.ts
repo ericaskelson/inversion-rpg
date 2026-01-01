@@ -53,6 +53,8 @@ export interface CharacterOption {
   id: string;
   name: string;
   description: string;
+  subcategory?: string; // Group within category (e.g., "Martial Skills", "Magic Skills")
+  image?: string; // Path to background image (relative to /images/options/)
   fate?: number; // Fate adjustment (+ or -)
   attributes?: Partial<Record<AttributeId, number>>; // Attribute adjustments
   traits?: string[]; // Traits to add

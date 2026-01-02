@@ -3317,6 +3317,7 @@ body {
   position: relative;
   cursor: pointer;
   transition: all 0.2s ease;
+  contain: layout;
 }
 
 .review-option:hover {

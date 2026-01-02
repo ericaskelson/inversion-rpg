@@ -735,19 +735,38 @@ app.get('/api/portraits/batch/:id(*)/status', async (req, res) => {
       return res.status(500).json({ error: statusResponse.error.message });
     }
 
-    // Determine state - completed batches may not have explicit state field
-    // but will have responses array
-    let state = statusResponse.state;
-    const responses = statusResponse.responses || [];
-
-    if (!state && responses.length > 0) {
-      // Has results = succeeded
-      state = 'JOB_STATE_SUCCEEDED';
-    } else if (!state) {
-      state = 'JOB_STATE_PENDING';
+    // Log response structure for debugging
+    const responseKeys = Object.keys(statusResponse);
+    console.log(`Batch response keys: ${responseKeys.join(', ')}`);
+    console.log(`  done: ${statusResponse.done}`);
+    if (statusResponse.response) {
+      console.log(`  response keys: ${Object.keys(statusResponse.response).join(', ')}`);
+      const inlined = statusResponse.response.inlinedResponses;
+      console.log(`  inlinedResponses type: ${typeof inlined}, isArray: ${Array.isArray(inlined)}`);
+      if (inlined && typeof inlined === 'object') {
+        const keys = Object.keys(inlined);
+        console.log(`  inlinedResponses keys (${keys.length}): ${keys.slice(0, 5).join(', ')}${keys.length > 5 ? '...' : ''}`);
+        if (keys.length > 0) {
+          const firstKey = keys[0];
+          const firstVal = inlined[firstKey];
+          console.log(`  first entry key: "${firstKey}", value type: ${typeof firstVal}, isArray: ${Array.isArray(firstVal)}`);
+          if (firstVal && typeof firstVal === 'object') {
+            console.log(`  first entry value keys: ${Object.keys(firstVal).join(', ')}`);
+          }
+        }
+      }
     }
 
-    console.log(`Batch ${jobId}: state=${state}, responses=${responses.length}`);
+    // Google Cloud long-running operation pattern:
+    // - done: boolean indicating completion
+    // - response: contains results when done=true
+    const isDone = statusResponse.done === true;
+    let state = isDone ? 'JOB_STATE_SUCCEEDED' : 'JOB_STATE_PENDING';
+
+    // Results are double-nested: response.inlinedResponses.inlinedResponses
+    const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
+
+    console.log(`Batch ${jobId}: done=${isDone}, state=${state}, responses=${responses.length}`);
 
     // Update local job record
     const jobs = await readBatchJobs();
@@ -787,8 +806,13 @@ app.post('/api/portraits/batch/:id(*)/import', async (req, res) => {
       return res.status(500).json({ error: statusResponse.error.message });
     }
 
-    // Get results - may be in 'responses' array directly
-    const responses = statusResponse.responses || statusResponse.dest?.inlinedResponses || [];
+    // Check if job is done (Google Cloud long-running operation pattern)
+    if (!statusResponse.done) {
+      return res.status(400).json({ error: 'Job is not yet complete. Please wait and try again.' });
+    }
+
+    // Get results - double-nested: response.inlinedResponses.inlinedResponses
+    const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
 
     if (responses.length === 0) {
       return res.status(400).json({

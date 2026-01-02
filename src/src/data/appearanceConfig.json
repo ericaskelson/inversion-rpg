@@ -2177,6 +2177,76 @@
       "hairColor": "red",
       "sex": "female",
       "race": "human"
+    },
+    {
+      "id": "female-elf-slim-fair-blonde-1767312364158-0",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-blonde-1767312364158-0.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-fair-brown-1767312364158-1",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-brown-1767312364158-1.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-fair-black-1767312364158-2",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-black-1767312364158-2.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-fair-red-1767312364158-3",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-red-1767312364158-3.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-fair-gray-1767312364158-4",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-gray-1767312364158-4.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-fair-white-1767312364158-5",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-white-1767312364158-5.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-fair-bald-1767312364158-6",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-bald-1767312364158-6.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
     }
   ],
   "portraitConfig": {

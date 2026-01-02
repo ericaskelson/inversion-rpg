@@ -1,0 +1,2189 @@
+{
+  "builds": [
+    {
+      "id": "slim",
+      "name": "Slim",
+      "description": "A lean, slender frame. Quick and light on your feet.",
+      "attributes": {
+        "agility": 1,
+        "strength": -1
+      }
+    },
+    {
+      "id": "average",
+      "name": "Average",
+      "description": "A balanced, unremarkable physique. Nothing stands out."
+    },
+    {
+      "id": "athletic",
+      "name": "Athletic",
+      "description": "A fit, well-toned body. The mark of an active lifestyle.",
+      "attributes": {
+        "agility": 1
+      },
+      "fate": 1
+    },
+    {
+      "id": "muscular",
+      "name": "Muscular",
+      "description": "A powerful, heavily-built frame. Strength is your advantage.",
+      "attributes": {
+        "strength": 2,
+        "agility": -1
+      },
+      "traits": [
+        "intimidating"
+      ],
+      "fate": 1
+    },
+    {
+      "id": "heavy",
+      "name": "Heavy",
+      "description": "A large, substantial build. Hard to move, harder to stop.",
+      "attributes": {
+        "endurance": 1,
+        "agility": -1
+      }
+    }
+  ],
+  "skinTones": [
+    {
+      "id": "pale",
+      "name": "Pale",
+      "description": "Porcelain skin, rarely touched by sun."
+    },
+    {
+      "id": "fair",
+      "name": "Fair",
+      "description": "Light skin with a healthy warmth."
+    },
+    {
+      "id": "olive",
+      "name": "Olive",
+      "description": "A warm, Mediterranean complexion."
+    },
+    {
+      "id": "brown",
+      "name": "Brown",
+      "description": "Rich, earthy skin tones."
+    },
+    {
+      "id": "dark",
+      "name": "Dark",
+      "description": "Deep, dark skin with a natural sheen."
+    }
+  ],
+  "hairColors": [
+    {
+      "id": "blonde",
+      "name": "Blonde",
+      "description": "Golden or pale yellow hair."
+    },
+    {
+      "id": "brown",
+      "name": "Brown",
+      "description": "Common brown hair in various shades."
+    },
+    {
+      "id": "black",
+      "name": "Black",
+      "description": "Jet black hair, dark as night."
+    },
+    {
+      "id": "red",
+      "name": "Red",
+      "description": "Fiery red or auburn hair.",
+      "traits": [
+        "distinctive"
+      ]
+    },
+    {
+      "id": "gray",
+      "name": "Gray",
+      "description": "Silver or gray hair, whether from age or nature."
+    },
+    {
+      "id": "white",
+      "name": "White",
+      "description": "Pure white hair, striking and unusual.",
+      "traits": [
+        "distinctive"
+      ],
+      "fate": 1
+    },
+    {
+      "id": "bald",
+      "name": "Bald",
+      "description": "No hair at all, by choice or circumstance."
+    }
+  ],
+  "portraits": [
+    {
+      "id": "male-human-average-fair-black",
+      "name": "male human (average)",
+      "image": "portraits/male-human-average-fair-black.png",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-red",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-red.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-white",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-white.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-gray",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-gray.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-blonde",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-blonde.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-red-1767304534376-0",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-red-1767304534376-0.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-elf-slim-fair-red-1767305275901-2",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-red-1767305275901-2.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-fair-red-1767305275901-1",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-red-1767305275901-1.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-human-slim-fair-red-1767306413424-0",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-red-1767306413424-0.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-gray-1767306413424-2",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-gray-1767306413424-2.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-bald-1767306413424-3",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-bald-1767306413424-3.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-black-1767306413424-4",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-black-1767306413424-4.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-brown-1767306413424-5",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-brown-1767306413424-5.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-blonde-1767306413424-6",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-blonde-1767306413424-6.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-red-1767306561955-0",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-red-1767306561955-0.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-white-1767306561955-1",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-white-1767306561955-1.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-gray-1767306561955-2",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-gray-1767306561955-2.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-bald-1767306561955-3",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-bald-1767306561955-3.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-black-1767306561955-4",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-black-1767306561955-4.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-brown-1767306561955-5",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-brown-1767306561955-5.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-blonde-1767306561955-6",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-blonde-1767306561955-6.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-red-1767306720969-0",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-red-1767306720969-0.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-white-1767306720969-1",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-white-1767306720969-1.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-gray-1767306720969-2",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-gray-1767306720969-2.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-bald-1767306720969-3",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-bald-1767306720969-3.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-black-1767306720969-4",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-black-1767306720969-4.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-brown-1767306720969-5",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-brown-1767306720969-5.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-blonde-1767306720969-6",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-blonde-1767306720969-6.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-blonde-1767307010269-0",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-blonde-1767307010269-0.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-brown-1767307010269-1",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-brown-1767307010269-1.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-black-1767307010269-2",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-black-1767307010269-2.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-red-1767307010269-3",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-red-1767307010269-3.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-gray-1767307010269-4",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-gray-1767307010269-4.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-white-1767307010269-5",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-white-1767307010269-5.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-pale-bald-1767307010269-6",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-pale-bald-1767307010269-6.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-blonde-1767307010269-7",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-blonde-1767307010269-7.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-brown-1767307010269-8",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-brown-1767307010269-8.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-black-1767307010269-9",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-black-1767307010269-9.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-red-1767307010269-10",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-red-1767307010269-10.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-gray-1767307010269-11",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-gray-1767307010269-11.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-white-1767307010269-12",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-white-1767307010269-12.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-fair-bald-1767307010269-13",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-bald-1767307010269-13.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-blonde-1767307010269-14",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-blonde-1767307010269-14.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-brown-1767307010269-15",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-brown-1767307010269-15.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-black-1767307010269-16",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-black-1767307010269-16.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-red-1767307010269-17",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-red-1767307010269-17.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-gray-1767307010269-18",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-gray-1767307010269-18.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-white-1767307010269-19",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-white-1767307010269-19.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-olive-bald-1767307010269-20",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-olive-bald-1767307010269-20.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-brown-blonde-1767307010269-21",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-brown-blonde-1767307010269-21.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-brown-brown-1767307010269-22",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-brown-brown-1767307010269-22.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-brown-black-1767307010269-23",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-brown-black-1767307010269-23.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-brown-red-1767307010269-24",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-brown-red-1767307010269-24.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-brown-gray-1767307010269-25",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-brown-gray-1767307010269-25.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-brown-white-1767307010269-26",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-brown-white-1767307010269-26.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-brown-bald-1767307010269-27",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-brown-bald-1767307010269-27.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-dark-blonde-1767307010269-28",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-dark-blonde-1767307010269-28.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-dark-brown-1767307010269-29",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-dark-brown-1767307010269-29.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-dark-black-1767307010269-30",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-dark-black-1767307010269-30.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-dark-red-1767307010269-31",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-dark-red-1767307010269-31.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-dark-gray-1767307010269-32",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-dark-gray-1767307010269-32.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-dark-white-1767307010269-33",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-dark-white-1767307010269-33.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-slim-dark-bald-1767307010269-34",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-dark-bald-1767307010269-34.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-pale-blonde-1767307010269-35",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-pale-blonde-1767307010269-35.png",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-pale-brown-1767307010269-36",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-pale-brown-1767307010269-36.png",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-pale-black-1767307010269-37",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-pale-black-1767307010269-37.png",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-pale-red-1767307010269-38",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-pale-red-1767307010269-38.png",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-pale-gray-1767307010269-39",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-pale-gray-1767307010269-39.png",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-pale-white-1767307010269-40",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-pale-white-1767307010269-40.png",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-pale-bald-1767307010269-41",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-pale-bald-1767307010269-41.png",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-fair-blonde-1767307010269-42",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-fair-blonde-1767307010269-42.png",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-fair-brown-1767307010269-43",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-fair-brown-1767307010269-43.png",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-fair-black-1767307010269-44",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-fair-black-1767307010269-44.png",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-fair-red-1767307010269-45",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-fair-red-1767307010269-45.png",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-fair-gray-1767307010269-46",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-fair-gray-1767307010269-46.png",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-fair-white-1767307010269-47",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-fair-white-1767307010269-47.png",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-fair-bald-1767307010269-48",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-fair-bald-1767307010269-48.png",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-olive-blonde-1767307010269-49",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-olive-blonde-1767307010269-49.png",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-olive-brown-1767307010269-50",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-olive-brown-1767307010269-50.png",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-olive-black-1767307010269-51",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-olive-black-1767307010269-51.png",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-olive-red-1767307010269-52",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-olive-red-1767307010269-52.png",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-olive-gray-1767307010269-53",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-olive-gray-1767307010269-53.png",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-olive-white-1767307010269-54",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-olive-white-1767307010269-54.png",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-olive-bald-1767307010269-55",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-olive-bald-1767307010269-55.png",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-brown-blonde-1767307010269-56",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-brown-blonde-1767307010269-56.png",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-brown-brown-1767307010269-57",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-brown-brown-1767307010269-57.png",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-brown-black-1767307010269-58",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-brown-black-1767307010269-58.png",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-brown-red-1767307010269-59",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-brown-red-1767307010269-59.png",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-brown-gray-1767307010269-60",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-brown-gray-1767307010269-60.png",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-brown-white-1767307010269-61",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-brown-white-1767307010269-61.png",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-brown-bald-1767307010269-62",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-brown-bald-1767307010269-62.png",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-dark-blonde-1767307010269-63",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-dark-blonde-1767307010269-63.png",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-dark-brown-1767307010269-64",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-dark-brown-1767307010269-64.png",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-dark-black-1767307010269-65",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-dark-black-1767307010269-65.png",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-dark-red-1767307010269-66",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-dark-red-1767307010269-66.png",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-dark-gray-1767307010269-67",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-dark-gray-1767307010269-67.png",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-dark-white-1767307010269-68",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-dark-white-1767307010269-68.png",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-average-dark-bald-1767307010269-69",
+      "name": "female human (average)",
+      "image": "portraits/female-human-average-dark-bald-1767307010269-69.png",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-pale-blonde-1767307010269-70",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-pale-blonde-1767307010269-70.png",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-pale-brown-1767307010269-71",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-pale-brown-1767307010269-71.png",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-pale-black-1767307010269-72",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-pale-black-1767307010269-72.png",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-pale-red-1767307010269-73",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-pale-red-1767307010269-73.png",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-pale-gray-1767307010269-74",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-pale-gray-1767307010269-74.png",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-pale-white-1767307010269-75",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-pale-white-1767307010269-75.png",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-pale-bald-1767307010269-76",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-pale-bald-1767307010269-76.png",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-fair-blonde-1767307010269-77",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-fair-blonde-1767307010269-77.png",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-fair-brown-1767307010269-78",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-fair-brown-1767307010269-78.png",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-fair-black-1767307010269-79",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-fair-black-1767307010269-79.png",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-fair-red-1767307010269-80",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-fair-red-1767307010269-80.png",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-fair-gray-1767307010269-81",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-fair-gray-1767307010269-81.png",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-fair-white-1767307010269-82",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-fair-white-1767307010269-82.png",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-fair-bald-1767307010269-83",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-fair-bald-1767307010269-83.png",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-olive-blonde-1767307010269-84",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-olive-blonde-1767307010269-84.png",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-olive-brown-1767307010269-85",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-olive-brown-1767307010269-85.png",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-olive-black-1767307010269-86",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-olive-black-1767307010269-86.png",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-olive-red-1767307010269-87",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-olive-red-1767307010269-87.png",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-olive-gray-1767307010269-88",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-olive-gray-1767307010269-88.png",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-olive-white-1767307010269-89",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-olive-white-1767307010269-89.png",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-olive-bald-1767307010269-90",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-olive-bald-1767307010269-90.png",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-brown-blonde-1767307010269-91",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-brown-blonde-1767307010269-91.png",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-brown-brown-1767307010269-92",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-brown-brown-1767307010269-92.png",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-brown-black-1767307010269-93",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-brown-black-1767307010269-93.png",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-brown-red-1767307010269-94",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-brown-red-1767307010269-94.png",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-brown-gray-1767307010269-95",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-brown-gray-1767307010269-95.png",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-brown-white-1767307010269-96",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-brown-white-1767307010269-96.png",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-brown-bald-1767307010269-97",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-brown-bald-1767307010269-97.png",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-dark-blonde-1767307010269-98",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-dark-blonde-1767307010269-98.png",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-dark-brown-1767307010269-99",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-dark-brown-1767307010269-99.png",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-dark-black-1767307010269-100",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-dark-black-1767307010269-100.png",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-dark-red-1767307010269-101",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-dark-red-1767307010269-101.png",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-dark-gray-1767307010269-102",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-dark-gray-1767307010269-102.png",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-dark-white-1767307010269-103",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-dark-white-1767307010269-103.png",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-athletic-dark-bald-1767307010269-104",
+      "name": "female human (athletic)",
+      "image": "portraits/female-human-athletic-dark-bald-1767307010269-104.png",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-pale-blonde-1767307010269-105",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-pale-blonde-1767307010269-105.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-pale-brown-1767307010269-106",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-pale-brown-1767307010269-106.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-pale-black-1767307010269-107",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-pale-black-1767307010269-107.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-pale-red-1767307010269-108",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-pale-red-1767307010269-108.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-pale-gray-1767307010269-109",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-pale-gray-1767307010269-109.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-pale-white-1767307010269-110",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-pale-white-1767307010269-110.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-pale-bald-1767307010269-111",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-pale-bald-1767307010269-111.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-fair-blonde-1767307010269-112",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-fair-blonde-1767307010269-112.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-fair-brown-1767307010269-113",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-fair-brown-1767307010269-113.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-fair-black-1767307010269-114",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-fair-black-1767307010269-114.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-fair-red-1767307010269-115",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-fair-red-1767307010269-115.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-fair-gray-1767307010269-116",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-fair-gray-1767307010269-116.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-fair-white-1767307010269-117",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-fair-white-1767307010269-117.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-fair-bald-1767307010269-118",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-fair-bald-1767307010269-118.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-olive-blonde-1767307010269-119",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-olive-blonde-1767307010269-119.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-olive-brown-1767307010269-120",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-olive-brown-1767307010269-120.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-olive-black-1767307010269-121",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-olive-black-1767307010269-121.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-olive-red-1767307010269-122",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-olive-red-1767307010269-122.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-olive-gray-1767307010269-123",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-olive-gray-1767307010269-123.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-olive-white-1767307010269-124",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-olive-white-1767307010269-124.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-olive-bald-1767307010269-125",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-olive-bald-1767307010269-125.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-brown-blonde-1767307010269-126",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-brown-blonde-1767307010269-126.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-brown-brown-1767307010269-127",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-brown-brown-1767307010269-127.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-brown-black-1767307010269-128",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-brown-black-1767307010269-128.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-brown-red-1767307010269-129",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-brown-red-1767307010269-129.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-brown-gray-1767307010269-130",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-brown-gray-1767307010269-130.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-brown-white-1767307010269-131",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-brown-white-1767307010269-131.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-brown-bald-1767307010269-132",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-brown-bald-1767307010269-132.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-dark-blonde-1767307010269-133",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-dark-blonde-1767307010269-133.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-dark-black-1767307010269-135",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-dark-black-1767307010269-135.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-dark-brown-1767307010269-134",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-dark-brown-1767307010269-134.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-dark-red-1767307010269-136",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-dark-red-1767307010269-136.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-dark-gray-1767307010269-137",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-dark-gray-1767307010269-137.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-dark-white-1767307010269-138",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-dark-white-1767307010269-138.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-muscular-dark-bald-1767307010269-139",
+      "name": "female human (muscular)",
+      "image": "portraits/female-human-muscular-dark-bald-1767307010269-139.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-pale-blonde-1767307010269-140",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-pale-blonde-1767307010269-140.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-pale-brown-1767307010269-141",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-pale-brown-1767307010269-141.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-pale-black-1767307010269-142",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-pale-black-1767307010269-142.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-pale-red-1767307010269-143",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-pale-red-1767307010269-143.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-pale-gray-1767307010269-144",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-pale-gray-1767307010269-144.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-pale-white-1767307010269-145",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-pale-white-1767307010269-145.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-pale-bald-1767307010269-146",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-pale-bald-1767307010269-146.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-fair-blonde-1767307010269-147",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-fair-blonde-1767307010269-147.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-fair-brown-1767307010269-148",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-fair-brown-1767307010269-148.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-fair-black-1767307010269-149",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-fair-black-1767307010269-149.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-fair-red-1767307010269-150",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-fair-red-1767307010269-150.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-fair-gray-1767307010269-151",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-fair-gray-1767307010269-151.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-fair-white-1767307010269-152",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-fair-white-1767307010269-152.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-fair-bald-1767307010269-153",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-fair-bald-1767307010269-153.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-olive-blonde-1767307010269-154",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-olive-blonde-1767307010269-154.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-olive-brown-1767307010269-155",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-olive-brown-1767307010269-155.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-olive-black-1767307010269-156",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-olive-black-1767307010269-156.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-olive-red-1767307010269-157",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-olive-red-1767307010269-157.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-olive-gray-1767307010269-158",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-olive-gray-1767307010269-158.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-olive-white-1767307010269-159",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-olive-white-1767307010269-159.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-olive-bald-1767307010269-160",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-olive-bald-1767307010269-160.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-brown-blonde-1767307010269-161",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-brown-blonde-1767307010269-161.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-brown-brown-1767307010269-162",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-brown-brown-1767307010269-162.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-brown-black-1767307010269-163",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-brown-black-1767307010269-163.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-brown-red-1767307010269-164",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-brown-red-1767307010269-164.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-brown-gray-1767307010269-165",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-brown-gray-1767307010269-165.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-brown-white-1767307010269-166",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-brown-white-1767307010269-166.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-brown-bald-1767307010269-167",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-brown-bald-1767307010269-167.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-dark-blonde-1767307010269-168",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-dark-blonde-1767307010269-168.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-dark-brown-1767307010269-169",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-dark-brown-1767307010269-169.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-dark-black-1767307010269-170",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-dark-black-1767307010269-170.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-dark-red-1767307010269-171",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-dark-red-1767307010269-171.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-dark-gray-1767307010269-172",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-dark-gray-1767307010269-172.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-dark-white-1767307010269-173",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-dark-white-1767307010269-173.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-human-heavy-dark-bald-1767307010269-174",
+      "name": "female human (heavy)",
+      "image": "portraits/female-human-heavy-dark-bald-1767307010269-174.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "human"
+    },
+    {
+      "id": "female-elf-slim-pale-black-1767310770836-0",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-pale-black-1767310770836-0.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-fair-red-1767311338543-0",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-fair-red-1767311338543-0.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-human-slim-fair-red-1767311427650-0",
+      "name": "female human (slim)",
+      "image": "portraits/female-human-slim-fair-red-1767311427650-0.png",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "human"
+    }
+  ],
+  "portraitConfig": {
+    "basePrompt": "Fantasy RPG character portrait. A {sex} {race} with a {build} build, {skinTone} skin, and {hairColor} hair. Detailed face with striking features, looking at viewer. Heroic adventurer out of their gear: linen clothing, suitable for any type of adventurer: wizard, warrior, or rogue. ",
+    "styleModifiers": "Realistic high fantasy art style, painterly, dramatic lighting, striking color palette, professional concept art, highly detailed",
+    "aspectRatio": "3:4",
+    "imageSize": "1K",
+    "model": "nano-banana-pro"
+  }
+}

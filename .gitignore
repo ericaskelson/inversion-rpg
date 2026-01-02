@@ -25,3 +25,10 @@ venv/
 
 # Logs
 *.log
+
+# Generated portraits (can be 1000s of images)
+src/public/images/portraits/
+
+# Editor server data (batch jobs, pending portraits metadata)
+src/src/data/batchJobs.json
+src/src/data/pending.json

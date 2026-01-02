@@ -8,13 +8,17 @@ import type {
   SkinTone,
   HairColor,
 } from '../types/game';
+import { useEditMode } from '../contexts/EditModeContext';
+import { PortraitManager } from './PortraitManager';
 
 type AppearanceStep = 'build' | 'skinTone' | 'hairColor' | 'portrait';
+type AppearanceOptionType = 'build' | 'skinTone' | 'hairColor';
 
 interface AppearanceSelectorProps {
   config: AppearanceConfig;
   selections: AppearanceSelections;
   characterSex: 'male' | 'female';
+  characterRace: string;
   onUpdate: (selections: AppearanceSelections) => void;
 }
 
@@ -22,6 +26,7 @@ interface StepIndicatorProps {
   currentStep: AppearanceStep;
   selections: AppearanceSelections;
   onStepClick: (step: AppearanceStep) => void;
+  editMode: boolean;
 }
 
 const STEPS: { id: AppearanceStep; label: string }[] = [
@@ -31,7 +36,7 @@ const STEPS: { id: AppearanceStep; label: string }[] = [
   { id: 'portrait', label: 'Portrait' },
 ];
 
-function StepIndicator({ currentStep, selections, onStepClick }: StepIndicatorProps) {
+function StepIndicator({ currentStep, selections, onStepClick, editMode }: StepIndicatorProps) {
   const isStepComplete = (step: AppearanceStep): boolean => {
     switch (step) {
       case 'build': return !!selections.build;
@@ -42,9 +47,9 @@ function StepIndicator({ currentStep, selections, onStepClick }: StepIndicatorPr
   };
 
   const isStepAccessible = (step: AppearanceStep): boolean => {
+    if (editMode) return true; // All steps accessible in edit mode
     const stepIndex = STEPS.findIndex(s => s.id === step);
     if (stepIndex === 0) return true;
-    // Can access a step if all previous steps are complete
     for (let i = 0; i < stepIndex; i++) {
       if (!isStepComplete(STEPS[i].id)) return false;
     }
@@ -79,42 +84,80 @@ interface OptionGridProps<T extends string> {
   options: (AppearanceOption & { id: T })[];
   selectedId?: T;
   onSelect: (id: T) => void;
+  editMode: boolean;
+  optionType: AppearanceOptionType;
+  onEdit: (option: AppearanceOption & { id: T }) => void;
+  onDelete: (id: T) => void;
+  onAdd: () => void;
 }
 
-function OptionGrid<T extends string>({ options, selectedId, onSelect }: OptionGridProps<T>) {
+function OptionGrid<T extends string>({
+  options,
+  selectedId,
+  onSelect,
+  editMode,
+  optionType,
+  onEdit,
+  onDelete,
+  onAdd,
+}: OptionGridProps<T>) {
+  const handleDelete = (id: T, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (confirm('Are you sure you want to delete this option?')) {
+      onDelete(id);
+    }
+  };
+
   return (
     <div className="appearance-options-grid">
       {options.map(option => (
-        <button
-          key={option.id}
-          className={`appearance-option ${selectedId === option.id ? 'selected' : ''}`}
-          onClick={() => onSelect(option.id)}
-        >
-          {option.image && (
-            <div className="appearance-option-image">
-              <img src={`/images/options/${option.image}`} alt={option.name} />
-            </div>
-          )}
-          <div className="appearance-option-content">
-            <h4 className="appearance-option-name">
-              {option.name}
-              {option.fate !== undefined && option.fate !== 0 && (
-                <span className={`fate-badge ${option.fate > 0 ? 'positive' : 'negative'}`}>
-                  {option.fate > 0 ? '+' : ''}{option.fate}
-                </span>
-              )}
-            </h4>
-            <p className="appearance-option-description">{option.description}</p>
-            {option.traits && option.traits.length > 0 && (
-              <div className="appearance-option-traits">
-                {option.traits.map(trait => (
-                  <span key={trait} className="trait-badge">{trait}</span>
-                ))}
+        <div key={option.id} className={`option-card-wrapper ${editMode ? 'edit-mode' : ''}`}>
+          <button
+            className={`appearance-option ${selectedId === option.id ? 'selected' : ''}`}
+            onClick={() => !editMode && onSelect(option.id)}
+          >
+            {option.image && (
+              <div className="appearance-option-image">
+                <img src={`/images/options/${option.image}`} alt={option.name} />
               </div>
             )}
-          </div>
-        </button>
+            <div className="appearance-option-content">
+              <h4 className="appearance-option-name">
+                {option.name}
+                {option.fate !== undefined && option.fate !== 0 && (
+                  <span className={`fate-badge ${option.fate > 0 ? 'positive' : 'negative'}`}>
+                    {option.fate > 0 ? '+' : ''}{option.fate}
+                  </span>
+                )}
+              </h4>
+              <p className="appearance-option-description">{option.description}</p>
+              {option.traits && option.traits.length > 0 && (
+                <div className="appearance-option-traits">
+                  {option.traits.map(trait => (
+                    <span key={trait} className="trait-badge">{trait}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </button>
+          {editMode && (
+            <div className="edit-buttons">
+              <button className="edit-btn" onClick={() => onEdit(option)} title="Edit option">
+                Edit
+              </button>
+              <button className="delete-btn" onClick={(e) => handleDelete(option.id, e)} title="Delete option">
+                Del
+              </button>
+            </div>
+          )}
+        </div>
       ))}
+      {editMode && (
+        <button className="add-option-card" onClick={onAdd}>
+          <span className="add-icon">+</span>
+          <span>Add {optionType === 'build' ? 'Build' : optionType === 'skinTone' ? 'Skin Tone' : 'Hair Color'}</span>
+        </button>
+      )}
     </div>
   );
 }
@@ -144,7 +187,6 @@ function PortraitGrid({ portraits, selectedId, onSelect }: PortraitGridProps) {
           onClick={() => onSelect(portrait.id)}
         >
           <img src={`/images/${portrait.image}`} alt={portrait.name} />
-          <span className="portrait-name">{portrait.name}</span>
         </button>
       ))}
     </div>
@@ -155,50 +197,59 @@ export function AppearanceSelector({
   config,
   selections,
   characterSex,
+  characterRace,
   onUpdate,
 }: AppearanceSelectorProps) {
+  const {
+    editMode,
+    appearanceData,
+    startEditingAppearanceOption,
+    startCreatingAppearanceOption,
+    deleteAppearanceOption,
+    refreshAppearanceConfig,
+  } = useEditMode();
+
+  // Use live data from context if available
+  const liveConfig = appearanceData ?? config;
+
   // Track current step explicitly (allows navigating back without losing selections)
   const [currentStep, setCurrentStep] = useState<AppearanceStep>(() => {
-    // Initialize to the first incomplete step
     if (!selections.build) return 'build';
     if (!selections.skinTone) return 'skinTone';
     if (!selections.hairColor) return 'hairColor';
     return 'portrait';
   });
 
-  // Filter portraits based on selections and sex
+  // Filter portraits based on selections, sex, and race
   const filteredPortraits = useMemo(() => {
     if (!selections.build || !selections.skinTone || !selections.hairColor) {
       return [];
     }
-    return config.portraits.filter(p =>
+    return liveConfig.portraits.filter(p =>
       p.sex === characterSex &&
+      p.race === characterRace &&
       p.build === selections.build &&
       p.skinTone === selections.skinTone &&
       p.hairColor === selections.hairColor
     );
-  }, [config.portraits, selections, characterSex]);
+  }, [liveConfig.portraits, selections, characterSex, characterRace]);
 
   const handleStepClick = (step: AppearanceStep) => {
-    // Just navigate to the step without clearing selections
     setCurrentStep(step);
   };
 
   const handleBuildSelect = (id: BuildType) => {
     onUpdate({ ...selections, build: id });
-    // Auto-advance to next step
     setCurrentStep('skinTone');
   };
 
   const handleSkinToneSelect = (id: SkinTone) => {
     onUpdate({ ...selections, skinTone: id });
-    // Auto-advance to next step
     setCurrentStep('hairColor');
   };
 
   const handleHairColorSelect = (id: HairColor) => {
     onUpdate({ ...selections, hairColor: id });
-    // Auto-advance to next step
     setCurrentStep('portrait');
   };
 
@@ -216,9 +267,14 @@ export function AppearanceSelector({
               <p>Your physical frame affects your capabilities.</p>
             </div>
             <OptionGrid
-              options={config.builds}
+              options={liveConfig.builds}
               selectedId={selections.build}
               onSelect={handleBuildSelect}
+              editMode={editMode}
+              optionType="build"
+              onEdit={(opt) => startEditingAppearanceOption(opt, 'build')}
+              onDelete={(id) => deleteAppearanceOption(id, 'build')}
+              onAdd={() => startCreatingAppearanceOption('build')}
             />
           </>
         );
@@ -231,9 +287,14 @@ export function AppearanceSelector({
               <p>The shade of your complexion.</p>
             </div>
             <OptionGrid
-              options={config.skinTones}
+              options={liveConfig.skinTones}
               selectedId={selections.skinTone}
               onSelect={handleSkinToneSelect}
+              editMode={editMode}
+              optionType="skinTone"
+              onEdit={(opt) => startEditingAppearanceOption(opt, 'skinTone')}
+              onDelete={(id) => deleteAppearanceOption(id, 'skinTone')}
+              onAdd={() => startCreatingAppearanceOption('skinTone')}
             />
           </>
         );
@@ -246,9 +307,14 @@ export function AppearanceSelector({
               <p>The color of your hair, if any.</p>
             </div>
             <OptionGrid
-              options={config.hairColors}
+              options={liveConfig.hairColors}
               selectedId={selections.hairColor}
               onSelect={handleHairColorSelect}
+              editMode={editMode}
+              optionType="hairColor"
+              onEdit={(opt) => startEditingAppearanceOption(opt, 'hairColor')}
+              onDelete={(id) => deleteAppearanceOption(id, 'hairColor')}
+              onAdd={() => startCreatingAppearanceOption('hairColor')}
             />
           </>
         );
@@ -263,11 +329,15 @@ export function AppearanceSelector({
                 {filteredPortraits.length > 0 && ` (${filteredPortraits.length} available)`}
               </p>
             </div>
-            <PortraitGrid
-              portraits={filteredPortraits}
-              selectedId={selections.portraitId}
-              onSelect={handlePortraitSelect}
-            />
+            {editMode ? (
+              <PortraitManager onRefreshConfig={refreshAppearanceConfig} />
+            ) : (
+              <PortraitGrid
+                portraits={filteredPortraits}
+                selectedId={selections.portraitId}
+                onSelect={handlePortraitSelect}
+              />
+            )}
           </>
         );
     }
@@ -277,19 +347,19 @@ export function AppearanceSelector({
   const selectionSummary = useMemo(() => {
     const parts: string[] = [];
     if (selections.build) {
-      const build = config.builds.find(b => b.id === selections.build);
+      const build = liveConfig.builds.find(b => b.id === selections.build);
       if (build) parts.push(build.name);
     }
     if (selections.skinTone) {
-      const skin = config.skinTones.find(s => s.id === selections.skinTone);
+      const skin = liveConfig.skinTones.find(s => s.id === selections.skinTone);
       if (skin) parts.push(skin.name);
     }
     if (selections.hairColor) {
-      const hair = config.hairColors.find(h => h.id === selections.hairColor);
+      const hair = liveConfig.hairColors.find(h => h.id === selections.hairColor);
       if (hair) parts.push(hair.name + ' hair');
     }
     return parts.join(', ');
-  }, [selections, config]);
+  }, [selections, liveConfig]);
 
   return (
     <div className="appearance-selector">
@@ -297,6 +367,7 @@ export function AppearanceSelector({
         currentStep={currentStep}
         selections={selections}
         onStepClick={handleStepClick}
+        editMode={editMode}
       />
 
       {selectionSummary && (

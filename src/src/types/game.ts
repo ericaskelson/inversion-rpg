@@ -50,8 +50,40 @@ export interface Portrait {
   skinTone: SkinTone;
   hairColor: HairColor;
   sex: 'male' | 'female';
+  race: string;  // Dynamic - pulled from race options
   traits?: string[];
   fate?: number;
+}
+
+// Portrait generation configuration
+export interface PortraitPromptConfig {
+  basePrompt: string;
+  styleModifiers: string;
+  aspectRatio: string;
+  imageSize: string;
+  model?: 'nano-banana-pro' | 'nano-banana';  // Default: nano-banana-pro
+}
+
+// A pending portrait awaiting review
+export interface PendingPortrait {
+  id: string;
+  tempPath: string;  // Path to temp image file
+  build: BuildType;
+  skinTone: SkinTone;
+  hairColor: HairColor;
+  sex: 'male' | 'female';
+  race: string;
+  generatedAt: string;  // ISO timestamp
+  prompt: string;  // The actual prompt used
+}
+
+// Portrait generation request
+export interface PortraitGenerationRequest {
+  builds: BuildType[];
+  skinTones: SkinTone[];
+  hairColors: HairColor[];
+  sexes: ('male' | 'female')[];
+  races: string[];
 }
 
 export interface AppearanceConfig {
@@ -59,6 +91,7 @@ export interface AppearanceConfig {
   skinTones: (AppearanceOption & { id: SkinTone })[];
   hairColors: (AppearanceOption & { id: HairColor })[];
   portraits: Portrait[];
+  portraitConfig?: PortraitPromptConfig;
 }
 
 // Appearance selections stored in builder state

@@ -1,4 +1,5 @@
-import type { AttributeId } from '../types/game';
+import { useState } from 'react';
+import type { AttributeId, Portrait } from '../types/game';
 
 interface CharacterSummaryProps {
   name: string;
@@ -7,6 +8,7 @@ interface CharacterSummaryProps {
   traits: string[];
   describeFate: (fate: number) => string;
   describeAttribute: (value: number) => string;
+  portrait?: Portrait;
 }
 
 const ATTRIBUTE_NAMES: Record<AttributeId, string> = {
@@ -25,9 +27,18 @@ export function CharacterSummary({
   traits,
   describeFate,
   describeAttribute,
+  portrait,
 }: CharacterSummaryProps) {
+  const [showLightbox, setShowLightbox] = useState(false);
+
   return (
     <div className="character-summary">
+      {portrait && (
+        <div className="summary-portrait" onClick={() => setShowLightbox(true)}>
+          <img src={`/images/${portrait.image}`} alt={portrait.name} />
+        </div>
+      )}
+
       <h2>{name || 'Unnamed Character'}</h2>
 
       <div className="fate-display">
@@ -64,6 +75,13 @@ export function CharacterSummary({
           <p className="no-traits">No traits yet</p>
         )}
       </div>
+
+      {/* Portrait lightbox */}
+      {showLightbox && portrait && (
+        <div className="portrait-lightbox" onClick={() => setShowLightbox(false)}>
+          <img src={`/images/${portrait.image}`} alt={portrait.name} />
+        </div>
+      )}
     </div>
   );
 }

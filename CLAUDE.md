@@ -224,18 +224,27 @@ inverse-rpg/
   CLAUDE.md                    # This file
   open-dev.bat                 # Opens browser to localhost:5173
   start-server.bat             # Starts the Vite dev server
+  start-edit.bat               # Starts in edit mode (Vite + editor server)
 
   src/                         # Vite + React + TypeScript web app
+    editor-server.js           # Express API for editing character data
     src/
+      api/
+        editorApi.ts           # Frontend API client for editor server
       components/
         AppearanceSelector.tsx # Multi-step wizard for Build/Skin/Hair/Portrait
         CategorySelector.tsx   # Generic option grid for most categories
         CharacterCreator.tsx   # Main character creation orchestrator
         CharacterSummary.tsx   # Sidebar showing current stats/traits
+        OptionEditorModal.tsx  # Modal form for editing options
         ScenarioPlayer.tsx     # Plays through scenarios (not yet integrated)
+      contexts/
+        EditModeContext.tsx    # React context for edit mode state
       data/
-        characterCreation.ts   # All category options (Sex, Race, Culture, etc.)
-        appearanceConfig.ts    # Build/Skin/Hair options + portrait metadata
+        characterCreation.json # All category options (editable via GUI)
+        characterCreation.ts   # Thin wrapper for JSON import
+        appearanceConfig.json  # Build/Skin/Hair options + portrait metadata
+        appearanceConfig.ts    # Thin wrapper for JSON import
       engine/
         characterBuilder.ts    # State management, calculations, validation
         conditions.ts          # Scenario condition evaluation
@@ -280,57 +289,194 @@ Portrait combinations: 5 builds × 6 skins × 7 hair × 2 sexes × 5 races = **2
 - `CharacterBuilderState` - Current selections, calculated values
 
 ### Data Files
-- `characterCreation.ts` - Exports `characterCreationData` with all 12 categories
-- `appearanceConfig.ts` - Exports `appearanceConfig` with builds, skinTones, hairColors, portraits[]
+- `characterCreation.json` - All 12 categories of options (editable via GUI)
+- `characterCreation.ts` - Thin wrapper that imports and type-asserts the JSON
+- `appearanceConfig.json` - Builds, skinTones, hairColors, portraits (editable via GUI)
+- `appearanceConfig.ts` - Thin wrapper that imports and type-asserts the JSON
 
 ---
 
-## NEXT TASK: Character Options Editor
+## Character Options Editor (IMPLEMENTED)
 
-### Goal
-GUI editor for character creation options, integrated into the web app with edit mode toggle.
+### Usage
+- Run `npm run dev:edit` or `start-edit.bat` to start in edit mode
+- This starts both Vite (port 5173) and the editor API server (port 3001)
+- In the UI, an "Edit Mode: ON/OFF" toggle appears in the header when editor server is available
+- When ON, each option card shows Edit/Delete buttons
+- "Add Option" button appears at the end of each category/subcategory
+- Changes are saved immediately to the JSON files
 
-### Plan
-1. **Convert data to JSON** - Change characterCreation.ts and appearanceConfig.ts to import from JSON files
-   - `src/src/data/characterCreation.json`
-   - `src/src/data/appearanceConfig.json`
-   - TS files become thin wrappers that import and type-assert the JSON
+### Editor Server
+Located at `src/editor-server.js`, provides:
+- `GET /api/character-creation` - Returns characterCreation.json
+- `PUT /api/character-creation` - Writes to characterCreation.json
+- `GET /api/appearance-config` - Returns appearanceConfig.json
+- `PUT /api/appearance-config` - Writes to appearanceConfig.json
 
-2. **Create editor server** - Simple Express server (~50 lines) at `tools/editor-server.js`
-   - `GET /api/character-creation` - Returns characterCreation.json
-   - `PUT /api/character-creation` - Writes to characterCreation.json
-   - `GET /api/appearance-config` - Returns appearanceConfig.json
-   - `PUT /api/appearance-config` - Writes to appearanceConfig.json
-   - Runs on port 3001 (Vite is on 5173)
+### Key Files
+- `src/editor-server.js` - Express API server for reading/writing JSON + portrait generation
+- `src/src/api/editorApi.ts` - Frontend API client
+- `src/src/contexts/EditModeContext.tsx` - React context for edit mode state
+- `src/src/components/OptionEditorModal.tsx` - Modal form for editing character options
+- `src/src/components/AppearanceEditorModal.tsx` - Modal form for editing appearance options
+- `src/src/components/PortraitManager.tsx` - Portrait generation and review UI
 
-3. **Add Edit Mode to UI**
-   - Toggle button in header: "Edit Mode: ON/OFF"
-   - When ON, each option card shows Edit/Delete buttons
-   - "Add Option" button at end of each category/subcategory
-   - Clicking Edit opens inline form or modal with all fields
-   - Changes POST to editor server immediately
-
-4. **Update dev scripts**
-   - `npm run dev` - Starts Vite only (normal mode)
-   - `npm run dev:edit` - Starts both Vite and editor server
-
-### Editor UI Needs
+### What You Can Edit
 For each CharacterOption:
-- id (auto-generated or manual)
-- name (text)
-- description (textarea)
-- subcategory (dropdown of existing + new)
-- image (file picker or text path)
-- fate (number, can be negative)
-- attributes (key-value pairs for strength/agility/etc)
-- traits (tag list)
-- requires (complex - trait/attribute/selection requirements)
-- incompatibleWith (list of option IDs)
-- isDrawback (checkbox)
+- id, name, description
+- subcategory (auto-suggests existing ones)
+- image filename
+- fate value
+- attributes (STR/AGI/END/CUN/CHA/WIL)
+- traits (comma-separated)
+- isDrawback flag
 
-For AppearanceConfig:
-- builds, skinTones, hairColors (similar to options)
-- portraits (list with build/skin/hair/sex tags)
+### Appearance Config Editing (IMPLEMENTED)
+In edit mode, the appearance wizard (Build/Skin Tone/Hair Color) also supports:
+- Edit/Delete buttons on each appearance option
+- Add button to create new builds, skin tones, or hair colors
+- Uses AppearanceEditorModal for the edit form
+- Saves changes to appearanceConfig.json
+
+### Portrait Management (IMPLEMENTED)
+
+AI-powered portrait generation integrated into edit mode:
+
+#### Usage
+1. Navigate to the Portrait step in the Appearance category
+2. Enable Edit Mode (toggle in header)
+3. The Portrait Manager UI replaces the portrait grid
+
+#### Features
+- **Stats Dashboard**: Shows existing, missing, and pending portrait counts
+- **Editable Prompt Template**: Edit base prompt and style modifiers directly in the UI
+- **Selection Interface**: Checkboxes for each characteristic (Sex, Race, Build, Skin Tone, Hair Color)
+- **Per-Combination Count**: Generate multiple portraits (1-10) for each characteristic combo
+- **Batch Generation**: Select any combination of options, generates all permutations × count
+- **Missing Counts**: Shows how many portraits are missing per category
+- **Generation Progress**: Real-time progress bar during generation
+- **Review Queue**: All generated portraits go to "pending" for review
+- **Click-to-Zoom**: Click any pending portrait to view full-size in lightbox
+- **Accept/Reject**: Individual or bulk accept/reject of pending portraits
+
+#### Portrait Filtering
+Portraits are filtered by ALL characteristics:
+- Sex (from sex category selection)
+- Race (from race category selection)
+- Build, Skin Tone, Hair Color (from appearance wizard)
+
+Multiple portraits can exist per characteristic set (unique IDs with timestamp suffix).
+
+#### API Endpoints (editor-server.js)
+- `POST /api/portraits/generate` - Queue generation (accepts `count` param for multiple per combo)
+- `GET /api/portraits/pending` - List pending portraits
+- `GET /api/portraits/generation-status` - Get progress
+- `POST /api/portraits/accept/:id` - Accept single portrait
+- `POST /api/portraits/accept-all` - Accept all pending
+- `DELETE /api/portraits/pending/:id` - Reject single portrait
+- `DELETE /api/portraits/pending` - Reject all pending
+
+#### Prompt Configuration
+Editable in the Portrait Manager UI, stored in `appearanceConfig.json`:
+```json
+{
+  "portraitConfig": {
+    "basePrompt": "Fantasy RPG character portrait. A {sex} {race} with a {build} build...",
+    "styleModifiers": "Dark fantasy art style, painterly...",
+    "aspectRatio": "3:4",
+    "imageSize": "1K"
+  }
+}
+```
+
+Template variables: `{sex}`, `{race}`, `{build}`, `{skinTone}`, `{hairColor}`
+
+#### Requirements
+- `GEMINI_API_KEY` environment variable must be set
+
+#### Image Generation Models
+
+Two Gemini models support image generation:
+
+| Model | ID | Quality | Speed | Best For |
+|-------|-----|---------|-------|----------|
+| **Nano Banana Pro** | `gemini-3-pro-image-preview` | Highest (4K, photorealism, text) | Slower | Final assets, text-heavy images |
+| **Nano Banana** | `gemini-2.5-flash-image` | Good (1K max) | Faster | Bulk generation, iteration |
+
+For portraits, Flash Image is likely sufficient since we don't need photorealism or text rendering.
+
+#### Gemini API Rate Limits (as of Dec 2025)
+
+Rate limits are per-project (not per-key) and vary by billing tier:
+
+| Tier | Qualification | Gemini 3 Pro Image RPD | Flash Image RPD |
+|------|---------------|------------------------|-----------------|
+| Free | Default | ~25 | ~250 |
+| Tier 1 | Paid billing enabled | ~250 | ~2,000 |
+| Tier 2 | $250+ spend + 30 days | Higher | Higher |
+| Tier 3 | $1,000+ spend + 30 days | Much higher | Much higher |
+
+**Key findings:**
+- RPD (requests per day) is the main bottleneck for bulk generation
+- Flash Image has ~8x higher RPD limits than Pro Image
+- Limits reset at midnight Pacific Time
+- Check actual limits in [Google AI Studio](https://aistudio.google.com/) under Settings
+
+**Rate limit headers** returned by API:
+- `X-RateLimit-Remaining` - requests left
+- `X-RateLimit-Limit` - total allowed
+- `X-RateLimit-Reset` - reset timestamp
+
+#### Batch API (Future Implementation)
+
+For very high volume (1000s of images), the [Gemini Batch API](https://ai.google.dev/gemini-api/docs/batch-api) offers:
+- **50% cost reduction** ($0.0195/image vs $0.039)
+- **Separate rate limits** from real-time API
+- **Higher throughput** (batch token limits much higher)
+- **Async processing** - submit JSONL, poll for results, ~24hr turnaround
+
+Batch API supports image generation models. Useful for:
+- Initial bulk portrait generation (1000s of images)
+- Scenario illustration batches
+- Any non-interactive generation workflow
+
+#### UI Details
+- **Portrait selection grid**: Large cards (280px min), 3:4 aspect ratio, no name labels
+- **Character summary sidebar**: 340px wide, shows selected portrait with click-to-zoom
+- Portraits stored in `public/images/portraits/`, pending in `public/images/portraits/pending/`
+
+### TODO: Prerequisites & Incompatibilities Editor
+The option editor currently doesn't support editing `requires` and `incompatibleWith` fields. These are complex because:
+- `requires` is an array of `OptionRequirement` objects with multiple possible conditions:
+  - `trait` - requires a specific trait
+  - `notTrait` - must NOT have a trait
+  - `attribute` - requires attribute comparison (id, op, value)
+  - `selection` - requires a specific option from another category
+  - `notSelection` - must NOT have selected an option
+- `incompatibleWith` is an array of option IDs from the same category
+
+Ideal UI would:
+- List all existing requirements with delete buttons
+- "Add Requirement" button with dropdown for requirement type
+- For trait/notTrait: dropdown/autocomplete of all existing traits
+- For selection/notSelection: cascading dropdowns (category -> option)
+- For attribute: dropdown for attribute, dropdown for operator, number input for value
+- For incompatibleWith: multi-select of options in current category
+
+---
+
+## Planned Features
+
+### Portrait Generation Enhancements
+- [x] **Model selector** in Portrait Manager UI - switch between Nano Banana Pro (quality) and Flash Image (speed/volume)
+- [x] **Rate limit display** - shows remaining/limit from API headers
+- [ ] **Batch API mode** - async generation for 1000s of images at 50% cost
+
+### Content Pipeline
+- [ ] Image generation for non-appearance options (sex, race, culture, etc.)
+- [ ] Scenario edit mode post-character generation
+- [ ] Automated name suggestions by sex/race
+- [ ] Text description of character in sidebar
 
 ---
 

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import type { Character, CategoryConfig, CharacterBuilderState, AppearanceSelections } from '../types/game';
-import { characterCreationData } from '../data/characterCreation';
+import { characterCreationData as initialData } from '../data/characterCreation';
 import { appearanceConfig } from '../data/appearanceConfig';
 import {
   createInitialBuilderState,
@@ -17,32 +17,48 @@ import {
 import { CategorySelector } from './CategorySelector';
 import { CharacterSummary } from './CharacterSummary';
 import { AppearanceSelector } from './AppearanceSelector';
+import { OptionEditorModal } from './OptionEditorModal';
+import { AppearanceEditorModal } from './AppearanceEditorModal';
+import { EditModeProvider, useEditMode } from '../contexts/EditModeContext';
 
 interface CharacterCreatorProps {
   onComplete: (character: Character) => void;
 }
 
-export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
+function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
+  const { editMode, editorAvailable, toggleEditMode, characterData, appearanceData } = useEditMode();
   const [state, setState] = useState<CharacterBuilderState>(createInitialBuilderState);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
 
-  const categories = characterCreationData.categories;
+  // Use data from context (allows live editing)
+  const categories = characterData?.categories ?? initialData.categories;
   const currentCategory = categories[currentCategoryIndex];
 
-  // Determine character sex from selections (default to male if not selected)
+  // Determine character sex and race from selections
   const characterSex = (state.selections.sex?.[0] === 'female' ? 'female' : 'male') as 'male' | 'female';
+  const characterRace = state.selections.race?.[0] ?? 'human';
 
   const handleToggleOption = useCallback((optionId: string, category: CategoryConfig) => {
-    setState(prev => toggleOption(optionId, category, prev, characterCreationData));
-  }, []);
+    // Use the live data from context
+    const data = { categories };
+    setState(prev => toggleOption(optionId, category, prev, data));
+  }, [categories]);
 
   const handleNameChange = useCallback((name: string) => {
     setState(prev => ({ ...prev, name }));
   }, []);
 
+  // Use live appearance data from context if available
+  const liveAppearanceConfig = appearanceData ?? appearanceConfig;
+
+  // Look up the selected portrait
+  const selectedPortrait = state.appearanceSelections.portraitId
+    ? liveAppearanceConfig.portraits.find(p => p.id === state.appearanceSelections.portraitId)
+    : undefined;
+
   const handleAppearanceUpdate = useCallback((selections: AppearanceSelections) => {
-    setState(prev => updateAppearanceSelections(selections, prev, appearanceConfig));
-  }, []);
+    setState(prev => updateAppearanceSelections(selections, prev, liveAppearanceConfig));
+  }, [liveAppearanceConfig]);
 
   const handlePrevCategory = () => {
     if (currentCategoryIndex > 0) {
@@ -57,7 +73,8 @@ export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
   };
 
   const handleFinish = () => {
-    if (isCharacterComplete(characterCreationData, state)) {
+    const data = { categories };
+    if (isCharacterComplete(data, state)) {
       const character = buildCharacter(state);
       onComplete(character);
     }
@@ -65,7 +82,7 @@ export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
 
   const canGoNext = isCategoryComplete(currentCategory, state);
   const isLastCategory = currentCategoryIndex === categories.length - 1;
-  const canFinish = isCharacterComplete(characterCreationData, state);
+  const canFinish = isCharacterComplete({ categories }, state);
 
   // Check if current category is appearance (uses special selector)
   const isAppearanceCategory = currentCategory.id === 'appearance';
@@ -74,16 +91,26 @@ export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
     <div className="character-creator">
       <header className="creator-header">
         <h1>Create Your Character</h1>
-        <div className="name-input-container">
-          <label htmlFor="character-name">Name:</label>
-          <input
-            id="character-name"
-            type="text"
-            value={state.name}
-            onChange={e => handleNameChange(e.target.value)}
-            placeholder="Enter character name..."
-            className="name-input"
-          />
+        <div className="header-controls">
+          <div className="name-input-container">
+            <label htmlFor="character-name">Name:</label>
+            <input
+              id="character-name"
+              type="text"
+              value={state.name}
+              onChange={e => handleNameChange(e.target.value)}
+              placeholder="Enter character name..."
+              className="name-input"
+            />
+          </div>
+          {editorAvailable && (
+            <button
+              className={`edit-mode-toggle ${editMode ? 'active' : ''}`}
+              onClick={toggleEditMode}
+            >
+              Edit Mode: {editMode ? 'ON' : 'OFF'}
+            </button>
+          )}
         </div>
       </header>
 
@@ -106,9 +133,10 @@ export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
 
           {isAppearanceCategory ? (
             <AppearanceSelector
-              config={appearanceConfig}
+              config={liveAppearanceConfig}
               selections={state.appearanceSelections}
               characterSex={characterSex}
+              characterRace={characterRace}
               onUpdate={handleAppearanceUpdate}
             />
           ) : (
@@ -133,7 +161,7 @@ export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
             {!isLastCategory ? (
               <button
                 onClick={handleNextCategory}
-                disabled={!canGoNext}
+                disabled={!canGoNext && !editMode}
                 className="nav-button primary"
               >
                 Next →
@@ -158,9 +186,21 @@ export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
             traits={state.calculatedTraits}
             describeFate={describeFate}
             describeAttribute={describeAttribute}
+            portrait={selectedPortrait}
           />
         </aside>
       </div>
+
+      <OptionEditorModal />
+      <AppearanceEditorModal />
     </div>
+  );
+}
+
+export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
+  return (
+    <EditModeProvider initialData={initialData} initialAppearanceData={appearanceConfig}>
+      <CharacterCreatorInner onComplete={onComplete} />
+    </EditModeProvider>
   );
 }

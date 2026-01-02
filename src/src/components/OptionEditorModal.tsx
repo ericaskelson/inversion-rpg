@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
-import type { CharacterOption, AttributeId } from '../types/game';
+import { useState, useEffect, useMemo } from 'react';
+import type { CharacterOption, AttributeId, OptionRequirement, CategoryId } from '../types/game';
 import { useEditMode } from '../contexts/EditModeContext';
 
 const ATTRIBUTE_IDS: AttributeId[] = ['strength', 'agility', 'endurance', 'cunning', 'charisma', 'will'];
+const OPERATORS: Array<'>=' | '>' | '<=' | '<'> = ['>=', '>', '<=', '<'];
+
+type RequirementType = 'trait' | 'notTrait' | 'attribute' | 'selection' | 'notSelection';
 
 export function OptionEditorModal() {
   const { editingOption, cancelEditing, saveOption, isCreatingNew, characterData } = useEditMode();
@@ -17,14 +20,41 @@ export function OptionEditorModal() {
   // Store raw traits input to allow typing commas freely
   const [traitsInput, setTraitsInput] = useState('');
 
+  // Requirements form state
+  const [showAddRequirement, setShowAddRequirement] = useState(false);
+  const [newReqType, setNewReqType] = useState<RequirementType>('trait');
+  const [newReqTrait, setNewReqTrait] = useState('');
+  const [newReqAttrId, setNewReqAttrId] = useState<AttributeId>('strength');
+  const [newReqAttrOp, setNewReqAttrOp] = useState<'>=' | '>' | '<=' | '<'>('>=');
+  const [newReqAttrValue, setNewReqAttrValue] = useState(1);
+  const [newReqCategory, setNewReqCategory] = useState<CategoryId | ''>('');
+  const [newReqOptionId, setNewReqOptionId] = useState('');
+
   // Reset form when editing option changes
   useEffect(() => {
     if (editingOption) {
       setFormData({ ...editingOption.option });
       setTraitsInput(editingOption.option.traits?.join(', ') ?? '');
       setError(null);
+      setShowAddRequirement(false);
     }
   }, [editingOption]);
+
+  // Collect all unique traits from all options
+  const allTraits = useMemo(() => {
+    if (!characterData) return [];
+    const traits = new Set<string>();
+    for (const cat of characterData.categories) {
+      for (const opt of cat.options) {
+        if (opt.traits) {
+          for (const t of opt.traits) {
+            traits.add(t);
+          }
+        }
+      }
+    }
+    return [...traits].sort();
+  }, [characterData]);
 
   if (!editingOption) return null;
 
@@ -33,6 +63,89 @@ export function OptionEditorModal() {
   const existingSubcategories = category
     ? [...new Set(category.options.map(o => o.subcategory).filter(Boolean))]
     : [];
+
+  // Get other options in same category (for incompatibleWith)
+  const otherOptionsInCategory = category
+    ? category.options.filter(o => o.id !== formData.id)
+    : [];
+
+  // Format a requirement for display
+  const formatRequirement = (req: OptionRequirement): string => {
+    if (req.trait) return `Has trait: ${req.trait}`;
+    if (req.notTrait) return `NOT trait: ${req.notTrait}`;
+    if (req.attribute) {
+      const attrName = req.attribute.id.charAt(0).toUpperCase() + req.attribute.id.slice(1);
+      return `${attrName} ${req.attribute.op} ${req.attribute.value}`;
+    }
+    if (req.selection) {
+      const cat = characterData?.categories.find(c => c.id === req.selection!.category);
+      const opt = cat?.options.find(o => o.id === req.selection!.optionId);
+      return `Selected: ${opt?.name ?? req.selection.optionId} (${cat?.name ?? req.selection.category})`;
+    }
+    if (req.notSelection) {
+      const cat = characterData?.categories.find(c => c.id === req.notSelection!.category);
+      const opt = cat?.options.find(o => o.id === req.notSelection!.optionId);
+      return `NOT selected: ${opt?.name ?? req.notSelection.optionId} (${cat?.name ?? req.notSelection.category})`;
+    }
+    return 'Unknown requirement';
+  };
+
+  // Add a new requirement
+  const addRequirement = () => {
+    let newReq: OptionRequirement;
+
+    switch (newReqType) {
+      case 'trait':
+        if (!newReqTrait.trim()) return;
+        newReq = { trait: newReqTrait.trim() };
+        break;
+      case 'notTrait':
+        if (!newReqTrait.trim()) return;
+        newReq = { notTrait: newReqTrait.trim() };
+        break;
+      case 'attribute':
+        newReq = { attribute: { id: newReqAttrId, op: newReqAttrOp, value: newReqAttrValue } };
+        break;
+      case 'selection':
+        if (!newReqCategory || !newReqOptionId) return;
+        newReq = { selection: { category: newReqCategory as CategoryId, optionId: newReqOptionId } };
+        break;
+      case 'notSelection':
+        if (!newReqCategory || !newReqOptionId) return;
+        newReq = { notSelection: { category: newReqCategory as CategoryId, optionId: newReqOptionId } };
+        break;
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      requires: [...(prev.requires ?? []), newReq],
+    }));
+
+    // Reset form
+    setShowAddRequirement(false);
+    setNewReqTrait('');
+    setNewReqOptionId('');
+  };
+
+  // Remove a requirement by index
+  const removeRequirement = (index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      requires: prev.requires?.filter((_, i) => i !== index),
+    }));
+  };
+
+  // Toggle an option in incompatibleWith
+  const toggleIncompatible = (optionId: string) => {
+    setFormData(prev => {
+      const current = prev.incompatibleWith ?? [];
+      if (current.includes(optionId)) {
+        return { ...prev, incompatibleWith: current.filter(id => id !== optionId) };
+      } else {
+        return { ...prev, incompatibleWith: [...current, optionId] };
+      }
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -243,6 +356,167 @@ export function OptionEditorModal() {
               placeholder="trait-one, trait-two"
             />
           </div>
+
+          {/* Prerequisites Section */}
+          <div className="form-group">
+            <label>Prerequisites</label>
+            {formData.requires && formData.requires.length > 0 ? (
+              <ul className="requirements-list">
+                {formData.requires.map((req, idx) => (
+                  <li key={idx} className="requirement-item">
+                    <span>{formatRequirement(req)}</span>
+                    <button
+                      type="button"
+                      className="btn-remove"
+                      onClick={() => removeRequirement(idx)}
+                      title="Remove requirement"
+                    >
+                      ×
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="no-requirements">No prerequisites</p>
+            )}
+
+            {!showAddRequirement ? (
+              <button
+                type="button"
+                className="btn-add-requirement"
+                onClick={() => setShowAddRequirement(true)}
+              >
+                + Add Prerequisite
+              </button>
+            ) : (
+              <div className="add-requirement-form">
+                <div className="form-row">
+                  <select
+                    value={newReqType}
+                    onChange={e => {
+                      setNewReqType(e.target.value as RequirementType);
+                      setNewReqTrait('');
+                      setNewReqOptionId('');
+                    }}
+                  >
+                    <option value="trait">Has Trait</option>
+                    <option value="notTrait">NOT Trait</option>
+                    <option value="attribute">Attribute Check</option>
+                    <option value="selection">Has Selection</option>
+                    <option value="notSelection">NOT Selection</option>
+                  </select>
+                </div>
+
+                {/* Trait input */}
+                {(newReqType === 'trait' || newReqType === 'notTrait') && (
+                  <div className="form-row">
+                    <input
+                      type="text"
+                      value={newReqTrait}
+                      onChange={e => setNewReqTrait(e.target.value)}
+                      placeholder="trait-name"
+                      list="all-traits-list"
+                    />
+                    <datalist id="all-traits-list">
+                      {allTraits.map(t => (
+                        <option key={t} value={t} />
+                      ))}
+                    </datalist>
+                  </div>
+                )}
+
+                {/* Attribute input */}
+                {newReqType === 'attribute' && (
+                  <div className="form-row attribute-requirement">
+                    <select
+                      value={newReqAttrId}
+                      onChange={e => setNewReqAttrId(e.target.value as AttributeId)}
+                    >
+                      {ATTRIBUTE_IDS.map(attr => (
+                        <option key={attr} value={attr}>
+                          {attr.charAt(0).toUpperCase() + attr.slice(1)}
+                        </option>
+                      ))}
+                    </select>
+                    <select
+                      value={newReqAttrOp}
+                      onChange={e => setNewReqAttrOp(e.target.value as '>=' | '>' | '<=' | '<')}
+                    >
+                      {OPERATORS.map(op => (
+                        <option key={op} value={op}>{op}</option>
+                      ))}
+                    </select>
+                    <input
+                      type="number"
+                      value={newReqAttrValue}
+                      onChange={e => setNewReqAttrValue(parseInt(e.target.value) || 0)}
+                      min={-10}
+                      max={10}
+                    />
+                  </div>
+                )}
+
+                {/* Selection input */}
+                {(newReqType === 'selection' || newReqType === 'notSelection') && (
+                  <div className="form-row selection-requirement">
+                    <select
+                      value={newReqCategory}
+                      onChange={e => {
+                        setNewReqCategory(e.target.value as CategoryId);
+                        setNewReqOptionId('');
+                      }}
+                    >
+                      <option value="">Select category...</option>
+                      {characterData?.categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      ))}
+                    </select>
+                    {newReqCategory && (
+                      <select
+                        value={newReqOptionId}
+                        onChange={e => setNewReqOptionId(e.target.value)}
+                      >
+                        <option value="">Select option...</option>
+                        {characterData?.categories
+                          .find(c => c.id === newReqCategory)
+                          ?.options.map(opt => (
+                            <option key={opt.id} value={opt.id}>{opt.name}</option>
+                          ))}
+                      </select>
+                    )}
+                  </div>
+                )}
+
+                <div className="form-row requirement-actions">
+                  <button type="button" className="btn-secondary" onClick={() => setShowAddRequirement(false)}>
+                    Cancel
+                  </button>
+                  <button type="button" className="btn-primary" onClick={addRequirement}>
+                    Add
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Incompatibilities Section */}
+          {otherOptionsInCategory.length > 0 && (
+            <div className="form-group">
+              <label>Incompatible With (same category)</label>
+              <div className="incompatible-options">
+                {otherOptionsInCategory.map(opt => (
+                  <label key={opt.id} className="incompatible-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={formData.incompatibleWith?.includes(opt.id) ?? false}
+                      onChange={() => toggleIncompatible(opt.id)}
+                    />
+                    <span>{opt.name}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
 
           <footer className="modal-footer">
             <button type="button" className="btn-secondary" onClick={cancelEditing}>

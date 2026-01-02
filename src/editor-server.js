@@ -847,8 +847,48 @@ async function* extractImagesFromLargeFile(tempFile, requestMetadata) {
   const stats = await fileHandle.stat();
   const fileSize = stats.size;
 
+  // IMPORTANT: Gemini batch responses have TWO sets of images:
+  // 1. metadata.output.inlinedResponses (first half) - echoed request data
+  // 2. response.inlinedResponses (after "done": true) - actual generated images
+  // We must skip to the response section to get the correct images.
+
+  // First, find the position of "done": true which marks the response section
+  let responseStartPosition = 0;
+  const SCAN_CHUNK_SIZE = 1024 * 1024;  // 1MB scan chunks
+  let scanBuffer = '';
+  let fileReadPosition = 0;  // Where to read next from file
+  let bufferFileStart = 0;   // File position corresponding to start of scanBuffer
+
+  console.log(`  Scanning for response section boundary...`);
+  while (fileReadPosition < fileSize) {
+    const scanChunk = Buffer.alloc(Math.min(SCAN_CHUNK_SIZE, fileSize - fileReadPosition));
+    await fileHandle.read(scanChunk, 0, scanChunk.length, fileReadPosition);
+    scanBuffer += scanChunk.toString('utf-8');
+    fileReadPosition += scanChunk.length;
+
+    // Look for "done": true pattern
+    const doneMatch = scanBuffer.match(/"done"\s*:\s*true/);
+    if (doneMatch) {
+      // Found it - response section starts shortly after this
+      responseStartPosition = bufferFileStart + doneMatch.index;
+      console.log(`  Found response section at ~${Math.round(responseStartPosition / 1024 / 1024)}MB`);
+      break;
+    }
+
+    // Keep last 100 bytes to handle pattern split across chunks
+    if (scanBuffer.length > SCAN_CHUNK_SIZE) {
+      const trimAmount = scanBuffer.length - 100;
+      scanBuffer = scanBuffer.slice(-100);
+      bufferFileStart += trimAmount;
+    }
+  }
+
+  if (responseStartPosition === 0) {
+    console.warn(`  Warning: Could not find "done": true marker, processing entire file`);
+  }
+
   let buffer = '';
-  let position = 0;
+  let position = responseStartPosition;
   let imageIndex = 0;
   const processedKeys = new Set();  // Track processed keys to avoid duplicates
 
@@ -857,7 +897,7 @@ async function* extractImagesFromLargeFile(tempFile, requestMetadata) {
   const inlineDataPattern = /"inlineData"\s*:\s*\{\s*"mimeType"\s*:\s*"[^"]+"\s*,\s*"data"\s*:\s*"/;
   const keyPattern = /"key"\s*:\s*"([^"]+)"/;
 
-  console.log(`  Reading ${Math.round(fileSize / 1024 / 1024)}MB file in ${CHUNK_SIZE / 1024 / 1024}MB chunks...`);
+  console.log(`  Reading ${Math.round((fileSize - responseStartPosition) / 1024 / 1024)}MB response section in ${CHUNK_SIZE / 1024 / 1024}MB chunks...`);
 
   try {
     while (position < fileSize) {
@@ -908,64 +948,80 @@ async function* extractImagesFromLargeFile(tempFile, requestMetadata) {
         const base64Data = buffer.slice(dataStart, dataEnd);
 
         // Look forward after data ends for the "metadata" block containing the key
-        // Note: Gemini responses include a ~2MB encrypted "thoughtSignature" between image and metadata,
-        // so we need to find "metadata": first, then look for "key" within it
+        // The metadata block is typically 500-1000 bytes after the image data ends
+        // (after usageMetadata, modelVersion, responseId)
         const remainingBuffer = buffer.slice(dataEnd);
         const metadataIdx = remainingBuffer.indexOf('"metadata"');
         let metadataMatch = null;
+
         if (metadataIdx !== -1) {
           const metadataSection = remainingBuffer.slice(metadataIdx, metadataIdx + 500);
           metadataMatch = metadataSection.match(/"key"\s*:\s*"([^"]+)"/);
+        } else if (remainingBuffer.length < 2500000) {
+          // Not enough buffer to find metadata - wait for more data
+          // Note: There's a ~2MB "thoughtSignature" field between the image data and metadata
+          // Don't advance searchStart, so this image will be retried with more data
+          break;
         }
+
         let key = metadataMatch ? metadataMatch[1] : null;
 
-        // If no key found, fall back to index-based matching (less reliable if results are out of order)
+        // Find matching metadata from our request
         let metadata;
         if (key) {
           metadata = requestMetadata.find(m => m.key === key);
-        } else {
-          metadata = requestMetadata[imageIndex];
-          key = metadata?.key;
         }
 
-        // Skip if we've already processed this key (avoid duplicates)
-        if (key && processedKeys.has(key)) {
+        // If no key found or no matching metadata, skip this image
+        if (!metadata || !key) {
+          console.warn(`  Skipping image: could not find/match key (metadataIdx=${metadataIdx}, remainingLen=${remainingBuffer.length})`);
           searchStart = dataEnd + 1;
           continue;
         }
 
-        if (metadata && key) {
-          processedKeys.add(key);
+        // Skip if we've already processed this key (avoid duplicates)
+        if (processedKeys.has(key)) {
+          searchStart = dataEnd + 1;
+          continue;
+        }
 
-          // Decode base64 to buffer
-          try {
-            const imageBuffer = Buffer.from(base64Data, 'base64');
+        processedKeys.add(key);
 
-            // Check for valid image data (PNG or JPEG headers)
-            const isPNG = imageBuffer.length > 8 && imageBuffer[0] === 0x89 && imageBuffer[1] === 0x50;
-            const isJPEG = imageBuffer.length > 2 && imageBuffer[0] === 0xFF && imageBuffer[1] === 0xD8;
+        // Decode base64 to buffer
+        try {
+          const imageBuffer = Buffer.from(base64Data, 'base64');
 
-            if (isPNG || isJPEG) {
-              yield { key, imageBuffer, metadata, format: isPNG ? 'png' : 'jpg' };
-              imageIndex++;
-            } else {
-              console.warn(`  Skipping invalid image data for ${key} (header: ${imageBuffer[0]?.toString(16)} ${imageBuffer[1]?.toString(16)})`);
-            }
-          } catch (e) {
-            console.warn(`  Failed to decode base64 for ${key}: ${e.message}`);
+          // Check for valid image data (PNG or JPEG headers)
+          const isPNG = imageBuffer.length > 8 && imageBuffer[0] === 0x89 && imageBuffer[1] === 0x50;
+          const isJPEG = imageBuffer.length > 2 && imageBuffer[0] === 0xFF && imageBuffer[1] === 0xD8;
+
+          if (isPNG || isJPEG) {
+            yield { key, imageBuffer, metadata, format: isPNG ? 'png' : 'jpg' };
+            imageIndex++;
+          } else {
+            console.warn(`  Skipping invalid image data for ${key} (header: ${imageBuffer[0]?.toString(16)} ${imageBuffer[1]?.toString(16)})`);
           }
+        } catch (e) {
+          console.warn(`  Failed to decode base64 for ${key}: ${e.message}`);
         }
 
         searchStart = dataEnd + 1;
       }
 
-      // Keep unprocessed part of buffer
-      if (searchStart > 1000) {
-        buffer = buffer.slice(searchStart - 500);
+      // Keep unprocessed part of buffer, but ensure we don't lose partial patterns
+      // Keep more context (4KB) to handle cases where inlineData pattern spans chunks
+      if (searchStart > 4096) {
+        buffer = buffer.slice(searchStart - 4096);
+      } else if (buffer.length > CHUNK_SIZE * 2) {
+        // Buffer grew too large without finding patterns - trim to last chunk + context
+        // This prevents memory issues if no patterns are found
+        buffer = buffer.slice(-CHUNK_SIZE - 4096);
       }
 
-      // Progress logging
-      const pct = Math.round((position / fileSize) * 100);
+      // Progress logging - adjust for starting from responseStartPosition
+      const progressBytes = position - responseStartPosition;
+      const totalBytes = fileSize - responseStartPosition;
+      const pct = Math.round((progressBytes / totalBytes) * 100);
       if (pct % 20 === 0 && pct > 0) {
         console.log(`    ${pct}% processed (${imageIndex} images found)...`);
       }

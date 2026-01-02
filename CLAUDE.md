@@ -476,7 +476,10 @@ The Gemini Batch API returns a long-running operation object:
 
 **Key insight:** Results are at `response.inlinedResponses.inlinedResponses` (double-nested).
 
-**Important:** Each response includes a ~2MB encrypted `thoughtSignature` field (base64-encoded chain-of-thought trace) between the image data and the metadata block. When parsing, search for the `"metadata"` block first, then find the `"key"` within it - don't just look N bytes after the image data ends.
+**Important - Response Structure:**
+1. The batch response contains TWO copies of results: one in `metadata.output.inlinedResponses` (first half) and one in `response.inlinedResponses` (after `"done": true`). Only process the response section.
+2. Each response includes a ~2MB encrypted `thoughtSignature` field between the image data and the metadata block.
+3. When streaming large files, ensure at least 2.5MB of buffer after each image's data end to find the metadata (to account for thoughtSignature + JSON structure).
 
 ##### Batch Job Persistence
 Jobs are stored in `src/src/data/batchJobs.json` (gitignored) with:
@@ -518,23 +521,23 @@ For batches over 100 images, the server uses streaming processing:
 - **Character summary sidebar**: 340px wide, shows selected portrait with click-to-zoom
 - Portraits stored in `public/images/portraits/`, pending in `public/images/portraits/pending/`
 
-### TODO: Prerequisites & Incompatibilities Editor
-The option editor currently doesn't support editing `requires` and `incompatibleWith` fields. These are complex because:
-- `requires` is an array of `OptionRequirement` objects with multiple possible conditions:
-  - `trait` - requires a specific trait
-  - `notTrait` - must NOT have a trait
-  - `attribute` - requires attribute comparison (id, op, value)
-  - `selection` - requires a specific option from another category
-  - `notSelection` - must NOT have selected an option
-- `incompatibleWith` is an array of option IDs from the same category
+### Prerequisites & Incompatibilities Editor (IMPLEMENTED)
 
-Ideal UI would:
-- List all existing requirements with delete buttons
-- "Add Requirement" button with dropdown for requirement type
-- For trait/notTrait: dropdown/autocomplete of all existing traits
-- For selection/notSelection: cascading dropdowns (category -> option)
-- For attribute: dropdown for attribute, dropdown for operator, number input for value
-- For incompatibleWith: multi-select of options in current category
+The option editor now supports editing `requires` and `incompatibleWith` fields:
+
+#### Prerequisites
+- Lists all existing requirements with delete buttons
+- "Add Prerequisite" button opens inline form with type selector
+- Supports all requirement types:
+  - **Has Trait** - requires a specific trait (autocomplete from all existing traits)
+  - **NOT Trait** - must NOT have a trait
+  - **Attribute Check** - attribute comparison (dropdown for attr, operator, value input)
+  - **Has Selection** - requires option from another category (cascading category → option dropdowns)
+  - **NOT Selection** - must NOT have selected an option
+
+#### Incompatibilities
+- Checkbox list of all other options in the same category
+- Check any options that cannot be selected alongside this option
 
 ---
 
@@ -725,7 +728,7 @@ Platforms:
 ## Pending Improvements
 
 ### Editor Enhancements
-- [ ] **Prerequisites editor** - UI for editing `requires` and `incompatibleWith` fields
+- [x] **Prerequisites editor** - UI for editing `requires` and `incompatibleWith` fields
 - [ ] **Batch chunking** - auto-split large image requests into multiple batch jobs
 - [ ] **Text description** of character in sidebar (prose summary)
 

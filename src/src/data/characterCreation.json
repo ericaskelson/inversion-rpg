@@ -908,10 +908,15 @@
           "id": "spell-fly",
           "name": "Fly",
           "description": "Fulfill the universal human dream: fall into the sky. Begin with an unnatural long-jump, then a slow hover, and eventually exceed the birds of prey.",
+          "image": "spells-spell-fly.png",
           "traits": [
             "flight"
           ],
-          "image": "spells-spell-fly.png"
+          "requires": [
+            {
+              "trait": "spellcaster"
+            }
+          ]
         }
       ]
     },

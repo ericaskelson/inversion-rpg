@@ -19,18 +19,31 @@ prod-open.bat     # Open http://localhost:4173
 
 ## Deployment
 
-### To deploy to GitHub Pages (or any static host):
+### GitHub Pages (automated)
+
+```
+deploy.bat        # Build and deploy to gh-pages branch
+```
+
+First-time setup:
+1. Create a GitHub repo
+2. `git remote add origin https://github.com/USERNAME/REPO.git`
+3. Edit `deploy.bat` and set `REPO_NAME` to match your repo
+4. Run `deploy.bat`
+
+The site will be at `https://USERNAME.github.io/REPO_NAME/`
+
+### Manual deployment (any static host)
 
 1. Run `prod-build.bat` (or `cd src && npm run build`)
 2. Upload the `src/dist/` folder
 3. Done!
 
-The production build is ~106 MB (images converted to WebP).
-
 ### What gets deployed
 - `dist/index.html` - The app
 - `dist/assets/` - Bundled JS/CSS
 - `dist/images/` - WebP images only (PNG/JPG stripped)
+- `dist/scenarios.json` - Compiled scenarios
 
 ## Project Structure
 
@@ -52,8 +65,8 @@ inverse-rpg/
 |------|---------|
 | `src/src/data/characterCreation.json` | All character options |
 | `src/src/data/appearanceConfig.json` | Appearance options + portrait registry |
-| `src/public/images/portraits/` | Portrait images (gitignored) |
-| `src/public/images/options/` | Option card images |
+| `src/public/images/portraits/` | Portrait images (gitignored, AI-generated) |
+| `src/public/images/options/` | Option card images (gitignored, AI-generated) |
 
 ## Batch Files
 
@@ -94,7 +107,7 @@ prod-server.bat   # Serves at localhost:4173
 - **WebP versions** are generated alongside them during build
 - **Production** uses WebP only (86% smaller)
 - **Development** uses original PNG/JPG (for editor workflow)
-- **Portraits are gitignored** - they're generated locally via Gemini API
+- **All images are gitignored** - portraits and option images are AI-generated via Gemini API
 
 ### Build modes
 - `npm run build` = **Production** (WebP conversion + cleanup)

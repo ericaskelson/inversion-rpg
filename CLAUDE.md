@@ -657,6 +657,9 @@ Platforms:
 - [x] Subcategories sort alphabetically
 - [x] Comma input works in traits field
 - [x] Image preloading for fast tab switching
+- [x] Character review page before adventure begins
+- [x] Fate tier styling with visual effects and difficulty descriptions
+- [x] Fixed-position tooltips on review page (mobile-friendly tap support)
 
 ---
 

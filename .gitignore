@@ -26,14 +26,9 @@ venv/
 # Logs
 *.log
 
-# Generated portraits (can be 1000s of images)
+# Generated images (AI-generated, restore from backup or regenerate)
+src/public/images/options/
 src/public/images/portraits/
-
-# Generated WebP files (created at build time from PNG/JPG sources)
-src/public/images/options/*.webp
-
-# Pending option images (review queue)
-src/public/images/options/pending/
 
 # Editor server data (batch jobs, pending metadata)
 src/src/data/batchJobs.json

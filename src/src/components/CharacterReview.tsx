@@ -124,9 +124,13 @@ export function CharacterReview({
         {/* Selected options by category */}
         <div className="review-selections">
           <h3>Your Choices</h3>
+          <div className="review-categories-grid">
           {categories.map(category => {
+            // Skip appearance category (handled separately via portrait)
+            if (category.id === 'appearance') return null;
+
             const selectedIds = selections[category.id] || [];
-            if (selectedIds.length === 0 && category.id !== 'appearance') return null;
+            if (selectedIds.length === 0) return null;
 
             const selectedOptions = getSelectedOptionsForCategory(category, selectedIds);
 
@@ -180,6 +184,7 @@ export function CharacterReview({
               </div>
             );
           })}
+          </div>
         </div>
       </div>
 

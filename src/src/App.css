@@ -3281,11 +3281,13 @@ body {
   border-bottom: 1px solid #0f3460;
 }
 
-.review-category {
-  margin-bottom: 1.5rem;
+.review-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 2rem;
 }
 
-.review-category:last-child {
+.review-category {
   margin-bottom: 0;
 }
 
@@ -3371,7 +3373,7 @@ body {
 .review-option-tooltip {
   display: none;
   position: absolute;
-  bottom: calc(100% + 10px);
+  top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
   background: #1a2744;
@@ -3383,14 +3385,14 @@ body {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-.review-option-tooltip::after {
+.review-option-tooltip::before {
   content: '';
   position: absolute;
-  top: 100%;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
   border: 8px solid transparent;
-  border-top-color: #3b82f6;
+  border-bottom-color: #3b82f6;
 }
 
 .review-option:hover .review-option-tooltip {
@@ -3399,7 +3401,7 @@ body {
 }
 
 @keyframes tooltipFadeIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+  from { opacity: 0; transform: translateX(-50%) translateY(-5px); }
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 

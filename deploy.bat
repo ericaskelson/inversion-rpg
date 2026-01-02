@@ -9,7 +9,7 @@ REM
 REM Usage: deploy.bat
 
 REM === CONFIGURE THIS ===
-set REPO_NAME=inverse-rpg
+set REPO_NAME=inversion-rpg
 REM ======================
 
 echo Building with base path: /%REPO_NAME%/

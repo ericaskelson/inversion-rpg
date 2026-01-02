@@ -55,6 +55,13 @@ function getSelectedOptionsForCategory(
     .filter((opt): opt is CharacterOption => opt !== undefined);
 }
 
+// Track tooltip state with position
+interface TooltipState {
+  option: CharacterOption;
+  x: number;
+  y: number;
+}
+
 export function CharacterReview({
   state,
   categories,
@@ -63,22 +70,42 @@ export function CharacterReview({
   onBack,
 }: CharacterReviewProps) {
   const { name, calculatedFate, calculatedAttributes, calculatedTraits, selections } = state;
-  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+  const [tooltipState, setTooltipState] = useState<TooltipState | null>(null);
 
-  const handleOptionClick = (optionId: string, e: React.MouseEvent) => {
-    e.stopPropagation(); // Don't trigger background click
-    setActiveTooltip(prev => prev === optionId ? null : optionId);
-  };
-
-  const handleOptionHover = (optionId: string) => {
-    // If a different option is clicked-open, close it when hovering another
-    if (activeTooltip && activeTooltip !== optionId) {
-      setActiveTooltip(null);
+  const handleOptionClick = (option: CharacterOption, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (tooltipState?.option.id === option.id) {
+      setTooltipState(null);
+    } else {
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      setTooltipState({
+        option,
+        x: rect.left + rect.width / 2,
+        y: rect.bottom + 10,
+      });
     }
   };
 
+  const handleOptionHover = (option: CharacterOption, e: React.MouseEvent) => {
+    // On hover, show tooltip (unless clicking locked one open)
+    if (!tooltipState || tooltipState.option.id !== option.id) {
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      setTooltipState({
+        option,
+        x: rect.left + rect.width / 2,
+        y: rect.bottom + 10,
+      });
+    }
+  };
+
+  const handleOptionLeave = () => {
+    // Only close on mouse leave if not click-locked
+    // For simplicity, always close on leave (click will reopen)
+    setTooltipState(null);
+  };
+
   const handleBackgroundClick = () => {
-    setActiveTooltip(null);
+    setTooltipState(null);
   };
 
   return (
@@ -159,9 +186,10 @@ export function CharacterReview({
                   {selectedOptions.map(option => (
                     <div
                       key={option.id}
-                      className={`review-option ${option.isDrawback ? 'drawback' : ''} ${activeTooltip === option.id ? 'tooltip-active' : ''}`}
-                      onClick={(e) => handleOptionClick(option.id, e)}
-                      onMouseEnter={() => handleOptionHover(option.id)}
+                      className={`review-option ${option.isDrawback ? 'drawback' : ''} ${tooltipState?.option.id === option.id ? 'tooltip-active' : ''}`}
+                      onClick={(e) => handleOptionClick(option, e)}
+                      onMouseEnter={(e) => handleOptionHover(option, e)}
+                      onMouseLeave={handleOptionLeave}
                     >
                       {option.image && (
                         <img
@@ -177,29 +205,6 @@ export function CharacterReview({
                             {option.fate > 0 ? '+' : ''}{option.fate}
                           </span>
                         )}
-                      </div>
-                      {/* Hover tooltip with full details */}
-                      <div className="review-option-tooltip">
-                        {option.image && (
-                          <img
-                            src={`/images/options/${option.image}`}
-                            alt={option.name}
-                            className="tooltip-image"
-                          />
-                        )}
-                        <div className="tooltip-content">
-                          <h5 className="tooltip-name">{option.name}</h5>
-                          {option.description && (
-                            <p className="tooltip-description">{option.description}</p>
-                          )}
-                          {option.traits && option.traits.length > 0 && (
-                            <div className="tooltip-traits">
-                              {option.traits.map(trait => (
-                                <span key={trait} className="trait-tag">{trait}</span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
                       </div>
                     </div>
                   ))}
@@ -219,6 +224,44 @@ export function CharacterReview({
           Begin Adventure
         </button>
       </div>
+
+      {/* Fixed-position tooltip overlay - rendered outside the column flow */}
+      {tooltipState && (
+        <div
+          className="review-option-tooltip"
+          style={{
+            left: `${tooltipState.x}px`,
+            top: `${tooltipState.y}px`,
+            transform: 'translateX(-50%)',
+          }}
+        >
+          {tooltipState.option.image && (
+            <img
+              src={`/images/options/${tooltipState.option.image}`}
+              alt={tooltipState.option.name}
+              className="tooltip-image"
+            />
+          )}
+          <h4 className="tooltip-name">{tooltipState.option.name}</h4>
+          <p className="tooltip-description">{tooltipState.option.description}</p>
+          {tooltipState.option.attributes && Object.keys(tooltipState.option.attributes).length > 0 && (
+            <div className="tooltip-attributes">
+              {(Object.entries(tooltipState.option.attributes) as [AttributeId, number][]).map(([attr, value]) => (
+                <span key={attr} className={`tooltip-attr ${value > 0 ? 'positive' : 'negative'}`}>
+                  {ATTRIBUTE_NAMES[attr]}: {value > 0 ? '+' : ''}{value}
+                </span>
+              ))}
+            </div>
+          )}
+          {tooltipState.option.traits && tooltipState.option.traits.length > 0 && (
+            <div className="tooltip-traits">
+              {tooltipState.option.traits.map(trait => (
+                <span key={trait} className="tooltip-trait">{trait}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

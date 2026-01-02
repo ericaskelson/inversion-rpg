@@ -175,11 +175,15 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
     return raceCategory?.options.map(o => ({ id: o.id, name: o.name })) ?? [];
   }, [characterData]);
 
-  // Get existing portraits set for quick lookup
-  const existingPortraitIds = useMemo(() => {
-    const ids = new Set<string>();
-    appearanceData?.portraits.forEach(p => ids.add(p.id));
-    return ids;
+  // Get existing portrait combinations for quick lookup (by characteristics, not ID)
+  const existingPortraitCombos = useMemo(() => {
+    const combos = new Set<string>();
+    appearanceData?.portraits.forEach(p => {
+      // Create a key from the portrait's actual characteristics
+      const key = `${p.sex}-${p.race}-${p.build}-${p.skinTone}-${p.hairColor}`;
+      combos.add(key);
+    });
+    return combos;
   }, [appearanceData]);
 
   // Calculate missing counts by category
@@ -205,8 +209,8 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
         for (const hairColor of hairColors) {
           for (const sex of sexOptions) {
             for (const race of races) {
-              const id = `${sex.id}-${race.id}-${build.id}-${skinTone.id}-${hairColor.id}`;
-              if (!existingPortraitIds.has(id)) {
+              const key = `${sex.id}-${race.id}-${build.id}-${skinTone.id}-${hairColor.id}`;
+              if (!existingPortraitCombos.has(key)) {
                 counts.builds[build.id]++;
                 counts.skinTones[skinTone.id]++;
                 counts.hairColors[hairColor.id]++;
@@ -220,7 +224,7 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
     }
 
     return counts;
-  }, [builds, skinTones, hairColors, sexOptions, races, existingPortraitIds]);
+  }, [builds, skinTones, hairColors, sexOptions, races, existingPortraitCombos]);
 
   // Calculate total missing
   const totalMissing = useMemo(() => {
@@ -230,8 +234,8 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
         for (const hairColor of hairColors) {
           for (const sex of sexOptions) {
             for (const race of races) {
-              const id = `${sex.id}-${race.id}-${build.id}-${skinTone.id}-${hairColor.id}`;
-              if (!existingPortraitIds.has(id)) {
+              const key = `${sex.id}-${race.id}-${build.id}-${skinTone.id}-${hairColor.id}`;
+              if (!existingPortraitCombos.has(key)) {
                 count++;
               }
             }
@@ -240,7 +244,7 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
       }
     }
     return count;
-  }, [builds, skinTones, hairColors, sexOptions, races, existingPortraitIds]);
+  }, [builds, skinTones, hairColors, sexOptions, races, existingPortraitCombos]);
 
   // Calculate how many will be generated from current selection
   const baseCombinations = useMemo(() => {
@@ -759,13 +763,13 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
                   >
                     ↻
                   </button>
-                  {job.state === 'JOB_STATE_SUCCEEDED' && !job.imported && (
+                  {job.state === 'JOB_STATE_SUCCEEDED' && (
                     <button
                       className="btn-small btn-primary"
                       onClick={() => handleImportBatch(job.id)}
-                      title="Import results to pending"
+                      title={job.imported ? "Re-import results to pending" : "Import results to pending"}
                     >
-                      Import
+                      {job.imported ? 'Re-import' : 'Import'}
                     </button>
                   )}
                   <button

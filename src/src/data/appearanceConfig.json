@@ -4957,10 +4957,4980 @@
       "hairColor": "bald",
       "sex": "male",
       "race": "human"
+    },
+    {
+      "id": "female-seraphic-slim-pale-blonde-1767335147143-0",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-pale-blonde-1767335147143-0.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-pale-brown-1767335147143-1",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-pale-brown-1767335147143-1.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-pale-black-1767335147143-2",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-pale-black-1767335147143-2.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-pale-red-1767335147143-3",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-pale-red-1767335147143-3.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-pale-gray-1767335147143-4",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-pale-gray-1767335147143-4.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-pale-white-1767335147143-5",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-pale-white-1767335147143-5.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-pale-bald-1767335147143-6",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-pale-bald-1767335147143-6.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-fair-blonde-1767335147143-7",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-fair-blonde-1767335147143-7.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-fair-brown-1767335147143-8",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-fair-brown-1767335147143-8.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-fair-black-1767335147143-9",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-fair-black-1767335147143-9.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-fair-red-1767335147143-10",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-fair-red-1767335147143-10.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-fair-gray-1767335147143-11",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-fair-gray-1767335147143-11.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-fair-white-1767335147143-12",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-fair-white-1767335147143-12.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-fair-bald-1767335147143-13",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-fair-bald-1767335147143-13.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-olive-blonde-1767335147143-14",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-olive-blonde-1767335147143-14.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-olive-brown-1767335147143-15",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-olive-brown-1767335147143-15.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-olive-black-1767335147143-16",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-olive-black-1767335147143-16.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-olive-red-1767335147143-17",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-olive-red-1767335147143-17.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-olive-gray-1767335147143-18",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-olive-gray-1767335147143-18.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-olive-white-1767335147143-19",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-olive-white-1767335147143-19.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-olive-bald-1767335147143-20",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-olive-bald-1767335147143-20.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-brown-blonde-1767335147143-21",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-brown-blonde-1767335147143-21.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-brown-brown-1767335147143-22",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-brown-brown-1767335147143-22.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-brown-black-1767335147143-23",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-brown-black-1767335147143-23.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-brown-red-1767335147143-24",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-brown-red-1767335147143-24.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-brown-gray-1767335147143-25",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-brown-gray-1767335147143-25.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-brown-white-1767335147143-26",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-brown-white-1767335147143-26.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-brown-bald-1767335147143-27",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-brown-bald-1767335147143-27.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-dark-blonde-1767335147143-28",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-dark-blonde-1767335147143-28.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-dark-brown-1767335147143-29",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-dark-brown-1767335147143-29.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-dark-black-1767335147143-30",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-dark-black-1767335147143-30.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-dark-red-1767335147143-31",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-dark-red-1767335147143-31.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-dark-gray-1767335147143-32",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-dark-gray-1767335147143-32.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-dark-white-1767335147143-33",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-dark-white-1767335147143-33.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-slim-dark-bald-1767335147143-34",
+      "name": "female seraphic (slim)",
+      "image": "portraits/female-seraphic-slim-dark-bald-1767335147143-34.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-pale-blonde-1767335147143-35",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-pale-blonde-1767335147143-35.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-pale-brown-1767335147143-36",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-pale-brown-1767335147143-36.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-pale-black-1767335147143-37",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-pale-black-1767335147143-37.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-pale-red-1767335147143-38",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-pale-red-1767335147143-38.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-pale-gray-1767335147143-39",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-pale-gray-1767335147143-39.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-pale-white-1767335147143-40",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-pale-white-1767335147143-40.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-pale-bald-1767335147143-41",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-pale-bald-1767335147143-41.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-fair-blonde-1767335147143-42",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-fair-blonde-1767335147143-42.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-fair-brown-1767335147143-43",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-fair-brown-1767335147143-43.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-fair-black-1767335147143-44",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-fair-black-1767335147143-44.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-fair-red-1767335147143-45",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-fair-red-1767335147143-45.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-fair-gray-1767335147143-46",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-fair-gray-1767335147143-46.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-fair-white-1767335147143-47",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-fair-white-1767335147143-47.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-fair-bald-1767335147143-48",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-fair-bald-1767335147143-48.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-olive-blonde-1767335147143-49",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-olive-blonde-1767335147143-49.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-olive-brown-1767335147143-50",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-olive-brown-1767335147143-50.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-olive-black-1767335147143-51",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-olive-black-1767335147143-51.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-olive-red-1767335147143-52",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-olive-red-1767335147143-52.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-olive-gray-1767335147143-53",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-olive-gray-1767335147143-53.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-olive-white-1767335147143-54",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-olive-white-1767335147143-54.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-olive-bald-1767335147143-55",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-olive-bald-1767335147143-55.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-brown-blonde-1767335147143-56",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-brown-blonde-1767335147143-56.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-brown-brown-1767335147143-57",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-brown-brown-1767335147143-57.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-brown-black-1767335147143-58",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-brown-black-1767335147143-58.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-brown-red-1767335147143-59",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-brown-red-1767335147143-59.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-brown-gray-1767335147143-60",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-brown-gray-1767335147143-60.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-brown-white-1767335147143-61",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-brown-white-1767335147143-61.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-brown-bald-1767335147143-62",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-brown-bald-1767335147143-62.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-dark-blonde-1767335147143-63",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-dark-blonde-1767335147143-63.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-dark-brown-1767335147143-64",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-dark-brown-1767335147143-64.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-dark-black-1767335147143-65",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-dark-black-1767335147143-65.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-dark-red-1767335147143-66",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-dark-red-1767335147143-66.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-dark-gray-1767335147143-67",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-dark-gray-1767335147143-67.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-dark-white-1767335147143-68",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-dark-white-1767335147143-68.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-average-dark-bald-1767335147143-69",
+      "name": "female seraphic (average)",
+      "image": "portraits/female-seraphic-average-dark-bald-1767335147143-69.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-pale-blonde-1767335147143-70",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-pale-blonde-1767335147143-70.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-pale-brown-1767335147143-71",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-pale-brown-1767335147143-71.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-pale-black-1767335147143-72",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-pale-black-1767335147143-72.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-pale-red-1767335147143-73",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-pale-red-1767335147143-73.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-pale-gray-1767335147143-74",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-pale-gray-1767335147143-74.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-pale-white-1767335147143-75",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-pale-white-1767335147143-75.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-pale-bald-1767335147143-76",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-pale-bald-1767335147143-76.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-fair-blonde-1767335147143-77",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-fair-blonde-1767335147143-77.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-fair-brown-1767335147143-78",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-fair-brown-1767335147143-78.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-fair-black-1767335147143-79",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-fair-black-1767335147143-79.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-fair-red-1767335147143-80",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-fair-red-1767335147143-80.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-fair-gray-1767335147143-81",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-fair-gray-1767335147143-81.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-fair-white-1767335147143-82",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-fair-white-1767335147143-82.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-fair-bald-1767335147143-83",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-fair-bald-1767335147143-83.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-olive-blonde-1767335147143-84",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-olive-blonde-1767335147143-84.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-olive-brown-1767335147143-85",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-olive-brown-1767335147143-85.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-olive-black-1767335147143-86",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-olive-black-1767335147143-86.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-olive-red-1767335147143-87",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-olive-red-1767335147143-87.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-olive-gray-1767335147143-88",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-olive-gray-1767335147143-88.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-olive-white-1767335147143-89",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-olive-white-1767335147143-89.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-olive-bald-1767335147143-90",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-olive-bald-1767335147143-90.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-brown-blonde-1767335147143-91",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-brown-blonde-1767335147143-91.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-brown-brown-1767335147143-92",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-brown-brown-1767335147143-92.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-brown-black-1767335147143-93",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-brown-black-1767335147143-93.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-brown-red-1767335147143-94",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-brown-red-1767335147143-94.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-brown-gray-1767335147143-95",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-brown-gray-1767335147143-95.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-brown-white-1767335147143-96",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-brown-white-1767335147143-96.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-brown-bald-1767335147143-97",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-brown-bald-1767335147143-97.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-dark-blonde-1767335147143-98",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-dark-blonde-1767335147143-98.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-dark-brown-1767335147143-99",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-dark-brown-1767335147143-99.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-dark-black-1767335147143-100",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-dark-black-1767335147143-100.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-dark-red-1767335147143-101",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-dark-red-1767335147143-101.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-dark-gray-1767335147143-102",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-dark-gray-1767335147143-102.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-dark-white-1767335147143-103",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-dark-white-1767335147143-103.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-athletic-dark-bald-1767335147143-104",
+      "name": "female seraphic (athletic)",
+      "image": "portraits/female-seraphic-athletic-dark-bald-1767335147143-104.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-pale-blonde-1767335147143-105",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-pale-blonde-1767335147143-105.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-pale-brown-1767335147143-106",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-pale-brown-1767335147143-106.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-pale-black-1767335147143-107",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-pale-black-1767335147143-107.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-pale-red-1767335147143-108",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-pale-red-1767335147143-108.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-pale-gray-1767335147143-109",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-pale-gray-1767335147143-109.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-pale-white-1767335147143-110",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-pale-white-1767335147143-110.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-pale-bald-1767335147143-111",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-pale-bald-1767335147143-111.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-fair-blonde-1767335147143-112",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-fair-blonde-1767335147143-112.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-fair-brown-1767335147143-113",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-fair-brown-1767335147143-113.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-fair-black-1767335147143-114",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-fair-black-1767335147143-114.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-fair-red-1767335147143-115",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-fair-red-1767335147143-115.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-fair-gray-1767335147143-116",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-fair-gray-1767335147143-116.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-fair-white-1767335147143-117",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-fair-white-1767335147143-117.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-fair-bald-1767335147143-118",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-fair-bald-1767335147143-118.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-olive-blonde-1767335147143-119",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-olive-blonde-1767335147143-119.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-olive-brown-1767335147143-120",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-olive-brown-1767335147143-120.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-olive-black-1767335147143-121",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-olive-black-1767335147143-121.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-olive-red-1767335147143-122",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-olive-red-1767335147143-122.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-olive-gray-1767335147143-123",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-olive-gray-1767335147143-123.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-olive-white-1767335147143-124",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-olive-white-1767335147143-124.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-olive-bald-1767335147143-125",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-olive-bald-1767335147143-125.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-brown-blonde-1767335147143-126",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-brown-blonde-1767335147143-126.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-brown-brown-1767335147143-127",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-brown-brown-1767335147143-127.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-brown-black-1767335147143-128",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-brown-black-1767335147143-128.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-brown-red-1767335147143-129",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-brown-red-1767335147143-129.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-brown-gray-1767335147143-130",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-brown-gray-1767335147143-130.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-brown-white-1767335147143-131",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-brown-white-1767335147143-131.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-brown-bald-1767335147143-132",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-brown-bald-1767335147143-132.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-dark-blonde-1767335147143-133",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-dark-blonde-1767335147143-133.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-dark-brown-1767335147143-134",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-dark-brown-1767335147143-134.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-dark-black-1767335147143-135",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-dark-black-1767335147143-135.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-dark-red-1767335147143-136",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-dark-red-1767335147143-136.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-dark-gray-1767335147143-137",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-dark-gray-1767335147143-137.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-dark-white-1767335147143-138",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-dark-white-1767335147143-138.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-muscular-dark-bald-1767335147143-139",
+      "name": "female seraphic (muscular)",
+      "image": "portraits/female-seraphic-muscular-dark-bald-1767335147143-139.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-pale-blonde-1767335147143-140",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-pale-blonde-1767335147143-140.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-pale-brown-1767335147143-141",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-pale-brown-1767335147143-141.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-pale-black-1767335147143-142",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-pale-black-1767335147143-142.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-pale-red-1767335147143-143",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-pale-red-1767335147143-143.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-pale-gray-1767335147143-144",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-pale-gray-1767335147143-144.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-pale-white-1767335147143-145",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-pale-white-1767335147143-145.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-pale-bald-1767335147143-146",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-pale-bald-1767335147143-146.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-fair-blonde-1767335147143-147",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-fair-blonde-1767335147143-147.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-fair-brown-1767335147143-148",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-fair-brown-1767335147143-148.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-fair-black-1767335147143-149",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-fair-black-1767335147143-149.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-fair-red-1767335147143-150",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-fair-red-1767335147143-150.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-fair-gray-1767335147143-151",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-fair-gray-1767335147143-151.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-fair-white-1767335147143-152",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-fair-white-1767335147143-152.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-fair-bald-1767335147143-153",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-fair-bald-1767335147143-153.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-olive-blonde-1767335147143-154",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-olive-blonde-1767335147143-154.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-olive-brown-1767335147143-155",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-olive-brown-1767335147143-155.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-olive-black-1767335147143-156",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-olive-black-1767335147143-156.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-olive-red-1767335147143-157",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-olive-red-1767335147143-157.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-olive-gray-1767335147143-158",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-olive-gray-1767335147143-158.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-olive-white-1767335147143-159",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-olive-white-1767335147143-159.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-olive-bald-1767335147143-160",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-olive-bald-1767335147143-160.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-brown-blonde-1767335147143-161",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-brown-blonde-1767335147143-161.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-brown-brown-1767335147143-162",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-brown-brown-1767335147143-162.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-brown-black-1767335147143-163",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-brown-black-1767335147143-163.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-brown-red-1767335147143-164",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-brown-red-1767335147143-164.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-brown-gray-1767335147143-165",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-brown-gray-1767335147143-165.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-brown-white-1767335147143-166",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-brown-white-1767335147143-166.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-brown-bald-1767335147143-167",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-brown-bald-1767335147143-167.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-dark-blonde-1767335147143-168",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-dark-blonde-1767335147143-168.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-dark-brown-1767335147143-169",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-dark-brown-1767335147143-169.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-dark-black-1767335147143-170",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-dark-black-1767335147143-170.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-dark-red-1767335147143-171",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-dark-red-1767335147143-171.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-dark-gray-1767335147143-172",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-dark-gray-1767335147143-172.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-dark-white-1767335147143-173",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-dark-white-1767335147143-173.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-seraphic-heavy-dark-bald-1767335147143-174",
+      "name": "female seraphic (heavy)",
+      "image": "portraits/female-seraphic-heavy-dark-bald-1767335147143-174.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "seraphic"
+    },
+    {
+      "id": "female-infernal-slim-pale-blonde-1767336244007-0",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-pale-blonde-1767336244007-0.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-pale-brown-1767336244007-1",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-pale-brown-1767336244007-1.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-pale-black-1767336244007-2",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-pale-black-1767336244007-2.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-pale-red-1767336244007-3",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-pale-red-1767336244007-3.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-pale-gray-1767336244007-4",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-pale-gray-1767336244007-4.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-pale-white-1767336244007-5",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-pale-white-1767336244007-5.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-pale-bald-1767336244007-6",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-pale-bald-1767336244007-6.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-fair-blonde-1767336244007-7",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-fair-blonde-1767336244007-7.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-fair-brown-1767336244007-8",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-fair-brown-1767336244007-8.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-fair-black-1767336244007-9",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-fair-black-1767336244007-9.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-fair-red-1767336244007-10",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-fair-red-1767336244007-10.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-fair-gray-1767336244007-11",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-fair-gray-1767336244007-11.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-fair-white-1767336244007-12",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-fair-white-1767336244007-12.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-fair-bald-1767336244007-13",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-fair-bald-1767336244007-13.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-olive-blonde-1767336244007-14",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-olive-blonde-1767336244007-14.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-olive-brown-1767336244007-15",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-olive-brown-1767336244007-15.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-olive-black-1767336244007-16",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-olive-black-1767336244007-16.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-olive-red-1767336244007-17",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-olive-red-1767336244007-17.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-olive-gray-1767336244007-18",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-olive-gray-1767336244007-18.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-olive-white-1767336244007-19",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-olive-white-1767336244007-19.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-olive-bald-1767336244007-20",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-olive-bald-1767336244007-20.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-brown-blonde-1767336244007-21",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-brown-blonde-1767336244007-21.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-brown-brown-1767336244007-22",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-brown-brown-1767336244007-22.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-brown-black-1767336244007-23",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-brown-black-1767336244007-23.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-brown-red-1767336244007-24",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-brown-red-1767336244007-24.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-brown-gray-1767336244007-25",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-brown-gray-1767336244007-25.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-brown-white-1767336244007-26",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-brown-white-1767336244007-26.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-brown-bald-1767336244007-27",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-brown-bald-1767336244007-27.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-dark-blonde-1767336244007-28",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-dark-blonde-1767336244007-28.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-dark-brown-1767336244007-29",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-dark-brown-1767336244007-29.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-dark-black-1767336244007-30",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-dark-black-1767336244007-30.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-dark-red-1767336244007-31",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-dark-red-1767336244007-31.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-dark-gray-1767336244007-32",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-dark-gray-1767336244007-32.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-dark-white-1767336244007-33",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-dark-white-1767336244007-33.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-slim-dark-bald-1767336244007-34",
+      "name": "female infernal (slim)",
+      "image": "portraits/female-infernal-slim-dark-bald-1767336244007-34.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-pale-blonde-1767336244007-35",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-pale-blonde-1767336244007-35.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-pale-brown-1767336244007-36",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-pale-brown-1767336244007-36.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-pale-black-1767336244007-37",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-pale-black-1767336244007-37.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-pale-red-1767336244007-38",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-pale-red-1767336244007-38.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-pale-gray-1767336244007-39",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-pale-gray-1767336244007-39.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-pale-white-1767336244007-40",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-pale-white-1767336244007-40.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-pale-bald-1767336244007-41",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-pale-bald-1767336244007-41.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-fair-blonde-1767336244007-42",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-fair-blonde-1767336244007-42.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-fair-brown-1767336244007-43",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-fair-brown-1767336244007-43.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-fair-black-1767336244007-44",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-fair-black-1767336244007-44.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-fair-gray-1767336244007-46",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-fair-gray-1767336244007-46.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-fair-white-1767336244007-47",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-fair-white-1767336244007-47.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-fair-bald-1767336244007-48",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-fair-bald-1767336244007-48.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-olive-blonde-1767336244007-49",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-olive-blonde-1767336244007-49.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-olive-brown-1767336244007-50",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-olive-brown-1767336244007-50.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-olive-black-1767336244007-51",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-olive-black-1767336244007-51.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-olive-red-1767336244007-52",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-olive-red-1767336244007-52.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-olive-gray-1767336244007-53",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-olive-gray-1767336244007-53.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-olive-white-1767336244007-54",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-olive-white-1767336244007-54.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-olive-bald-1767336244007-55",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-olive-bald-1767336244007-55.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-brown-blonde-1767336244007-56",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-brown-blonde-1767336244007-56.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-brown-brown-1767336244007-57",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-brown-brown-1767336244007-57.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-brown-black-1767336244007-58",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-brown-black-1767336244007-58.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-brown-red-1767336244007-59",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-brown-red-1767336244007-59.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-brown-gray-1767336244007-60",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-brown-gray-1767336244007-60.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-brown-white-1767336244007-61",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-brown-white-1767336244007-61.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-brown-bald-1767336244007-62",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-brown-bald-1767336244007-62.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-dark-blonde-1767336244007-63",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-dark-blonde-1767336244007-63.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-dark-brown-1767336244007-64",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-dark-brown-1767336244007-64.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-dark-black-1767336244007-65",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-dark-black-1767336244007-65.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-dark-red-1767336244007-66",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-dark-red-1767336244007-66.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-dark-gray-1767336244007-67",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-dark-gray-1767336244007-67.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-dark-white-1767336244007-68",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-dark-white-1767336244007-68.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-average-dark-bald-1767336244007-69",
+      "name": "female infernal (average)",
+      "image": "portraits/female-infernal-average-dark-bald-1767336244007-69.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-pale-blonde-1767336244007-70",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-pale-blonde-1767336244007-70.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-pale-brown-1767336244007-71",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-pale-brown-1767336244007-71.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-pale-black-1767336244007-72",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-pale-black-1767336244007-72.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-pale-red-1767336244007-73",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-pale-red-1767336244007-73.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-pale-gray-1767336244007-74",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-pale-gray-1767336244007-74.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-pale-white-1767336244007-75",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-pale-white-1767336244007-75.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-pale-bald-1767336244007-76",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-pale-bald-1767336244007-76.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-fair-blonde-1767336244007-77",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-fair-blonde-1767336244007-77.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-fair-brown-1767336244007-78",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-fair-brown-1767336244007-78.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-fair-black-1767336244007-79",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-fair-black-1767336244007-79.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-fair-red-1767336244007-80",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-fair-red-1767336244007-80.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-fair-gray-1767336244007-81",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-fair-gray-1767336244007-81.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-fair-white-1767336244007-82",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-fair-white-1767336244007-82.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-fair-bald-1767336244007-83",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-fair-bald-1767336244007-83.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-olive-blonde-1767336244007-84",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-olive-blonde-1767336244007-84.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-olive-brown-1767336244007-85",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-olive-brown-1767336244007-85.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-olive-black-1767336244007-86",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-olive-black-1767336244007-86.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-olive-red-1767336244007-87",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-olive-red-1767336244007-87.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-olive-gray-1767336244007-88",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-olive-gray-1767336244007-88.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-olive-white-1767336244007-89",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-olive-white-1767336244007-89.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-olive-bald-1767336244007-90",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-olive-bald-1767336244007-90.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-brown-blonde-1767336244007-91",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-brown-blonde-1767336244007-91.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-brown-brown-1767336244007-92",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-brown-brown-1767336244007-92.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-brown-black-1767336244007-93",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-brown-black-1767336244007-93.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-brown-red-1767336244007-94",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-brown-red-1767336244007-94.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-brown-gray-1767336244007-95",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-brown-gray-1767336244007-95.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-brown-white-1767336244007-96",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-brown-white-1767336244007-96.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-brown-bald-1767336244007-97",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-brown-bald-1767336244007-97.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-dark-blonde-1767336244007-98",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-dark-blonde-1767336244007-98.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-dark-brown-1767336244007-99",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-dark-brown-1767336244007-99.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-dark-black-1767336244007-100",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-dark-black-1767336244007-100.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-dark-red-1767336244007-101",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-dark-red-1767336244007-101.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-dark-gray-1767336244007-102",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-dark-gray-1767336244007-102.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-dark-white-1767336244007-103",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-dark-white-1767336244007-103.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-athletic-dark-bald-1767336244007-104",
+      "name": "female infernal (athletic)",
+      "image": "portraits/female-infernal-athletic-dark-bald-1767336244007-104.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-pale-blonde-1767336244007-105",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-pale-blonde-1767336244007-105.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-pale-brown-1767336244007-106",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-pale-brown-1767336244007-106.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-pale-black-1767336244007-107",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-pale-black-1767336244007-107.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-pale-red-1767336244007-108",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-pale-red-1767336244007-108.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-pale-gray-1767336244007-109",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-pale-gray-1767336244007-109.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-pale-white-1767336244007-110",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-pale-white-1767336244007-110.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-pale-bald-1767336244007-111",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-pale-bald-1767336244007-111.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-fair-blonde-1767336244007-112",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-fair-blonde-1767336244007-112.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-fair-brown-1767336244007-113",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-fair-brown-1767336244007-113.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-fair-black-1767336244007-114",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-fair-black-1767336244007-114.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-fair-red-1767336244007-115",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-fair-red-1767336244007-115.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-fair-gray-1767336244007-116",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-fair-gray-1767336244007-116.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-fair-white-1767336244007-117",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-fair-white-1767336244007-117.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-fair-bald-1767336244007-118",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-fair-bald-1767336244007-118.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-olive-blonde-1767336244007-119",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-olive-blonde-1767336244007-119.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-olive-brown-1767336244007-120",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-olive-brown-1767336244007-120.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-olive-black-1767336244007-121",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-olive-black-1767336244007-121.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-olive-red-1767336244007-122",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-olive-red-1767336244007-122.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-olive-gray-1767336244007-123",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-olive-gray-1767336244007-123.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-olive-white-1767336244007-124",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-olive-white-1767336244007-124.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-olive-bald-1767336244007-125",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-olive-bald-1767336244007-125.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-brown-blonde-1767336244007-126",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-brown-blonde-1767336244007-126.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-brown-brown-1767336244007-127",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-brown-brown-1767336244007-127.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-brown-black-1767336244007-128",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-brown-black-1767336244007-128.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-brown-red-1767336244007-129",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-brown-red-1767336244007-129.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-brown-gray-1767336244007-130",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-brown-gray-1767336244007-130.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-brown-white-1767336244007-131",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-brown-white-1767336244007-131.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-brown-bald-1767336244007-132",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-brown-bald-1767336244007-132.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-dark-blonde-1767336244007-133",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-dark-blonde-1767336244007-133.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-dark-brown-1767336244007-134",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-dark-brown-1767336244007-134.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-dark-black-1767336244007-135",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-dark-black-1767336244007-135.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-dark-red-1767336244007-136",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-dark-red-1767336244007-136.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-dark-gray-1767336244007-137",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-dark-gray-1767336244007-137.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-dark-white-1767336244007-138",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-dark-white-1767336244007-138.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-muscular-dark-bald-1767336244007-139",
+      "name": "female infernal (muscular)",
+      "image": "portraits/female-infernal-muscular-dark-bald-1767336244007-139.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-pale-blonde-1767336244007-140",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-pale-blonde-1767336244007-140.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-pale-brown-1767336244007-141",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-pale-brown-1767336244007-141.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-pale-black-1767336244007-142",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-pale-black-1767336244007-142.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-pale-red-1767336244007-143",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-pale-red-1767336244007-143.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-pale-gray-1767336244007-144",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-pale-gray-1767336244007-144.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-pale-white-1767336244007-145",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-pale-white-1767336244007-145.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-pale-bald-1767336244007-146",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-pale-bald-1767336244007-146.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-fair-blonde-1767336244007-147",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-fair-blonde-1767336244007-147.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-fair-brown-1767336244007-148",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-fair-brown-1767336244007-148.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-fair-black-1767336244007-149",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-fair-black-1767336244007-149.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-fair-red-1767336244007-150",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-fair-red-1767336244007-150.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-fair-gray-1767336244007-151",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-fair-gray-1767336244007-151.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-fair-white-1767336244007-152",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-fair-white-1767336244007-152.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-fair-bald-1767336244007-153",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-fair-bald-1767336244007-153.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-olive-blonde-1767336244007-154",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-olive-blonde-1767336244007-154.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-olive-brown-1767336244007-155",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-olive-brown-1767336244007-155.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-olive-black-1767336244007-156",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-olive-black-1767336244007-156.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-olive-red-1767336244007-157",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-olive-red-1767336244007-157.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-olive-gray-1767336244007-158",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-olive-gray-1767336244007-158.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-olive-white-1767336244007-159",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-olive-white-1767336244007-159.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-olive-bald-1767336244007-160",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-olive-bald-1767336244007-160.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-brown-blonde-1767336244007-161",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-brown-blonde-1767336244007-161.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-brown-brown-1767336244007-162",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-brown-brown-1767336244007-162.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-brown-black-1767336244007-163",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-brown-black-1767336244007-163.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-brown-red-1767336244007-164",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-brown-red-1767336244007-164.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-brown-gray-1767336244007-165",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-brown-gray-1767336244007-165.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-brown-white-1767336244007-166",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-brown-white-1767336244007-166.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-brown-bald-1767336244007-167",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-brown-bald-1767336244007-167.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-dark-blonde-1767336244007-168",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-dark-blonde-1767336244007-168.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-dark-brown-1767336244007-169",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-dark-brown-1767336244007-169.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-dark-black-1767336244007-170",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-dark-black-1767336244007-170.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-dark-red-1767336244007-171",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-dark-red-1767336244007-171.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-dark-gray-1767336244007-172",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-dark-gray-1767336244007-172.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-dark-white-1767336244007-173",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-dark-white-1767336244007-173.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "female-infernal-heavy-dark-bald-1767336244007-174",
+      "name": "female infernal (heavy)",
+      "image": "portraits/female-infernal-heavy-dark-bald-1767336244007-174.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "infernal"
+    },
+    {
+      "id": "male-seraphic-athletic-dark-black-1767336307226-100",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-dark-black-1767336307226-100.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-dark-red-1767336307226-101",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-dark-red-1767336307226-101.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-pale-black-1767336307226-2",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-pale-black-1767336307226-2.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-dark-white-1767336307226-103",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-dark-white-1767336307226-103.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-dark-bald-1767336307226-104",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-dark-bald-1767336307226-104.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-pale-white-1767336307226-5",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-pale-white-1767336307226-5.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-pale-brown-1767336307226-106",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-pale-brown-1767336307226-106.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-pale-black-1767336307226-107",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-pale-black-1767336307226-107.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-fair-brown-1767336307226-8",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-fair-brown-1767336307226-8.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-pale-gray-1767336307226-109",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-pale-gray-1767336307226-109.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-pale-white-1767336307226-110",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-pale-white-1767336307226-110.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-fair-gray-1767336307226-11",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-fair-gray-1767336307226-11.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-fair-blonde-1767336307226-112",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-fair-blonde-1767336307226-112.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-fair-brown-1767336307226-113",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-fair-brown-1767336307226-113.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-fair-black-1767336307226-114",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-fair-black-1767336307226-114.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-fair-red-1767336307226-115",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-fair-red-1767336307226-115.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-fair-gray-1767336307226-116",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-fair-gray-1767336307226-116.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-fair-white-1767336307226-117",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-fair-white-1767336307226-117.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-fair-bald-1767336307226-118",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-fair-bald-1767336307226-118.jpg",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-olive-blonde-1767336307226-119",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-olive-blonde-1767336307226-119.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-olive-brown-1767336307226-120",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-olive-brown-1767336307226-120.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-olive-black-1767336307226-121",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-olive-black-1767336307226-121.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-brown-brown-1767336307226-22",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-brown-brown-1767336307226-22.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-olive-gray-1767336307226-123",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-olive-gray-1767336307226-123.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-olive-white-1767336307226-124",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-olive-white-1767336307226-124.jpg",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-brown-gray-1767336307226-25",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-brown-gray-1767336307226-25.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-brown-blonde-1767336307226-126",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-brown-blonde-1767336307226-126.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-brown-brown-1767336307226-127",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-brown-brown-1767336307226-127.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-dark-blonde-1767336307226-28",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-dark-blonde-1767336307226-28.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-brown-red-1767336307226-129",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-brown-red-1767336307226-129.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-brown-gray-1767336307226-130",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-brown-gray-1767336307226-130.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-brown-white-1767336307226-131",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-brown-white-1767336307226-131.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-brown-bald-1767336307226-132",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-brown-bald-1767336307226-132.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-dark-blonde-1767336307226-133",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-dark-blonde-1767336307226-133.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-dark-brown-1767336307226-134",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-dark-brown-1767336307226-134.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-dark-black-1767336307226-135",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-dark-black-1767336307226-135.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-pale-brown-1767336307226-36",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-pale-brown-1767336307226-36.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-dark-gray-1767336307226-137",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-dark-gray-1767336307226-137.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-dark-white-1767336307226-138",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-dark-white-1767336307226-138.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-pale-gray-1767336307226-39",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-pale-gray-1767336307226-39.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-pale-blonde-1767336307226-140",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-pale-blonde-1767336307226-140.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-pale-brown-1767336307226-141",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-pale-brown-1767336307226-141.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-fair-blonde-1767336307226-42",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-fair-blonde-1767336307226-42.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-pale-red-1767336307226-143",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-pale-red-1767336307226-143.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-pale-gray-1767336307226-144",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-pale-gray-1767336307226-144.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-fair-red-1767336307226-45",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-fair-red-1767336307226-45.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-pale-bald-1767336307226-146",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-pale-bald-1767336307226-146.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-fair-blonde-1767336307226-147",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-fair-blonde-1767336307226-147.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-fair-bald-1767336307226-48",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-fair-bald-1767336307226-48.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-fair-black-1767336307226-149",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-fair-black-1767336307226-149.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-fair-red-1767336307226-150",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-fair-red-1767336307226-150.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-fair-gray-1767336307226-151",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-fair-gray-1767336307226-151.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-fair-white-1767336307226-152",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-fair-white-1767336307226-152.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-olive-gray-1767336307226-53",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-olive-gray-1767336307226-53.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-olive-blonde-1767336307226-154",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-olive-blonde-1767336307226-154.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-olive-brown-1767336307226-155",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-olive-brown-1767336307226-155.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-brown-blonde-1767336307226-56",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-brown-blonde-1767336307226-56.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-olive-red-1767336307226-157",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-olive-red-1767336307226-157.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-olive-gray-1767336307226-158",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-olive-gray-1767336307226-158.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-brown-red-1767336307226-59",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-brown-red-1767336307226-59.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-olive-bald-1767336307226-160",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-olive-bald-1767336307226-160.jpg",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-brown-blonde-1767336307226-161",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-brown-blonde-1767336307226-161.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-brown-bald-1767336307226-62",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-brown-bald-1767336307226-62.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-brown-black-1767336307226-163",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-brown-black-1767336307226-163.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-brown-red-1767336307226-164",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-brown-red-1767336307226-164.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-dark-black-1767336307226-65",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-dark-black-1767336307226-65.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-brown-white-1767336307226-166",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-brown-white-1767336307226-166.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-brown-bald-1767336307226-167",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-brown-bald-1767336307226-167.jpg",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-dark-white-1767336307226-68",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-dark-white-1767336307226-68.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-dark-brown-1767336307226-169",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-dark-brown-1767336307226-169.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-dark-black-1767336307226-170",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-dark-black-1767336307226-170.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-dark-red-1767336307226-171",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-dark-red-1767336307226-171.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-dark-gray-1767336307226-172",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-dark-gray-1767336307226-172.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-pale-red-1767336307226-73",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-pale-red-1767336307226-73.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-dark-bald-1767336307226-174",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-dark-bald-1767336307226-174.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-pale-blonde-1767336307226-0",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-pale-blonde-1767336307226-0.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-pale-bald-1767336307226-76",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-pale-bald-1767336307226-76.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-pale-red-1767336307226-3",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-pale-red-1767336307226-3.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-fair-brown-1767336307226-78",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-fair-brown-1767336307226-78.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-pale-bald-1767336307226-6",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-pale-bald-1767336307226-6.jpg",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-fair-red-1767336307226-80",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-fair-red-1767336307226-80.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-fair-black-1767336307226-9",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-fair-black-1767336307226-9.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-fair-white-1767336307226-82",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-fair-white-1767336307226-82.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-fair-white-1767336307226-12",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-fair-white-1767336307226-12.jpg",
+      "build": "slim",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-olive-blonde-1767336307226-84",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-olive-blonde-1767336307226-84.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-olive-blonde-1767336307226-14",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-olive-blonde-1767336307226-14.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-olive-brown-1767336307226-15",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-olive-brown-1767336307226-15.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-olive-red-1767336307226-87",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-olive-red-1767336307226-87.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-olive-red-1767336307226-17",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-olive-red-1767336307226-17.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-olive-gray-1767336307226-18",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-olive-gray-1767336307226-18.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-olive-bald-1767336307226-90",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-olive-bald-1767336307226-90.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-olive-bald-1767336307226-20",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-olive-bald-1767336307226-20.jpg",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-brown-blonde-1767336307226-21",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-brown-blonde-1767336307226-21.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-brown-black-1767336307226-93",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-brown-black-1767336307226-93.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-brown-black-1767336307226-23",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-brown-black-1767336307226-23.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-brown-red-1767336307226-24",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-brown-red-1767336307226-24.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-brown-white-1767336307226-96",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-brown-white-1767336307226-96.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-brown-white-1767336307226-26",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-brown-white-1767336307226-26.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-brown-bald-1767336307226-27",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-brown-bald-1767336307226-27.jpg",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-dark-brown-1767336307226-99",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-dark-brown-1767336307226-99.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-dark-brown-1767336307226-29",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-dark-brown-1767336307226-29.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-dark-black-1767336307226-30",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-dark-black-1767336307226-30.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-dark-gray-1767336307226-102",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-dark-gray-1767336307226-102.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-dark-gray-1767336307226-32",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-dark-gray-1767336307226-32.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-slim-dark-white-1767336307226-33",
+      "name": "male seraphic (slim)",
+      "image": "portraits/male-seraphic-slim-dark-white-1767336307226-33.jpg",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-pale-blonde-1767336307226-105",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-pale-blonde-1767336307226-105.jpg",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-pale-blonde-1767336307226-35",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-pale-blonde-1767336307226-35.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-pale-red-1767336307226-38",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-pale-red-1767336307226-38.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-pale-white-1767336307226-40",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-pale-white-1767336307226-40.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-pale-bald-1767336307226-41",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-pale-bald-1767336307226-41.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-fair-brown-1767336307226-43",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-fair-brown-1767336307226-43.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-fair-black-1767336307226-44",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-fair-black-1767336307226-44.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-fair-gray-1767336307226-46",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-fair-gray-1767336307226-46.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-fair-white-1767336307226-47",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-fair-white-1767336307226-47.jpg",
+      "build": "average",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-olive-brown-1767336307226-50",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-olive-brown-1767336307226-50.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-olive-black-1767336307226-51",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-olive-black-1767336307226-51.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-olive-white-1767336307226-54",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-olive-white-1767336307226-54.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-brown-brown-1767336307226-57",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-brown-brown-1767336307226-57.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-brown-black-1767336307226-58",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-brown-black-1767336307226-58.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-brown-gray-1767336307226-60",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-brown-gray-1767336307226-60.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-brown-white-1767336307226-61",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-brown-white-1767336307226-61.jpg",
+      "build": "average",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-dark-blonde-1767336307226-63",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-dark-blonde-1767336307226-63.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-dark-brown-1767336307226-64",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-dark-brown-1767336307226-64.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-dark-red-1767336307226-66",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-dark-red-1767336307226-66.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-dark-gray-1767336307226-67",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-dark-gray-1767336307226-67.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-dark-bald-1767336307226-69",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-dark-bald-1767336307226-69.jpg",
+      "build": "average",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-pale-blonde-1767336307226-70",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-pale-blonde-1767336307226-70.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-pale-brown-1767336307226-71",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-pale-brown-1767336307226-71.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-brown-black-1767336307226-128",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-brown-black-1767336307226-128.jpg",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-pale-gray-1767336307226-74",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-pale-gray-1767336307226-74.jpg",
+      "build": "athletic",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-fair-black-1767336307226-79",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-fair-black-1767336307226-79.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-fair-bald-1767336307226-83",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-fair-bald-1767336307226-83.jpg",
+      "build": "athletic",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-olive-brown-1767336307226-85",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-olive-brown-1767336307226-85.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-olive-black-1767336307226-86",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-olive-black-1767336307226-86.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-olive-gray-1767336307226-88",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-olive-gray-1767336307226-88.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-olive-white-1767336307226-89",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-olive-white-1767336307226-89.jpg",
+      "build": "athletic",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-brown-blonde-1767336307226-91",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-brown-blonde-1767336307226-91.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-brown-brown-1767336307226-92",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-brown-brown-1767336307226-92.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-muscular-dark-bald-1767336307226-139",
+      "name": "male seraphic (muscular)",
+      "image": "portraits/male-seraphic-muscular-dark-bald-1767336307226-139.jpg",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-brown-gray-1767336307226-95",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-brown-gray-1767336307226-95.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-brown-bald-1767336307226-97",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-brown-bald-1767336307226-97.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-dark-blonde-1767336307226-98",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-dark-blonde-1767336307226-98.jpg",
+      "build": "athletic",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-dark-blonde-1767336307226-168",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-dark-blonde-1767336307226-168.jpg",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-pale-black-1767336307226-37",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-pale-black-1767336307226-37.jpg",
+      "build": "average",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-pale-white-1767336307226-145",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-pale-white-1767336307226-145.jpg",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-average-olive-bald-1767336307226-55",
+      "name": "male seraphic (average)",
+      "image": "portraits/male-seraphic-average-olive-bald-1767336307226-55.jpg",
+      "build": "average",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-athletic-brown-red-1767336307226-94",
+      "name": "male seraphic (athletic)",
+      "image": "portraits/male-seraphic-athletic-brown-red-1767336307226-94.jpg",
+      "build": "athletic",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "male",
+      "race": "seraphic"
+    },
+    {
+      "id": "male-seraphic-heavy-fair-brown-1767336307226-148",
+      "name": "male seraphic (heavy)",
+      "image": "portraits/male-seraphic-heavy-fair-brown-1767336307226-148.jpg",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "male",
+      "race": "seraphic"
     }
   ],
   "portraitConfig": {
-    "basePrompt": "Fantasy RPG character portrait. A {sex} {race} with a {build} build, {skinTone} skin, and {hairColor} hair. Detailed face with striking features, looking at viewer. Heroic adventurer out of their gear: linen clothing, suitable for any type of adventurer: wizard, warrior, or rogue. ",
+    "basePrompt": "Fantasy RPG character portrait. A {sex} {race} with a {build} build, {skinTone} skin, and {hairColor} hair. Detailed face with striking features, looking at viewer. Heroic adventurer out of their gear: linen clothing, suitable for any type of adventurer: wizard, warrior, or rogue. Description of seraphic race: \"Their purposes are their own. Enigmatic, sharp, and ensouled in a manner orthogonal to the mortal races.\"",
     "styleModifiers": "Realistic high fantasy art style, painterly, dramatic lighting, striking color palette, professional concept art, highly detailed",
     "aspectRatio": "3:4",
     "imageSize": "1K",

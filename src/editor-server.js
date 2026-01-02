@@ -907,18 +907,23 @@ async function* extractImagesFromLargeFile(tempFile, requestMetadata) {
         // Extract the base64 data
         const base64Data = buffer.slice(dataStart, dataEnd);
 
-        // Look forward after data ends for the key (metadata comes after response)
-        // Need to look far enough to find the metadata block
-        const followingText = buffer.slice(dataEnd, Math.min(buffer.length, dataEnd + 1000));
-        const keyMatch = followingText.match(keyPattern);
-        let key = keyMatch ? keyMatch[1] : null;
+        // Look forward after data ends for the "metadata" block containing the key
+        // Note: Gemini responses include a ~2MB encrypted "thoughtSignature" between image and metadata,
+        // so we need to find "metadata": first, then look for "key" within it
+        const remainingBuffer = buffer.slice(dataEnd);
+        const metadataIdx = remainingBuffer.indexOf('"metadata"');
+        let metadataMatch = null;
+        if (metadataIdx !== -1) {
+          const metadataSection = remainingBuffer.slice(metadataIdx, metadataIdx + 500);
+          metadataMatch = metadataSection.match(/"key"\s*:\s*"([^"]+)"/);
+        }
+        let key = metadataMatch ? metadataMatch[1] : null;
 
-        // If no key found, use index-based matching
+        // If no key found, fall back to index-based matching (less reliable if results are out of order)
         let metadata;
         if (key) {
           metadata = requestMetadata.find(m => m.key === key);
         } else {
-          // Use index-based matching, but skip already-processed indices
           metadata = requestMetadata[imageIndex];
           key = metadata?.key;
         }
@@ -1330,12 +1335,30 @@ async function importLargeBatch(jobId, job, jobs, res) {
   let tempFile = job.tempFile;
   let cleanup = async () => {};
 
+  // Verify temp file exists if we have a path
+  if (tempFile) {
+    try {
+      await fs.access(tempFile);
+      console.log(`  Using existing temp file: ${tempFile}`);
+    } catch {
+      console.log(`  Temp file not found at ${tempFile}, will re-download`);
+      tempFile = null;
+    }
+  }
+
   if (!tempFile) {
     // Need to download fresh
     console.log('  No cached temp file, downloading...');
     const result = await fetchLargeBatchJob(jobId);
     tempFile = result.tempFile;
     cleanup = result.cleanup;
+
+    // Save the temp file path for future re-imports
+    const jobIndex = jobs.findIndex(j => j.id === jobId);
+    if (jobIndex >= 0) {
+      jobs[jobIndex].tempFile = tempFile;
+      await writeBatchJobs(jobs);
+    }
 
     // Parse metadata to verify it's done
     const metadata = await parseBatchJobMetadata(tempFile);
@@ -1394,7 +1417,8 @@ async function importLargeBatch(jobId, job, jobs, res) {
       jobs[jobIndex].importedAt = new Date().toISOString();
       jobs[jobIndex].importedCount = imported;
       jobs[jobIndex].failedCount = failed;
-      delete jobs[jobIndex].tempFile;  // Clean up reference
+      // Keep tempFile reference for potential re-imports
+      // jobs[jobIndex].tempFile is preserved
       await writeBatchJobs(jobs);
     }
 
@@ -1407,11 +1431,11 @@ async function importLargeBatch(jobId, job, jobs, res) {
       total: job.requestCount
     });
   } finally {
-    // Clean up temp file
-    await cleanup();
-    if (tempFile) {
-      await fs.unlink(tempFile).catch(() => {});
-    }
+    // Don't clean up temp file - keep for debugging/re-import
+    // await cleanup();
+    // if (tempFile) {
+    //   await fs.unlink(tempFile).catch(() => {});
+    // }
   }
 }
 
@@ -2272,10 +2296,11 @@ async function importLargeOptionBatch(jobId, job, jobs, res) {
       total: job.requestCount
     });
   } finally {
-    await cleanup();
-    if (tempFile) {
-      await fs.unlink(tempFile).catch(() => {});
-    }
+    // Don't clean up temp file - keep for debugging/re-import
+    // await cleanup();
+    // if (tempFile) {
+    //   await fs.unlink(tempFile).catch(() => {});
+    // }
   }
 }
 

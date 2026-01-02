@@ -106,6 +106,37 @@
             "intimidating"
           ],
           "isDrawback": false
+        },
+        {
+          "id": "infernal",
+          "name": "Infernal",
+          "description": "A product of unholy relations with inhabitants of the lower planes. Powerful, beautiful, hated.",
+          "image": "race-infernal.png",
+          "fate": -1,
+          "attributes": {
+            "strength": 1,
+            "agility": 1,
+            "will": -1,
+            "endurance": 1
+          },
+          "traits": [
+            "infernal"
+          ]
+        },
+        {
+          "id": "seraphic",
+          "name": "Seraphic",
+          "description": "Their purposes are their own. Enigmatic, sharp, and ensouled in a manner orthogonal to the mortal races.",
+          "image": "race-seraphic.png",
+          "fate": 2,
+          "attributes": {
+            "charisma": 1,
+            "will": 2
+          },
+          "traits": [
+            "seraphic",
+            "flight"
+          ]
         }
       ]
     },
@@ -234,10 +265,10 @@
           "fate": 1,
           "attributes": {
             "strength": 1,
-            "endurance": 1
+            "endurance": 1,
+            "agility": 1
           },
           "traits": [
-            "military-training",
             "disciplined"
           ]
         },
@@ -250,7 +281,8 @@
           "fate": 1,
           "attributes": {
             "cunning": 2,
-            "strength": -1
+            "strength": -1,
+            "will": 1
           },
           "traits": [
             "educated",
@@ -268,8 +300,7 @@
             "cunning": 1
           },
           "traits": [
-            "streetwise",
-            "light-fingers"
+            "streetwise"
           ]
         },
         {
@@ -279,24 +310,22 @@
           "subcategory": "Run of the Mill",
           "image": "avocation-avocation-merchant.png",
           "attributes": {
-            "charisma": 2,
+            "charisma": 1,
             "cunning": 1
           },
           "traits": [
-            "silver-tongued",
-            "appraiser"
+            "silver-tongued"
           ]
         },
         {
           "id": "avocation-priest",
           "name": "Acolyte",
           "description": "You served a temple, learning the rites and dogma of your faith.",
-          "subcategory": "Run of the Mill",
+          "subcategory": "Uncommon",
           "image": "avocation-avocation-priest.png",
           "fate": 1,
           "attributes": {
-            "will": 2,
-            "charisma": 1
+            "will": 2
           },
           "traits": [
             "faithful",
@@ -315,9 +344,20 @@
             "endurance": 1
           },
           "traits": [
-            "tracker",
-            "patient"
+            "tracker"
           ]
+        },
+        {
+          "id": "avocation-farmer",
+          "name": "Farmer",
+          "description": "You woke with the sun, tended the soil, fed the livestock. A simple life, it could have been.",
+          "subcategory": "Run of the Mill",
+          "fate": -1,
+          "attributes": {
+            "strength": 1,
+            "endurance": 1
+          },
+          "image": "avocation-avocation-farmer.png"
         }
       ]
     },
@@ -332,55 +372,64 @@
           "id": "virtue-brave",
           "name": "Brave",
           "description": "Fear does not rule you. You face danger head-on.",
+          "subcategory": "1. Virtue",
+          "image": "virtueVice-virtue-brave.png",
           "fate": 1,
           "attributes": {
-            "will": 1
+            "strength": 1
           },
           "traits": [
             "brave"
-          ],
-          "image": "virtueVice-virtue-brave.png"
+          ]
         },
         {
           "id": "virtue-honest",
           "name": "Honest",
           "description": "You speak truth even when lies would be easier.",
-          "fate": 0,
+          "subcategory": "1. Virtue",
+          "image": "virtueVice-virtue-honest.png",
+          "fate": 1,
+          "attributes": {
+            "will": 1
+          },
           "traits": [
             "honest"
-          ],
-          "image": "virtueVice-virtue-honest.png"
+          ]
         },
         {
           "id": "virtue-compassionate",
           "name": "Compassionate",
           "description": "The suffering of others moves you to action.",
-          "fate": 0,
+          "subcategory": "1. Virtue",
+          "image": "virtueVice-virtue-compassionate.png",
+          "fate": 1,
           "attributes": {
             "charisma": 1
           },
           "traits": [
             "compassionate"
-          ],
-          "image": "virtueVice-virtue-compassionate.png"
+          ]
         },
         {
           "id": "virtue-cunning",
           "name": "Clever",
           "description": "You see angles others miss, always thinking three steps ahead.",
+          "subcategory": "1. Virtue",
+          "image": "virtueVice-virtue-cunning.png",
           "fate": 1,
           "attributes": {
             "cunning": 1
           },
           "traits": [
             "quick-witted"
-          ],
-          "image": "virtueVice-virtue-cunning.png"
+          ]
         },
         {
           "id": "vice-wrathful",
           "name": "Wrathful",
           "description": "Anger burns hot in you, and you struggle to control it.",
+          "subcategory": "2. Vice",
+          "image": "virtueVice-vice-wrathful.png",
           "fate": -1,
           "attributes": {
             "strength": 1,
@@ -389,14 +438,18 @@
           "traits": [
             "hot-headed"
           ],
-          "isDrawback": true,
-          "image": "virtueVice-vice-wrathful.png"
+          "isDrawback": true
         },
         {
           "id": "vice-greedy",
           "name": "Greedy",
           "description": "Gold calls to you. You always want more.",
+          "subcategory": "2. Vice",
+          "image": "virtueVice-vice-greedy.png",
           "fate": -1,
+          "attributes": {
+            "charisma": -1
+          },
           "traits": [
             "greedy"
           ],
@@ -406,21 +459,25 @@
           "id": "vice-coward",
           "name": "Cowardly",
           "description": "Self-preservation is your highest priority.",
+          "subcategory": "2. Vice",
+          "image": "virtueVice-vice-coward.png",
           "fate": -2,
           "attributes": {
             "agility": 1,
-            "will": -1
+            "will": -1,
+            "charisma": -1
           },
           "traits": [
             "cowardly"
           ],
-          "isDrawback": true,
-          "image": "virtueVice-vice-coward.png"
+          "isDrawback": true
         },
         {
           "id": "vice-arrogant",
           "name": "Arrogant",
           "description": "You know your worth - and make sure others know it too.",
+          "subcategory": "2. Vice",
+          "image": "virtueVice-vice-arrogant.png",
           "fate": -1,
           "attributes": {
             "charisma": -1
@@ -428,14 +485,19 @@
           "traits": [
             "arrogant"
           ],
-          "isDrawback": true,
-          "image": "virtueVice-vice-arrogant.png"
+          "isDrawback": true
         },
         {
           "id": "vice-addicted",
-          "name": "Vice-Ridden",
+          "name": "Addicted",
           "description": "Drink, drugs, or gambling - something has its hooks in you.",
-          "fate": -2,
+          "subcategory": "2. Vice",
+          "image": "virtueVice-vice-addicted.png",
+          "fate": -3,
+          "attributes": {
+            "charisma": -1,
+            "will": -2
+          },
           "traits": [
             "addicted"
           ],
@@ -508,12 +570,11 @@
         {
           "id": "philosophy-fatalist",
           "name": "Fatalist",
-          "description": "What will be, will be. You accept your destiny.",
-          "fate": 0,
+          "description": "What will be, will be. You submit to your destiny.",
+          "image": "philosophy-philosophy-fatalist.png",
           "traits": [
             "fatalist"
-          ],
-          "image": "philosophy-philosophy-fatalist.png"
+          ]
         }
       ]
     },
@@ -580,7 +641,8 @@
           "traits": [
             "stealthy",
             "shadow-walker"
-          ]
+          ],
+          "image": "edge-edge-shadow.png"
         },
         {
           "id": "edge-survivor",
@@ -674,7 +736,8 @@
           },
           "traits": [
             "intimidating"
-          ]
+          ],
+          "image": "skills-skill-intimidation.png"
         },
         {
           "id": "skill-athletics",
@@ -721,7 +784,8 @@
           },
           "traits": [
             "berserker"
-          ]
+          ],
+          "image": "feats-feat-berserker.png"
         },
         {
           "id": "feat-iron-will",
@@ -769,7 +833,8 @@
           "id": "spell-fire",
           "name": "Flame Conjuration",
           "description": "You can summon and control fire.",
-          "fate": 2,
+          "image": "spells-spell-fire.png",
+          "fate": 1,
           "traits": [
             "pyromancer"
           ],
@@ -777,29 +842,29 @@
             {
               "trait": "spellcaster"
             }
-          ],
-          "image": "spells-spell-fire.png"
+          ]
         },
         {
           "id": "spell-healing",
           "name": "Healing Light",
           "description": "You can mend wounds with magical energy.",
-          "fate": 2,
+          "image": "spells-spell-healing.png",
+          "fate": 1,
           "traits": [
-            "divine-healer"
+            "healer"
           ],
           "requires": [
             {
               "trait": "spellcaster"
             }
-          ],
-          "image": "spells-spell-healing.png"
+          ]
         },
         {
           "id": "spell-illusion",
           "name": "Veil of Shadows",
-          "description": "You can create illusions and bend perception.",
-          "fate": 2,
+          "description": "You can create illusions and bend perception. Begin today with a wisp of fog; with a century of effort summon walls and towers of light.",
+          "image": "spells-spell-illusion.png",
+          "fate": 1,
           "traits": [
             "illusionist"
           ],
@@ -807,14 +872,14 @@
             {
               "trait": "spellcaster"
             }
-          ],
-          "image": "spells-spell-illusion.png"
+          ]
         },
         {
           "id": "spell-divination",
           "name": "Third Eye",
-          "description": "You can sense hidden things and glimpse the future.",
-          "fate": 2,
+          "description": "You see what others do not: signs, portents; prophecies and histories.",
+          "image": "spells-spell-divination.png",
+          "fate": 1,
           "traits": [
             "seer"
           ],
@@ -822,14 +887,14 @@
             {
               "trait": "spellcaster"
             }
-          ],
-          "image": "spells-spell-divination.png"
+          ]
         },
         {
           "id": "spell-enchantment",
           "name": "Mind Touch",
-          "description": "You can influence thoughts and emotions.",
-          "fate": 3,
+          "description": "You wrench others wills to align to your own; twist their desires; violate the sanctity of the mind - do you enjoy it?",
+          "image": "spells-spell-enchantment.png",
+          "fate": 2,
           "traits": [
             "enchanter"
           ],
@@ -837,8 +902,16 @@
             {
               "trait": "spellcaster"
             }
+          ]
+        },
+        {
+          "id": "spell-fly",
+          "name": "Fly",
+          "description": "Fulfill the universal human dream: fall into the sky. Begin with an unnatural long-jump, then a slow hover, and eventually exceed the birds of prey.",
+          "traits": [
+            "flight"
           ],
-          "image": "spells-spell-enchantment.png"
+          "image": "spells-spell-fly.png"
         }
       ]
     },

@@ -460,6 +460,8 @@ The Gemini Batch API returns a long-running operation object:
 
 **Key insight:** Results are at `response.inlinedResponses.inlinedResponses` (double-nested).
 
+**Important:** Each response includes a ~2MB encrypted `thoughtSignature` field (base64-encoded chain-of-thought trace) between the image data and the metadata block. When parsing, search for the `"metadata"` block first, then find the `"key"` within it - don't just look N bytes after the image data ends.
+
 ##### Batch Job Persistence
 Jobs are stored in `src/src/data/batchJobs.json` (gitignored) with:
 - Job ID, display name, creation time
@@ -481,7 +483,7 @@ For batches over 100 images, the server uses streaming processing:
 1. Downloads response to a temp file instead of memory
 2. Status check parses just the first few KB for `done` status
 3. Import processes images incrementally using chunked file reading
-4. Temp files are cleaned up after import
+4. Temp files are preserved in `src/temp/` for debugging and re-imports (delete manually when done)
 
 **Recommendations:**
 - For batches under 100 images: standard processing, fast and simple

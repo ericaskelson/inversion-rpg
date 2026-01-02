@@ -2247,6 +2247,286 @@
       "hairColor": "bald",
       "sex": "female",
       "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-pale-blonde-1767314189879-0",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-pale-blonde-1767314189879-0.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-pale-brown-1767314189879-1",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-pale-brown-1767314189879-1.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-pale-black-1767314189879-2",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-pale-black-1767314189879-2.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-pale-red-1767314189879-3",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-pale-red-1767314189879-3.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-pale-gray-1767314189879-4",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-pale-gray-1767314189879-4.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-pale-white-1767314189879-5",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-pale-white-1767314189879-5.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-pale-bald-1767314189879-6",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-pale-bald-1767314189879-6.png",
+      "build": "slim",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-olive-blonde-1767314189879-7",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-olive-blonde-1767314189879-7.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-olive-brown-1767314189879-8",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-olive-brown-1767314189879-8.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-olive-black-1767314189879-9",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-olive-black-1767314189879-9.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-olive-red-1767314189879-10",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-olive-red-1767314189879-10.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-olive-gray-1767314189879-11",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-olive-gray-1767314189879-11.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-olive-white-1767314189879-12",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-olive-white-1767314189879-12.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-olive-bald-1767314189879-13",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-olive-bald-1767314189879-13.png",
+      "build": "slim",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-brown-blonde-1767314189879-14",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-brown-blonde-1767314189879-14.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-brown-brown-1767314189879-15",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-brown-brown-1767314189879-15.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-brown-black-1767314189879-16",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-brown-black-1767314189879-16.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-brown-red-1767314189879-17",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-brown-red-1767314189879-17.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-brown-gray-1767314189879-18",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-brown-gray-1767314189879-18.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-brown-white-1767314189879-19",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-brown-white-1767314189879-19.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-brown-bald-1767314189879-20",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-brown-bald-1767314189879-20.png",
+      "build": "slim",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-dark-blonde-1767314189879-21",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-dark-blonde-1767314189879-21.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-dark-brown-1767314189879-22",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-dark-brown-1767314189879-22.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-dark-black-1767314189879-23",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-dark-black-1767314189879-23.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-dark-red-1767314189879-24",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-dark-red-1767314189879-24.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-dark-gray-1767314189879-25",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-dark-gray-1767314189879-25.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-dark-white-1767314189879-26",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-dark-white-1767314189879-26.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-slim-dark-bald-1767314189879-27",
+      "name": "female elf (slim)",
+      "image": "portraits/female-elf-slim-dark-bald-1767314189879-27.png",
+      "build": "slim",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
     }
   ],
   "portraitConfig": {

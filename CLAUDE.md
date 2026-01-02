@@ -403,7 +403,7 @@ Two Gemini models support image generation:
 | **Nano Banana Pro** | `gemini-3-pro-image-preview` | Highest (4K, photorealism, text) | Slower | Final assets, text-heavy images |
 | **Nano Banana** | `gemini-2.5-flash-image` | Good (1K max) | Faster | Bulk generation, iteration |
 
-For portraits, Flash Image is likely sufficient since we don't need photorealism or text rendering.
+**Quality Note:** Flash Image produces noticeably lower quality with "AI smooth skin" artifacts. For final portrait assets, Nano Banana Pro is strongly preferred despite slower speed. Use Batch API to offset the lower rate limits.
 
 #### Gemini API Rate Limits (as of Dec 2025)
 
@@ -427,18 +427,58 @@ Rate limits are per-project (not per-key) and vary by billing tier:
 - `X-RateLimit-Limit` - total allowed
 - `X-RateLimit-Reset` - reset timestamp
 
-#### Batch API (Future Implementation)
+#### Batch API (IMPLEMENTED)
 
-For very high volume (1000s of images), the [Gemini Batch API](https://ai.google.dev/gemini-api/docs/batch-api) offers:
-- **50% cost reduction** ($0.0195/image vs $0.039)
+For high volume portrait generation, the [Gemini Batch API](https://ai.google.dev/gemini-api/docs/batch-api) offers:
+- **50% cost reduction** vs real-time API
 - **Separate rate limits** from real-time API
-- **Higher throughput** (batch token limits much higher)
-- **Async processing** - submit JSONL, poll for results, ~24hr turnaround
+- **Higher throughput** - not subject to RPM limits
+- **Async processing** - submit batch, poll for completion, import results
 
-Batch API supports image generation models. Useful for:
-- Initial bulk portrait generation (1000s of images)
-- Scenario illustration batches
-- Any non-interactive generation workflow
+##### Batch API Endpoints
+- `POST /api/portraits/batch` - Create batch job with selected characteristics
+- `GET /api/portraits/batch` - List all batch jobs
+- `GET /api/portraits/batch/:id/status` - Check job status (polls Google API)
+- `POST /api/portraits/batch/:id/import` - Import completed results to pending
+- `DELETE /api/portraits/batch/:id` - Delete local job record
+
+##### Response Structure (Google Cloud Long-Running Operation)
+The Gemini Batch API returns a long-running operation object:
+```javascript
+{
+  name: "batches/abc123",      // Job ID
+  metadata: {...},              // Job metadata
+  done: true/false,             // Completion status
+  response: {                   // Only present when done=true
+    "@type": "...",
+    inlinedResponses: {         // Double-nested!
+      inlinedResponses: [...]   // Array of results
+    }
+  }
+}
+```
+
+**Key insight:** Results are at `response.inlinedResponses.inlinedResponses` (double-nested).
+
+##### Batch Job Persistence
+Jobs are stored in `src/src/data/batchJobs.json` (gitignored) with:
+- Job ID, display name, creation time
+- Request metadata (characteristics for each image)
+- Status, last checked time, import results
+
+##### Inline vs File-Based Batches
+Currently using **inline requests** (requests embedded in API call, results returned inline).
+- Docs say inline is for "smaller batches under 20MB request size"
+- Response size is the real limit (~200-500KB per image base64)
+- Testing in progress: 28 images works, 70 and 175 pending
+- For very large batches (500+), may need file-based approach or chunking
+
+##### UI Features
+- **Create Batch Job** button in Portrait Manager (uses same characteristic selection as real-time)
+- **Batch Jobs Panel** showing all jobs with status
+- **Refresh** button to poll Google API for status updates
+- **Import** button to pull completed results into pending queue
+- **Delete** button to remove job records
 
 #### UI Details
 - **Portrait selection grid**: Large cards (280px min), 3:4 aspect ratio, no name labels
@@ -470,7 +510,8 @@ Ideal UI would:
 ### Portrait Generation Enhancements
 - [x] **Model selector** in Portrait Manager UI - switch between Nano Banana Pro (quality) and Flash Image (speed/volume)
 - [x] **Rate limit display** - shows remaining/limit from API headers
-- [ ] **Batch API mode** - async generation for 1000s of images at 50% cost
+- [x] **Batch API mode** - async generation for bulk images at 50% cost (inline mode, testing size limits)
+- [ ] **Batch chunking** - auto-split large requests into multiple batch jobs if inline limits are hit
 
 ### Content Pipeline
 - [ ] Image generation for non-appearance options (sex, race, culture, etc.)

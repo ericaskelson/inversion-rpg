@@ -1,6 +1,71 @@
 import { useMemo } from 'react';
-import type { CategoryConfig, CharacterOption, CharacterBuilderState } from '../types/game';
+import type { CategoryConfig, CharacterOption, CharacterBuilderState, OptionRequirement } from '../types/game';
 import { useEditMode } from '../contexts/EditModeContext';
+
+// Format a single requirement into human-readable text
+function formatRequirement(req: OptionRequirement): string {
+  if (req.trait) {
+    return `Requires trait: ${req.trait}`;
+  }
+  if (req.notTrait) {
+    return `Cannot have trait: ${req.notTrait}`;
+  }
+  if (req.attribute) {
+    const attrName = req.attribute.id.charAt(0).toUpperCase() + req.attribute.id.slice(1);
+    return `Requires ${attrName} ${req.attribute.op} ${req.attribute.value}`;
+  }
+  if (req.selection) {
+    return `Requires selection: ${req.selection.optionId}`;
+  }
+  if (req.notSelection) {
+    return `Cannot have selected: ${req.notSelection.optionId}`;
+  }
+  return 'Requires prerequisites';
+}
+
+// Get all unmet requirements as readable strings
+function getUnmetRequirements(
+  option: CharacterOption,
+  state: CharacterBuilderState
+): string[] {
+  if (!option.requires) return [];
+
+  const unmet: string[] = [];
+
+  for (const req of option.requires) {
+    let isMet = true;
+
+    if (req.trait && !state.calculatedTraits.includes(req.trait)) {
+      isMet = false;
+    }
+    if (req.notTrait && state.calculatedTraits.includes(req.notTrait)) {
+      isMet = false;
+    }
+    if (req.attribute) {
+      const value = state.calculatedAttributes[req.attribute.id] ?? 0;
+      switch (req.attribute.op) {
+        case '>=': isMet = value >= req.attribute.value; break;
+        case '>': isMet = value > req.attribute.value; break;
+        case '<=': isMet = value <= req.attribute.value; break;
+        case '<': isMet = value < req.attribute.value; break;
+      }
+    }
+    if (req.selection) {
+      const categorySelections = state.selections[req.selection.category] || [];
+      isMet = categorySelections.includes(req.selection.optionId);
+    }
+    if (req.notSelection) {
+      const categorySelections = state.selections[req.notSelection.category] || [];
+      isMet = !categorySelections.includes(req.notSelection.optionId);
+    }
+
+    if (!isMet) {
+      unmet.push(formatRequirement(req));
+    }
+  }
+
+  return unmet;
+}
 
 interface CategorySelectorProps {
   category: CategoryConfig;
@@ -34,9 +99,10 @@ interface OptionCardProps {
   editMode: boolean;
   onEdit: () => void;
   onDelete: () => void;
+  unmetRequirements: string[];
 }
 
-function OptionCard({ option, selected, available, canSelect, onToggle, editMode, onEdit, onDelete }: OptionCardProps) {
+function OptionCard({ option, selected, available, canSelect, onToggle, editMode, onEdit, onDelete, unmetRequirements }: OptionCardProps) {
   const imageUrl = option.image ? `/images/options/${option.image}` : null;
 
   const handleClick = () => {
@@ -99,7 +165,14 @@ function OptionCard({ option, selected, available, canSelect, onToggle, editMode
 
         {!available && !editMode && (
           <div className="unavailable-overlay">
-            <span>Requires prerequisites</span>
+            <span className="unavailable-label">Locked</span>
+            {unmetRequirements.length > 0 && (
+              <div className="unmet-requirements">
+                {unmetRequirements.map((req, i) => (
+                  <span key={i} className="unmet-requirement">{req}</span>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </button>
@@ -160,6 +233,7 @@ export function CategorySelector({
         // For single-select categories (maxPicks === 1), always allow clicking if available
         // This lets users switch their selection by clicking a different option
         const canSelect = available && (selected || selectedCount < category.maxPicks || category.maxPicks === 1);
+        const unmetRequirements = available ? [] : getUnmetRequirements(option, state);
 
         return (
           <OptionCard
@@ -172,6 +246,7 @@ export function CategorySelector({
             editMode={editMode}
             onEdit={() => startEditingOption(option, category.id)}
             onDelete={() => handleDelete(option.id)}
+            unmetRequirements={unmetRequirements}
           />
         );
       })}

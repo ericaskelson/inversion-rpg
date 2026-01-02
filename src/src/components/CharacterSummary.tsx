@@ -20,6 +20,17 @@ const ATTRIBUTE_NAMES: Record<AttributeId, string> = {
   will: 'Will',
 };
 
+// Get difficulty description based on fate level
+function getFateDifficultyDescription(fate: number): string {
+  if (fate <= -5) return "Fate itself has forgotten you. Expect mundane struggles and humble beginnings.";
+  if (fate <= -2) return "The stars look away. Your path begins with hardship, but destiny does not interfere.";
+  if (fate <= 0) return "An ordinary life awaits. Neither blessed nor cursed, your challenges match your station.";
+  if (fate <= 3) return "The threads of destiny stir. Greater trials await, but so do greater rewards.";
+  if (fate <= 6) return "Heaven takes notice. Powerful forces will test your mettle from the start.";
+  if (fate <= 10) return "Your name echoes in the halls of fate. Epic challenges will forge your legend—or break you.";
+  return "The cosmos trembles at your potential. Only the most harrowing trials can measure your worth.";
+}
+
 export function CharacterSummary({
   name,
   fate,
@@ -41,12 +52,15 @@ export function CharacterSummary({
 
       <h2>{name || 'Unnamed Character'}</h2>
 
-      <div className="fate-display">
-        <span className="fate-label">Fate:</span>
-        <span className={`fate-value ${fate > 0 ? 'positive' : fate < 0 ? 'negative' : ''}`}>
-          {describeFate(fate)}
-        </span>
-        <span className="fate-number">({fate >= 0 ? '+' : ''}{fate})</span>
+      <div className={`fate-section ${fate >= 5 ? 'fate-high' : fate <= -2 ? 'fate-low' : ''}`}>
+        <div className="fate-display">
+          <span className="fate-label">Fate:</span>
+          <span className={`fate-value ${fate > 0 ? 'positive' : fate < 0 ? 'negative' : ''}`}>
+            {describeFate(fate)}
+          </span>
+          <span className="fate-number">({fate >= 0 ? '+' : ''}{fate})</span>
+        </div>
+        <p className="fate-description">{getFateDifficultyDescription(fate)}</p>
       </div>
 
       <div className="attributes-section">

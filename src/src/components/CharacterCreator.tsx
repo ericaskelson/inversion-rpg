@@ -18,6 +18,7 @@ import { CategorySelector } from './CategorySelector';
 import { CharacterSummary } from './CharacterSummary';
 import { AppearanceSelector } from './AppearanceSelector';
 import { NameSelector } from './NameSelector';
+import { CharacterReview } from './CharacterReview';
 import { OptionEditorModal } from './OptionEditorModal';
 import { AppearanceEditorModal } from './AppearanceEditorModal';
 import OptionImageManager from './OptionImageManager';
@@ -54,6 +55,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
   const [state, setState] = useState<CharacterBuilderState>(createInitialBuilderState);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [showOptionImageManager, setShowOptionImageManager] = useState(false);
+  const [showReview, setShowReview] = useState(false);
 
   // Track which categories have been preloaded
   const preloadedCategories = useRef<Set<number>>(new Set());
@@ -103,9 +105,17 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
   const handleFinish = () => {
     const data = { categories };
     if (isCharacterComplete(data, state)) {
-      const character = buildCharacter(state);
-      onComplete(character);
+      setShowReview(true);
     }
+  };
+
+  const handleConfirmAdventure = () => {
+    const character = buildCharacter(state);
+    onComplete(character);
+  };
+
+  const handleBackFromReview = () => {
+    setShowReview(false);
   };
 
   // Total tabs = categories + 1 for Name tab
@@ -185,6 +195,21 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
 
     return () => clearTimeout(timer);
   }, [categories, getCategoryImageUrls]);
+
+  // Show review page if in review mode
+  if (showReview) {
+    return (
+      <div className="character-creator">
+        <CharacterReview
+          state={state}
+          categories={categories}
+          portrait={selectedPortrait}
+          onConfirm={handleConfirmAdventure}
+          onBack={handleBackFromReview}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="character-creator">

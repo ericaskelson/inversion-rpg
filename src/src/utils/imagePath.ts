@@ -28,5 +28,5 @@ export function getImagePath(path: string): string {
  * @returns The full URL path (e.g., "/images/portraits/hero.webp" in production)
  */
 export function getImageUrl(path: string): string {
-  return `/images/${getImagePath(path)}`;
+  return `${import.meta.env.BASE_URL}images/${getImagePath(path)}`;
 }

@@ -2527,6 +2527,706 @@
       "hairColor": "bald",
       "sex": "female",
       "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-pale-blonde-1767314277572-0",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-pale-blonde-1767314277572-0.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-pale-brown-1767314277572-1",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-pale-brown-1767314277572-1.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-pale-black-1767314277572-2",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-pale-black-1767314277572-2.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-pale-red-1767314277572-3",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-pale-red-1767314277572-3.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-pale-gray-1767314277572-4",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-pale-gray-1767314277572-4.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-pale-white-1767314277572-5",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-pale-white-1767314277572-5.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-pale-bald-1767314277572-6",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-pale-bald-1767314277572-6.png",
+      "build": "muscular",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-fair-blonde-1767314277572-7",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-fair-blonde-1767314277572-7.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-fair-brown-1767314277572-8",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-fair-brown-1767314277572-8.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-fair-black-1767314277572-9",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-fair-black-1767314277572-9.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-fair-red-1767314277572-10",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-fair-red-1767314277572-10.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-fair-gray-1767314277572-11",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-fair-gray-1767314277572-11.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-fair-white-1767314277572-12",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-fair-white-1767314277572-12.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-fair-bald-1767314277572-13",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-fair-bald-1767314277572-13.png",
+      "build": "muscular",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-olive-blonde-1767314277572-14",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-olive-blonde-1767314277572-14.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-olive-brown-1767314277572-15",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-olive-brown-1767314277572-15.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-olive-black-1767314277572-16",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-olive-black-1767314277572-16.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-olive-red-1767314277572-17",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-olive-red-1767314277572-17.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-olive-gray-1767314277572-18",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-olive-gray-1767314277572-18.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-olive-white-1767314277572-19",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-olive-white-1767314277572-19.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-olive-bald-1767314277572-20",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-olive-bald-1767314277572-20.png",
+      "build": "muscular",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-brown-blonde-1767314277572-21",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-brown-blonde-1767314277572-21.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-brown-brown-1767314277572-22",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-brown-brown-1767314277572-22.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-brown-black-1767314277572-23",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-brown-black-1767314277572-23.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-brown-red-1767314277572-24",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-brown-red-1767314277572-24.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-brown-gray-1767314277572-25",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-brown-gray-1767314277572-25.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-brown-white-1767314277572-26",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-brown-white-1767314277572-26.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-brown-bald-1767314277572-27",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-brown-bald-1767314277572-27.png",
+      "build": "muscular",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-dark-blonde-1767314277572-28",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-dark-blonde-1767314277572-28.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-dark-brown-1767314277572-29",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-dark-brown-1767314277572-29.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-dark-black-1767314277572-30",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-dark-black-1767314277572-30.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-dark-red-1767314277572-31",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-dark-red-1767314277572-31.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-dark-gray-1767314277572-32",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-dark-gray-1767314277572-32.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-dark-white-1767314277572-33",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-dark-white-1767314277572-33.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-muscular-dark-bald-1767314277572-34",
+      "name": "female elf (muscular)",
+      "image": "portraits/female-elf-muscular-dark-bald-1767314277572-34.png",
+      "build": "muscular",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-pale-blonde-1767314277572-35",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-pale-blonde-1767314277572-35.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-pale-brown-1767314277572-36",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-pale-brown-1767314277572-36.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-pale-black-1767314277572-37",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-pale-black-1767314277572-37.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-pale-red-1767314277572-38",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-pale-red-1767314277572-38.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-pale-gray-1767314277572-39",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-pale-gray-1767314277572-39.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-pale-white-1767314277572-40",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-pale-white-1767314277572-40.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-pale-bald-1767314277572-41",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-pale-bald-1767314277572-41.png",
+      "build": "heavy",
+      "skinTone": "pale",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-fair-blonde-1767314277572-42",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-fair-blonde-1767314277572-42.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-fair-brown-1767314277572-43",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-fair-brown-1767314277572-43.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-fair-black-1767314277572-44",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-fair-black-1767314277572-44.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-fair-red-1767314277572-45",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-fair-red-1767314277572-45.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-fair-gray-1767314277572-46",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-fair-gray-1767314277572-46.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-fair-white-1767314277572-47",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-fair-white-1767314277572-47.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-fair-bald-1767314277572-48",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-fair-bald-1767314277572-48.png",
+      "build": "heavy",
+      "skinTone": "fair",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-olive-blonde-1767314277572-49",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-olive-blonde-1767314277572-49.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-olive-brown-1767314277572-50",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-olive-brown-1767314277572-50.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-olive-black-1767314277572-51",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-olive-black-1767314277572-51.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-olive-red-1767314277572-52",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-olive-red-1767314277572-52.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-olive-gray-1767314277572-53",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-olive-gray-1767314277572-53.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-olive-white-1767314277572-54",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-olive-white-1767314277572-54.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-olive-bald-1767314277572-55",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-olive-bald-1767314277572-55.png",
+      "build": "heavy",
+      "skinTone": "olive",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-brown-blonde-1767314277572-56",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-brown-blonde-1767314277572-56.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-brown-brown-1767314277572-57",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-brown-brown-1767314277572-57.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-brown-black-1767314277572-58",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-brown-black-1767314277572-58.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-brown-red-1767314277572-59",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-brown-red-1767314277572-59.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-brown-gray-1767314277572-60",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-brown-gray-1767314277572-60.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-brown-white-1767314277572-61",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-brown-white-1767314277572-61.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-brown-bald-1767314277572-62",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-brown-bald-1767314277572-62.png",
+      "build": "heavy",
+      "skinTone": "brown",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-dark-blonde-1767314277572-63",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-dark-blonde-1767314277572-63.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "blonde",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-dark-brown-1767314277572-64",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-dark-brown-1767314277572-64.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "brown",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-dark-black-1767314277572-65",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-dark-black-1767314277572-65.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "black",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-dark-red-1767314277572-66",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-dark-red-1767314277572-66.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "red",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-dark-gray-1767314277572-67",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-dark-gray-1767314277572-67.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "gray",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-dark-white-1767314277572-68",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-dark-white-1767314277572-68.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "white",
+      "sex": "female",
+      "race": "elf"
+    },
+    {
+      "id": "female-elf-heavy-dark-bald-1767314277572-69",
+      "name": "female elf (heavy)",
+      "image": "portraits/female-elf-heavy-dark-bald-1767314277572-69.png",
+      "build": "heavy",
+      "skinTone": "dark",
+      "hairColor": "bald",
+      "sex": "female",
+      "race": "elf"
     }
   ],
   "portraitConfig": {

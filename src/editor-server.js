@@ -577,6 +577,9 @@ async function writeBatchJobs(jobs) {
 }
 
 // Make a request to Gemini API and return JSON response
+// Cache for batch job responses (to avoid double-download on status then import)
+const batchResponseCache = new Map();
+
 function geminiRequest(method, endpoint, body = null) {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
@@ -597,14 +600,17 @@ function geminiRequest(method, endpoint, body = null) {
     };
 
     const req = https.request(options, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
+      // Use array of buffers to handle large responses without hitting string length limits
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
         try {
+          const data = Buffer.concat(chunks).toString('utf-8');
           const json = JSON.parse(data);
           resolve(json);
         } catch (e) {
-          reject(new Error(`Failed to parse response: ${data.substring(0, 200)}`));
+          const preview = Buffer.concat(chunks).toString('utf-8').substring(0, 200);
+          reject(new Error(`Failed to parse response: ${preview}`));
         }
       });
     });
@@ -616,6 +622,30 @@ function geminiRequest(method, endpoint, body = null) {
     }
     req.end();
   });
+}
+
+// Wrapper that caches batch job responses (for status -> import flow)
+async function fetchBatchJobWithCache(jobId) {
+  // Check cache first (valid for 5 minutes)
+  const cached = batchResponseCache.get(jobId);
+  if (cached && (Date.now() - cached.timestamp < 5 * 60 * 1000)) {
+    console.log(`  Using cached response for ${jobId}`);
+    return cached.data;
+  }
+
+  // Fetch fresh
+  const response = await geminiRequest('GET', `/${jobId}`);
+
+  // Cache if job is done (completed jobs don't change)
+  if (response.done) {
+    batchResponseCache.set(jobId, {
+      data: response,
+      timestamp: Date.now()
+    });
+    console.log(`  Cached response for ${jobId} (${Math.round(JSON.stringify(response).length / 1024)}KB)`);
+  }
+
+  return response;
 }
 
 // POST /api/portraits/batch - Create a new batch job
@@ -733,8 +763,8 @@ app.get('/api/portraits/batch/:id(*)/status', async (req, res) => {
     const jobId = req.params.id;  // e.g., "batches/123456789"
     console.log(`Checking batch status for: ${jobId}`);
 
-    // Fetch status from Gemini API
-    const statusResponse = await geminiRequest('GET', `/${jobId}`);
+    // Fetch status from Gemini API (with caching for large responses)
+    const statusResponse = await fetchBatchJobWithCache(jobId);
 
     if (statusResponse.error) {
       console.error('Batch status error:', statusResponse.error);
@@ -805,8 +835,8 @@ app.post('/api/portraits/batch/:id(*)/import', async (req, res) => {
     const jobId = req.params.id;
     console.log(`Importing batch results for: ${jobId}`);
 
-    // Get job status and results
-    const statusResponse = await geminiRequest('GET', `/${jobId}`);
+    // Get job status and results (uses cache from status check)
+    const statusResponse = await fetchBatchJobWithCache(jobId);
 
     if (statusResponse.error) {
       return res.status(500).json({ error: statusResponse.error.message });
@@ -1507,7 +1537,7 @@ app.get('/api/options/batch/:id(*)/status', async (req, res) => {
     const jobId = req.params.id;
     console.log(`Checking option batch status for: ${jobId}`);
 
-    const statusResponse = await geminiRequest('GET', `/${jobId}`);
+    const statusResponse = await fetchBatchJobWithCache(jobId);
 
     if (statusResponse.error) {
       console.error('Batch status error:', statusResponse.error);
@@ -1547,7 +1577,7 @@ app.post('/api/options/batch/:id(*)/import', async (req, res) => {
     const jobId = req.params.id;
     console.log(`Importing option batch results for: ${jobId}`);
 
-    const statusResponse = await geminiRequest('GET', `/${jobId}`);
+    const statusResponse = await fetchBatchJobWithCache(jobId);
 
     if (statusResponse.error) {
       return res.status(500).json({ error: statusResponse.error.message });

@@ -921,5 +921,12 @@
         }
       ]
     }
-  ]
+  ],
+  "optionImageConfig": {
+    "basePrompt": "You are generating option card art for a dark fantasy RPG character creator.\nThese are selection cards shown during character creation - the image should be iconic and symbolic of the option, but they should not include any non-diagetic text. No \"Elf\" label on an Elf picture.\nSquare 1:1 format, suitable for a card/button.",
+    "styleModifiers": "Dark fantasy art style, painterly, dramatic lighting, striking color palette",
+    "aspectRatio": "1:1",
+    "imageSize": "1K",
+    "model": "nano-banana-pro"
+  }
 }

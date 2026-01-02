@@ -468,10 +468,25 @@ Jobs are stored in `src/src/data/batchJobs.json` (gitignored) with:
 
 ##### Inline vs File-Based Batches
 Currently using **inline requests** (requests embedded in API call, results returned inline).
-- Docs say inline is for "smaller batches under 20MB request size"
-- Response size is the real limit (~200-500KB per image base64)
-- Testing in progress: 28 images works, 70 and 175 pending
-- For very large batches (500+), may need file-based approach or chunking
+
+**Batch Size Limits:**
+- Each image is ~3MB base64 in the response
+- JavaScript has a ~512MB string length limit (`0x1fffffe8` characters)
+- **Maximum inline batch size: ~100 images** (to stay safely under the limit)
+- Tested successfully: 28 images, 70 images
+- 175 images (500MB+ response) requires streaming processing
+
+**Large Batch Handling (100+ images):**
+For batches over 100 images, the server uses streaming processing:
+1. Downloads response to a temp file instead of memory
+2. Status check parses just the first few KB for `done` status
+3. Import processes images incrementally using chunked file reading
+4. Temp files are cleaned up after import
+
+**Recommendations:**
+- For batches under 100 images: standard processing, fast and simple
+- For batches 100-200 images: works but slower, uses temp files
+- For batches 200+ images: consider splitting into multiple batch jobs
 
 ##### UI Features
 - **Create Batch Job** button in Portrait Manager (uses same characteristic selection as real-time)
@@ -510,11 +525,12 @@ Ideal UI would:
 ### Portrait Generation Enhancements
 - [x] **Model selector** in Portrait Manager UI - switch between Nano Banana Pro (quality) and Flash Image (speed/volume)
 - [x] **Rate limit display** - shows remaining/limit from API headers
-- [x] **Batch API mode** - async generation for bulk images at 50% cost (inline mode, testing size limits)
+- [x] **Batch API mode** - async generation for bulk images at 50% cost (inline mode)
+- [x] **Large batch streaming** - batches over 100 images use streaming file processing to avoid memory limits
 - [ ] **Batch chunking** - auto-split large requests into multiple batch jobs if inline limits are hit
 
 ### Content Pipeline
-- [ ] Image generation for non-appearance options (sex, race, culture, etc.)
+- [x] Image generation for non-appearance options (Option Image Manager - sex, race, culture, etc.)
 - [ ] Scenario edit mode post-character generation
 - [ ] Automated name suggestions by sex/race
 - [ ] Text description of character in sidebar

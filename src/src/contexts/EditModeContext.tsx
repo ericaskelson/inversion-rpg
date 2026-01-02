@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
 import type { CharacterCreationData, CharacterOption, AppearanceConfig, AppearanceOption, BuildType, SkinTone, HairColor } from '../types/game';
-import { isEditorAvailable, saveCharacterCreation, saveAppearanceConfig, fetchAppearanceConfig } from '../api/editorApi';
+import { isEditorAvailable, saveCharacterCreation, saveAppearanceConfig, fetchAppearanceConfig, fetchCharacterCreation } from '../api/editorApi';
 
 type AppearanceOptionType = 'build' | 'skinTone' | 'hairColor';
 
@@ -16,6 +16,7 @@ interface EditModeContextType {
   // Character data management
   characterData: CharacterCreationData | null;
   setCharacterData: (data: CharacterCreationData) => void;
+  refreshCharacterData: () => Promise<void>;
   // Character option editing
   editingOption: { option: CharacterOption; categoryId: string } | null;
   startEditingOption: (option: CharacterOption, categoryId: string) => void;
@@ -216,6 +217,16 @@ export function EditModeProvider({ children, initialData, initialAppearanceData 
     setAppearanceData(updatedData);
   }, [appearanceData]);
 
+  // Refresh character data from server (used after option image acceptance)
+  const refreshCharacterData = useCallback(async () => {
+    try {
+      const data = await fetchCharacterCreation() as CharacterCreationData;
+      setCharacterData(data);
+    } catch (err) {
+      console.error('Failed to refresh character data:', err);
+    }
+  }, []);
+
   // Refresh appearance config from server (used after portrait generation)
   const refreshAppearanceConfig = useCallback(async () => {
     try {
@@ -232,6 +243,7 @@ export function EditModeProvider({ children, initialData, initialAppearanceData 
     toggleEditMode,
     characterData,
     setCharacterData,
+    refreshCharacterData,
     editingOption,
     startEditingOption,
     startCreatingOption,

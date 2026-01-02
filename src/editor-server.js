@@ -46,6 +46,10 @@ const OPTIONS_BATCH_JOBS_FILE = path.join(DATA_DIR, 'optionBatchJobs.json');
 // Gemini API base URL
 const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta';
 
+// Maximum inline batch size (responses over ~100 images can exceed JS string limits)
+// Each image is ~3MB base64, so 100 images = ~300MB response which is near the limit
+const MAX_INLINE_BATCH_SIZE = 100;
+
 // Generation state
 let generationQueue = [];
 let isGenerating = false;
@@ -413,9 +417,10 @@ app.post('/api/portraits/accept/:id', async (req, res) => {
       return res.status(404).json({ error: 'Pending portrait not found' });
     }
 
-    // Move file from pending to portraits
-    const srcPath = path.join(PENDING_DIR, `${id}.png`);
-    const destPath = path.join(PORTRAITS_DIR, `${id}.png`);
+    // Move file from pending to portraits (detect extension from tempPath)
+    const ext = portrait.tempPath ? path.extname(portrait.tempPath) : '.png';
+    const srcPath = path.join(PENDING_DIR, `${id}${ext}`);
+    const destPath = path.join(PORTRAITS_DIR, `${id}${ext}`);
     await fs.rename(srcPath, destPath);
 
     // Add to appearance config
@@ -426,7 +431,7 @@ app.post('/api/portraits/accept/:id', async (req, res) => {
     const newPortrait = {
       id: portrait.id,
       name: `${portrait.sex} ${portrait.race} (${portrait.build})`,
-      image: `portraits/${id}.png`,
+      image: `portraits/${id}${ext}`,
       build: portrait.build,
       skinTone: portrait.skinTone,
       hairColor: portrait.hairColor,
@@ -463,8 +468,9 @@ app.delete('/api/portraits/pending/:id', async (req, res) => {
       return res.status(404).json({ error: 'Pending portrait not found' });
     }
 
-    // Delete the image file
-    const filepath = path.join(PENDING_DIR, `${id}.png`);
+    // Delete the image file (detect extension from tempPath)
+    const ext = portrait.tempPath ? path.extname(portrait.tempPath) : '.png';
+    const filepath = path.join(PENDING_DIR, `${id}${ext}`);
     try {
       await fs.unlink(filepath);
     } catch {
@@ -495,16 +501,17 @@ app.post('/api/portraits/accept-all', async (req, res) => {
 
     for (const portrait of pending) {
       try {
-        // Move file
-        const srcPath = path.join(PENDING_DIR, `${portrait.id}.png`);
-        const destPath = path.join(PORTRAITS_DIR, `${portrait.id}.png`);
+        // Move file (detect extension from tempPath)
+        const ext = portrait.tempPath ? path.extname(portrait.tempPath) : '.png';
+        const srcPath = path.join(PENDING_DIR, `${portrait.id}${ext}`);
+        const destPath = path.join(PORTRAITS_DIR, `${portrait.id}${ext}`);
         await fs.rename(srcPath, destPath);
 
         // Add to config
         const newPortrait = {
           id: portrait.id,
           name: `${portrait.sex} ${portrait.race} (${portrait.build})`,
-          image: `portraits/${portrait.id}.png`,
+          image: `portraits/${portrait.id}${ext}`,
           build: portrait.build,
           skinTone: portrait.skinTone,
           hairColor: portrait.hairColor,
@@ -539,10 +546,11 @@ app.delete('/api/portraits/pending', async (req, res) => {
   try {
     const pending = await readPendingMeta();
 
-    // Delete all image files
+    // Delete all image files (detect extension from tempPath)
     for (const portrait of pending) {
       try {
-        const filepath = path.join(PENDING_DIR, `${portrait.id}.png`);
+        const ext = portrait.tempPath ? path.extname(portrait.tempPath) : '.png';
+        const filepath = path.join(PENDING_DIR, `${portrait.id}${ext}`);
         await fs.unlink(filepath);
       } catch {
         // Ignore errors
@@ -579,6 +587,9 @@ async function writeBatchJobs(jobs) {
 // Make a request to Gemini API and return JSON response
 // Cache for batch job responses (to avoid double-download on status then import)
 const batchResponseCache = new Map();
+
+// Temp directory for large response files
+const TEMP_DIR = path.join(__dirname, 'temp');
 
 function geminiRequest(method, endpoint, body = null) {
   const apiKey = process.env.GEMINI_API_KEY;
@@ -624,11 +635,264 @@ function geminiRequest(method, endpoint, body = null) {
   });
 }
 
+// Stream large batch responses to a temp file, then process images incrementally
+// Returns { done, response: { inlinedResponses: { inlinedResponses: [...] } } } structure
+// but processes images directly from file without loading entire response into memory
+async function fetchLargeBatchJob(jobId) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY not set');
+  }
+
+  const endpoint = `/${jobId}`;
+  const url = `${GEMINI_API_BASE}${endpoint}`;
+  const urlObj = new URL(url);
+
+  // Ensure temp dir exists
+  await fs.mkdir(TEMP_DIR, { recursive: true });
+  const tempFile = path.join(TEMP_DIR, `batch-${Date.now()}.json`);
+
+  return new Promise((resolve, reject) => {
+    const options = {
+      hostname: urlObj.hostname,
+      path: urlObj.pathname + urlObj.search + `?key=${apiKey}`,
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+
+    console.log(`  Streaming large batch response to temp file...`);
+
+    const req = https.request(options, async (res) => {
+      // Stream directly to file using sync fs to avoid import issues
+      const fsSync = await import('fs');
+      const fileStream = fsSync.createWriteStream(tempFile);
+      let totalBytes = 0;
+
+      res.on('data', chunk => {
+        totalBytes += chunk.length;
+        fileStream.write(chunk);
+        // Log progress for large downloads
+        if (totalBytes % (10 * 1024 * 1024) === 0) {
+          console.log(`    Downloaded ${Math.round(totalBytes / 1024 / 1024)}MB...`);
+        }
+      });
+
+      res.on('end', async () => {
+        fileStream.end();
+        const sizeMB = Math.round(totalBytes / 1024 / 1024);
+        console.log(`  Downloaded ${sizeMB}MB to temp file`);
+
+        // For very large files, we need to return the file path
+        // and let the caller process it incrementally
+        resolve({
+          tempFile,
+          sizeMB,
+          cleanup: async () => {
+            await fs.unlink(tempFile).catch(() => {});
+          }
+        });
+      });
+
+      res.on('error', async (err) => {
+        fileStream.end();
+        await fs.unlink(tempFile).catch(() => {});
+        reject(err);
+      });
+    });
+
+    req.on('error', async (err) => {
+      await fs.unlink(tempFile).catch(() => {});
+      reject(err);
+    });
+    req.end();
+  });
+}
+
+// Parse batch job metadata from file (done status, etc) without loading images
+// Note: The Gemini Batch API response structure varies:
+//   - Sometimes has "done": true/false field
+//   - Sometimes indicates completion via presence of "output" in metadata
+async function parseBatchJobMetadata(tempFile) {
+  const fd = await fs.open(tempFile, 'r');
+  const stats = await fd.stat();
+  const fileSize = stats.size;
+
+  // Read first 8KB to check structure
+  const startBuffer = Buffer.alloc(Math.min(8192, fileSize));
+  await fd.read(startBuffer, 0, startBuffer.length, 0);
+  const startText = startBuffer.toString('utf-8');
+
+  // Method 1: Check for explicit "done" field
+  let doneMatch = startText.match(/"done"\s*:\s*(true|false)/);
+
+  // Method 2: Check for "output" in metadata (indicates job is complete)
+  // Structure: { "metadata": { "output": { "inlinedResponses": ... } } }
+  const hasOutput = startText.includes('"output"');
+
+  // If no done field at start, check end of file
+  if (!doneMatch && fileSize > 8192) {
+    const endBuffer = Buffer.alloc(8192);
+    const endPosition = Math.max(0, fileSize - 8192);
+    await fd.read(endBuffer, 0, 8192, endPosition);
+    const endText = endBuffer.toString('utf-8');
+    doneMatch = endText.match(/"done"\s*:\s*(true|false)/);
+
+    if (doneMatch) {
+      console.log(`  Found "done" field at END of file (position ~${endPosition})`);
+    }
+  }
+
+  await fd.close();
+
+  // Job is done if: explicit done=true OR presence of output data
+  const done = (doneMatch ? doneMatch[1] === 'true' : false) || hasOutput;
+  console.log(`  Parsed metadata: done=${done} (doneField=${doneMatch?.[1] ?? 'none'}, hasOutput=${hasOutput}, fileSize=${Math.round(fileSize/1024/1024)}MB)`);
+
+  return { done };
+}
+
+// Process images from large batch file incrementally using chunked reading
+// Yields { key, imageBuffer, metadata } for each image found
+// This avoids loading the entire file into memory by reading in chunks and
+// extracting base64 image data as we find complete images
+async function* extractImagesFromLargeFile(tempFile, requestMetadata) {
+  const CHUNK_SIZE = 8 * 1024 * 1024;  // 8MB chunks
+  const fileHandle = await fs.open(tempFile, 'r');
+  const stats = await fileHandle.stat();
+  const fileSize = stats.size;
+
+  let buffer = '';
+  let position = 0;
+  let imageIndex = 0;
+  const processedKeys = new Set();  // Track processed keys to avoid duplicates
+
+  // Pattern to find image data - must be inside "inlineData" block
+  // Structure: "inlineData": { "mimeType": "...", "data": "BASE64" }
+  const inlineDataPattern = /"inlineData"\s*:\s*\{\s*"mimeType"\s*:\s*"[^"]+"\s*,\s*"data"\s*:\s*"/;
+  const keyPattern = /"key"\s*:\s*"([^"]+)"/;
+
+  console.log(`  Reading ${Math.round(fileSize / 1024 / 1024)}MB file in ${CHUNK_SIZE / 1024 / 1024}MB chunks...`);
+
+  try {
+    while (position < fileSize) {
+      // Read next chunk
+      const chunk = Buffer.alloc(Math.min(CHUNK_SIZE, fileSize - position));
+      await fileHandle.read(chunk, 0, chunk.length, position);
+      buffer += chunk.toString('utf-8');
+      position += chunk.length;
+
+      // Process complete images in buffer
+      let searchStart = 0;
+      while (true) {
+        // Find "inlineData" block containing image
+        const inlineMatch = buffer.slice(searchStart).match(inlineDataPattern);
+        if (!inlineMatch) break;
+
+        const dataStart = searchStart + inlineMatch.index + inlineMatch[0].length;
+
+        // Find the end of the base64 string (closing quote)
+        let dataEnd = -1;
+        let escapeNext = false;
+        for (let i = dataStart; i < buffer.length; i++) {
+          if (escapeNext) {
+            escapeNext = false;
+            continue;
+          }
+          if (buffer[i] === '\\') {
+            escapeNext = true;
+            continue;
+          }
+          if (buffer[i] === '"') {
+            dataEnd = i;
+            break;
+          }
+        }
+
+        // If we haven't found the end, we need more data
+        if (dataEnd === -1) {
+          if (position >= fileSize) {
+            console.error(`  Failed to find end of base64 data at position ${dataStart}`);
+            searchStart = buffer.length;
+            break;
+          }
+          break;
+        }
+
+        // Extract the base64 data
+        const base64Data = buffer.slice(dataStart, dataEnd);
+
+        // Look forward after data ends for the key (metadata comes after response)
+        // Need to look far enough to find the metadata block
+        const followingText = buffer.slice(dataEnd, Math.min(buffer.length, dataEnd + 1000));
+        const keyMatch = followingText.match(keyPattern);
+        let key = keyMatch ? keyMatch[1] : null;
+
+        // If no key found, use index-based matching
+        let metadata;
+        if (key) {
+          metadata = requestMetadata.find(m => m.key === key);
+        } else {
+          // Use index-based matching, but skip already-processed indices
+          metadata = requestMetadata[imageIndex];
+          key = metadata?.key;
+        }
+
+        // Skip if we've already processed this key (avoid duplicates)
+        if (key && processedKeys.has(key)) {
+          searchStart = dataEnd + 1;
+          continue;
+        }
+
+        if (metadata && key) {
+          processedKeys.add(key);
+
+          // Decode base64 to buffer
+          try {
+            const imageBuffer = Buffer.from(base64Data, 'base64');
+
+            // Check for valid image data (PNG or JPEG headers)
+            const isPNG = imageBuffer.length > 8 && imageBuffer[0] === 0x89 && imageBuffer[1] === 0x50;
+            const isJPEG = imageBuffer.length > 2 && imageBuffer[0] === 0xFF && imageBuffer[1] === 0xD8;
+
+            if (isPNG || isJPEG) {
+              yield { key, imageBuffer, metadata, format: isPNG ? 'png' : 'jpg' };
+              imageIndex++;
+            } else {
+              console.warn(`  Skipping invalid image data for ${key} (header: ${imageBuffer[0]?.toString(16)} ${imageBuffer[1]?.toString(16)})`);
+            }
+          } catch (e) {
+            console.warn(`  Failed to decode base64 for ${key}: ${e.message}`);
+          }
+        }
+
+        searchStart = dataEnd + 1;
+      }
+
+      // Keep unprocessed part of buffer
+      if (searchStart > 1000) {
+        buffer = buffer.slice(searchStart - 500);
+      }
+
+      // Progress logging
+      const pct = Math.round((position / fileSize) * 100);
+      if (pct % 20 === 0 && pct > 0) {
+        console.log(`    ${pct}% processed (${imageIndex} images found)...`);
+      }
+    }
+  } finally {
+    await fileHandle.close();
+  }
+
+  console.log(`  Streaming extraction complete: ${imageIndex} images found`);
+}
+
 // Wrapper that caches batch job responses (for status -> import flow)
+// Cache has no timeout - completed jobs don't change, and we don't want to re-download 1GB files
 async function fetchBatchJobWithCache(jobId) {
-  // Check cache first (valid for 5 minutes)
   const cached = batchResponseCache.get(jobId);
-  if (cached && (Date.now() - cached.timestamp < 5 * 60 * 1000)) {
+  if (cached) {
     console.log(`  Using cached response for ${jobId}`);
     return cached.data;
   }
@@ -638,10 +902,7 @@ async function fetchBatchJobWithCache(jobId) {
 
   // Cache if job is done (completed jobs don't change)
   if (response.done) {
-    batchResponseCache.set(jobId, {
-      data: response,
-      timestamp: Date.now()
-    });
+    batchResponseCache.set(jobId, { data: response });
     console.log(`  Cached response for ${jobId} (${Math.round(JSON.stringify(response).length / 1024)}KB)`);
   }
 
@@ -763,56 +1024,79 @@ app.get('/api/portraits/batch/:id(*)/status', async (req, res) => {
     const jobId = req.params.id;  // e.g., "batches/123456789"
     console.log(`Checking batch status for: ${jobId}`);
 
-    // Fetch status from Gemini API (with caching for large responses)
-    const statusResponse = await fetchBatchJobWithCache(jobId);
+    // Check if this is a large batch that needs streaming
+    const jobs = await readBatchJobs();
+    const job = jobs.find(j => j.id === jobId);
+    const isLargeBatch = job && job.requestCount > MAX_INLINE_BATCH_SIZE;
 
-    if (statusResponse.error) {
-      console.error('Batch status error:', statusResponse.error);
-      return res.status(500).json({ error: statusResponse.error.message });
-    }
+    let isDone = false;
+    let responseCount = 0;
+    let stats = null;
 
-    // Log response structure for debugging
-    const responseKeys = Object.keys(statusResponse);
-    console.log(`Batch response keys: ${responseKeys.join(', ')}`);
-    console.log(`  done: ${statusResponse.done}`);
-    if (statusResponse.response) {
-      console.log(`  response keys: ${Object.keys(statusResponse.response).join(', ')}`);
-      const inlined = statusResponse.response.inlinedResponses;
-      console.log(`  inlinedResponses type: ${typeof inlined}, isArray: ${Array.isArray(inlined)}`);
-      if (inlined && typeof inlined === 'object') {
-        const keys = Object.keys(inlined);
-        console.log(`  inlinedResponses keys (${keys.length}): ${keys.slice(0, 5).join(', ')}${keys.length > 5 ? '...' : ''}`);
-        if (keys.length > 0) {
-          const firstKey = keys[0];
-          const firstVal = inlined[firstKey];
-          console.log(`  first entry key: "${firstKey}", value type: ${typeof firstVal}, isArray: ${Array.isArray(firstVal)}`);
-          if (firstVal && typeof firstVal === 'object') {
-            console.log(`  first entry value keys: ${Object.keys(firstVal).join(', ')}`);
-          }
+    if (isLargeBatch) {
+      // For large batches, stream to temp file and just parse the "done" field
+      console.log(`  Large batch (${job.requestCount} requests), using streaming status check...`);
+
+      let tempFile = job.tempFile;
+      let tempFileSizeMB = job.tempFileSizeMB;
+
+      // Reuse existing temp file if available
+      if (tempFile) {
+        try {
+          await fs.access(tempFile);
+          console.log(`  Reusing cached temp file: ${tempFile} (${tempFileSizeMB}MB)`);
+        } catch {
+          console.log(`  Cached temp file not found, re-downloading...`);
+          tempFile = null;
         }
       }
+
+      // Download if no cached file
+      if (!tempFile) {
+        const result = await fetchLargeBatchJob(jobId);
+        tempFile = result.tempFile;
+        tempFileSizeMB = result.sizeMB;
+      }
+
+      // Parse just the metadata to get "done" status
+      const metadata = await parseBatchJobMetadata(tempFile);
+      isDone = metadata.done;
+
+      // Always keep the temp file - don't delete it even if "not done"
+      const jobIndex = jobs.findIndex(j => j.id === jobId);
+      if (jobIndex >= 0) {
+        jobs[jobIndex].tempFile = tempFile;
+        jobs[jobIndex].tempFileSizeMB = tempFileSizeMB;
+        await writeBatchJobs(jobs);
+      }
+
+      responseCount = job.requestCount; // Estimate, actual count only known after import
+    } else {
+      // For small batches, use the normal fetch with caching
+      const statusResponse = await fetchBatchJobWithCache(jobId);
+
+      if (statusResponse.error) {
+        console.error('Batch status error:', statusResponse.error);
+        return res.status(500).json({ error: statusResponse.error.message });
+      }
+
+      isDone = statusResponse.done === true;
+      const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
+      responseCount = responses.length;
+      stats = statusResponse.batchStats || null;
     }
 
-    // Google Cloud long-running operation pattern:
-    // - done: boolean indicating completion
-    // - response: contains results when done=true
-    const isDone = statusResponse.done === true;
-    let state = isDone ? 'JOB_STATE_SUCCEEDED' : 'JOB_STATE_PENDING';
-
-    // Results are double-nested: response.inlinedResponses.inlinedResponses
-    const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
-
-    console.log(`Batch ${jobId}: done=${isDone}, state=${state}, responses=${responses.length}`);
+    const state = isDone ? 'JOB_STATE_SUCCEEDED' : 'JOB_STATE_PENDING';
+    console.log(`Batch ${jobId}: done=${isDone}, state=${state}, responseCount=${responseCount}`);
 
     // Update local job record
-    const jobs = await readBatchJobs();
     const jobIndex = jobs.findIndex(j => j.id === jobId);
     if (jobIndex >= 0) {
       jobs[jobIndex].state = state;
       jobs[jobIndex].lastChecked = new Date().toISOString();
-      jobs[jobIndex].responseCount = responses.length;
-      if (statusResponse.batchStats) {
-        jobs[jobIndex].stats = statusResponse.batchStats;
+      jobs[jobIndex].responseCount = responseCount;
+      if (stats) {
+        jobs[jobIndex].stats = stats;
       }
       await writeBatchJobs(jobs);
     }
@@ -820,8 +1104,12 @@ app.get('/api/portraits/batch/:id(*)/status', async (req, res) => {
     res.json({
       id: jobId,
       state: state,
-      responseCount: responses.length,
-      stats: statusResponse.batchStats || null
+      responseCount: responseCount,
+      stats: stats,
+      isLargeBatch: isLargeBatch,
+      warning: isLargeBatch && isDone
+        ? `Large batch (${job.requestCount} images) - import may take several minutes and use significant memory.`
+        : undefined
     });
   } catch (err) {
     console.error('Error checking batch status:', err);
@@ -835,27 +1123,6 @@ app.post('/api/portraits/batch/:id(*)/import', async (req, res) => {
     const jobId = req.params.id;
     console.log(`Importing batch results for: ${jobId}`);
 
-    // Get job status and results (uses cache from status check)
-    const statusResponse = await fetchBatchJobWithCache(jobId);
-
-    if (statusResponse.error) {
-      return res.status(500).json({ error: statusResponse.error.message });
-    }
-
-    // Check if job is done (Google Cloud long-running operation pattern)
-    if (!statusResponse.done) {
-      return res.status(400).json({ error: 'Job is not yet complete. Please wait and try again.' });
-    }
-
-    // Get results - double-nested: response.inlinedResponses.inlinedResponses
-    const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
-
-    if (responses.length === 0) {
-      return res.status(400).json({
-        error: 'No results found. Job may still be processing.'
-      });
-    }
-
     // Get our stored metadata
     const jobs = await readBatchJobs();
     const job = jobs.find(j => j.id === jobId);
@@ -863,12 +1130,31 @@ app.post('/api/portraits/batch/:id(*)/import', async (req, res) => {
       return res.status(404).json({ error: 'Job not found in local records' });
     }
 
-    console.log(`Importing ${responses.length} results from batch job...`);
+    const isLargeBatch = job.requestCount > MAX_INLINE_BATCH_SIZE;
 
-    // Log first response structure for debugging
-    if (responses.length > 0) {
-      console.log('First response structure:', JSON.stringify(responses[0], null, 2).substring(0, 1000));
+    // For large batches, use streaming import from temp file
+    if (isLargeBatch) {
+      return await importLargeBatch(jobId, job, jobs, res);
     }
+
+    // For small batches, use the normal cached fetch
+    const statusResponse = await fetchBatchJobWithCache(jobId);
+
+    if (statusResponse.error) {
+      return res.status(500).json({ error: statusResponse.error.message });
+    }
+
+    if (!statusResponse.done) {
+      return res.status(400).json({ error: 'Job is not yet complete. Please wait and try again.' });
+    }
+
+    const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
+
+    if (responses.length === 0) {
+      return res.status(400).json({ error: 'No results found. Job may still be processing.' });
+    }
+
+    console.log(`Importing ${responses.length} results from batch job...`);
 
     await ensurePortraitDirs();
     const pending = await readPendingMeta();
@@ -878,30 +1164,22 @@ app.post('/api/portraits/batch/:id(*)/import', async (req, res) => {
     for (let i = 0; i < responses.length; i++) {
       const item = responses[i];
       try {
-        // Find metadata - try multiple strategies
-        // 1. Try item.key directly
-        // 2. Try item.metadata?.key
-        // 3. Fall back to index-based matching (responses in same order as requests)
         let metadata = null;
         const itemKey = item.key || item.metadata?.key;
 
         if (itemKey) {
           metadata = job.requestMetadata.find(m => m.key === itemKey);
         }
-
-        // Fallback: index-based matching
         if (!metadata && job.requestMetadata[i]) {
-          console.log(`  Using index-based matching for response ${i}`);
           metadata = job.requestMetadata[i];
         }
 
         if (!metadata) {
-          console.warn(`  No metadata for response ${i} (key: ${itemKey || 'none'})`);
+          console.warn(`  No metadata for response ${i}`);
           failed++;
           continue;
         }
 
-        // Find image part in response
         const parts = item.response?.candidates?.[0]?.content?.parts || [];
         const imagePart = parts.find(p => p.inlineData?.data);
 
@@ -911,12 +1189,10 @@ app.post('/api/portraits/batch/:id(*)/import', async (req, res) => {
           continue;
         }
 
-        // Save image to pending
         const filename = `${metadata.key}.png`;
         const filepath = path.join(PENDING_DIR, filename);
         await fs.writeFile(filepath, Buffer.from(imagePart.inlineData.data, 'base64'));
 
-        // Add to pending metadata
         pending.push({
           id: metadata.key,
           tempPath: `portraits/pending/${filename}`,
@@ -939,7 +1215,6 @@ app.post('/api/portraits/batch/:id(*)/import', async (req, res) => {
 
     await writePendingMeta(pending);
 
-    // Update job status
     const jobIndex = jobs.findIndex(j => j.id === jobId);
     if (jobIndex >= 0) {
       jobs[jobIndex].imported = true;
@@ -962,6 +1237,99 @@ app.post('/api/portraits/batch/:id(*)/import', async (req, res) => {
     res.status(500).json({ error: err.message || 'Failed to import batch results' });
   }
 });
+
+// Import large batch using streaming file processing
+async function importLargeBatch(jobId, job, jobs, res) {
+  console.log(`Large batch import (${job.requestCount} images)...`);
+
+  // Check for temp file from status check
+  let tempFile = job.tempFile;
+  let cleanup = async () => {};
+
+  if (!tempFile) {
+    // Need to download fresh
+    console.log('  No cached temp file, downloading...');
+    const result = await fetchLargeBatchJob(jobId);
+    tempFile = result.tempFile;
+    cleanup = result.cleanup;
+
+    // Parse metadata to verify it's done
+    const metadata = await parseBatchJobMetadata(tempFile);
+    if (!metadata.done) {
+      await cleanup();
+      return res.status(400).json({ error: 'Job is not yet complete.' });
+    }
+  }
+
+  try {
+    // Process images from the temp file incrementally
+    await ensurePortraitDirs();
+    const pending = await readPendingMeta();
+    let imported = 0;
+    let failed = 0;
+
+    console.log(`  Processing images from temp file...`);
+
+    // Use the streaming extractor
+    for await (const imageInfo of extractImagesFromLargeFile(tempFile, job.requestMetadata)) {
+      try {
+        const ext = imageInfo.format || 'png';
+        const filename = `${imageInfo.key}.${ext}`;
+        const filepath = path.join(PENDING_DIR, filename);
+        await fs.writeFile(filepath, imageInfo.imageBuffer);
+
+        pending.push({
+          id: imageInfo.key,
+          tempPath: `portraits/pending/${filename}`,
+          build: imageInfo.metadata.build,
+          skinTone: imageInfo.metadata.skinTone,
+          hairColor: imageInfo.metadata.hairColor,
+          sex: imageInfo.metadata.sex,
+          race: imageInfo.metadata.race,
+          generatedAt: new Date().toISOString(),
+          prompt: '(batch generated)',
+          batchJobId: jobId
+        });
+
+        imported++;
+        if (imported % 10 === 0) {
+          console.log(`    Imported ${imported} images...`);
+        }
+      } catch (err) {
+        console.error(`  Error saving image ${imageInfo.key}:`, err.message);
+        failed++;
+      }
+    }
+
+    await writePendingMeta(pending);
+
+    // Update job status
+    const jobIndex = jobs.findIndex(j => j.id === jobId);
+    if (jobIndex >= 0) {
+      jobs[jobIndex].imported = true;
+      jobs[jobIndex].importedAt = new Date().toISOString();
+      jobs[jobIndex].importedCount = imported;
+      jobs[jobIndex].failedCount = failed;
+      delete jobs[jobIndex].tempFile;  // Clean up reference
+      await writeBatchJobs(jobs);
+    }
+
+    console.log(`Large batch import complete: ${imported} imported, ${failed} failed`);
+
+    res.json({
+      success: true,
+      imported,
+      failed,
+      total: job.requestCount
+    });
+  } finally {
+    // Clean up temp file
+    await cleanup();
+    if (tempFile) {
+      await fs.unlink(tempFile).catch(() => {});
+    }
+  }
+}
 
 // DELETE /api/portraits/batch/:id - Delete a batch job record (local only)
 app.delete('/api/portraits/batch/:id(*)', async (req, res) => {
@@ -1310,9 +1678,10 @@ app.post('/api/options/accept/:id', async (req, res) => {
       return res.status(404).json({ error: 'Pending image not found' });
     }
 
-    // Move from pending to final location
-    const srcPath = path.join(OPTIONS_PENDING_DIR, `${id}.png`);
-    const destPath = path.join(OPTIONS_DIR, `${id}.png`);
+    // Move from pending to final location (detect extension from tempPath)
+    const ext = item.tempPath ? path.extname(item.tempPath) : '.png';
+    const srcPath = path.join(OPTIONS_PENDING_DIR, `${id}${ext}`);
+    const destPath = path.join(OPTIONS_DIR, `${id}${ext}`);
 
     await fs.rename(srcPath, destPath);
 
@@ -1325,13 +1694,13 @@ app.post('/api/options/accept/:id', async (req, res) => {
     for (const category of charData.categories) {
       const option = category.options.find(o => o.id === item.optionId);
       if (option) {
-        option.image = `${id}.png`;
+        option.image = `${id}${ext}`;
         break;
       }
     }
     await writeJsonFile('characterCreation.json', charData);
 
-    res.json({ success: true, imagePath: `options/${id}.png` });
+    res.json({ success: true, imagePath: `options/${id}${ext}` });
   } catch (err) {
     console.error('Error accepting option image:', err);
     res.status(500).json({ error: 'Failed to accept image' });
@@ -1351,15 +1720,16 @@ app.post('/api/options/accept-all', async (req, res) => {
 
     for (const item of pending) {
       try {
-        const srcPath = path.join(OPTIONS_PENDING_DIR, `${item.id}.png`);
-        const destPath = path.join(OPTIONS_DIR, `${item.id}.png`);
+        const ext = item.tempPath ? path.extname(item.tempPath) : '.png';
+        const srcPath = path.join(OPTIONS_PENDING_DIR, `${item.id}${ext}`);
+        const destPath = path.join(OPTIONS_DIR, `${item.id}${ext}`);
         await fs.rename(srcPath, destPath);
 
         // Update option image reference
         for (const category of charData.categories) {
           const option = category.options.find(o => o.id === item.optionId);
           if (option) {
-            option.image = `${item.id}.png`;
+            option.image = `${item.id}${ext}`;
             break;
           }
         }
@@ -1390,8 +1760,9 @@ app.delete('/api/options/pending/:id', async (req, res) => {
       return res.status(404).json({ error: 'Pending image not found' });
     }
 
-    // Delete the image file
-    const filepath = path.join(OPTIONS_PENDING_DIR, `${id}.png`);
+    // Delete the image file (detect extension from tempPath)
+    const ext = item.tempPath ? path.extname(item.tempPath) : '.png';
+    const filepath = path.join(OPTIONS_PENDING_DIR, `${id}${ext}`);
     await fs.unlink(filepath);
 
     // Remove from pending metadata
@@ -1413,7 +1784,8 @@ app.delete('/api/options/pending', async (req, res) => {
 
     for (const item of pending) {
       try {
-        const filepath = path.join(OPTIONS_PENDING_DIR, `${item.id}.png`);
+        const ext = item.tempPath ? path.extname(item.tempPath) : '.png';
+        const filepath = path.join(OPTIONS_PENDING_DIR, `${item.id}${ext}`);
         await fs.unlink(filepath);
         rejected++;
       } catch (err) {
@@ -1537,33 +1909,83 @@ app.get('/api/options/batch/:id(*)/status', async (req, res) => {
     const jobId = req.params.id;
     console.log(`Checking option batch status for: ${jobId}`);
 
-    const statusResponse = await fetchBatchJobWithCache(jobId);
+    // Check if this is a large batch that needs streaming
+    const jobs = await readOptionBatchJobs();
+    const job = jobs.find(j => j.id === jobId);
+    const isLargeBatch = job && job.requestCount > MAX_INLINE_BATCH_SIZE;
 
-    if (statusResponse.error) {
-      console.error('Batch status error:', statusResponse.error);
-      return res.status(500).json({ error: statusResponse.error.message });
+    let isDone = false;
+    let responseCount = 0;
+
+    if (isLargeBatch) {
+      // For large batches, stream to temp file and just parse the "done" field
+      console.log(`  Large option batch (${job.requestCount} requests), using streaming status check...`);
+
+      let tempFile = job.tempFile;
+      let tempFileSizeMB = job.tempFileSizeMB;
+
+      // Reuse existing temp file if available
+      if (tempFile) {
+        try {
+          await fs.access(tempFile);
+          console.log(`  Reusing cached temp file: ${tempFile} (${tempFileSizeMB}MB)`);
+        } catch {
+          console.log(`  Cached temp file not found, re-downloading...`);
+          tempFile = null;
+        }
+      }
+
+      // Download if no cached file
+      if (!tempFile) {
+        const result = await fetchLargeBatchJob(jobId);
+        tempFile = result.tempFile;
+        tempFileSizeMB = result.sizeMB;
+      }
+
+      const metadata = await parseBatchJobMetadata(tempFile);
+      isDone = metadata.done;
+
+      // Always keep the temp file
+      const jobIndex = jobs.findIndex(j => j.id === jobId);
+      if (jobIndex >= 0) {
+        jobs[jobIndex].tempFile = tempFile;
+        jobs[jobIndex].tempFileSizeMB = tempFileSizeMB;
+        await writeOptionBatchJobs(jobs);
+      }
+      responseCount = job.requestCount;
+    } else {
+      const statusResponse = await fetchBatchJobWithCache(jobId);
+
+      if (statusResponse.error) {
+        console.error('Batch status error:', statusResponse.error);
+        return res.status(500).json({ error: statusResponse.error.message });
+      }
+
+      isDone = statusResponse.done === true;
+      const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
+      responseCount = responses.length;
     }
 
-    const isDone = statusResponse.done === true;
-    let state = isDone ? 'JOB_STATE_SUCCEEDED' : 'JOB_STATE_PENDING';
-    const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
-
-    console.log(`Option batch ${jobId}: done=${isDone}, state=${state}, responses=${responses.length}`);
+    const state = isDone ? 'JOB_STATE_SUCCEEDED' : 'JOB_STATE_PENDING';
+    console.log(`Option batch ${jobId}: done=${isDone}, state=${state}, responses=${responseCount}`);
 
     // Update local job record
-    const jobs = await readOptionBatchJobs();
     const jobIndex = jobs.findIndex(j => j.id === jobId);
     if (jobIndex >= 0) {
       jobs[jobIndex].state = state;
       jobs[jobIndex].lastChecked = new Date().toISOString();
-      jobs[jobIndex].responseCount = responses.length;
+      jobs[jobIndex].responseCount = responseCount;
       await writeOptionBatchJobs(jobs);
     }
 
     res.json({
       id: jobId,
       state: state,
-      responseCount: responses.length
+      responseCount: responseCount,
+      isLargeBatch: isLargeBatch,
+      warning: isLargeBatch && isDone
+        ? `Large batch (${job.requestCount} images) - import may take several minutes.`
+        : undefined
     });
   } catch (err) {
     console.error('Error checking option batch status:', err);
@@ -1577,6 +1999,20 @@ app.post('/api/options/batch/:id(*)/import', async (req, res) => {
     const jobId = req.params.id;
     console.log(`Importing option batch results for: ${jobId}`);
 
+    const jobs = await readOptionBatchJobs();
+    const job = jobs.find(j => j.id === jobId);
+    if (!job) {
+      return res.status(404).json({ error: 'Job not found in local records' });
+    }
+
+    const isLargeBatch = job.requestCount > MAX_INLINE_BATCH_SIZE;
+
+    // For large batches, use streaming import
+    if (isLargeBatch) {
+      return await importLargeOptionBatch(jobId, job, jobs, res);
+    }
+
+    // For small batches, use the normal cached fetch
     const statusResponse = await fetchBatchJobWithCache(jobId);
 
     if (statusResponse.error) {
@@ -1591,12 +2027,6 @@ app.post('/api/options/batch/:id(*)/import', async (req, res) => {
 
     if (responses.length === 0) {
       return res.status(400).json({ error: 'No results found.' });
-    }
-
-    const jobs = await readOptionBatchJobs();
-    const job = jobs.find(j => j.id === jobId);
-    if (!job) {
-      return res.status(404).json({ error: 'Job not found in local records' });
     }
 
     console.log(`Importing ${responses.length} option images from batch job...`);
@@ -1658,7 +2088,6 @@ app.post('/api/options/batch/:id(*)/import', async (req, res) => {
 
     await writeOptionPendingMeta(pending);
 
-    // Update job status
     const jobIndex = jobs.findIndex(j => j.id === jobId);
     if (jobIndex >= 0) {
       jobs[jobIndex].imported = true;
@@ -1681,6 +2110,90 @@ app.post('/api/options/batch/:id(*)/import', async (req, res) => {
     res.status(500).json({ error: err.message || 'Failed to import batch results' });
   }
 });
+
+// Import large option batch using streaming file processing
+async function importLargeOptionBatch(jobId, job, jobs, res) {
+  console.log(`Large option batch import (${job.requestCount} images)...`);
+
+  let tempFile = job.tempFile;
+  let cleanup = async () => {};
+
+  if (!tempFile) {
+    console.log('  No cached temp file, downloading...');
+    const result = await fetchLargeBatchJob(jobId);
+    tempFile = result.tempFile;
+    cleanup = result.cleanup;
+
+    const metadata = await parseBatchJobMetadata(tempFile);
+    if (!metadata.done) {
+      await cleanup();
+      return res.status(400).json({ error: 'Job is not yet complete.' });
+    }
+  }
+
+  try {
+    await ensureOptionDirs();
+    const pending = await readOptionPendingMeta();
+    let imported = 0;
+    let failed = 0;
+
+    console.log(`  Processing images from temp file...`);
+
+    for await (const imageInfo of extractImagesFromLargeFile(tempFile, job.requestMetadata)) {
+      try {
+        const ext = imageInfo.format || 'png';
+        const filename = `${imageInfo.key}.${ext}`;
+        const filepath = path.join(OPTIONS_PENDING_DIR, filename);
+        await fs.writeFile(filepath, imageInfo.imageBuffer);
+
+        pending.push({
+          id: imageInfo.key,
+          optionId: imageInfo.metadata.optionId,
+          category: imageInfo.metadata.category,
+          name: imageInfo.metadata.name,
+          tempPath: `options/pending/${filename}`,
+          generatedAt: new Date().toISOString(),
+          prompt: '(batch generated)',
+          batchJobId: jobId
+        });
+
+        imported++;
+        if (imported % 10 === 0) {
+          console.log(`    Imported ${imported} images...`);
+        }
+      } catch (err) {
+        console.error(`  Error saving image ${imageInfo.key}:`, err.message);
+        failed++;
+      }
+    }
+
+    await writeOptionPendingMeta(pending);
+
+    const jobIndex = jobs.findIndex(j => j.id === jobId);
+    if (jobIndex >= 0) {
+      jobs[jobIndex].imported = true;
+      jobs[jobIndex].importedAt = new Date().toISOString();
+      jobs[jobIndex].importedCount = imported;
+      jobs[jobIndex].failedCount = failed;
+      delete jobs[jobIndex].tempFile;
+      await writeOptionBatchJobs(jobs);
+    }
+
+    console.log(`Large option batch import complete: ${imported} imported, ${failed} failed`);
+
+    res.json({
+      success: true,
+      imported,
+      failed,
+      total: job.requestCount
+    });
+  } finally {
+    await cleanup();
+    if (tempFile) {
+      await fs.unlink(tempFile).catch(() => {});
+    }
+  }
+}
 
 // DELETE /api/options/batch/:id - Delete option batch job record
 app.delete('/api/options/batch/:id(*)', async (req, res) => {

@@ -36,3 +36,6 @@ src/public/images/options/pending/
 src/src/data/batchJobs.json
 src/src/data/pending.json
 src/src/data/optionBatchJobs.json
+
+# Temp files for large batch processing
+src/temp/

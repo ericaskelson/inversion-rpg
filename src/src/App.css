@@ -1993,17 +1993,68 @@ body {
 
 .option-image-manager {
   padding: 1rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  height: calc(100vh - 120px);
+  overflow: hidden;
+}
+
+/* Two-column layout */
+.option-manager-layout {
+  display: flex;
+  gap: 1rem;
+  height: 100%;
+}
+
+.option-manager-left {
+  width: 350px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.option-manager-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+/* Selection bar for left column */
+.selection-bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.selection-bar button {
+  flex: 1;
+  background: #2a3a5a;
+  color: #aac;
+  border: none;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.selection-bar button:hover:not(:disabled) {
+  background: #3a4a6a;
+}
+
+.selection-bar button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .option-stats-bar {
   display: flex;
-  gap: 2rem;
-  padding: 1rem;
+  gap: 1.5rem;
+  padding: 0.75rem 1rem;
   background: #1a2a3a;
   border-radius: 8px;
-  margin-bottom: 1.5rem;
+  flex-shrink: 0;
 }
 
 .option-stats-bar .stat {
@@ -2104,15 +2155,15 @@ body {
   background: #3a6a4a;
 }
 
-/* Filters */
+/* Filters - compact for left column */
 .option-filters {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
   background: #1a2a3a;
   border-radius: 8px;
-  margin-bottom: 1rem;
+  flex-shrink: 0;
 }
 
 .option-filters label {
@@ -2120,15 +2171,17 @@ body {
   align-items: center;
   gap: 0.5rem;
   color: #889;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .option-filters select {
+  flex: 1;
   background: #0d1520;
   border: 1px solid #2a3a4a;
   border-radius: 4px;
   color: #cde;
   padding: 0.35rem 0.5rem;
+  font-size: 0.85rem;
 }
 
 .checkbox-label {
@@ -2139,36 +2192,11 @@ body {
   cursor: pointer;
 }
 
-.selection-actions {
-  display: flex;
-  gap: 0.5rem;
-  margin-left: auto;
-}
-
-.selection-actions button {
-  background: #2a3a5a;
-  color: #aac;
-  border: none;
-  padding: 0.4rem 0.75rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85rem;
-}
-
-.selection-actions button:hover:not(:disabled) {
-  background: #3a4a6a;
-}
-
-.selection-actions button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 /* Generation Actions */
 .generation-actions {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .generate-btn,
@@ -2209,7 +2237,7 @@ body {
   background: #1a2a3a;
   padding: 0.75rem 1rem;
   border-radius: 4px;
-  margin-bottom: 1rem;
+  flex-shrink: 0;
 }
 
 .generation-progress .progress-bar {
@@ -2231,12 +2259,13 @@ body {
   color: #9ab;
 }
 
-/* Options List */
+/* Options List - scrollable in left column */
 .options-list {
   background: #1a2a3a;
   border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 
 .category-section {
@@ -2371,7 +2400,7 @@ body {
   background: #1a2a3a;
   border-radius: 8px;
   padding: 1rem;
-  margin-bottom: 1.5rem;
+  flex-shrink: 0;
 }
 
 .pending-header {
@@ -2517,4 +2546,56 @@ body {
 .option-images-btn.active {
   background: #3a5a7a;
   color: #fff;
+}
+
+/* Full-page lightbox for option images */
+.option-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: zoom-out;
+  padding: 2rem;
+}
+
+.option-lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Prompt config as collapsible section */
+.prompt-config-section {
+  background: #1a2a3a;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.prompt-config-section summary {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: #9ab;
+  font-size: 0.9rem;
+  font-weight: 500;
+  user-select: none;
+}
+
+.prompt-config-section summary:hover {
+  color: #abc;
+}
+
+.prompt-config-section[open] summary {
+  border-bottom: 1px solid #2a3a4a;
+}
+
+.prompt-config-section .prompt-fields {
+  padding: 1rem;
 }

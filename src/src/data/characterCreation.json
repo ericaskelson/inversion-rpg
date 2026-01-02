@@ -112,70 +112,10 @@
     {
       "id": "appearance",
       "name": "Appearance",
-      "description": "Your physical characteristics.",
+      "description": "Your physical characteristics - build, skin tone, hair, and portrait.",
       "minPicks": 0,
-      "maxPicks": 3,
-      "options": [
-        {
-          "id": "appearance-scarred",
-          "name": "Battle-Scarred",
-          "description": "Your face tells the story of battles survived.",
-          "fate": 0,
-          "traits": [
-            "scarred"
-          ]
-        },
-        {
-          "id": "appearance-beautiful",
-          "name": "Striking Beauty",
-          "description": "You turn heads wherever you go.",
-          "fate": 1,
-          "attributes": {
-            "charisma": 1
-          },
-          "traits": [
-            "beautiful"
-          ]
-        },
-        {
-          "id": "appearance-imposing",
-          "name": "Imposing Stature",
-          "description": "You stand taller and broader than most.",
-          "fate": 0,
-          "attributes": {
-            "strength": 1,
-            "agility": -1
-          },
-          "traits": [
-            "imposing"
-          ]
-        },
-        {
-          "id": "appearance-unassuming",
-          "name": "Forgettable Face",
-          "description": "People struggle to remember you. Sometimes that's useful.",
-          "fate": 0,
-          "attributes": {
-            "charisma": -1
-          },
-          "traits": [
-            "forgettable"
-          ]
-        },
-        {
-          "id": "appearance-disfigured",
-          "name": "Disfigured",
-          "description": "Something terrible marked you. People avert their eyes.",
-          "fate": -2,
-          "attributes": {
-            "charisma": -2
-          },
-          "traits": [
-            "disfigured"
-          ],
-          "isDrawback": true
-        }
-      ]
+      "maxPicks": 0,
+      "options": []
     },
     {
       "id": "culture",
@@ -186,9 +126,9 @@
       "options": [
         {
           "id": "culture-city",
-          "name": "City-Born",
+          "name": "City Kid",
           "description": "Raised in the bustling streets of a great city, you learned to navigate crowds and politics.",
-          "fate": 0,
+          "subcategory": "Common",
           "attributes": {
             "charisma": 1,
             "cunning": 1
@@ -196,12 +136,14 @@
           "traits": [
             "streetwise",
             "literate"
-          ]
+          ],
+          "image": "culture-culture-city.png"
         },
         {
           "id": "culture-village",
           "name": "Village Folk",
           "description": "A simple upbringing in a rural village taught you the value of community and hard work.",
+          "subcategory": "Common",
           "fate": -1,
           "attributes": {
             "endurance": 1,
@@ -209,12 +151,14 @@
           },
           "traits": [
             "salt-of-the-earth"
-          ]
+          ],
+          "image": "culture-culture-village.png"
         },
         {
           "id": "culture-noble",
           "name": "Noble House",
           "description": "Born to privilege, you were educated in the arts of leadership and etiquette.",
+          "subcategory": "Elevated",
           "fate": 2,
           "attributes": {
             "charisma": 2
@@ -229,7 +173,7 @@
           "id": "culture-frontier",
           "name": "Frontier Lands",
           "description": "Raised on the edge of civilization, you learned self-reliance and survival.",
-          "fate": 0,
+          "subcategory": "Common",
           "attributes": {
             "endurance": 1,
             "cunning": 1,
@@ -238,12 +182,14 @@
           },
           "traits": [
             "survivalist"
-          ]
+          ],
+          "image": "culture-culture-frontier.png"
         },
         {
           "id": "culture-nomad",
           "name": "Wandering Tribes",
           "description": "Your people have no fixed home, moving with the seasons and the herds.",
+          "subcategory": "Common",
           "attributes": {
             "agility": 1,
             "endurance": 1
@@ -251,6 +197,21 @@
           "traits": [
             "nomad",
             "horse-rider"
+          ],
+          "image": "culture-culture-nomad.png"
+        },
+        {
+          "id": "culture-royalty",
+          "name": "Royal Blood",
+          "description": "Known or invisible, the blood of princes and kings runs in your veins. Doors open, arms are raised, and heads bow.",
+          "subcategory": "Elevated",
+          "fate": 4,
+          "attributes": {
+            "charisma": 2,
+            "will": 1
+          },
+          "traits": [
+            "noble-born"
           ]
         }
       ]
@@ -274,12 +235,15 @@
           "traits": [
             "military-training",
             "disciplined"
-          ]
+          ],
+          "image": "avocation-avocation-soldier.png"
         },
         {
           "id": "avocation-scholar",
           "name": "Scholar",
-          "description": "Your days were spent in study, poring over ancient texts and arcane theories.",
+          "description": "Your days were spent in study, poring over ancient texts and heretical histories.",
+          "subcategory": "Uncommon",
+          "image": "avocation-avocation-scholar.png",
           "fate": 1,
           "attributes": {
             "cunning": 2,
@@ -302,7 +266,8 @@
           "traits": [
             "streetwise",
             "light-fingers"
-          ]
+          ],
+          "image": "avocation-avocation-thief.png"
         },
         {
           "id": "avocation-merchant",
@@ -316,7 +281,8 @@
           "traits": [
             "silver-tongued",
             "appraiser"
-          ]
+          ],
+          "image": "avocation-avocation-merchant.png"
         },
         {
           "id": "avocation-priest",
@@ -330,7 +296,8 @@
           "traits": [
             "faithful",
             "literate"
-          ]
+          ],
+          "image": "avocation-avocation-priest.png"
         },
         {
           "id": "avocation-hunter",
@@ -345,7 +312,8 @@
           "traits": [
             "tracker",
             "patient"
-          ]
+          ],
+          "image": "avocation-avocation-hunter.png"
         }
       ]
     },
@@ -493,7 +461,8 @@
           },
           "traits": [
             "pragmatic"
-          ]
+          ],
+          "image": "philosophy-philosophy-pragmatist.png"
         },
         {
           "id": "philosophy-nihilist",
@@ -507,7 +476,8 @@
           "traits": [
             "nihilist"
           ],
-          "isDrawback": true
+          "isDrawback": true,
+          "image": "philosophy-philosophy-nihilist.png"
         },
         {
           "id": "philosophy-hedonist",
@@ -923,7 +893,7 @@
     }
   ],
   "optionImageConfig": {
-    "basePrompt": "You are generating option card art for a dark fantasy RPG character creator.\nThese are selection cards shown during character creation - the image should be iconic and symbolic of the option, but they should not include any non-diagetic text. No \"Elf\" label on an Elf picture.\nSquare 1:1 format, suitable for a card/button.",
+    "basePrompt": "You are generating option art for a dark fantasy RPG character creator.\nThese are selection cards shown during character creation - the image should be iconic and symbolic of the option, but they should not include any non-diagetic text. No \"Elf\" label on an Elf picture.\nSquare 1:1 format, suitable for a card/button. Fill the image completely: no frame or whitespace.",
     "styleModifiers": "Dark fantasy art style, painterly, dramatic lighting, striking color palette",
     "aspectRatio": "1:1",
     "imageSize": "1K",

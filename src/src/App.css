@@ -3185,12 +3185,12 @@ body {
 }
 
 .review-portrait {
+  width: 100%;
   aspect-ratio: 3 / 4;
   background: #0f1729;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
   margin-bottom: 1.5rem;
-  max-height: 350px;
 }
 
 .review-portrait img {
@@ -3209,24 +3209,6 @@ body {
   margin: 0 0 0.75rem 0;
   font-size: 1.5rem;
   color: #f0c674;
-}
-
-.review-fate {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  background: #0f1729;
-  border-radius: 4px;
-}
-
-.review-fate.high {
-  background: linear-gradient(135deg, #1a1a2e 0%, #2a1f3d 100%);
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
-}
-
-.review-fate.low {
-  background: linear-gradient(135deg, #1a1a2e 0%, #1f2a3d 100%);
 }
 
 .review-attributes {
@@ -3396,8 +3378,7 @@ body {
   border: 1px solid #3b82f6;
   border-radius: 8px;
   padding: 1rem;
-  min-width: 280px;
-  max-width: 350px;
+  width: 300px;
   z-index: 100;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
@@ -3424,7 +3405,7 @@ body {
 
 .tooltip-image {
   width: 100%;
-  max-height: 150px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 0.75rem;

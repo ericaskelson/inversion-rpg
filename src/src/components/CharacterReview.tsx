@@ -18,6 +18,32 @@ const ATTRIBUTE_NAMES: Record<AttributeId, string> = {
   will: 'Will',
 };
 
+// Get fate tier for styling (matches CharacterSummary)
+function getFateTier(fate: number): string {
+  if (fate <= -2) return 'low';
+  if (fate <= 4) return '';
+  if (fate <= 9) return 'high';
+  if (fate <= 15) return 'epic';
+  if (fate <= 21) return 'legendary';
+  return 'mythic';
+}
+
+// Get difficulty description based on fate level (matches CharacterSummary)
+function getFateDifficultyDescription(fate: number): string {
+  if (fate <= -5) return "Fate itself has forgotten you. Expect mundane struggles and humble beginnings.";
+  if (fate <= -2) return "The stars look away. Your path begins with hardship, but destiny does not interfere.";
+  if (fate <= 0) return "An ordinary life awaits. Neither blessed nor cursed, your challenges match your station.";
+  if (fate <= 3) return "The threads of destiny stir. Greater trials await, but so do greater rewards.";
+  if (fate <= 6) return "Heaven takes notice. Powerful forces will test your mettle from the start.";
+  if (fate <= 9) return "Your name echoes in the halls of fate. Epic challenges will forge your legend—or break you.";
+  if (fate <= 12) return "The cosmos trembles at your potential. Only the most harrowing trials can measure your worth.";
+  if (fate <= 15) return "Prophecies speak your name. Ancient evils stir, drawn to the blinding light of your destiny.";
+  if (fate <= 18) return "Gods and demons alike turn their gaze upon you. Your very existence reshapes the weave of fate.";
+  if (fate <= 21) return "Reality itself bends around your legend. You are the fulcrum upon which worlds will turn.";
+  if (fate <= 24) return "The heavens war over your soul. Your path will echo through eternity—in glory or ruin.";
+  return "You have become a force of nature, a living myth. The universe holds its breath at your every step.";
+}
+
 // Get selected options for a category
 function getSelectedOptionsForCategory(
   category: CategoryConfig,
@@ -57,12 +83,15 @@ export function CharacterReview({
 
           <div className="review-identity">
             <h2 className="review-name">{name}</h2>
-            <div className={`review-fate ${calculatedFate >= 5 ? 'high' : calculatedFate <= -2 ? 'low' : ''}`}>
-              <span className="fate-label">Fate:</span>
-              <span className={`fate-value ${calculatedFate > 0 ? 'positive' : calculatedFate < 0 ? 'negative' : ''}`}>
-                {describeFate(calculatedFate)}
-              </span>
-              <span className="fate-number">({calculatedFate >= 0 ? '+' : ''}{calculatedFate})</span>
+            <div className={`fate-section ${getFateTier(calculatedFate) ? `fate-${getFateTier(calculatedFate)}` : ''}`}>
+              <div className="fate-display">
+                <span className="fate-label">Fate:</span>
+                <span className={`fate-value ${calculatedFate > 0 ? 'positive' : calculatedFate < 0 ? 'negative' : ''}`}>
+                  {describeFate(calculatedFate)}
+                </span>
+                <span className="fate-number">({calculatedFate >= 0 ? '+' : ''}{calculatedFate})</span>
+              </div>
+              <p className="fate-description">{getFateDifficultyDescription(calculatedFate)}</p>
             </div>
           </div>
 

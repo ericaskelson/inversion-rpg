@@ -315,7 +315,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
                   disabled={!canFinish}
                   className="nav-button finish"
                 >
-                  Begin Adventure
+                  Review Character →
                 </button>
               )}
             </div>

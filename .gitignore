@@ -29,6 +29,10 @@ venv/
 # Generated portraits (can be 1000s of images)
 src/public/images/portraits/
 
-# Editor server data (batch jobs, pending portraits metadata)
+# Pending option images (review queue)
+src/public/images/options/pending/
+
+# Editor server data (batch jobs, pending metadata)
 src/src/data/batchJobs.json
 src/src/data/pending.json
+src/src/data/optionBatchJobs.json

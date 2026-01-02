@@ -19,6 +19,7 @@ import { CharacterSummary } from './CharacterSummary';
 import { AppearanceSelector } from './AppearanceSelector';
 import { OptionEditorModal } from './OptionEditorModal';
 import { AppearanceEditorModal } from './AppearanceEditorModal';
+import OptionImageManager from './OptionImageManager';
 import { EditModeProvider, useEditMode } from '../contexts/EditModeContext';
 
 interface CharacterCreatorProps {
@@ -29,6 +30,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
   const { editMode, editorAvailable, toggleEditMode, characterData, appearanceData } = useEditMode();
   const [state, setState] = useState<CharacterBuilderState>(createInitialBuilderState);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
+  const [showOptionImageManager, setShowOptionImageManager] = useState(false);
 
   // Use data from context (allows live editing)
   const categories = characterData?.categories ?? initialData.categories;
@@ -104,92 +106,106 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
             />
           </div>
           {editorAvailable && (
-            <button
-              className={`edit-mode-toggle ${editMode ? 'active' : ''}`}
-              onClick={toggleEditMode}
-            >
-              Edit Mode: {editMode ? 'ON' : 'OFF'}
-            </button>
+            <div className="editor-controls">
+              <button
+                className={`edit-mode-toggle ${editMode ? 'active' : ''}`}
+                onClick={toggleEditMode}
+              >
+                Edit Mode: {editMode ? 'ON' : 'OFF'}
+              </button>
+              {editMode && (
+                <button
+                  className={`option-images-btn ${showOptionImageManager ? 'active' : ''}`}
+                  onClick={() => setShowOptionImageManager(!showOptionImageManager)}
+                >
+                  {showOptionImageManager ? '← Back to Creator' : 'Option Images'}
+                </button>
+              )}
+            </div>
           )}
         </div>
       </header>
 
-      <div className="creator-layout">
-        <div className="creator-main">
-          <nav className="category-nav">
-            {categories.map((cat, index) => (
-              <button
-                key={cat.id}
-                onClick={() => setCurrentCategoryIndex(index)}
-                className={`category-tab ${index === currentCategoryIndex ? 'active' : ''} ${
-                  isCategoryComplete(cat, state) ? 'complete' : ''
-                }`}
-              >
-                {cat.name}
-                {isCategoryComplete(cat, state) && <span className="check">✓</span>}
-              </button>
-            ))}
-          </nav>
+      {showOptionImageManager && editMode ? (
+        <OptionImageManager categories={categories} />
+      ) : (
+        <div className="creator-layout">
+          <div className="creator-main">
+            <nav className="category-nav">
+              {categories.map((cat, index) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setCurrentCategoryIndex(index)}
+                  className={`category-tab ${index === currentCategoryIndex ? 'active' : ''} ${
+                    isCategoryComplete(cat, state) ? 'complete' : ''
+                  }`}
+                >
+                  {cat.name}
+                  {isCategoryComplete(cat, state) && <span className="check">✓</span>}
+                </button>
+              ))}
+            </nav>
 
-          {isAppearanceCategory ? (
-            <AppearanceSelector
-              config={liveAppearanceConfig}
-              selections={state.appearanceSelections}
-              characterSex={characterSex}
-              characterRace={characterRace}
-              onUpdate={handleAppearanceUpdate}
-            />
-          ) : (
-            <CategorySelector
-              category={currentCategory}
-              state={state}
-              onToggle={handleToggleOption}
-              isOptionAvailable={(opt) => isOptionAvailable(opt, currentCategory, state)}
-              isOptionSelected={(optId) => isOptionSelected(optId, currentCategory.id, state)}
-            />
-          )}
-
-          <div className="creator-navigation">
-            <button
-              onClick={handlePrevCategory}
-              disabled={currentCategoryIndex === 0}
-              className="nav-button"
-            >
-              ← Previous
-            </button>
-
-            {!isLastCategory ? (
-              <button
-                onClick={handleNextCategory}
-                disabled={!canGoNext && !editMode}
-                className="nav-button primary"
-              >
-                Next →
-              </button>
+            {isAppearanceCategory ? (
+              <AppearanceSelector
+                config={liveAppearanceConfig}
+                selections={state.appearanceSelections}
+                characterSex={characterSex}
+                characterRace={characterRace}
+                onUpdate={handleAppearanceUpdate}
+              />
             ) : (
-              <button
-                onClick={handleFinish}
-                disabled={!canFinish}
-                className="nav-button finish"
-              >
-                Begin Adventure
-              </button>
+              <CategorySelector
+                category={currentCategory}
+                state={state}
+                onToggle={handleToggleOption}
+                isOptionAvailable={(opt) => isOptionAvailable(opt, currentCategory, state)}
+                isOptionSelected={(optId) => isOptionSelected(optId, currentCategory.id, state)}
+              />
             )}
-          </div>
-        </div>
 
-        <aside className="creator-sidebar">
-          <CharacterSummary
-            name={state.name}
-            fate={state.calculatedFate}
-            attributes={state.calculatedAttributes}
-            traits={state.calculatedTraits}
-            describeFate={describeFate}
-            describeAttribute={describeAttribute}
-            portrait={selectedPortrait}
-          />
-        </aside>
-      </div>
+            <div className="creator-navigation">
+              <button
+                onClick={handlePrevCategory}
+                disabled={currentCategoryIndex === 0}
+                className="nav-button"
+              >
+                ← Previous
+              </button>
+
+              {!isLastCategory ? (
+                <button
+                  onClick={handleNextCategory}
+                  disabled={!canGoNext && !editMode}
+                  className="nav-button primary"
+                >
+                  Next →
+                </button>
+              ) : (
+                <button
+                  onClick={handleFinish}
+                  disabled={!canFinish}
+                  className="nav-button finish"
+                >
+                  Begin Adventure
+                </button>
+              )}
+            </div>
+          </div>
+
+          <aside className="creator-sidebar">
+            <CharacterSummary
+              name={state.name}
+              fate={state.calculatedFate}
+              attributes={state.calculatedAttributes}
+              traits={state.calculatedTraits}
+              describeFate={describeFate}
+              describeAttribute={describeAttribute}
+              portrait={selectedPortrait}
+            />
+          </aside>
+        </div>
+      )}
 
       <OptionEditorModal />
       <AppearanceEditorModal />

@@ -37,6 +37,12 @@ const PENDING_DIR = path.join(PORTRAITS_DIR, 'pending');
 const PENDING_META_FILE = path.join(PENDING_DIR, 'pending.json');
 const BATCH_JOBS_FILE = path.join(DATA_DIR, 'batchJobs.json');
 
+// Option images paths
+const OPTIONS_DIR = path.join(PUBLIC_DIR, 'images', 'options');
+const OPTIONS_PENDING_DIR = path.join(OPTIONS_DIR, 'pending');
+const OPTIONS_PENDING_META_FILE = path.join(OPTIONS_PENDING_DIR, 'pending.json');
+const OPTIONS_BATCH_JOBS_FILE = path.join(DATA_DIR, 'optionBatchJobs.json');
+
 // Gemini API base URL
 const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta';
 
@@ -946,25 +952,739 @@ app.delete('/api/portraits/batch/:id(*)', async (req, res) => {
   }
 });
 
+// ============================================
+// OPTION IMAGE GENERATION ENDPOINTS
+// ============================================
+
+// Ensure option image directories exist
+async function ensureOptionDirs() {
+  await fs.mkdir(OPTIONS_DIR, { recursive: true });
+  await fs.mkdir(OPTIONS_PENDING_DIR, { recursive: true });
+}
+
+// Read pending option images metadata
+async function readOptionPendingMeta() {
+  try {
+    const content = await fs.readFile(OPTIONS_PENDING_META_FILE, 'utf-8');
+    return JSON.parse(content);
+  } catch {
+    return [];
+  }
+}
+
+// Write pending option images metadata
+async function writeOptionPendingMeta(data) {
+  await ensureOptionDirs();
+  await fs.writeFile(OPTIONS_PENDING_META_FILE, JSON.stringify(data, null, 2), 'utf-8');
+}
+
+// Read option batch jobs
+async function readOptionBatchJobs() {
+  try {
+    const content = await fs.readFile(OPTIONS_BATCH_JOBS_FILE, 'utf-8');
+    return JSON.parse(content);
+  } catch {
+    return [];
+  }
+}
+
+// Write option batch jobs
+async function writeOptionBatchJobs(data) {
+  await fs.writeFile(OPTIONS_BATCH_JOBS_FILE, JSON.stringify(data, null, 2), 'utf-8');
+}
+
+// Build prompt for an option image
+function buildOptionPrompt(config, option) {
+  // Provide full context to the reasoning model
+  let prompt = config.basePrompt || `You are generating option card art for a dark fantasy RPG character creator.
+These are selection cards shown during character creation - the image should be iconic and symbolic of the option.
+Square 1:1 format, suitable for a card/button.`;
+
+  prompt += `\n\nGenerate an image for this character option:
+Category: ${option.category}
+ID: ${option.id}
+Name: ${option.name}
+Description: ${option.description || 'No description'}`;
+
+  if (option.traits && option.traits.length > 0) {
+    prompt += `\nTraits granted: ${option.traits.join(', ')}`;
+  }
+  if (option.attributes && Object.keys(option.attributes).length > 0) {
+    const attrs = Object.entries(option.attributes)
+      .map(([k, v]) => `${k}: ${v > 0 ? '+' : ''}${v}`)
+      .join(', ');
+    prompt += `\nAttribute effects: ${attrs}`;
+  }
+  if (option.isDrawback) {
+    prompt += `\nThis is a DRAWBACK option (negative/challenging choice)`;
+  }
+  if (option.subcategory) {
+    prompt += `\nSubcategory: ${option.subcategory}`;
+  }
+
+  if (config.styleModifiers) {
+    prompt += `\n\nStyle: ${config.styleModifiers}`;
+  }
+
+  return prompt;
+}
+
+// Generate a single option image
+async function generateOptionImage(prompt, config) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY environment variable not set');
+  }
+
+  const modelKey = config.model || 'nano-banana-pro';
+  const model = IMAGE_MODELS[modelKey] || IMAGE_MODELS['nano-banana-pro'];
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+  console.log(`  Using model: ${model} (${modelKey})`);
+
+  // Options use 1:1 square format
+  const imageConfig = { aspectRatio: config.aspectRatio || '1:1' };
+  if (modelKey === 'nano-banana-pro' && config.imageSize) {
+    imageConfig.imageSize = config.imageSize;
+  }
+
+  const requestBody = JSON.stringify({
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: {
+      responseModalities: ['TEXT', 'IMAGE'],
+      imageConfig
+    }
+  });
+
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const options = {
+      hostname: urlObj.hostname,
+      path: urlObj.pathname + urlObj.search,
+      method: 'POST',
+      headers: {
+        'x-goog-api-key': apiKey,
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(requestBody)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      // Track rate limit headers
+      const remaining = res.headers['x-ratelimit-remaining'];
+      const limit = res.headers['x-ratelimit-limit'];
+      const reset = res.headers['x-ratelimit-reset'];
+
+      if (remaining !== undefined || limit !== undefined) {
+        rateLimitInfo = {
+          model: modelKey,
+          remaining: remaining ? parseInt(remaining, 10) : null,
+          limit: limit ? parseInt(limit, 10) : null,
+          reset: reset || null,
+          lastUpdated: new Date().toISOString()
+        };
+      }
+
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(data);
+          if (json.error) {
+            console.error('  API error:', json.error.message);
+            reject(new Error(json.error.message || 'API error'));
+            return;
+          }
+
+          const parts = json.candidates?.[0]?.content?.parts || [];
+          const imagePart = parts.find(p => p.inlineData?.data);
+
+          if (!imagePart) {
+            console.error('  No image in response. Parts:', parts.map(p => Object.keys(p)));
+            reject(new Error('No image data in response'));
+            return;
+          }
+
+          resolve(Buffer.from(imagePart.inlineData.data, 'base64'));
+        } catch (e) {
+          console.error('  Parse error:', e.message);
+          reject(e);
+        }
+      });
+    });
+
+    req.on('error', reject);
+    req.write(requestBody);
+    req.end();
+  });
+}
+
+// Option image generation queue
+let optionGenerationQueue = [];
+let isGeneratingOptions = false;
+let optionGenerationProgress = { current: 0, total: 0, currentItem: null };
+
+// Process option generation queue
+async function processOptionGenerationQueue() {
+  if (isGeneratingOptions || optionGenerationQueue.length === 0) return;
+
+  isGeneratingOptions = true;
+  const charData = await readJsonFile('characterCreation.json');
+  const config = charData.optionImageConfig || {
+    basePrompt: `You are generating option card art for a dark fantasy RPG character creator.
+These are selection cards shown during character creation - the image should be iconic and symbolic of the option.
+Square 1:1 format, suitable for a card/button.`,
+    styleModifiers: 'Dark fantasy art style, painterly, dramatic lighting, striking color palette',
+    aspectRatio: '1:1',
+    imageSize: '1K',
+    model: 'nano-banana-pro'
+  };
+
+  optionGenerationProgress.total = optionGenerationQueue.length;
+  optionGenerationProgress.current = 0;
+
+  while (optionGenerationQueue.length > 0) {
+    const item = optionGenerationQueue.shift();
+    optionGenerationProgress.current++;
+    optionGenerationProgress.currentItem = item;
+
+    try {
+      const prompt = buildOptionPrompt(config, item);
+      console.log(`Generating option (${optionGenerationProgress.current}/${optionGenerationProgress.total}): ${item.category}/${item.id}`);
+
+      const imageBuffer = await generateOptionImage(prompt, config);
+
+      // Save to pending
+      await ensureOptionDirs();
+      const filename = `${item.category}-${item.id}.png`;
+      const filepath = path.join(OPTIONS_PENDING_DIR, filename);
+      await fs.writeFile(filepath, imageBuffer);
+
+      // Update pending metadata
+      const pending = await readOptionPendingMeta();
+      pending.push({
+        id: `${item.category}-${item.id}`,
+        optionId: item.id,
+        category: item.category,
+        name: item.name,
+        tempPath: `options/pending/${filename}`,
+        generatedAt: new Date().toISOString(),
+        prompt: prompt
+      });
+      await writeOptionPendingMeta(pending);
+
+      console.log(`  Saved: ${filename}`);
+    } catch (err) {
+      console.error(`  Error generating ${item.id}:`, err.message);
+    }
+
+    // Small delay between requests
+    if (optionGenerationQueue.length > 0) {
+      await new Promise(r => setTimeout(r, 500));
+    }
+  }
+
+  optionGenerationProgress.currentItem = null;
+  isGeneratingOptions = false;
+}
+
+// GET /api/options/image-config - Get option image generation config
+app.get('/api/options/image-config', async (req, res) => {
+  try {
+    const charData = await readJsonFile('characterCreation.json');
+    const config = charData.optionImageConfig || {
+      basePrompt: `You are generating option card art for a dark fantasy RPG character creator.
+These are selection cards shown during character creation - the image should be iconic and symbolic of the option.
+Square 1:1 format, suitable for a card/button.`,
+      styleModifiers: 'Dark fantasy art style, painterly, dramatic lighting, striking color palette',
+      aspectRatio: '1:1',
+      imageSize: '1K',
+      model: 'nano-banana-pro'
+    };
+    res.json(config);
+  } catch (err) {
+    console.error('Error reading option image config:', err);
+    res.status(500).json({ error: 'Failed to read config' });
+  }
+});
+
+// PUT /api/options/image-config - Save option image generation config
+app.put('/api/options/image-config', async (req, res) => {
+  try {
+    const charData = await readJsonFile('characterCreation.json');
+    charData.optionImageConfig = req.body;
+    await writeJsonFile('characterCreation.json', charData);
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error saving option image config:', err);
+    res.status(500).json({ error: 'Failed to save config' });
+  }
+});
+
+// POST /api/options/generate - Queue option image generation
+app.post('/api/options/generate', async (req, res) => {
+  try {
+    const { options } = req.body;  // Array of { category, id, name, description, traits, attributes, isDrawback, subcategory }
+
+    if (!options || !Array.isArray(options) || options.length === 0) {
+      return res.status(400).json({ error: 'Must provide options array' });
+    }
+
+    // Add to queue
+    for (const opt of options) {
+      optionGenerationQueue.push(opt);
+    }
+
+    // Start processing if not already running
+    processOptionGenerationQueue();
+
+    res.json({
+      queued: options.length,
+      total: optionGenerationQueue.length,
+      message: `Queued ${options.length} options for generation`
+    });
+  } catch (err) {
+    console.error('Error queueing option generation:', err);
+    res.status(500).json({ error: 'Failed to queue generation' });
+  }
+});
+
+// GET /api/options/pending - Get pending option images
+app.get('/api/options/pending', async (req, res) => {
+  try {
+    const pending = await readOptionPendingMeta();
+    res.json(pending);
+  } catch (err) {
+    console.error('Error reading pending options:', err);
+    res.status(500).json({ error: 'Failed to read pending options' });
+  }
+});
+
+// GET /api/options/generation-status - Get option generation status
+app.get('/api/options/generation-status', async (req, res) => {
+  res.json({
+    isGenerating: isGeneratingOptions,
+    progress: optionGenerationProgress,
+    queueLength: optionGenerationQueue.length
+  });
+});
+
+// POST /api/options/accept/:id - Accept a pending option image
+app.post('/api/options/accept/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pending = await readOptionPendingMeta();
+    const item = pending.find(p => p.id === id);
+
+    if (!item) {
+      return res.status(404).json({ error: 'Pending image not found' });
+    }
+
+    // Move from pending to final location
+    const srcPath = path.join(OPTIONS_PENDING_DIR, `${id}.png`);
+    const destPath = path.join(OPTIONS_DIR, `${id}.png`);
+
+    await fs.rename(srcPath, destPath);
+
+    // Remove from pending metadata
+    const newPending = pending.filter(p => p.id !== id);
+    await writeOptionPendingMeta(newPending);
+
+    // Update the option in characterCreation.json to reference the image
+    const charData = await readJsonFile('characterCreation.json');
+    for (const category of charData.categories) {
+      const option = category.options.find(o => o.id === item.optionId);
+      if (option) {
+        option.image = `${id}.png`;
+        break;
+      }
+    }
+    await writeJsonFile('characterCreation.json', charData);
+
+    res.json({ success: true, imagePath: `options/${id}.png` });
+  } catch (err) {
+    console.error('Error accepting option image:', err);
+    res.status(500).json({ error: 'Failed to accept image' });
+  }
+});
+
+// POST /api/options/accept-all - Accept all pending option images
+app.post('/api/options/accept-all', async (req, res) => {
+  try {
+    const pending = await readOptionPendingMeta();
+    if (pending.length === 0) {
+      return res.json({ accepted: 0 });
+    }
+
+    const charData = await readJsonFile('characterCreation.json');
+    let accepted = 0;
+
+    for (const item of pending) {
+      try {
+        const srcPath = path.join(OPTIONS_PENDING_DIR, `${item.id}.png`);
+        const destPath = path.join(OPTIONS_DIR, `${item.id}.png`);
+        await fs.rename(srcPath, destPath);
+
+        // Update option image reference
+        for (const category of charData.categories) {
+          const option = category.options.find(o => o.id === item.optionId);
+          if (option) {
+            option.image = `${item.id}.png`;
+            break;
+          }
+        }
+        accepted++;
+      } catch (err) {
+        console.error(`Error accepting ${item.id}:`, err.message);
+      }
+    }
+
+    await writeJsonFile('characterCreation.json', charData);
+    await writeOptionPendingMeta([]);
+
+    res.json({ accepted });
+  } catch (err) {
+    console.error('Error accepting all option images:', err);
+    res.status(500).json({ error: 'Failed to accept all images' });
+  }
+});
+
+// DELETE /api/options/pending/:id - Reject a pending option image
+app.delete('/api/options/pending/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pending = await readOptionPendingMeta();
+    const item = pending.find(p => p.id === id);
+
+    if (!item) {
+      return res.status(404).json({ error: 'Pending image not found' });
+    }
+
+    // Delete the image file
+    const filepath = path.join(OPTIONS_PENDING_DIR, `${id}.png`);
+    await fs.unlink(filepath);
+
+    // Remove from pending metadata
+    const newPending = pending.filter(p => p.id !== id);
+    await writeOptionPendingMeta(newPending);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error rejecting option image:', err);
+    res.status(500).json({ error: 'Failed to reject image' });
+  }
+});
+
+// DELETE /api/options/pending - Reject all pending option images
+app.delete('/api/options/pending', async (req, res) => {
+  try {
+    const pending = await readOptionPendingMeta();
+    let rejected = 0;
+
+    for (const item of pending) {
+      try {
+        const filepath = path.join(OPTIONS_PENDING_DIR, `${item.id}.png`);
+        await fs.unlink(filepath);
+        rejected++;
+      } catch (err) {
+        console.error(`Error deleting ${item.id}:`, err.message);
+      }
+    }
+
+    await writeOptionPendingMeta([]);
+    res.json({ rejected });
+  } catch (err) {
+    console.error('Error rejecting all option images:', err);
+    res.status(500).json({ error: 'Failed to reject all images' });
+  }
+});
+
+// POST /api/options/batch - Create a batch job for option images
+app.post('/api/options/batch', async (req, res) => {
+  try {
+    const { options } = req.body;
+
+    if (!options || !Array.isArray(options) || options.length === 0) {
+      return res.status(400).json({ error: 'Must provide options array' });
+    }
+
+    const charData = await readJsonFile('characterCreation.json');
+    const config = charData.optionImageConfig || {
+      basePrompt: `You are generating option card art for a dark fantasy RPG character creator.
+These are selection cards shown during character creation - the image should be iconic and symbolic of the option.
+Square 1:1 format, suitable for a card/button.`,
+      styleModifiers: 'Dark fantasy art style, painterly, dramatic lighting, striking color palette',
+      aspectRatio: '1:1',
+      imageSize: '1K'
+    };
+
+    // Build batch requests
+    const requests = [];
+    const timestamp = Date.now();
+
+    for (const opt of options) {
+      const id = `${opt.category}-${opt.id}`;
+      const prompt = buildOptionPrompt(config, opt);
+
+      requests.push({
+        metadata: {
+          key: id,
+          optionId: opt.id,
+          category: opt.category,
+          name: opt.name
+        },
+        request: {
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseModalities: ['TEXT', 'IMAGE'],
+            imageConfig: {
+              aspectRatio: config.aspectRatio || '1:1',
+              imageSize: config.imageSize || '1K'
+            }
+          }
+        }
+      });
+    }
+
+    console.log(`Creating option batch job with ${requests.length} requests...`);
+
+    // Create batch job
+    const batchResponse = await geminiRequest('POST', '/models/gemini-3-pro-image-preview:batchGenerateContent', {
+      batch: {
+        displayName: `options-${timestamp}`,
+        inputConfig: {
+          requests: { requests }
+        }
+      }
+    });
+
+    if (batchResponse.error) {
+      console.error('Batch API error:', batchResponse.error);
+      return res.status(500).json({ error: batchResponse.error.message || 'Batch creation failed' });
+    }
+
+    console.log('Option batch job created:', batchResponse.name);
+
+    // Save job to persistent storage
+    const jobs = await readOptionBatchJobs();
+    const newJob = {
+      id: batchResponse.name,
+      displayName: `options-${timestamp}`,
+      createdAt: new Date().toISOString(),
+      requestCount: requests.length,
+      state: batchResponse.state || 'JOB_STATE_PENDING',
+      requestMetadata: requests.map(r => r.metadata)
+    };
+    jobs.push(newJob);
+    await writeOptionBatchJobs(jobs);
+
+    res.json({
+      success: true,
+      jobId: batchResponse.name,
+      requestCount: requests.length,
+      state: batchResponse.state
+    });
+  } catch (err) {
+    console.error('Error creating option batch job:', err);
+    res.status(500).json({ error: err.message || 'Failed to create batch job' });
+  }
+});
+
+// GET /api/options/batch - List all option batch jobs
+app.get('/api/options/batch', async (req, res) => {
+  try {
+    const jobs = await readOptionBatchJobs();
+    res.json(jobs);
+  } catch (err) {
+    console.error('Error listing option batch jobs:', err);
+    res.status(500).json({ error: 'Failed to list batch jobs' });
+  }
+});
+
+// GET /api/options/batch/:id/status - Check option batch job status
+app.get('/api/options/batch/:id(*)/status', async (req, res) => {
+  try {
+    const jobId = req.params.id;
+    console.log(`Checking option batch status for: ${jobId}`);
+
+    const statusResponse = await geminiRequest('GET', `/${jobId}`);
+
+    if (statusResponse.error) {
+      console.error('Batch status error:', statusResponse.error);
+      return res.status(500).json({ error: statusResponse.error.message });
+    }
+
+    const isDone = statusResponse.done === true;
+    let state = isDone ? 'JOB_STATE_SUCCEEDED' : 'JOB_STATE_PENDING';
+    const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
+
+    console.log(`Option batch ${jobId}: done=${isDone}, state=${state}, responses=${responses.length}`);
+
+    // Update local job record
+    const jobs = await readOptionBatchJobs();
+    const jobIndex = jobs.findIndex(j => j.id === jobId);
+    if (jobIndex >= 0) {
+      jobs[jobIndex].state = state;
+      jobs[jobIndex].lastChecked = new Date().toISOString();
+      jobs[jobIndex].responseCount = responses.length;
+      await writeOptionBatchJobs(jobs);
+    }
+
+    res.json({
+      id: jobId,
+      state: state,
+      responseCount: responses.length
+    });
+  } catch (err) {
+    console.error('Error checking option batch status:', err);
+    res.status(500).json({ error: err.message || 'Failed to check batch status' });
+  }
+});
+
+// POST /api/options/batch/:id/import - Import option batch results
+app.post('/api/options/batch/:id(*)/import', async (req, res) => {
+  try {
+    const jobId = req.params.id;
+    console.log(`Importing option batch results for: ${jobId}`);
+
+    const statusResponse = await geminiRequest('GET', `/${jobId}`);
+
+    if (statusResponse.error) {
+      return res.status(500).json({ error: statusResponse.error.message });
+    }
+
+    if (!statusResponse.done) {
+      return res.status(400).json({ error: 'Job is not yet complete. Please wait and try again.' });
+    }
+
+    const responses = statusResponse.response?.inlinedResponses?.inlinedResponses || [];
+
+    if (responses.length === 0) {
+      return res.status(400).json({ error: 'No results found.' });
+    }
+
+    const jobs = await readOptionBatchJobs();
+    const job = jobs.find(j => j.id === jobId);
+    if (!job) {
+      return res.status(404).json({ error: 'Job not found in local records' });
+    }
+
+    console.log(`Importing ${responses.length} option images from batch job...`);
+
+    await ensureOptionDirs();
+    const pending = await readOptionPendingMeta();
+    let imported = 0;
+    let failed = 0;
+
+    for (let i = 0; i < responses.length; i++) {
+      const item = responses[i];
+      try {
+        let metadata = null;
+        const itemKey = item.key || item.metadata?.key;
+
+        if (itemKey) {
+          metadata = job.requestMetadata.find(m => m.key === itemKey);
+        }
+        if (!metadata && job.requestMetadata[i]) {
+          metadata = job.requestMetadata[i];
+        }
+
+        if (!metadata) {
+          console.warn(`  No metadata for response ${i}`);
+          failed++;
+          continue;
+        }
+
+        const parts = item.response?.candidates?.[0]?.content?.parts || [];
+        const imagePart = parts.find(p => p.inlineData?.data);
+
+        if (!imagePart) {
+          console.warn(`  No image in response ${i} (${metadata.key})`);
+          failed++;
+          continue;
+        }
+
+        const filename = `${metadata.key}.png`;
+        const filepath = path.join(OPTIONS_PENDING_DIR, filename);
+        await fs.writeFile(filepath, Buffer.from(imagePart.inlineData.data, 'base64'));
+
+        pending.push({
+          id: metadata.key,
+          optionId: metadata.optionId,
+          category: metadata.category,
+          name: metadata.name,
+          tempPath: `options/pending/${filename}`,
+          generatedAt: new Date().toISOString(),
+          prompt: '(batch generated)',
+          batchJobId: jobId
+        });
+
+        imported++;
+      } catch (itemErr) {
+        console.error(`  Error importing response ${i}:`, itemErr.message);
+        failed++;
+      }
+    }
+
+    await writeOptionPendingMeta(pending);
+
+    // Update job status
+    const jobIndex = jobs.findIndex(j => j.id === jobId);
+    if (jobIndex >= 0) {
+      jobs[jobIndex].imported = true;
+      jobs[jobIndex].importedAt = new Date().toISOString();
+      jobs[jobIndex].importedCount = imported;
+      jobs[jobIndex].failedCount = failed;
+      await writeOptionBatchJobs(jobs);
+    }
+
+    console.log(`Option batch import complete: ${imported} imported, ${failed} failed`);
+
+    res.json({
+      success: true,
+      imported,
+      failed,
+      total: responses.length
+    });
+  } catch (err) {
+    console.error('Error importing option batch results:', err);
+    res.status(500).json({ error: err.message || 'Failed to import batch results' });
+  }
+});
+
+// DELETE /api/options/batch/:id - Delete option batch job record
+app.delete('/api/options/batch/:id(*)', async (req, res) => {
+  try {
+    const jobId = req.params.id;
+    const jobs = await readOptionBatchJobs();
+    const newJobs = jobs.filter(j => j.id !== jobId);
+
+    if (newJobs.length === jobs.length) {
+      return res.status(404).json({ error: 'Job not found' });
+    }
+
+    await writeOptionBatchJobs(newJobs);
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error deleting option batch job:', err);
+    res.status(500).json({ error: 'Failed to delete batch job' });
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Editor server running at http://localhost:${PORT}`);
-  console.log('\nReal-time generation:');
+  console.log('\nPortrait generation:');
   console.log('  POST    /api/portraits/generate');
   console.log('  GET     /api/portraits/pending');
-  console.log('  GET     /api/portraits/generation-status');
-  console.log('  GET     /api/portraits/rate-limits');
-  console.log('  POST    /api/portraits/accept/:id');
-  console.log('  POST    /api/portraits/accept-all');
-  console.log('  DELETE  /api/portraits/pending/:id');
-  console.log('  DELETE  /api/portraits/pending (all)');
-  console.log('\nBatch generation (async, 50% cost):');
   console.log('  POST    /api/portraits/batch - Create batch job');
-  console.log('  GET     /api/portraits/batch - List batch jobs');
-  console.log('  GET     /api/portraits/batch/:id/status - Check status');
-  console.log('  POST    /api/portraits/batch/:id/import - Import results');
-  console.log('  DELETE  /api/portraits/batch/:id - Delete job record');
+  console.log('\nOption image generation:');
+  console.log('  GET     /api/options/image-config');
+  console.log('  PUT     /api/options/image-config');
+  console.log('  POST    /api/options/generate');
+  console.log('  GET     /api/options/pending');
+  console.log('  POST    /api/options/batch - Create batch job');
   if (!process.env.GEMINI_API_KEY) {
-    console.log('\nWARNING: GEMINI_API_KEY not set - portrait generation will fail');
+    console.log('\nWARNING: GEMINI_API_KEY not set - image generation will fail');
   }
 });

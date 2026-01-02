@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getImageUrl } from '../utils/imagePath';
 import type { CharacterBuilderState, CategoryConfig, CharacterOption, Portrait, AttributeId } from '../types/game';
 import { describeFate, describeAttribute } from '../engine/characterBuilder';
 
@@ -122,7 +123,7 @@ export function CharacterReview({
         <div className="review-overview">
           {portrait && (
             <div className="review-portrait">
-              <img src={`/images/${portrait.image}`} alt={name} />
+              <img src={getImageUrl(portrait.image)} alt={name} />
             </div>
           )}
 
@@ -193,7 +194,7 @@ export function CharacterReview({
                     >
                       {option.image && (
                         <img
-                          src={`/images/options/${option.image}`}
+                          src={getImageUrl(`options/${option.image}`)}
                           alt={option.name}
                           className="review-option-image"
                         />
@@ -237,7 +238,7 @@ export function CharacterReview({
         >
           {tooltipState.option.image && (
             <img
-              src={`/images/options/${tooltipState.option.image}`}
+              src={getImageUrl(`options/${tooltipState.option.image}`)}
               alt={tooltipState.option.name}
               className="tooltip-image"
             />

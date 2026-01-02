@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { getImageUrl } from '../utils/imagePath';
 import type { Character, CategoryConfig, CharacterBuilderState, AppearanceSelections } from '../types/game';
 import { characterCreationData as initialData } from '../data/characterCreation';
 import { appearanceConfig } from '../data/appearanceConfig';
@@ -144,13 +145,13 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
     if (cat.id === 'appearance') {
       return liveAppearanceConfig.portraits
         .filter(p => p.image)
-        .map(p => `/images/${p.image}`);
+        .map(p => getImageUrl(p.image));
     }
 
     // For regular categories, preload option images
     return cat.options
       .filter(opt => opt.image)
-      .map(opt => `/images/options/${opt.image}`);
+      .map(opt => getImageUrl(`options/${opt.image}`));
   }, [categories, liveAppearanceConfig]);
 
   // Preload adjacent categories when current category changes

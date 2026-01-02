@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { getImageUrl } from '../utils/imagePath';
 import type { CategoryConfig, CharacterOption, CharacterBuilderState, OptionRequirement } from '../types/game';
 import { useEditMode } from '../contexts/EditModeContext';
 
@@ -103,7 +104,7 @@ interface OptionCardProps {
 }
 
 function OptionCard({ option, selected, available, canSelect, onToggle, editMode, onEdit, onDelete, unmetRequirements }: OptionCardProps) {
-  const imageUrl = option.image ? `/images/options/${option.image}` : null;
+  const imageUrl = option.image ? getImageUrl(`options/${option.image}`) : null;
 
   const handleClick = () => {
     if (editMode) return; // Don't toggle when in edit mode

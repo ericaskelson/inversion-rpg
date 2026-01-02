@@ -221,13 +221,25 @@ This ensures every character can start somewhere.
 
 ```
 inverse-rpg/
-  CLAUDE.md                    # This file
-  open-dev.bat                 # Opens browser to localhost:5173
-  start-server.bat             # Starts the Vite dev server
-  start-edit.bat               # Starts in edit mode (Vite + editor server)
+  CLAUDE.md                    # This file (for Claude)
+  README.md                    # Quick reference (for humans)
+
+  # Batch files (Windows)
+  dev-build.bat                # Build for development
+  dev-server.bat               # Start dev server (with editor support)
+  dev-open.bat                 # Open browser to localhost:5173
+  prod-build.bat               # Build for production (WebP + cleanup)
+  prod-server.bat              # Start production preview server
+  prod-open.bat                # Open browser to localhost:4173
 
   src/                         # Vite + React + TypeScript web app
     editor-server.js           # Express API for editing character data
+    dist/                      # Production build output (deploy this folder)
+    public/
+      images/
+        options/               # Option card images (PNG/JPG source + WebP generated)
+        portraits/             # Portrait images (gitignored, ~1000 files)
+      scenarios.json           # Compiled scenario bundle
     src/
       api/
         editorApi.ts           # Frontend API client for editor server
@@ -236,7 +248,9 @@ inverse-rpg/
         CategorySelector.tsx   # Generic option grid for most categories
         CharacterCreator.tsx   # Main character creation orchestrator
         CharacterSummary.tsx   # Sidebar showing current stats/traits
+        CharacterReview.tsx    # Final review page before adventure
         OptionEditorModal.tsx  # Modal form for editing options
+        PortraitManager.tsx    # Portrait generation and review UI
         ScenarioPlayer.tsx     # Plays through scenarios (not yet integrated)
       contexts/
         EditModeContext.tsx    # React context for edit mode state
@@ -250,15 +264,17 @@ inverse-rpg/
         conditions.ts          # Scenario condition evaluation
       types/
         game.ts                # All TypeScript interfaces
+      utils/
+        imagePath.ts           # WebP path conversion for production
       App.tsx                  # Main app component
       App.css                  # All styles
-    public/
-      images/options/          # Option card images (sex-male.png, race-*.png, etc.)
-      scenarios.json           # Compiled scenario bundle
 
   scenarios/                   # Scenario content folders (one per scenario)
   tools/
     build-scenarios.js         # Compiles scenarios/ into scenarios.json
+    convert-to-webp.js         # Converts PNG/JPG to WebP (incremental)
+    cleanup-dist-images.js     # Removes PNG/JPG from dist/ after build
+    cleanup-orphaned-portraits.js  # Removes JSON entries for deleted images
 ```
 
 ## Current Implementation State
@@ -660,6 +676,49 @@ Platforms:
 - [x] Character review page before adventure begins
 - [x] Fate tier styling with visual effects and difficulty descriptions
 - [x] Fixed-position tooltips on review page (mobile-friendly tap support)
+
+### Build & Deployment
+- [x] WebP image compression (86% size reduction: 750MB → 106MB)
+- [x] Incremental conversion (only converts new/changed images)
+- [x] Production build strips PNG/JPG from dist/ (WebP only)
+- [x] Orphaned portrait cleanup (removes JSON entries for deleted images)
+- [x] Automatic cleanup runs during both dev and prod builds
+
+---
+
+## Build System
+
+### NPM Scripts (in src/package.json)
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start Vite dev server (no editor) |
+| `npm run dev:edit` | Start dev server + editor API server |
+| `npm run build` | **Production build** - full pipeline |
+| `npm run build:dev` | Dev build (cleanup only, no WebP) |
+| `npm run preview` | Serve production build locally |
+| `npm run convert-images` | Convert PNG/JPG to WebP |
+| `npm run cleanup-portraits` | Remove orphaned portrait entries |
+| `npm run cleanup-dist` | Remove PNG/JPG from dist/ |
+
+### Production Build Pipeline (`npm run build`)
+1. `cleanup-portraits` - Remove JSON entries for deleted image files
+2. `convert-images` - Generate WebP versions (incremental, skips existing)
+3. `tsc -b` - TypeScript compilation
+4. `vite build` - Bundle app, copy public/ to dist/
+5. `cleanup-dist` - Remove PNG/JPG from dist/ (keep WebP only)
+
+### Image Path Handling
+- Source images: `src/public/images/` (PNG/JPG)
+- Generated WebP: alongside originals (same folder)
+- In development: app uses original PNG/JPG files
+- In production: `getImageUrl()` utility swaps extensions to `.webp`
+- Utility location: `src/src/utils/imagePath.ts`
+
+### Deleting Portraits
+1. Delete image files from `src/public/images/portraits/`
+2. Run `npm run cleanup-portraits` (or just build - it runs automatically)
+3. Orphaned entries are removed from `appearanceConfig.json`
 
 ---
 

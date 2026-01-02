@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "dev:edit": "concurrently \"vite\" \"node editor-server.js\"",
-    "build": "tsc -b && vite build",
+    "convert-images": "node ../tools/convert-to-webp.js",
+    "cleanup-dist": "node ../tools/cleanup-dist-images.js",
+    "cleanup-portraits": "node ../tools/cleanup-orphaned-portraits.js --apply",
+    "build": "npm run cleanup-portraits && npm run convert-images && tsc -b && vite build && npm run cleanup-dist",
+    "build:dev": "npm run cleanup-portraits && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getImageUrl } from '../utils/imagePath';
 import type { AttributeId, Portrait } from '../types/game';
 
 interface CharacterSummaryProps {
@@ -61,7 +62,7 @@ export function CharacterSummary({
     <div className="character-summary">
       {portrait && (
         <div className="summary-portrait" onClick={() => setShowLightbox(true)}>
-          <img src={`/images/${portrait.image}`} alt={portrait.name} />
+          <img src={getImageUrl(portrait.image)} alt={portrait.name} />
         </div>
       )}
 
@@ -108,7 +109,7 @@ export function CharacterSummary({
       {/* Portrait lightbox */}
       {showLightbox && portrait && (
         <div className="portrait-lightbox" onClick={() => setShowLightbox(false)}>
-          <img src={`/images/${portrait.image}`} alt={portrait.name} />
+          <img src={getImageUrl(portrait.image)} alt={portrait.name} />
         </div>
       )}
     </div>

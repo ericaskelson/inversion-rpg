@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { getImageUrl } from '../utils/imagePath';
 import type {
   AppearanceConfig,
   AppearanceSelections,
@@ -118,7 +119,7 @@ function OptionGrid<T extends string>({
           >
             {option.image && (
               <div className="appearance-option-image">
-                <img src={`/images/options/${option.image}`} alt={option.name} />
+                <img src={getImageUrl(`options/${option.image}`)} alt={option.name} />
               </div>
             )}
             <div className="appearance-option-content">
@@ -186,7 +187,7 @@ function PortraitGrid({ portraits, selectedId, onSelect }: PortraitGridProps) {
           className={`portrait-option ${selectedId === portrait.id ? 'selected' : ''}`}
           onClick={() => onSelect(portrait.id)}
         >
-          <img src={`/images/${portrait.image}`} alt={portrait.name} />
+          <img src={getImageUrl(portrait.image)} alt={portrait.name} />
         </button>
       ))}
     </div>

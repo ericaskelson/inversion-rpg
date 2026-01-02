@@ -122,6 +122,29 @@ export function CharacterReview({
                           </span>
                         )}
                       </div>
+                      {/* Hover tooltip with full details */}
+                      <div className="review-option-tooltip">
+                        {option.image && (
+                          <img
+                            src={`/images/options/${option.image}`}
+                            alt={option.name}
+                            className="tooltip-image"
+                          />
+                        )}
+                        <div className="tooltip-content">
+                          <h5 className="tooltip-name">{option.name}</h5>
+                          {option.description && (
+                            <p className="tooltip-description">{option.description}</p>
+                          )}
+                          {option.traits && option.traits.length > 0 && (
+                            <div className="tooltip-traits">
+                              {option.traits.map(trait => (
+                                <span key={trait} className="trait-tag">{trait}</span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>

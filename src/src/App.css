@@ -1014,6 +1014,13 @@ body {
   transition: all 0.3s ease;
 }
 
+.fate-section.fate-low {
+  background: linear-gradient(135deg, #1a1a2e 0%, #1f2a3d 100%);
+  border-color: #3b82f6;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+}
+
+/* Tier: High (5-9) - Purple glow */
 .fate-section.fate-high {
   background: linear-gradient(135deg, #1a1a2e 0%, #2a1f3d 100%);
   border-color: #6366f1;
@@ -1021,15 +1028,72 @@ body {
   animation: fateHighPulse 3s ease-in-out infinite;
 }
 
-.fate-section.fate-low {
-  background: linear-gradient(135deg, #1a1a2e 0%, #1f2a3d 100%);
-  border-color: #3b82f6;
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+/* Tier: Epic (10-15) - Gold/amber glow */
+.fate-section.fate-epic {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d2a1f 100%);
+  border-color: #f59e0b;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), inset 0 0 25px rgba(245, 158, 11, 0.1);
+  animation: fateEpicPulse 2.5s ease-in-out infinite;
+}
+
+/* Tier: Legendary (16-21) - Radiant gold with particles effect */
+.fate-section.fate-legendary {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d281f 50%, #3d2f1f 100%);
+  border-color: #fbbf24;
+  box-shadow:
+    0 0 25px rgba(251, 191, 36, 0.5),
+    0 0 50px rgba(251, 191, 36, 0.2),
+    inset 0 0 30px rgba(251, 191, 36, 0.15);
+  animation: fateLegendaryPulse 2s ease-in-out infinite;
+}
+
+/* Tier: Mythic (22+) - Cosmic rainbow shimmer */
+.fate-section.fate-mythic {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2a1f3d 25%, #3d2f1f 50%, #1f3d2a 75%, #1a1a2e 100%);
+  background-size: 400% 400%;
+  border-color: #fff;
+  box-shadow:
+    0 0 30px rgba(255, 255, 255, 0.4),
+    0 0 60px rgba(167, 139, 250, 0.3),
+    0 0 90px rgba(251, 191, 36, 0.2),
+    inset 0 0 40px rgba(255, 255, 255, 0.1);
+  animation: fateMythicShimmer 4s ease-in-out infinite, fateMythicPulse 2s ease-in-out infinite;
 }
 
 @keyframes fateHighPulse {
   0%, 100% { box-shadow: 0 0 15px rgba(99, 102, 241, 0.3), inset 0 0 20px rgba(99, 102, 241, 0.1); }
   50% { box-shadow: 0 0 25px rgba(99, 102, 241, 0.5), inset 0 0 30px rgba(99, 102, 241, 0.15); }
+}
+
+@keyframes fateEpicPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), inset 0 0 25px rgba(245, 158, 11, 0.1); }
+  50% { box-shadow: 0 0 35px rgba(245, 158, 11, 0.6), inset 0 0 35px rgba(245, 158, 11, 0.2); }
+}
+
+@keyframes fateLegendaryPulse {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(251, 191, 36, 0.5), 0 0 50px rgba(251, 191, 36, 0.2), inset 0 0 30px rgba(251, 191, 36, 0.15);
+    border-color: #fbbf24;
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(251, 191, 36, 0.7), 0 0 70px rgba(251, 191, 36, 0.3), inset 0 0 40px rgba(251, 191, 36, 0.2);
+    border-color: #fcd34d;
+  }
+}
+
+@keyframes fateMythicShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fateMythicPulse {
+  0%, 100% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(167, 139, 250, 0.3), 0 0 90px rgba(251, 191, 36, 0.2), inset 0 0 40px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.6), 0 0 80px rgba(167, 139, 250, 0.4), 0 0 110px rgba(251, 191, 36, 0.3), inset 0 0 50px rgba(255, 255, 255, 0.15);
+  }
 }
 
 .fate-display {
@@ -1050,9 +1114,42 @@ body {
   color: #4ade80;
 }
 
+/* Fate value text effects by tier */
 .fate-section.fate-high .fate-value.positive {
   color: #a78bfa;
   text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+}
+
+.fate-section.fate-epic .fate-value.positive {
+  color: #fbbf24;
+  text-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
+  font-weight: 700;
+}
+
+.fate-section.fate-legendary .fate-value.positive {
+  color: #fcd34d;
+  text-shadow:
+    0 0 10px rgba(252, 211, 77, 0.8),
+    0 0 20px rgba(251, 191, 36, 0.4);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.fate-section.fate-mythic .fate-value.positive {
+  background: linear-gradient(90deg, #fcd34d, #a78bfa, #4ade80, #fcd34d);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  animation: mythicTextShimmer 3s linear infinite;
+}
+
+@keyframes mythicTextShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
 }
 
 .fate-value.negative {
@@ -1076,6 +1173,20 @@ body {
 
 .fate-section.fate-high .fate-description {
   color: #a5b4fc;
+}
+
+.fate-section.fate-epic .fate-description {
+  color: #fcd34d;
+}
+
+.fate-section.fate-legendary .fate-description {
+  color: #fef08a;
+  text-shadow: 0 0 5px rgba(254, 240, 138, 0.3);
+}
+
+.fate-section.fate-mythic .fate-description {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .fate-section.fate-low .fate-description {
@@ -3058,7 +3169,7 @@ body {
 
 .review-content {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 420px 1fr;
   gap: 2rem;
   flex: 1;
 }
@@ -3078,7 +3189,8 @@ body {
   background: #0f1729;
   border-radius: 6px;
   overflow: hidden;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  max-height: 350px;
 }
 
 .review-portrait img {
@@ -3133,20 +3245,29 @@ body {
 .attributes-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
+  gap: 0.5rem 1rem;
 }
 
 .attr-item {
   display: flex;
   justify-content: space-between;
-  padding: 0.35rem 0.5rem;
+  align-items: center;
+  padding: 0.4rem 0.6rem;
   background: #0f1729;
   border-radius: 4px;
   font-size: 0.85rem;
+  min-width: 0;
 }
 
 .attr-name {
   color: #888;
+  white-space: nowrap;
+  margin-right: 0.5rem;
+}
+
+.attr-value {
+  white-space: nowrap;
+  text-align: right;
 }
 
 .attr-value.positive {
@@ -3209,11 +3330,23 @@ body {
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
   min-width: 180px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.review-option:hover {
+  border-color: #3b82f6;
+  background: #111b2e;
 }
 
 .review-option.drawback {
   border-color: #7f1d1d;
   background: linear-gradient(135deg, #0f1729 0%, #1a1020 100%);
+}
+
+.review-option.drawback:hover {
+  border-color: #dc2626;
 }
 
 .review-option-image {
@@ -3250,6 +3383,85 @@ body {
 .review-option .fate-badge.negative {
   background: #7f1d1d;
   color: #fca5a5;
+}
+
+/* Review option hover tooltip */
+.review-option-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a2744;
+  border: 1px solid #3b82f6;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 280px;
+  max-width: 350px;
+  z-index: 100;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.review-option-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-top-color: #3b82f6;
+}
+
+.review-option:hover .review-option-tooltip {
+  display: block;
+  animation: tooltipFadeIn 0.15s ease;
+}
+
+@keyframes tooltipFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(5px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.tooltip-image {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.tooltip-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tooltip-name {
+  margin: 0;
+  font-size: 1rem;
+  color: #f0c674;
+}
+
+.tooltip-description {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #aaa;
+  line-height: 1.4;
+}
+
+.tooltip-traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+}
+
+.tooltip-traits .trait-tag {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+  background: #312e81;
+  color: #a5b4fc;
+  border-radius: 3px;
 }
 
 .review-actions {

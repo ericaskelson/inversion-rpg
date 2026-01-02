@@ -415,6 +415,11 @@ export function describeFate(fate: number): string {
   if (fate <= 0) return 'Unremarkable';
   if (fate <= 3) return 'Promising';
   if (fate <= 6) return 'Destined';
-  if (fate <= 10) return 'Fated for Greatness';
-  return 'Chosen by Heaven';
+  if (fate <= 9) return 'Fated for Greatness';
+  if (fate <= 12) return 'Chosen by Heaven';
+  if (fate <= 15) return 'Prophesied';
+  if (fate <= 18) return 'World-Shaper';
+  if (fate <= 21) return 'Legend Incarnate';
+  if (fate <= 24) return 'Myth-Touched';
+  return 'Avatar of Destiny';
 }

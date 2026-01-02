@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { CharacterBuilderState, CategoryConfig, CharacterOption, Portrait, AttributeId } from '../types/game';
 import { describeFate, describeAttribute } from '../engine/characterBuilder';
 
@@ -62,6 +63,11 @@ export function CharacterReview({
   onBack,
 }: CharacterReviewProps) {
   const { name, calculatedFate, calculatedAttributes, calculatedTraits, selections } = state;
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+
+  const handleOptionClick = (optionId: string) => {
+    setActiveTooltip(prev => prev === optionId ? null : optionId);
+  };
 
   return (
     <div className="character-review">
@@ -139,7 +145,11 @@ export function CharacterReview({
                 <h4>{category.name}</h4>
                 <div className="review-options">
                   {selectedOptions.map(option => (
-                    <div key={option.id} className={`review-option ${option.isDrawback ? 'drawback' : ''}`}>
+                    <div
+                      key={option.id}
+                      className={`review-option ${option.isDrawback ? 'drawback' : ''} ${activeTooltip === option.id ? 'tooltip-active' : ''}`}
+                      onClick={() => handleOptionClick(option.id)}
+                    >
                       {option.image && (
                         <img
                           src={`/images/options/${option.image}`}

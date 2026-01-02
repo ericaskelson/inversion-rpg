@@ -3395,7 +3395,8 @@ body {
   border-bottom-color: #3b82f6;
 }
 
-.review-option:hover .review-option-tooltip {
+.review-option:hover .review-option-tooltip,
+.review-option.tooltip-active .review-option-tooltip {
   display: block;
   animation: tooltipFadeIn 0.15s ease;
 }

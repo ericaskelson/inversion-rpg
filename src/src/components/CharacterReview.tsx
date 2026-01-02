@@ -65,12 +65,24 @@ export function CharacterReview({
   const { name, calculatedFate, calculatedAttributes, calculatedTraits, selections } = state;
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
 
-  const handleOptionClick = (optionId: string) => {
+  const handleOptionClick = (optionId: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Don't trigger background click
     setActiveTooltip(prev => prev === optionId ? null : optionId);
   };
 
+  const handleOptionHover = (optionId: string) => {
+    // If a different option is clicked-open, close it when hovering another
+    if (activeTooltip && activeTooltip !== optionId) {
+      setActiveTooltip(null);
+    }
+  };
+
+  const handleBackgroundClick = () => {
+    setActiveTooltip(null);
+  };
+
   return (
-    <div className="character-review">
+    <div className="character-review" onClick={handleBackgroundClick}>
       <header className="review-header">
         <h1>Review Your Character</h1>
         <p className="review-subtitle">
@@ -148,7 +160,8 @@ export function CharacterReview({
                     <div
                       key={option.id}
                       className={`review-option ${option.isDrawback ? 'drawback' : ''} ${activeTooltip === option.id ? 'tooltip-active' : ''}`}
-                      onClick={() => handleOptionClick(option.id)}
+                      onClick={(e) => handleOptionClick(option.id, e)}
+                      onMouseEnter={() => handleOptionHover(option.id)}
                     >
                       {option.image && (
                         <img

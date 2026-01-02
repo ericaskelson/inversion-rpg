@@ -16,7 +16,7 @@ function App() {
 
   // Load scenarios on mount
   useEffect(() => {
-    fetch('/scenarios.json')
+    fetch(`${import.meta.env.BASE_URL}scenarios.json`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to load scenarios');
         return res.json();

@@ -3282,13 +3282,13 @@ body {
 }
 
 .review-categories-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem 2rem;
+  column-count: 2;
+  column-gap: 2rem;
 }
 
 .review-category {
-  margin-bottom: 0;
+  break-inside: avoid;
+  margin-bottom: 1.5rem;
 }
 
 .review-category h4 {

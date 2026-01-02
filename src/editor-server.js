@@ -133,6 +133,90 @@ app.put('/api/appearance-config', async (req, res) => {
 });
 
 // ============================================
+// NAMES ENDPOINTS
+// ============================================
+
+// GET /api/names - Returns namesConfig.json
+app.get('/api/names', async (req, res) => {
+  try {
+    const data = await readJsonFile('namesConfig.json');
+    res.json(data);
+  } catch (err) {
+    console.error('Error reading namesConfig.json:', err);
+    res.status(500).json({ error: 'Failed to read names config' });
+  }
+});
+
+// PUT /api/names - Write entire namesConfig.json
+app.put('/api/names', async (req, res) => {
+  try {
+    await writeJsonFile('namesConfig.json', req.body);
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error writing namesConfig.json:', err);
+    res.status(500).json({ error: 'Failed to write names config' });
+  }
+});
+
+// POST /api/names/add - Add a single name to a sex/race combination
+app.post('/api/names/add', async (req, res) => {
+  try {
+    const { sex, race, name } = req.body;
+    if (!sex || !race || !name) {
+      return res.status(400).json({ error: 'sex, race, and name are required' });
+    }
+
+    const data = await readJsonFile('namesConfig.json');
+
+    // Ensure the sex object exists
+    if (!data.names[sex]) {
+      data.names[sex] = {};
+    }
+
+    // Ensure the race array exists
+    if (!data.names[sex][race]) {
+      data.names[sex][race] = [];
+    }
+
+    // Add the name if it doesn't already exist
+    if (!data.names[sex][race].includes(name)) {
+      data.names[sex][race].push(name);
+      // Sort alphabetically
+      data.names[sex][race].sort((a, b) => a.localeCompare(b));
+      await writeJsonFile('namesConfig.json', data);
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error adding name:', err);
+    res.status(500).json({ error: 'Failed to add name' });
+  }
+});
+
+// POST /api/names/delete - Delete a single name from a sex/race combination
+app.post('/api/names/delete', async (req, res) => {
+  try {
+    const { sex, race, name } = req.body;
+    if (!sex || !race || !name) {
+      return res.status(400).json({ error: 'sex, race, and name are required' });
+    }
+
+    const data = await readJsonFile('namesConfig.json');
+
+    // Check if the path exists
+    if (data.names[sex] && data.names[sex][race]) {
+      data.names[sex][race] = data.names[sex][race].filter(n => n !== name);
+      await writeJsonFile('namesConfig.json', data);
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error deleting name:', err);
+    res.status(500).json({ error: 'Failed to delete name' });
+  }
+});
+
+// ============================================
 // PORTRAIT GENERATION ENDPOINTS
 // ============================================
 

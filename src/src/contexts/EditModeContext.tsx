@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
-import type { CharacterCreationData, CharacterOption, AppearanceConfig, AppearanceOption, BuildType, SkinTone, HairColor } from '../types/game';
-import { isEditorAvailable, saveCharacterCreation, saveAppearanceConfig, fetchAppearanceConfig, fetchCharacterCreation } from '../api/editorApi';
+import type { CharacterCreationData, CharacterOption, AppearanceConfig, AppearanceOption, NamesConfig } from '../types/game';
+import { isEditorAvailable, saveCharacterCreation, saveAppearanceConfig, fetchAppearanceConfig, fetchCharacterCreation, fetchNamesConfig, addNameToList, deleteNameFromList } from '../api/editorApi';
+import { namesConfig as staticNamesConfig } from '../data/namesConfig';
 
 type AppearanceOptionType = 'build' | 'skinTone' | 'hairColor';
 
@@ -40,6 +41,10 @@ interface EditModeContextType {
   deleteAppearanceOption: (optionId: string, type: AppearanceOptionType) => Promise<void>;
   isCreatingNewAppearance: boolean;
   currentAppearanceType: AppearanceOptionType | null;
+  // Names management
+  namesData: NamesConfig | null;
+  addName: (sex: 'male' | 'female', race: string, name: string) => Promise<void>;
+  deleteName: (sex: 'male' | 'female', race: string, name: string) => Promise<void>;
 }
 
 const EditModeContext = createContext<EditModeContextType | null>(null);
@@ -71,9 +76,22 @@ export function EditModeProvider({ children, initialData, initialAppearanceData 
   const [editingAppearanceOption, setEditingAppearanceOption] = useState<EditingAppearanceOption | null>(null);
   const [isCreatingNewAppearance, setIsCreatingNewAppearance] = useState(false);
 
-  // Check if editor server is available on mount
+  // Names state
+  const [namesData, setNamesData] = useState<NamesConfig>(staticNamesConfig);
+
+  // Check if editor server is available on mount and load names
   useEffect(() => {
-    isEditorAvailable().then(setEditorAvailable);
+    isEditorAvailable().then(async (available) => {
+      setEditorAvailable(available);
+      if (available) {
+        try {
+          const data = await fetchNamesConfig() as NamesConfig;
+          setNamesData(data);
+        } catch (err) {
+          console.error('Failed to fetch names config:', err);
+        }
+      }
+    });
   }, []);
 
   const toggleEditMode = useCallback(() => {
@@ -237,6 +255,30 @@ export function EditModeProvider({ children, initialData, initialAppearanceData 
     }
   }, []);
 
+  // Add a name to a sex/race combination
+  const addName = useCallback(async (sex: 'male' | 'female', race: string, name: string) => {
+    await addNameToList(sex, race, name);
+    // Refresh names data
+    try {
+      const data = await fetchNamesConfig() as NamesConfig;
+      setNamesData(data);
+    } catch (err) {
+      console.error('Failed to refresh names after add:', err);
+    }
+  }, []);
+
+  // Delete a name from a sex/race combination
+  const deleteName = useCallback(async (sex: 'male' | 'female', race: string, name: string) => {
+    await deleteNameFromList(sex, race, name);
+    // Refresh names data
+    try {
+      const data = await fetchNamesConfig() as NamesConfig;
+      setNamesData(data);
+    } catch (err) {
+      console.error('Failed to refresh names after delete:', err);
+    }
+  }, []);
+
   const value: EditModeContextType = {
     editMode,
     editorAvailable,
@@ -265,6 +307,10 @@ export function EditModeProvider({ children, initialData, initialAppearanceData 
     deleteAppearanceOption,
     isCreatingNewAppearance,
     currentAppearanceType: editingAppearanceOption?.type ?? null,
+    // Names
+    namesData,
+    addName,
+    deleteName,
   };
 
   return (

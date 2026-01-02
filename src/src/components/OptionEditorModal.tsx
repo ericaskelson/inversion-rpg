@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { CharacterOption, AttributeId, OptionRequirement } from '../types/game';
+import type { CharacterOption, AttributeId } from '../types/game';
 import { useEditMode } from '../contexts/EditModeContext';
 
 const ATTRIBUTE_IDS: AttributeId[] = ['strength', 'agility', 'endurance', 'cunning', 'charisma', 'will'];
@@ -14,11 +14,14 @@ export function OptionEditorModal() {
   });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Store raw traits input to allow typing commas freely
+  const [traitsInput, setTraitsInput] = useState('');
 
   // Reset form when editing option changes
   useEffect(() => {
     if (editingOption) {
       setFormData({ ...editingOption.option });
+      setTraitsInput(editingOption.option.traits?.join(', ') ?? '');
       setError(null);
     }
   }, [editingOption]);
@@ -104,11 +107,14 @@ export function OptionEditorModal() {
     }));
   };
 
-  const updateTraits = (traitsString: string) => {
-    const traits = traitsString.split(',').map(t => t.trim()).filter(Boolean);
+  const updateTraitsInput = (value: string) => {
+    setTraitsInput(value);
+    // Parse traits but don't filter empty - let the user type freely
+    // Empty strings will be filtered on save
+    const traits = value.split(',').map(t => t.trim());
     setFormData(prev => ({
       ...prev,
-      traits: traits.length > 0 ? traits : undefined,
+      traits: traits.some(t => t) ? traits : undefined,
     }));
   };
 
@@ -232,8 +238,8 @@ export function OptionEditorModal() {
             <input
               id="option-traits"
               type="text"
-              value={formData.traits?.join(', ') ?? ''}
-              onChange={e => updateTraits(e.target.value)}
+              value={traitsInput}
+              onChange={e => updateTraitsInput(e.target.value)}
               placeholder="trait-one, trait-two"
             />
           </div>

@@ -573,3 +573,68 @@ export async function deleteOptionBatchJob(jobId: string): Promise<void> {
     throw new Error('Failed to delete option batch job');
   }
 }
+
+// ============================================
+// NAMES API
+// ============================================
+
+/**
+ * Fetch names config from the editor server
+ */
+export async function fetchNamesConfig(): Promise<unknown> {
+  const response = await fetch(`${EDITOR_API_BASE}/names`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch names config');
+  }
+  return response.json();
+}
+
+/**
+ * Save names config to the editor server
+ */
+export async function saveNamesConfig(data: unknown): Promise<void> {
+  const response = await fetch(`${EDITOR_API_BASE}/names`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to save names config');
+  }
+}
+
+/**
+ * Add a name to a specific sex/race combination
+ */
+export async function addNameToList(
+  sex: 'male' | 'female',
+  race: string,
+  name: string
+): Promise<void> {
+  const response = await fetch(`${EDITOR_API_BASE}/names/add`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sex, race, name }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to add name');
+  }
+}
+
+/**
+ * Delete a name from a specific sex/race combination
+ */
+export async function deleteNameFromList(
+  sex: 'male' | 'female',
+  race: string,
+  name: string
+): Promise<void> {
+  const response = await fetch(`${EDITOR_API_BASE}/names/delete`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ sex, race, name }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to delete name');
+  }
+}

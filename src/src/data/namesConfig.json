@@ -1,0 +1,80 @@
+{
+  "names": {
+    "male": {
+      "human": [
+        "Aldric", "Brennan", "Corwin", "Darien", "Edmund", "Felix", "Gareth", "Henrik",
+        "Ivan", "Jasper", "Kieran", "Leander", "Marcus", "Nikolai", "Osric", "Percival",
+        "Quentin", "Roland", "Sebastian", "Theron", "Ulric", "Victor", "Willem", "Xavier",
+        "Yorick", "Zephyr", "Alaric", "Benedict", "Caspian", "Dorian", "Emeric", "Florian",
+        "Godwin", "Hadrian", "Ignatius", "Justinian", "Konrad", "Lysander"
+      ],
+      "elf": [
+        "Aelindor", "Caelum", "Eryndor", "Faelar", "Galathil", "Ithildir", "Lythien", "Miravel",
+        "Naeris", "Orinath", "Quilindor", "Raelis", "Sylvarin", "Thalion", "Vaelorn", "Aerendir",
+        "Celeborn", "Elowen", "Findarion", "Galamir", "Ilyndor", "Lorindel", "Maedhros", "Nimloth",
+        "Oropher", "Phaelorn", "Rhovandil", "Silmaris", "Thranduil", "Vandariel", "Anarion",
+        "Berethor", "Cirdan", "Daerandil", "Elrohir", "Faelindor"
+      ],
+      "dwarf": [
+        "Thorin", "Balin", "Dwalin", "Gimli", "Gloin", "Oin", "Nori", "Dori",
+        "Bifur", "Bofur", "Bombur", "Fili", "Kili", "Durin", "Thrain", "Thror",
+        "Dain", "Nain", "Fundin", "Grorin", "Borin", "Farin", "Groin", "Florin",
+        "Nordri", "Sudri", "Austri", "Vestri", "Brokkr", "Sindri", "Eitri", "Brok",
+        "Dolgrim", "Kazrik", "Thorgrim", "Snorri", "Ungrim", "Gotrek"
+      ],
+      "halfling": [
+        "Bilbo", "Frodo", "Samwise", "Merry", "Pippin", "Hamfast", "Drogo", "Bungo",
+        "Largo", "Ponto", "Porto", "Polo", "Fosco", "Posco", "Prisca", "Rollo",
+        "Tobold", "Bandobras", "Hildifons", "Isengrim", "Adelard", "Reginard", "Sigismond", "Ferdinand",
+        "Everard", "Doderic", "Dinodas", "Dudo", "Griffo", "Hugo", "Odo", "Otho",
+        "Rudigar", "Saradas", "Wilcome", "Flambard", "Fortinbras", "Gerontius"
+      ],
+      "orc": [
+        "Groknak", "Thrakul", "Morgash", "Uruk", "Bolg", "Azog", "Shagrat", "Gorbag",
+        "Ugluk", "Grishnakh", "Lugdush", "Mauhur", "Muzgash", "Radbug", "Snaga", "Gashnak",
+        "Krimpatul", "Burzum", "Durgash", "Ghash", "Lugburz", "Shakur", "Throgg", "Varag",
+        "Grimgor", "Gorfang", "Morglum", "Gorbad", "Azhag", "Wurrzag", "Skullmuncha", "Grimskull",
+        "Drakka", "Goroth", "Kragnath", "Mograk", "Thokk", "Vragg"
+      ]
+    },
+    "female": {
+      "human": [
+        "Adriana", "Beatrice", "Cordelia", "Diana", "Eleanor", "Fiona", "Gwendolyn", "Helena",
+        "Isadora", "Juliana", "Katarina", "Lysandra", "Mirabel", "Natalia", "Ophelia", "Portia",
+        "Quinn", "Rosalind", "Seraphina", "Theodora", "Ursula", "Vivienne", "Winifred", "Xanthe",
+        "Ysolde", "Zelda", "Arabella", "Brienne", "Cassandra", "Delphine", "Evelyn", "Freya",
+        "Genevieve", "Honoria", "Isolde", "Jessamine", "Kallista", "Lavinia"
+      ],
+      "elf": [
+        "Aelindra", "Calista", "Elowyn", "Faelynn", "Galadria", "Ithilwen", "Liriel", "Mirathel",
+        "Naerys", "Orinthia", "Quilara", "Raewyn", "Sylvana", "Thalindra", "Vaelora", "Aerith",
+        "Celebrian", "Elenwë", "Finduilas", "Galadriel", "Idril", "Lorethiel", "Melian", "Nimrodel",
+        "Orophina", "Phaedra", "Rhovaniel", "Silmariën", "Tinuviel", "Vanessa", "Arwen", "Berethil",
+        "Cirdanel", "Daeriel", "Elrienne", "Faelivrin"
+      ],
+      "dwarf": [
+        "Disa", "Thyra", "Hilda", "Brunhilde", "Astrid", "Sigrid", "Gudrun", "Helga",
+        "Ingrid", "Kara", "Brynhild", "Freydis", "Gerta", "Hulda", "Iona", "Jora",
+        "Katla", "Lofn", "Mist", "Nanna", "Oda", "Runa", "Saga", "Thora",
+        "Ulfhild", "Vigdis", "Alva", "Bodil", "Dagny", "Embla", "Freja", "Gerd",
+        "Hertha", "Idun", "Jorunn", "Kelda", "Liv", "Magnhild"
+      ],
+      "halfling": [
+        "Belladonna", "Primula", "Amaranth", "Petunia", "Camellia", "Daisy", "Eglantine", "Fern",
+        "Goldilocks", "Honeysuckle", "Iris", "Jasmine", "Lavender", "Marigold", "Nettle", "Olive",
+        "Pansy", "Rose", "Sage", "Tansy", "Violet", "Willow", "Angelica", "Bryony",
+        "Clover", "Dahlia", "Esmeralda", "Flora", "Gilly", "Heather", "Ivy", "Jessamine",
+        "Lobelia", "Myrtle", "Narcissa", "Orchid", "Poppy", "Rosemary"
+      ],
+      "orc": [
+        "Grukka", "Shagga", "Morgra", "Urza", "Bolga", "Azura", "Shagara", "Gorba",
+        "Uglara", "Grishna", "Lugda", "Maura", "Muzga", "Radba", "Snagga", "Gashna",
+        "Krimpa", "Burzuma", "Durga", "Ghashna", "Lugbura", "Shakura", "Throgga", "Varaga",
+        "Grimgora", "Gorfanga", "Morgluma", "Gorbada", "Azhaga", "Wurrzaga", "Skullmuncha", "Grimskulda",
+        "Drakka", "Gorotha", "Kragnatha", "Mograka", "Thokka", "Vragga"
+      ]
+    }
+  },
+  "displayCount": 12,
+  "allowCustom": true
+}

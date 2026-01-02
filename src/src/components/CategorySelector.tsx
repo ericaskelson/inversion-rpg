@@ -53,6 +53,7 @@ function OptionCard({ option, selected, available, canSelect, onToggle, editMode
           option.isDrawback ? 'drawback' : ''
         } ${!available ? 'unavailable' : ''} ${imageUrl ? 'has-image' : ''}`}
       >
+        {selected && <span className="selected-indicator">✓</span>}
         {imageUrl && (
           <div className="option-image-container">
             <img src={imageUrl} alt={option.name} className="option-image" />
@@ -136,6 +137,15 @@ export function CategorySelector({
   // Check if we have any subcategories
   const hasSubcategories = groupedOptions.size > 1 || !groupedOptions.has(null);
 
+  // Sort subcategory entries alphabetically (null/ungrouped goes first)
+  const sortedGroupEntries = useMemo(() => {
+    return Array.from(groupedOptions.entries()).sort(([a], [b]) => {
+      if (a === null) return -1;
+      if (b === null) return 1;
+      return a.localeCompare(b);
+    });
+  }, [groupedOptions]);
+
   const handleDelete = async (optionId: string) => {
     if (confirm('Are you sure you want to delete this option?')) {
       await deleteOption(optionId, category.id);
@@ -147,7 +157,9 @@ export function CategorySelector({
       {options.map(option => {
         const available = isOptionAvailable(option);
         const selected = isOptionSelected(option.id);
-        const canSelect = available && (selected || selectedCount < category.maxPicks);
+        // For single-select categories (maxPicks === 1), always allow clicking if available
+        // This lets users switch their selection by clicking a different option
+        const canSelect = available && (selected || selectedCount < category.maxPicks || category.maxPicks === 1);
 
         return (
           <OptionCard
@@ -187,9 +199,9 @@ export function CategorySelector({
       </div>
 
       {hasSubcategories ? (
-        // Render with subcategory groupings
+        // Render with subcategory groupings (sorted alphabetically)
         <div className="subcategory-groups">
-          {Array.from(groupedOptions.entries()).map(([subcategory, options]) => (
+          {sortedGroupEntries.map(([subcategory, options]) => (
             <div key={subcategory ?? 'ungrouped'} className="subcategory-group">
               {subcategory && (
                 <h3 className="subcategory-heading">{subcategory}</h3>

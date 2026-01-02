@@ -387,8 +387,32 @@ body {
 
 .option-card.selected {
   border-color: #4ade80;
-  background: #16213e;
-  box-shadow: 0 0 0 1px #4ade80;
+  background: linear-gradient(135deg, #16213e 0%, #1a3a2e 100%);
+  box-shadow: 0 0 0 2px #4ade80, 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+/* Checkmark indicator for selected options */
+.selected-indicator {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  background: #4ade80;
+  color: #0f1729;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.option-card.drawback .selected-indicator {
+  background: #e74c3c;
+  color: white;
 }
 
 .option-card.drawback {
@@ -401,7 +425,8 @@ body {
 
 .option-card.drawback.selected {
   border-color: #e74c3c;
-  box-shadow: 0 0 0 1px #e74c3c;
+  background: linear-gradient(135deg, #16213e 0%, #2e1a1a 100%);
+  box-shadow: 0 0 0 2px #e74c3c, 0 0 20px rgba(231, 76, 60, 0.3);
 }
 
 .option-card.unavailable {
@@ -592,6 +617,326 @@ body {
 
 .nav-button.finish:hover:not(:disabled) {
   background: #15803d;
+}
+
+/* Name Selector */
+.name-selector {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.name-selector-header {
+  text-align: center;
+}
+
+.name-selector-header h2 {
+  margin: 0 0 0.5rem 0;
+  color: #f0c674;
+  font-size: 1.5rem;
+}
+
+.name-selector-subtitle {
+  color: #888;
+  margin: 0;
+}
+
+.current-name-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #16213e 0%, #1a3a2e 100%);
+  border: 2px solid #4ade80;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.2);
+}
+
+.current-name-label {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.current-name-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4ade80;
+}
+
+.name-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.name-chip {
+  position: relative;
+  padding: 0.75rem 1rem;
+  background: #16213e;
+  border: 2px solid #0f3460;
+  border-radius: 8px;
+  color: #eee;
+  font-family: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.name-chip:hover {
+  border-color: #f0c674;
+  transform: translateY(-2px);
+  background: #1a2744;
+}
+
+.name-chip.selected {
+  border-color: #4ade80;
+  background: linear-gradient(135deg, #16213e 0%, #1a3a2e 100%);
+  box-shadow: 0 0 0 2px #4ade80, 0 0 15px rgba(74, 222, 128, 0.3);
+}
+
+.name-check {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  background: #4ade80;
+  color: #0f1729;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.name-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.shuffle-btn,
+.custom-name-btn {
+  padding: 0.75rem 1.5rem;
+  background: #16213e;
+  border: 1px solid #0f3460;
+  border-radius: 6px;
+  color: #eee;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shuffle-btn:hover,
+.custom-name-btn:hover {
+  background: #1a2744;
+  border-color: #f0c674;
+}
+
+.shuffle-icon {
+  font-size: 1.2rem;
+}
+
+.custom-name-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: #0f1729;
+  border-radius: 8px;
+  border: 1px solid #0f3460;
+}
+
+.custom-name-input {
+  padding: 0.75rem 1rem;
+  background: #16213e;
+  border: 2px solid #0f3460;
+  border-radius: 6px;
+  color: #eee;
+  font-family: inherit;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.custom-name-input:focus {
+  outline: none;
+  border-color: #f0c674;
+}
+
+.custom-name-input::placeholder {
+  color: #666;
+}
+
+.custom-name-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.custom-name-confirm,
+.custom-name-cancel {
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.custom-name-confirm {
+  background: #166534;
+  border: 1px solid #22c55e;
+  color: #fff;
+}
+
+.custom-name-confirm:hover:not(:disabled) {
+  background: #15803d;
+}
+
+.custom-name-confirm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.custom-name-cancel {
+  background: #16213e;
+  border: 1px solid #0f3460;
+  color: #eee;
+}
+
+.custom-name-cancel:hover {
+  background: #1a2744;
+  border-color: #f0c674;
+}
+
+.name-hint {
+  text-align: center;
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Name Selector Edit Mode */
+.name-edit-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.add-name-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.add-name-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: #16213e;
+  border: 2px solid #0f3460;
+  border-radius: 6px;
+  color: #eee;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.add-name-input:focus {
+  outline: none;
+  border-color: #f0c674;
+}
+
+.add-name-input::placeholder {
+  color: #666;
+}
+
+.add-name-btn {
+  padding: 0.75rem 1.25rem;
+  background: #166534;
+  border: 1px solid #22c55e;
+  border-radius: 6px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.add-name-btn:hover:not(:disabled) {
+  background: #15803d;
+}
+
+.add-name-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.create-list-hint {
+  color: #f0c674;
+  font-size: 0.85rem;
+  margin: 0;
+  font-style: italic;
+}
+
+.fallback-notice {
+  color: #fca5a5;
+  font-style: italic;
+}
+
+.name-grid.edit-mode {
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.name-chip-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.name-chip-wrapper .name-chip {
+  flex: 1;
+}
+
+.name-grid.edit-mode .name-chip {
+  cursor: default;
+  padding-right: 2rem;
+}
+
+.name-grid.edit-mode .name-chip:hover {
+  transform: none;
+  border-color: #0f3460;
+}
+
+.name-delete-btn {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: #7c2d12;
+  border: none;
+  border-radius: 4px;
+  color: #fca5a5;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.name-delete-btn:hover {
+  background: #991b1b;
+  color: #fff;
 }
 
 /* Character Summary (Sidebar) */

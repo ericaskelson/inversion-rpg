@@ -520,20 +520,150 @@ Ideal UI would:
 
 ---
 
-## Planned Features
+## Roadmap / Next Steps
 
-### Portrait Generation Enhancements
-- [x] **Model selector** in Portrait Manager UI - switch between Nano Banana Pro (quality) and Flash Image (speed/volume)
-- [x] **Rate limit display** - shows remaining/limit from API headers
-- [x] **Batch API mode** - async generation for bulk images at 50% cost (inline mode)
-- [x] **Large batch streaming** - batches over 100 images use streaming file processing to avoid memory limits
-- [ ] **Batch chunking** - auto-split large requests into multiple batch jobs if inline limits are hit
+### 1. Name Selection System (HIGH PRIORITY)
+Replace the free-text name input with a curated name selection tab:
+- New category/tab specifically for names (distinct UI from normal options)
+- Name lists filtered by sex and race combinations
+- Could show 10-20 suggestions with a "regenerate" button
+- Names should feel culturally appropriate for each race
+- Data structure: `namesConfig.json` with arrays per sex/race combo
+- Consider: should names affect anything mechanically, or purely cosmetic?
 
-### Content Pipeline
-- [x] Image generation for non-appearance options (Option Image Manager - sex, race, culture, etc.)
-- [ ] Scenario edit mode post-character generation
-- [ ] Automated name suggestions by sex/race
-- [ ] Text description of character in sidebar
+### 2. AI Text Generation for Options
+Automate option creation by prompting an LLM:
+- Input: category context, all existing options in that category
+- Output: new option that fits the style but is maximally distinctive
+- Implementation approach:
+  - Add "Generate Option" button in edit mode
+  - Call Gemini API with structured prompt
+  - Pre-fill the option editor modal with generated content
+  - Human reviews/edits before saving
+- Could also generate descriptions for existing options that lack them
+- Reuse this infrastructure for scenario text generation later
+
+### 3. Scenario Framework
+Build the post-character-creation gameplay loop:
+- **Scenario Editor UI** - similar to option editor but for scenario nodes
+- **Scenario Player** - already exists (ScenarioPlayer.tsx) but not integrated
+- **AI-Assisted Authoring**:
+  - Generate scenario text given: character traits, previous node, desired tone
+  - Generate choice options with appropriate trait/attribute gates
+  - Generate outcome variations based on character builds
+- **Image Generation** - reuse portrait/option image pipeline for scenario illustrations
+- **Build Process** - compile scenario folders into optimized bundle
+
+### 4. Public Hosting
+See "Hosting Options" section below for detailed analysis.
+
+---
+
+## Hosting Options
+
+### Option A: Static Hosting (Vercel/Netlify/GitHub Pages)
+**Best for: Read-only public access**
+
+Pros:
+- Free tier available
+- Zero server maintenance
+- Global CDN, fast everywhere
+- Simple deployment (git push)
+
+Cons:
+- No edit mode (editor-server.js won't run)
+- All content must be baked into the build
+- No AI generation features for end users
+
+Implementation:
+1. `npm run build` creates static bundle
+2. Deploy `dist/` folder to Vercel/Netlify
+3. All images and data bundled at build time
+
+**Verdict:** Good for v1 public release. Edit mode stays local-only.
+
+### Option B: Node.js Server (Railway/Render/Fly.io)
+**Best for: Full features including edit mode**
+
+Pros:
+- Full editor-server.js functionality
+- Could enable edit mode for admin users
+- Can add authentication later
+
+Cons:
+- Costs money (~$5-20/month)
+- Need to manage persistent storage for images
+- More complex deployment
+
+Platforms:
+- **Railway** - simple, good DX, $5/month hobby tier
+- **Render** - free tier available (sleeps after inactivity)
+- **Fly.io** - edge deployment, slightly more complex
+
+**Verdict:** Good if you want remote editing or future user features.
+
+### Option C: Hybrid (Static + Serverless Functions)
+**Best for: Selective backend features**
+
+Pros:
+- Static hosting for main app (free)
+- Serverless functions for specific features (pay per use)
+- Can add AI generation as API routes
+
+Cons:
+- More complex architecture
+- Need to split editor-server.js into serverless functions
+- Cold start latency
+
+Platforms:
+- **Vercel** with API routes
+- **Netlify Functions**
+- **Cloudflare Workers**
+
+**Verdict:** Good middle ground if you want some dynamic features.
+
+### Recommended Approach
+1. **Phase 1**: Deploy static build to Vercel/Netlify (free, immediate)
+   - Public can play the character creator
+   - Edit mode remains local development only
+   - All content pre-generated and bundled
+
+2. **Phase 2**: If needed, add serverless functions for:
+   - Name generation (call Gemini API)
+   - Analytics/telemetry
+   - Future: user accounts, saved characters
+
+3. **Phase 3**: Full backend only if:
+   - You want remote editing
+   - You want user-generated content
+   - You need persistent user data
+
+---
+
+## Completed Features
+
+### Portrait Generation
+- [x] Model selector (Nano Banana Pro vs Flash Image)
+- [x] Rate limit display from API headers
+- [x] Batch API mode for bulk generation at 50% cost
+- [x] Large batch streaming (100+ images via temp files)
+- [x] Option Image Manager for non-appearance options
+
+### Character Creator Polish
+- [x] Single-select categories allow switching selections
+- [x] Visual emphasis on selected options (checkmark badge, glow)
+- [x] Subcategories sort alphabetically
+- [x] Comma input works in traits field
+- [x] Image preloading for fast tab switching
+
+---
+
+## Pending Improvements
+
+### Editor Enhancements
+- [ ] **Prerequisites editor** - UI for editing `requires` and `incompatibleWith` fields
+- [ ] **Batch chunking** - auto-split large image requests into multiple batch jobs
+- [ ] **Text description** of character in sidebar (prose summary)
 
 ---
 

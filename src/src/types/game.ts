@@ -201,6 +201,19 @@ export interface Choice {
 }
 
 // ============================================
+// NAME SELECTION TYPES
+// ============================================
+
+export interface NamesConfig {
+  names: {
+    male: Record<string, string[]>;   // race -> names
+    female: Record<string, string[]>; // race -> names
+  };
+  displayCount: number;  // How many names to show at once
+  allowCustom: boolean;  // Whether to allow free-text input
+}
+
+// ============================================
 // SCENARIO TYPES
 // ============================================
 

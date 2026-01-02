@@ -16,7 +16,6 @@ export function AppearanceEditorModal() {
     cancelAppearanceEditing,
     saveAppearanceOption,
     isCreatingNewAppearance,
-    currentAppearanceType,
   } = useEditMode();
 
   const [formData, setFormData] = useState<AppearanceOption & { id: string }>({

@@ -17,6 +17,7 @@ import {
 import { CategorySelector } from './CategorySelector';
 import { CharacterSummary } from './CharacterSummary';
 import { AppearanceSelector } from './AppearanceSelector';
+import { NameSelector } from './NameSelector';
 import { OptionEditorModal } from './OptionEditorModal';
 import { AppearanceEditorModal } from './AppearanceEditorModal';
 import OptionImageManager from './OptionImageManager';
@@ -60,7 +61,6 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
 
   // Use data from context (allows live editing)
   const categories = characterData?.categories ?? initialData.categories;
-  const currentCategory = categories[currentCategoryIndex];
 
   // Determine character sex and race from selections
   const characterSex = (state.selections.sex?.[0] === 'female' ? 'female' : 'male') as 'male' | 'female';
@@ -95,7 +95,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
   };
 
   const handleNextCategory = () => {
-    if (currentCategoryIndex < categories.length - 1) {
+    if (currentCategoryIndex < totalTabs - 1) {
       setCurrentCategoryIndex(prev => prev + 1);
     }
   };
@@ -108,12 +108,22 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
     }
   };
 
-  const canGoNext = isCategoryComplete(currentCategory, state);
-  const isLastCategory = currentCategoryIndex === categories.length - 1;
-  const canFinish = isCharacterComplete({ categories }, state);
+  // Total tabs = categories + 1 for Name tab
+  const totalTabs = categories.length + 1;
+  const isNameTab = currentCategoryIndex === categories.length;
+  const isLastTab = currentCategoryIndex === totalTabs - 1;
+
+  // For regular categories
+  const currentCategory = !isNameTab ? categories[currentCategoryIndex] : null;
+  const canGoNext = isNameTab
+    ? state.name.trim().length > 0  // Name tab is complete if name is set
+    : currentCategory
+      ? isCategoryComplete(currentCategory, state)
+      : false;
+  const canFinish = isCharacterComplete({ categories }, state) && state.name.trim().length > 0;
 
   // Check if current category is appearance (uses special selector)
-  const isAppearanceCategory = currentCategory.id === 'appearance';
+  const isAppearanceCategory = currentCategory?.id === 'appearance';
 
   // Helper to get image URLs for a category
   const getCategoryImageUrls = useCallback((categoryIndex: number): string[] => {
@@ -180,19 +190,8 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
     <div className="character-creator">
       <header className="creator-header">
         <h1>Create Your Character</h1>
-        <div className="header-controls">
-          <div className="name-input-container">
-            <label htmlFor="character-name">Name:</label>
-            <input
-              id="character-name"
-              type="text"
-              value={state.name}
-              onChange={e => handleNameChange(e.target.value)}
-              placeholder="Enter character name..."
-              className="name-input"
-            />
-          </div>
-          {editorAvailable && (
+        {editorAvailable && (
+          <div className="header-controls">
             <div className="editor-controls">
               <button
                 className={`edit-mode-toggle ${editMode ? 'active' : ''}`}
@@ -209,8 +208,8 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
                 </button>
               )}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </header>
 
       {showOptionImageManager && editMode ? (
@@ -231,9 +230,26 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
                   {isCategoryComplete(cat, state) && <span className="check">✓</span>}
                 </button>
               ))}
+              {/* Name tab - always last */}
+              <button
+                onClick={() => setCurrentCategoryIndex(categories.length)}
+                className={`category-tab ${isNameTab ? 'active' : ''} ${
+                  state.name.trim().length > 0 ? 'complete' : ''
+                }`}
+              >
+                Name
+                {state.name.trim().length > 0 && <span className="check">✓</span>}
+              </button>
             </nav>
 
-            {isAppearanceCategory ? (
+            {isNameTab ? (
+              <NameSelector
+                currentName={state.name}
+                characterSex={characterSex}
+                characterRace={characterRace}
+                onNameSelect={handleNameChange}
+              />
+            ) : isAppearanceCategory ? (
               <AppearanceSelector
                 config={liveAppearanceConfig}
                 selections={state.appearanceSelections}
@@ -241,7 +257,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
                 characterRace={characterRace}
                 onUpdate={handleAppearanceUpdate}
               />
-            ) : (
+            ) : currentCategory ? (
               <CategorySelector
                 category={currentCategory}
                 state={state}
@@ -249,7 +265,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
                 isOptionAvailable={(opt) => isOptionAvailable(opt, currentCategory, state)}
                 isOptionSelected={(optId) => isOptionSelected(optId, currentCategory.id, state)}
               />
-            )}
+            ) : null}
 
             <div className="creator-navigation">
               <button
@@ -260,7 +276,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
                 ← Previous
               </button>
 
-              {!isLastCategory ? (
+              {!isLastTab ? (
                 <button
                   onClick={handleNextCategory}
                   disabled={!canGoNext && !editMode}

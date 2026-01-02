@@ -55,7 +55,7 @@
           },
           "traits": [
             "elf",
-            "low-light-vision"
+            "darkvision"
           ]
         },
         {
@@ -167,7 +167,8 @@
             "noble-born",
             "literate",
             "entitled"
-          ]
+          ],
+          "image": "culture-culture-noble.png"
         },
         {
           "id": "culture-frontier",
@@ -212,7 +213,8 @@
           },
           "traits": [
             "noble-born"
-          ]
+          ],
+          "image": "culture-culture-royalty.png"
         }
       ]
     },
@@ -227,6 +229,8 @@
           "id": "avocation-soldier",
           "name": "Soldier",
           "description": "You served in an army, learning discipline and the art of war.",
+          "subcategory": "Uncommon",
+          "image": "avocation-avocation-soldier.png",
           "fate": 1,
           "attributes": {
             "strength": 1,
@@ -235,8 +239,7 @@
           "traits": [
             "military-training",
             "disciplined"
-          ],
-          "image": "avocation-avocation-soldier.png"
+          ]
         },
         {
           "id": "avocation-scholar",
@@ -258,7 +261,8 @@
           "id": "avocation-thief",
           "name": "Criminal",
           "description": "You lived outside the law, developing skills best used in the shadows.",
-          "fate": 0,
+          "subcategory": "Run of the Mill",
+          "image": "avocation-avocation-thief.png",
           "attributes": {
             "agility": 1,
             "cunning": 1
@@ -266,14 +270,14 @@
           "traits": [
             "streetwise",
             "light-fingers"
-          ],
-          "image": "avocation-avocation-thief.png"
+          ]
         },
         {
           "id": "avocation-merchant",
           "name": "Merchant",
           "description": "You learned the art of the deal, reading people and situations for profit.",
-          "fate": 0,
+          "subcategory": "Run of the Mill",
+          "image": "avocation-avocation-merchant.png",
           "attributes": {
             "charisma": 2,
             "cunning": 1
@@ -281,13 +285,14 @@
           "traits": [
             "silver-tongued",
             "appraiser"
-          ],
-          "image": "avocation-avocation-merchant.png"
+          ]
         },
         {
           "id": "avocation-priest",
           "name": "Acolyte",
           "description": "You served a temple, learning the rites and dogma of your faith.",
+          "subcategory": "Run of the Mill",
+          "image": "avocation-avocation-priest.png",
           "fate": 1,
           "attributes": {
             "will": 2,
@@ -296,14 +301,14 @@
           "traits": [
             "faithful",
             "literate"
-          ],
-          "image": "avocation-avocation-priest.png"
+          ]
         },
         {
           "id": "avocation-hunter",
           "name": "Hunter",
           "description": "You tracked and killed for your living, learning patience and precision.",
-          "fate": 0,
+          "subcategory": "Run of the Mill",
+          "image": "avocation-avocation-hunter.png",
           "attributes": {
             "agility": 1,
             "cunning": 1,
@@ -312,8 +317,7 @@
           "traits": [
             "tracker",
             "patient"
-          ],
-          "image": "avocation-avocation-hunter.png"
+          ]
         }
       ]
     },
@@ -334,7 +338,8 @@
           },
           "traits": [
             "brave"
-          ]
+          ],
+          "image": "virtueVice-virtue-brave.png"
         },
         {
           "id": "virtue-honest",
@@ -343,7 +348,8 @@
           "fate": 0,
           "traits": [
             "honest"
-          ]
+          ],
+          "image": "virtueVice-virtue-honest.png"
         },
         {
           "id": "virtue-compassionate",
@@ -355,7 +361,8 @@
           },
           "traits": [
             "compassionate"
-          ]
+          ],
+          "image": "virtueVice-virtue-compassionate.png"
         },
         {
           "id": "virtue-cunning",
@@ -367,7 +374,8 @@
           },
           "traits": [
             "quick-witted"
-          ]
+          ],
+          "image": "virtueVice-virtue-cunning.png"
         },
         {
           "id": "vice-wrathful",
@@ -381,7 +389,8 @@
           "traits": [
             "hot-headed"
           ],
-          "isDrawback": true
+          "isDrawback": true,
+          "image": "virtueVice-vice-wrathful.png"
         },
         {
           "id": "vice-greedy",
@@ -405,7 +414,8 @@
           "traits": [
             "cowardly"
           ],
-          "isDrawback": true
+          "isDrawback": true,
+          "image": "virtueVice-vice-coward.png"
         },
         {
           "id": "vice-arrogant",
@@ -418,7 +428,8 @@
           "traits": [
             "arrogant"
           ],
-          "isDrawback": true
+          "isDrawback": true,
+          "image": "virtueVice-vice-arrogant.png"
         },
         {
           "id": "vice-addicted",
@@ -449,7 +460,8 @@
           },
           "traits": [
             "idealist"
-          ]
+          ],
+          "image": "philosophy-philosophy-idealist.png"
         },
         {
           "id": "philosophy-pragmatist",
@@ -490,7 +502,8 @@
           },
           "traits": [
             "hedonist"
-          ]
+          ],
+          "image": "philosophy-philosophy-hedonist.png"
         },
         {
           "id": "philosophy-fatalist",
@@ -499,7 +512,8 @@
           "fate": 0,
           "traits": [
             "fatalist"
-          ]
+          ],
+          "image": "philosophy-philosophy-fatalist.png"
         }
       ]
     },
@@ -522,7 +536,8 @@
           },
           "traits": [
             "combat-instincts"
-          ]
+          ],
+          "image": "edge-edge-warrior.png"
         },
         {
           "id": "edge-spellcaster",
@@ -536,7 +551,8 @@
           "traits": [
             "spellcaster",
             "arcane-sensitivity"
-          ]
+          ],
+          "image": "edge-edge-spellcaster.png"
         },
         {
           "id": "edge-silver-tongue",
@@ -549,7 +565,8 @@
           "traits": [
             "silver-tongued",
             "persuasive"
-          ]
+          ],
+          "image": "edge-edge-silver-tongue.png"
         },
         {
           "id": "edge-shadow",
@@ -577,7 +594,8 @@
           "traits": [
             "hard-to-kill",
             "scarred"
-          ]
+          ],
+          "image": "edge-edge-survivor.png"
         },
         {
           "id": "edge-leader",
@@ -591,7 +609,8 @@
           "traits": [
             "inspiring",
             "commander"
-          ]
+          ],
+          "image": "edge-edge-leader.png"
         }
       ]
     },
@@ -609,7 +628,8 @@
           "fate": 1,
           "traits": [
             "healer"
-          ]
+          ],
+          "image": "skills-skill-medicine.png"
         },
         {
           "id": "skill-lockpicking",
@@ -618,7 +638,8 @@
           "fate": 1,
           "traits": [
             "lockpicker"
-          ]
+          ],
+          "image": "skills-skill-lockpicking.png"
         },
         {
           "id": "skill-lore",
@@ -630,7 +651,8 @@
           },
           "traits": [
             "lorekeeper"
-          ]
+          ],
+          "image": "skills-skill-lore.png"
         },
         {
           "id": "skill-survival",
@@ -639,7 +661,8 @@
           "fate": 1,
           "traits": [
             "wilderness-survival"
-          ]
+          ],
+          "image": "skills-skill-survival.png"
         },
         {
           "id": "skill-intimidation",
@@ -663,7 +686,8 @@
           },
           "traits": [
             "athletic"
-          ]
+          ],
+          "image": "skills-skill-athletics.png"
         }
       ]
     },
@@ -684,7 +708,8 @@
           },
           "traits": [
             "duelist"
-          ]
+          ],
+          "image": "feats-feat-duelist.png"
         },
         {
           "id": "feat-berserker",
@@ -708,7 +733,8 @@
           },
           "traits": [
             "iron-will"
-          ]
+          ],
+          "image": "feats-feat-iron-will.png"
         },
         {
           "id": "feat-eagle-eye",
@@ -717,7 +743,8 @@
           "fate": 2,
           "traits": [
             "sharpshooter"
-          ]
+          ],
+          "image": "feats-feat-eagle-eye.png"
         },
         {
           "id": "feat-linguist",
@@ -726,7 +753,8 @@
           "fate": 1,
           "traits": [
             "polyglot"
-          ]
+          ],
+          "image": "feats-feat-linguist.png"
         }
       ]
     },
@@ -749,7 +777,8 @@
             {
               "trait": "spellcaster"
             }
-          ]
+          ],
+          "image": "spells-spell-fire.png"
         },
         {
           "id": "spell-healing",
@@ -763,7 +792,8 @@
             {
               "trait": "spellcaster"
             }
-          ]
+          ],
+          "image": "spells-spell-healing.png"
         },
         {
           "id": "spell-illusion",
@@ -777,7 +807,8 @@
             {
               "trait": "spellcaster"
             }
-          ]
+          ],
+          "image": "spells-spell-illusion.png"
         },
         {
           "id": "spell-divination",
@@ -791,7 +822,8 @@
             {
               "trait": "spellcaster"
             }
-          ]
+          ],
+          "image": "spells-spell-divination.png"
         },
         {
           "id": "spell-enchantment",
@@ -805,7 +837,8 @@
             {
               "trait": "spellcaster"
             }
-          ]
+          ],
+          "image": "spells-spell-enchantment.png"
         }
       ]
     },
@@ -823,7 +856,8 @@
           "fate": 1,
           "traits": [
             "armed-sword"
-          ]
+          ],
+          "image": "gear-gear-sword.png"
         },
         {
           "id": "gear-bow",
@@ -832,7 +866,8 @@
           "fate": 1,
           "traits": [
             "armed-bow"
-          ]
+          ],
+          "image": "gear-gear-bow.png"
         },
         {
           "id": "gear-armor",
@@ -841,7 +876,8 @@
           "fate": 1,
           "traits": [
             "armored"
-          ]
+          ],
+          "image": "gear-gear-armor.png"
         },
         {
           "id": "gear-tome",
@@ -855,7 +891,8 @@
             {
               "trait": "spellcaster"
             }
-          ]
+          ],
+          "image": "gear-gear-tome.png"
         },
         {
           "id": "gear-tools",
@@ -864,7 +901,8 @@
           "fate": 1,
           "traits": [
             "has-tools"
-          ]
+          ],
+          "image": "gear-gear-tools.png"
         },
         {
           "id": "gear-horse",
@@ -873,7 +911,8 @@
           "fate": 1,
           "traits": [
             "mounted"
-          ]
+          ],
+          "image": "gear-gear-horse.png"
         },
         {
           "id": "gear-cursed",
@@ -887,13 +926,14 @@
             "cursed-item",
             "arcane-sensitivity"
           ],
-          "isDrawback": true
+          "isDrawback": true,
+          "image": "gear-gear-cursed.png"
         }
       ]
     }
   ],
   "optionImageConfig": {
-    "basePrompt": "You are generating option art for a dark fantasy RPG character creator.\nThese are selection cards shown during character creation - the image should be iconic and symbolic of the option, but they should not include any non-diagetic text. No \"Elf\" label on an Elf picture.\nSquare 1:1 format, suitable for a card/button. Fill the image completely: no frame or whitespace.",
+    "basePrompt": "You are generating option art for a dark fantasy RPG character creator.\nThese are selection cards shown during character creation - the image should be iconic, symbolic of the option, and somewhat abstract, but they should not include any non-diagetic text. No \"Elf\" label on an Elf picture.\nSquare 1:1 format, suitable for a card/button. Fill the image completely: no frame or whitespace.",
     "styleModifiers": "Dark fantasy art style, painterly, dramatic lighting, striking color palette",
     "aspectRatio": "1:1",
     "imageSize": "1K",

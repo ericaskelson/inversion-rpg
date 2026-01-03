@@ -414,12 +414,7 @@ async function processGenerationQueue() {
 // POST /api/portraits/generate - Queue portrait generation
 app.post('/api/portraits/generate', async (req, res) => {
   try {
-    const { builds, skinTones, hairColors, sexes, races, count = 1 } = req.body;
-
-    if (!builds?.length || !skinTones?.length || !hairColors?.length ||
-        !sexes?.length || !races?.length) {
-      return res.status(400).json({ error: 'Must select at least one option from each category' });
-    }
+    const { builds, skinTones, hairColors, sexes, races, count = 1, combinations: specificCombos } = req.body;
 
     // Clamp count to reasonable limits
     const perCombo = Math.max(1, Math.min(10, count));
@@ -428,21 +423,49 @@ app.post('/api/portraits/generate', async (req, res) => {
     const combinations = [];
     const timestamp = Date.now();
     let counter = 0;
-    for (const build of builds) {
-      for (const skinTone of skinTones) {
-        for (const hairColor of hairColors) {
-          for (const sex of sexes) {
-            for (const race of races) {
-              // Generate 'count' portraits for each combination
-              for (let i = 0; i < perCombo; i++) {
-                // Use timestamp + counter for unique IDs, allowing multiple portraits per characteristic set
-                const id = `${sex}-${race}-${build}-${skinTone}-${hairColor}-${timestamp}-${counter++}`;
-                combinations.push({ id, build, skinTone, hairColor, sex, race });
+
+    if (specificCombos?.length) {
+      // Use specific combinations provided (for "missing only" mode)
+      for (const combo of specificCombos) {
+        for (let i = 0; i < perCombo; i++) {
+          const id = `${combo.sex}-${combo.race}-${combo.build}-${combo.skinTone}-${combo.hairColor}-${timestamp}-${counter++}`;
+          combinations.push({
+            id,
+            build: combo.build,
+            skinTone: combo.skinTone,
+            hairColor: combo.hairColor,
+            sex: combo.sex,
+            race: combo.race
+          });
+        }
+      }
+    } else {
+      // Generate cartesian product of all selections
+      if (!builds?.length || !skinTones?.length || !hairColors?.length ||
+          !sexes?.length || !races?.length) {
+        return res.status(400).json({ error: 'Must select at least one option from each category' });
+      }
+
+      for (const build of builds) {
+        for (const skinTone of skinTones) {
+          for (const hairColor of hairColors) {
+            for (const sex of sexes) {
+              for (const race of races) {
+                // Generate 'count' portraits for each combination
+                for (let i = 0; i < perCombo; i++) {
+                  // Use timestamp + counter for unique IDs, allowing multiple portraits per characteristic set
+                  const id = `${sex}-${race}-${build}-${skinTone}-${hairColor}-${timestamp}-${counter++}`;
+                  combinations.push({ id, build, skinTone, hairColor, sex, race });
+                }
               }
             }
           }
         }
       }
+    }
+
+    if (combinations.length === 0) {
+      return res.status(400).json({ error: 'No combinations to generate' });
     }
 
     // Add to queue (skip duplicates)
@@ -1057,12 +1080,7 @@ async function fetchBatchJobWithCache(jobId) {
 // POST /api/portraits/batch - Create a new batch job
 app.post('/api/portraits/batch', async (req, res) => {
   try {
-    const { builds, skinTones, hairColors, sexes, races, count = 1 } = req.body;
-
-    if (!builds?.length || !skinTones?.length || !hairColors?.length ||
-        !sexes?.length || !races?.length) {
-      return res.status(400).json({ error: 'Must select at least one option from each category' });
-    }
+    const { builds, skinTones, hairColors, sexes, races, count = 1, combinations: specificCombos } = req.body;
 
     const appearanceConfig = await readJsonFile('appearanceConfig.json');
     const config = appearanceConfig.portraitConfig || {};
@@ -1073,36 +1091,77 @@ app.post('/api/portraits/batch', async (req, res) => {
     const timestamp = Date.now();
     let counter = 0;
 
-    for (const build of builds) {
-      for (const skinTone of skinTones) {
-        for (const hairColor of hairColors) {
-          for (const sex of sexes) {
-            for (const race of races) {
-              for (let i = 0; i < perCombo; i++) {
-                const id = `${sex}-${race}-${build}-${skinTone}-${hairColor}-${timestamp}-${counter++}`;
-                const prompt = buildPrompt(config, { sex, race, build, skinTone, hairColor });
+    if (specificCombos?.length) {
+      // Use specific combinations provided (for "missing only" mode)
+      for (const combo of specificCombos) {
+        for (let i = 0; i < perCombo; i++) {
+          const id = `${combo.sex}-${combo.race}-${combo.build}-${combo.skinTone}-${combo.hairColor}-${timestamp}-${counter++}`;
+          const prompt = buildPrompt(config, combo);
 
-                requests.push({
-                  metadata: {
-                    key: id,
-                    sex, race, build, skinTone, hairColor
-                  },
-                  request: {
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: {
-                      responseModalities: ['TEXT', 'IMAGE'],
-                      imageConfig: {
-                        aspectRatio: config.aspectRatio || '3:4',
-                        imageSize: config.imageSize || '1K'
+          requests.push({
+            metadata: {
+              key: id,
+              sex: combo.sex,
+              race: combo.race,
+              build: combo.build,
+              skinTone: combo.skinTone,
+              hairColor: combo.hairColor
+            },
+            request: {
+              contents: [{ parts: [{ text: prompt }] }],
+              generationConfig: {
+                responseModalities: ['TEXT', 'IMAGE'],
+                imageConfig: {
+                  aspectRatio: config.aspectRatio || '3:4',
+                  imageSize: config.imageSize || '1K'
+                }
+              }
+            }
+          });
+        }
+      }
+    } else {
+      // Generate cartesian product of all selections
+      if (!builds?.length || !skinTones?.length || !hairColors?.length ||
+          !sexes?.length || !races?.length) {
+        return res.status(400).json({ error: 'Must select at least one option from each category' });
+      }
+
+      for (const build of builds) {
+        for (const skinTone of skinTones) {
+          for (const hairColor of hairColors) {
+            for (const sex of sexes) {
+              for (const race of races) {
+                for (let i = 0; i < perCombo; i++) {
+                  const id = `${sex}-${race}-${build}-${skinTone}-${hairColor}-${timestamp}-${counter++}`;
+                  const prompt = buildPrompt(config, { sex, race, build, skinTone, hairColor });
+
+                  requests.push({
+                    metadata: {
+                      key: id,
+                      sex, race, build, skinTone, hairColor
+                    },
+                    request: {
+                      contents: [{ parts: [{ text: prompt }] }],
+                      generationConfig: {
+                        responseModalities: ['TEXT', 'IMAGE'],
+                        imageConfig: {
+                          aspectRatio: config.aspectRatio || '3:4',
+                          imageSize: config.imageSize || '1K'
+                        }
                       }
                     }
-                  }
-                });
+                  });
+                }
               }
             }
           }
         }
       }
+    }
+
+    if (requests.length === 0) {
+      return res.status(400).json({ error: 'No combinations to generate' });
     }
 
     console.log(`Creating batch job with ${requests.length} requests...`);

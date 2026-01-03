@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from 'react';
-import type { CharacterCreationData, CharacterOption, AppearanceConfig, AppearanceOption, NamesConfig } from '../types/game';
+import type { CharacterCreationData, CharacterOption, AppearanceConfig, AppearanceOption, NamesConfig, CategoryConfig, CategoryId } from '../types/game';
 import { isEditorAvailable, saveCharacterCreation, saveAppearanceConfig, fetchAppearanceConfig, fetchCharacterCreation, fetchNamesConfig, addNameToList, deleteNameFromList } from '../api/editorApi';
 import { namesConfig as staticNamesConfig } from '../data/namesConfig';
 
@@ -45,6 +45,16 @@ interface EditModeContextType {
   namesData: NamesConfig | null;
   addName: (sex: 'male' | 'female', race: string, name: string) => Promise<void>;
   deleteName: (sex: 'male' | 'female', race: string, name: string) => Promise<void>;
+  // Category editing
+  editingCategory: CategoryConfig | null;
+  isCreatingNewCategory: boolean;
+  startEditingCategory: (category: CategoryConfig) => void;
+  startCreatingCategory: () => void;
+  cancelCategoryEditing: () => void;
+  saveCategory: (category: CategoryConfig, originalId?: CategoryId) => Promise<void>;
+  deleteCategory: (categoryId: CategoryId) => Promise<void>;
+  moveCategoryUp: (categoryId: CategoryId) => Promise<void>;
+  moveCategoryDown: (categoryId: CategoryId) => Promise<void>;
 }
 
 const EditModeContext = createContext<EditModeContextType | null>(null);
@@ -78,6 +88,10 @@ export function EditModeProvider({ children, initialData, initialAppearanceData 
 
   // Names state
   const [namesData, setNamesData] = useState<NamesConfig>(staticNamesConfig);
+
+  // Category editing state
+  const [editingCategory, setEditingCategory] = useState<CategoryConfig | null>(null);
+  const [isCreatingNewCategory, setIsCreatingNewCategory] = useState(false);
 
   // Check if editor server is available on mount and load names
   useEffect(() => {
@@ -279,6 +293,86 @@ export function EditModeProvider({ children, initialData, initialAppearanceData 
     }
   }, []);
 
+  // Category editing functions
+  const startEditingCategory = useCallback((category: CategoryConfig) => {
+    setEditingCategory(category);
+    setIsCreatingNewCategory(false);
+  }, []);
+
+  const startCreatingCategory = useCallback(() => {
+    const newCategory: CategoryConfig = {
+      id: `category-${Date.now()}` as CategoryId,
+      name: 'New Category',
+      description: '',
+      minPicks: 0,
+      maxPicks: 1,
+      options: [],
+    };
+    setEditingCategory(newCategory);
+    setIsCreatingNewCategory(true);
+  }, []);
+
+  const cancelCategoryEditing = useCallback(() => {
+    setEditingCategory(null);
+    setIsCreatingNewCategory(false);
+  }, []);
+
+  const saveCategory = useCallback(async (category: CategoryConfig, originalId?: CategoryId) => {
+    const updatedData = { ...characterData };
+    const idToFind = originalId || category.id;
+    const categoryIndex = updatedData.categories.findIndex(c => c.id === idToFind);
+
+    if (isCreatingNewCategory) {
+      // Add new category at the end
+      updatedData.categories = [...updatedData.categories, category];
+    } else if (categoryIndex === -1) {
+      throw new Error(`Category ${idToFind} not found`);
+    } else {
+      // Update existing category
+      updatedData.categories = [...updatedData.categories];
+      updatedData.categories[categoryIndex] = category;
+    }
+
+    await saveCharacterCreation(updatedData);
+    setCharacterData(updatedData);
+    setEditingCategory(null);
+    setIsCreatingNewCategory(false);
+  }, [characterData, isCreatingNewCategory]);
+
+  const deleteCategory = useCallback(async (categoryId: CategoryId) => {
+    const updatedData = { ...characterData };
+    updatedData.categories = updatedData.categories.filter(c => c.id !== categoryId);
+
+    await saveCharacterCreation(updatedData);
+    setCharacterData(updatedData);
+  }, [characterData]);
+
+  const moveCategoryUp = useCallback(async (categoryId: CategoryId) => {
+    const updatedData = { ...characterData };
+    const categories = [...updatedData.categories];
+    const index = categories.findIndex(c => c.id === categoryId);
+
+    if (index > 0) {
+      [categories[index - 1], categories[index]] = [categories[index], categories[index - 1]];
+      updatedData.categories = categories;
+      await saveCharacterCreation(updatedData);
+      setCharacterData(updatedData);
+    }
+  }, [characterData]);
+
+  const moveCategoryDown = useCallback(async (categoryId: CategoryId) => {
+    const updatedData = { ...characterData };
+    const categories = [...updatedData.categories];
+    const index = categories.findIndex(c => c.id === categoryId);
+
+    if (index < categories.length - 1) {
+      [categories[index], categories[index + 1]] = [categories[index + 1], categories[index]];
+      updatedData.categories = categories;
+      await saveCharacterCreation(updatedData);
+      setCharacterData(updatedData);
+    }
+  }, [characterData]);
+
   const value: EditModeContextType = {
     editMode,
     editorAvailable,
@@ -311,6 +405,16 @@ export function EditModeProvider({ children, initialData, initialAppearanceData 
     namesData,
     addName,
     deleteName,
+    // Category editing
+    editingCategory,
+    isCreatingNewCategory,
+    startEditingCategory,
+    startCreatingCategory,
+    cancelCategoryEditing,
+    saveCategory,
+    deleteCategory,
+    moveCategoryUp,
+    moveCategoryDown,
   };
 
   return (

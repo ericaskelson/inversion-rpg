@@ -333,6 +333,72 @@ body {
   margin-left: 0.25rem;
 }
 
+/* Category tab wrapper for edit mode */
+.category-tab-wrapper {
+  display: contents;
+}
+
+.category-tab-wrapper.edit-mode {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.category-tab-wrapper.edit-mode .category-tab {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.category-edit-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cat-edit-btn,
+.cat-move-btn {
+  background: #1a2744;
+  border: 1px solid #0f3460;
+  border-left: none;
+  color: #888;
+  font-size: 0.65rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.cat-edit-btn {
+  border-top-right-radius: 4px;
+  flex: 1;
+}
+
+.cat-move-btn:last-child {
+  border-bottom-right-radius: 4px;
+}
+
+.cat-edit-btn:hover,
+.cat-move-btn:hover {
+  color: #f0c674;
+  background: #243656;
+}
+
+.cat-move-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.add-category-btn {
+  color: #4ade80 !important;
+  border-style: dashed !important;
+  border-color: #4ade80 !important;
+  background: transparent !important;
+}
+
+.add-category-btn:hover {
+  background: rgba(74, 222, 128, 0.1) !important;
+}
+
 /* Category Selector */
 .category-selector {
   flex: 1;
@@ -2103,6 +2169,69 @@ body {
   border-color: #f0c674;
 }
 
+/* Prompt presets */
+.prompt-field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.prompt-field-header label {
+  margin-bottom: 0;
+}
+
+.prompt-presets .preset-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.prompt-presets .preset-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.preset-load {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.preset-delete {
+  padding: 0.15rem 0.4rem !important;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.btn-tiny {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.save-preset-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.preset-name-input {
+  width: 120px;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.85rem;
+  background: #0f1729;
+  border: 1px solid #1a2a4a;
+  border-radius: 4px;
+  color: #eee;
+}
+
+.preset-name-input:focus {
+  outline: none;
+  border-color: #f0c674;
+}
+
 .prompt-preview {
   background: #0f1729;
   border-radius: 4px;
@@ -2312,6 +2441,42 @@ body {
 .generation-summary .combination-count {
   color: #81a1c1;
   font-size: 0.95rem;
+}
+
+.generation-summary .missing-only-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  background: rgba(129, 161, 193, 0.15);
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #81a1c1;
+  user-select: none;
+}
+
+.generation-summary .missing-only-toggle:hover {
+  background: rgba(129, 161, 193, 0.25);
+}
+
+.generation-summary .missing-only-toggle input {
+  margin: 0;
+  cursor: pointer;
+}
+
+.generation-summary .missing-in-selection {
+  color: #ebcb8b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  background: rgba(235, 203, 139, 0.15);
+  border-radius: 4px;
+}
+
+.generation-summary .missing-in-selection.all-covered {
+  color: #a3be8c;
+  background: rgba(163, 190, 140, 0.15);
 }
 
 .generation-summary .generate-btn {
@@ -3663,4 +3828,157 @@ body {
   .review-portrait {
     margin-bottom: 0;
   }
+}
+
+/* Category Editor Modal */
+.category-editor-modal {
+  padding: 1.5rem;
+}
+
+.category-editor-modal h2 {
+  margin: 0 0 1rem 0;
+  color: #f0c674;
+  font-size: 1.25rem;
+}
+
+.category-editor-modal .editor-error {
+  background: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  color: #e74c3c;
+}
+
+.category-editor-modal .editor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.category-editor-modal .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.category-editor-modal .form-group label {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.category-editor-modal .label-hint {
+  font-size: 0.75rem;
+  color: #666;
+  margin-left: 0.5rem;
+}
+
+.category-editor-modal input,
+.category-editor-modal textarea {
+  background: #0f1729;
+  border: 1px solid #0f3460;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: #eee;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.category-editor-modal input:focus,
+.category-editor-modal textarea:focus {
+  outline: none;
+  border-color: #f0c674;
+}
+
+.category-editor-modal input[type="number"] {
+  width: 80px;
+}
+
+.category-editor-modal .form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.category-editor-modal .field-hint {
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.category-editor-modal .picks-preview {
+  background: rgba(240, 198, 116, 0.1);
+  border: 1px solid rgba(240, 198, 116, 0.3);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.category-editor-modal .preview-text {
+  font-size: 0.85rem;
+  color: #f0c674;
+}
+
+.category-editor-modal .category-stats {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.category-editor-modal .modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #0f3460;
+}
+
+.category-editor-modal .modal-actions .spacer {
+  flex: 1;
+}
+
+.category-editor-modal .btn-primary,
+.category-editor-modal .btn-secondary,
+.category-editor-modal .btn-delete {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-editor-modal .btn-primary {
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  border: 1px solid #22c55e;
+  color: #fff;
+}
+
+.category-editor-modal .btn-primary:hover {
+  background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+}
+
+.category-editor-modal .btn-secondary {
+  background: #16213e;
+  border: 1px solid #0f3460;
+  color: #888;
+}
+
+.category-editor-modal .btn-secondary:hover {
+  background: #1a2744;
+  color: #aaa;
+}
+
+.category-editor-modal .btn-delete {
+  background: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+}
+
+.category-editor-modal .btn-delete:hover {
+  background: rgba(231, 76, 60, 0.3);
+}
+
+.category-editor-modal button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

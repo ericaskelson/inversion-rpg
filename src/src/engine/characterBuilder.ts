@@ -288,6 +288,34 @@ export function isOptionAvailable(
 }
 
 /**
+ * Check if ALL options in a category are unavailable (locked)
+ * Used to hide categories like Spells for non-spellcasters
+ */
+export function isCategoryFullyLocked(
+  category: CategoryConfig,
+  state: CharacterBuilderState
+): boolean {
+  // Special categories that use custom selectors are never fully locked
+  if (category.id === 'appearance') {
+    return false;
+  }
+
+  // If category has no options, consider it locked
+  if (category.options.length === 0) {
+    return true;
+  }
+
+  // Check if at least one option is available
+  for (const option of category.options) {
+    if (isOptionAvailable(option, category, state)) {
+      return false; // Found an available option, not fully locked
+    }
+  }
+
+  return true; // All options are locked
+}
+
+/**
  * Check if an option is currently selected
  */
 export function isOptionSelected(
@@ -362,12 +390,17 @@ export function isCategoryComplete(
 
 /**
  * Check if all categories are complete
+ * Categories that are fully locked (all options unavailable) are skipped
  */
 export function isCharacterComplete(
   data: CharacterCreationData,
   state: CharacterBuilderState
 ): boolean {
   for (const category of data.categories) {
+    // Skip fully-locked categories (e.g., Spells for non-spellcasters)
+    if (isCategoryFullyLocked(category, state)) {
+      continue;
+    }
     if (!isCategoryComplete(category, state)) {
       return false;
     }

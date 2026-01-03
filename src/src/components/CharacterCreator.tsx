@@ -9,6 +9,7 @@ import {
   isOptionAvailable,
   isOptionSelected,
   isCategoryComplete,
+  isCategoryFullyLocked,
   isCharacterComplete,
   buildCharacter,
   describeFate,
@@ -22,6 +23,7 @@ import { NameSelector } from './NameSelector';
 import { CharacterReview } from './CharacterReview';
 import { OptionEditorModal } from './OptionEditorModal';
 import { AppearanceEditorModal } from './AppearanceEditorModal';
+import { CategoryEditorModal } from './CategoryEditorModal';
 import OptionImageManager from './OptionImageManager';
 import { EditModeProvider, useEditMode } from '../contexts/EditModeContext';
 
@@ -52,7 +54,17 @@ interface CharacterCreatorProps {
 }
 
 function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
-  const { editMode, editorAvailable, toggleEditMode, characterData, appearanceData } = useEditMode();
+  const {
+    editMode,
+    editorAvailable,
+    toggleEditMode,
+    characterData,
+    appearanceData,
+    startEditingCategory,
+    startCreatingCategory,
+    moveCategoryUp,
+    moveCategoryDown,
+  } = useEditMode();
   const [state, setState] = useState<CharacterBuilderState>(createInitialBuilderState);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [showOptionImageManager, setShowOptionImageManager] = useState(false);
@@ -63,17 +75,23 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
   const allImagesPreloaded = useRef(false);
 
   // Use data from context (allows live editing)
-  const categories = characterData?.categories ?? initialData.categories;
+  const allCategories = characterData?.categories ?? initialData.categories;
+
+  // Filter out fully-locked categories (unless in edit mode)
+  // This hides categories like Spells when all options require traits the character doesn't have
+  const categories = editMode
+    ? allCategories
+    : allCategories.filter(cat => !isCategoryFullyLocked(cat, state));
 
   // Determine character sex and race from selections
   const characterSex = (state.selections.sex?.[0] === 'female' ? 'female' : 'male') as 'male' | 'female';
   const characterRace = state.selections.race?.[0] ?? 'human';
 
   const handleToggleOption = useCallback((optionId: string, category: CategoryConfig) => {
-    // Use the live data from context
-    const data = { categories };
+    // Use the live data from context (all categories for calculation)
+    const data = { categories: allCategories };
     setState(prev => toggleOption(optionId, category, prev, data));
-  }, [categories]);
+  }, [allCategories]);
 
   const handleNameChange = useCallback((name: string) => {
     setState(prev => ({ ...prev, name }));
@@ -104,7 +122,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
   };
 
   const handleFinish = () => {
-    const data = { categories };
+    const data = { categories: allCategories };
     if (isCharacterComplete(data, state)) {
       setShowReview(true);
     }
@@ -131,14 +149,14 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
     : currentCategory
       ? isCategoryComplete(currentCategory, state)
       : false;
-  const canFinish = isCharacterComplete({ categories }, state) && state.name.trim().length > 0;
+  const canFinish = isCharacterComplete({ categories: allCategories }, state) && state.name.trim().length > 0;
 
   // Check if current category is appearance (uses special selector)
   const isAppearanceCategory = currentCategory?.id === 'appearance';
 
-  // Helper to get image URLs for a category
+  // Helper to get image URLs for a category (uses allCategories for preloading)
   const getCategoryImageUrls = useCallback((categoryIndex: number): string[] => {
-    const cat = categories[categoryIndex];
+    const cat = allCategories[categoryIndex];
     if (!cat) return [];
 
     // For appearance category, preload portrait images
@@ -152,7 +170,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
     return cat.options
       .filter(opt => opt.image)
       .map(opt => getImageUrl(`options/${opt.image}`));
-  }, [categories, liveAppearanceConfig]);
+  }, [allCategories, liveAppearanceConfig]);
 
   // Preload adjacent categories when current category changes
   useEffect(() => {
@@ -160,7 +178,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
       currentCategoryIndex - 1,
       currentCategoryIndex,
       currentCategoryIndex + 1,
-    ].filter(i => i >= 0 && i < categories.length);
+    ].filter(i => i >= 0 && i < allCategories.length);
 
     for (const index of indicesToPreload) {
       if (!preloadedCategories.current.has(index)) {
@@ -171,7 +189,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
         }
       }
     }
-  }, [currentCategoryIndex, categories.length, getCategoryImageUrls]);
+  }, [currentCategoryIndex, allCategories.length, getCategoryImageUrls]);
 
   // Preload all remaining images in the background after initial render
   useEffect(() => {
@@ -183,7 +201,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
       const allUrls: string[] = [];
 
       // Collect all option images
-      for (let i = 0; i < categories.length; i++) {
+      for (let i = 0; i < allCategories.length; i++) {
         if (!preloadedCategories.current.has(i)) {
           allUrls.push(...getCategoryImageUrls(i));
         }
@@ -195,7 +213,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [categories, getCategoryImageUrls]);
+  }, [allCategories, getCategoryImageUrls]);
 
   // Show review page if in review mode
   if (showReview) {
@@ -203,7 +221,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
       <div className="character-creator">
         <CharacterReview
           state={state}
-          categories={categories}
+          categories={allCategories}
           portrait={selectedPortrait}
           onConfirm={handleConfirmAdventure}
           onBack={handleBackFromReview}
@@ -239,23 +257,61 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
       </header>
 
       {showOptionImageManager && editMode ? (
-        <OptionImageManager categories={categories} />
+        <OptionImageManager categories={allCategories} />
       ) : (
         <div className="creator-layout">
           <div className="creator-main">
             <nav className="category-nav">
               {categories.map((cat, index) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setCurrentCategoryIndex(index)}
-                  className={`category-tab ${index === currentCategoryIndex ? 'active' : ''} ${
-                    isCategoryComplete(cat, state) ? 'complete' : ''
-                  }`}
-                >
-                  {cat.name}
-                  {isCategoryComplete(cat, state) && <span className="check">✓</span>}
-                </button>
+                <div key={cat.id} className={`category-tab-wrapper ${editMode ? 'edit-mode' : ''}`}>
+                  <button
+                    onClick={() => setCurrentCategoryIndex(index)}
+                    className={`category-tab ${index === currentCategoryIndex ? 'active' : ''} ${
+                      isCategoryComplete(cat, state) ? 'complete' : ''
+                    }`}
+                  >
+                    {cat.name}
+                    {isCategoryComplete(cat, state) && <span className="check">✓</span>}
+                  </button>
+                  {editMode && (
+                    <div className="category-edit-controls">
+                      <button
+                        className="cat-edit-btn"
+                        onClick={(e) => { e.stopPropagation(); startEditingCategory(cat); }}
+                        title="Edit category"
+                      >
+                        ✎
+                      </button>
+                      <button
+                        className="cat-move-btn"
+                        onClick={(e) => { e.stopPropagation(); moveCategoryUp(cat.id); }}
+                        disabled={index === 0}
+                        title="Move up"
+                      >
+                        ↑
+                      </button>
+                      <button
+                        className="cat-move-btn"
+                        onClick={(e) => { e.stopPropagation(); moveCategoryDown(cat.id); }}
+                        disabled={index === categories.length - 1}
+                        title="Move down"
+                      >
+                        ↓
+                      </button>
+                    </div>
+                  )}
+                </div>
               ))}
+              {/* Add Category button (edit mode only) */}
+              {editMode && (
+                <button
+                  className="category-tab add-category-btn"
+                  onClick={startCreatingCategory}
+                  title="Add new category"
+                >
+                  + Add
+                </button>
+              )}
               {/* Name tab - always last */}
               <button
                 onClick={() => setCurrentCategoryIndex(categories.length)}
@@ -338,6 +394,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
 
       <OptionEditorModal />
       <AppearanceEditorModal />
+      <CategoryEditorModal />
     </div>
   );
 }

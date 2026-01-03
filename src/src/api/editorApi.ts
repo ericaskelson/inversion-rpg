@@ -76,6 +76,14 @@ export async function saveAppearanceConfig(data: unknown): Promise<void> {
 // PORTRAIT GENERATION API
 // ============================================
 
+export interface PortraitCombination {
+  build: string;
+  skinTone: string;
+  hairColor: string;
+  sex: 'male' | 'female';
+  race: string;
+}
+
 export interface PortraitGenerationRequest {
   builds: string[];
   skinTones: string[];
@@ -83,6 +91,8 @@ export interface PortraitGenerationRequest {
   sexes: ('male' | 'female')[];
   races: string[];
   count?: number;  // Number of portraits per combination (default 1)
+  // If provided, only these specific combinations are generated (ignores the arrays above)
+  combinations?: PortraitCombination[];
 }
 
 export interface PendingPortrait {

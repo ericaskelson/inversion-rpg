@@ -19,6 +19,7 @@ import {
   type GenerationStatus,
   type RateLimitInfo,
   type BatchJob,
+  type PortraitCombination,
 } from '../api/editorApi';
 
 interface PortraitManagerProps {
@@ -89,6 +90,7 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
   const [selectedSexes, setSelectedSexes] = useState<Set<string>>(new Set());
   const [selectedRaces, setSelectedRaces] = useState<Set<string>>(new Set());
   const [countPerCombination, setCountPerCombination] = useState(1);
+  const [generateMissingOnly, setGenerateMissingOnly] = useState(true);
 
   // Generation state
   const [pendingPortraits, setPendingPortraits] = useState<PendingPortrait[]>([]);
@@ -105,6 +107,10 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
   const [styleModifiers, setStyleModifiers] = useState('');
   const [selectedModel, setSelectedModel] = useState('nano-banana-pro');
   const [promptSaving, setPromptSaving] = useState(false);
+
+  // Preset management
+  const [showSavePreset, setShowSavePreset] = useState(false);
+  const [newPresetName, setNewPresetName] = useState('');
 
   // Rate limit tracking
   const [rateLimits, setRateLimits] = useState<RateLimitInfo | null>(null);
@@ -141,6 +147,72 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
       setEditingPrompt(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to save prompt');
+    } finally {
+      setPromptSaving(false);
+    }
+  };
+
+  // Get presets from config
+  const presets = useMemo(() =>
+    appearanceData?.portraitConfig?.presets || [],
+    [appearanceData?.portraitConfig?.presets]
+  );
+
+  // Load a preset
+  const handleLoadPreset = (presetId: string) => {
+    const preset = presets.find(p => p.id === presetId);
+    if (preset) {
+      setBasePrompt(preset.basePrompt);
+    }
+  };
+
+  // Save current prompt as a new preset
+  const handleSaveAsPreset = async () => {
+    if (!appearanceData || !newPresetName.trim()) return;
+    setPromptSaving(true);
+    try {
+      const newPreset = {
+        id: `preset-${Date.now()}`,
+        name: newPresetName.trim(),
+        basePrompt,
+      };
+      const updatedConfig = {
+        ...appearanceData,
+        portraitConfig: {
+          ...appearanceData.portraitConfig,
+          basePrompt,
+          styleModifiers,
+          model: selectedModel,
+          presets: [...presets, newPreset],
+        },
+      };
+      await saveAppearanceConfig(updatedConfig);
+      onRefreshConfig();
+      setShowSavePreset(false);
+      setNewPresetName('');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to save preset');
+    } finally {
+      setPromptSaving(false);
+    }
+  };
+
+  // Delete a preset
+  const handleDeletePreset = async (presetId: string) => {
+    if (!appearanceData) return;
+    setPromptSaving(true);
+    try {
+      const updatedConfig = {
+        ...appearanceData,
+        portraitConfig: {
+          ...appearanceData.portraitConfig,
+          presets: presets.filter(p => p.id !== presetId),
+        },
+      };
+      await saveAppearanceConfig(updatedConfig);
+      onRefreshConfig();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete preset');
     } finally {
       setPromptSaving(false);
     }
@@ -259,6 +331,39 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
 
   const totalToGenerate = baseCombinations * countPerCombination;
 
+  // Calculate missing combinations in current selection (both count and list)
+  const { missingCount: missingInSelection, missingCombinations } = useMemo(() => {
+    if (baseCombinations === 0) return { missingCount: 0, missingCombinations: [] as PortraitCombination[] };
+
+    const missing: PortraitCombination[] = [];
+    for (const build of selectedBuilds) {
+      for (const skinTone of selectedSkinTones) {
+        for (const hairColor of selectedHairColors) {
+          for (const sex of selectedSexes) {
+            for (const race of selectedRaces) {
+              const key = `${sex}-${race}-${build}-${skinTone}-${hairColor}`;
+              if (!existingPortraitCombos.has(key)) {
+                missing.push({
+                  build,
+                  skinTone,
+                  hairColor,
+                  sex: sex as 'male' | 'female',
+                  race,
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+    return { missingCount: missing.length, missingCombinations: missing };
+  }, [selectedBuilds, selectedSkinTones, selectedHairColors, selectedSexes, selectedRaces, existingPortraitCombos, baseCombinations]);
+
+  // Calculate effective generation count based on "missing only" toggle
+  const effectiveToGenerate = generateMissingOnly
+    ? missingInSelection * countPerCombination
+    : totalToGenerate;
+
   // Toggle helpers
   const toggleBuild = useCallback((id: string) => {
     setSelectedBuilds(prev => {
@@ -341,14 +446,26 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
     setError(null);
     setIsLoading(true);
     try {
-      const result = await generatePortraits({
-        builds: Array.from(selectedBuilds),
-        skinTones: Array.from(selectedSkinTones),
-        hairColors: Array.from(selectedHairColors),
-        sexes: Array.from(selectedSexes) as ('male' | 'female')[],
-        races: Array.from(selectedRaces),
-        count: countPerCombination,
-      });
+      const request = generateMissingOnly && missingCombinations.length > 0
+        ? {
+            // Use specific combinations for missing-only mode
+            builds: [],
+            skinTones: [],
+            hairColors: [],
+            sexes: [] as ('male' | 'female')[],
+            races: [],
+            count: countPerCombination,
+            combinations: missingCombinations,
+          }
+        : {
+            builds: Array.from(selectedBuilds),
+            skinTones: Array.from(selectedSkinTones),
+            hairColors: Array.from(selectedHairColors),
+            sexes: Array.from(selectedSexes) as ('male' | 'female')[],
+            races: Array.from(selectedRaces),
+            count: countPerCombination,
+          };
+      const result = await generatePortraits(request);
       console.log('Generation queued:', result);
       refreshStatus();
     } catch (err) {
@@ -406,14 +523,25 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
     setError(null);
     setIsCreatingBatch(true);
     try {
-      const result = await createBatchJob({
-        builds: Array.from(selectedBuilds),
-        skinTones: Array.from(selectedSkinTones),
-        hairColors: Array.from(selectedHairColors),
-        sexes: Array.from(selectedSexes) as ('male' | 'female')[],
-        races: Array.from(selectedRaces),
-        count: countPerCombination,
-      });
+      const request = generateMissingOnly && missingCombinations.length > 0
+        ? {
+            builds: [],
+            skinTones: [],
+            hairColors: [],
+            sexes: [] as ('male' | 'female')[],
+            races: [],
+            count: countPerCombination,
+            combinations: missingCombinations,
+          }
+        : {
+            builds: Array.from(selectedBuilds),
+            skinTones: Array.from(selectedSkinTones),
+            hairColors: Array.from(selectedHairColors),
+            sexes: Array.from(selectedSexes) as ('male' | 'female')[],
+            races: Array.from(selectedRaces),
+            count: countPerCombination,
+          };
+      const result = await createBatchJob(request);
       console.log('Batch job created:', result);
       await refreshStatus();
     } catch (err) {
@@ -549,8 +677,80 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
                 <option value="nano-banana">Nano Banana Flash (Faster, 2000 RPD)</option>
               </select>
             </div>
+
+            {/* Preset selector */}
+            {presets.length > 0 && (
+              <div className="prompt-field prompt-presets">
+                <label>Load Preset</label>
+                <div className="preset-list">
+                  {presets.map(preset => (
+                    <div key={preset.id} className="preset-item">
+                      <button
+                        className="btn-secondary btn-small preset-load"
+                        onClick={() => handleLoadPreset(preset.id)}
+                        title={preset.basePrompt}
+                      >
+                        {preset.name}
+                      </button>
+                      <button
+                        className="btn-danger btn-tiny preset-delete"
+                        onClick={() => handleDeletePreset(preset.id)}
+                        title="Delete preset"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="prompt-field">
-              <label>Base Prompt</label>
+              <div className="prompt-field-header">
+                <label>Base Prompt</label>
+                {!showSavePreset ? (
+                  <button
+                    className="btn-secondary btn-tiny"
+                    onClick={() => setShowSavePreset(true)}
+                  >
+                    Save as Preset
+                  </button>
+                ) : (
+                  <div className="save-preset-inline">
+                    <input
+                      type="text"
+                      value={newPresetName}
+                      onChange={(e) => setNewPresetName(e.target.value)}
+                      placeholder="Preset name"
+                      className="preset-name-input"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleSaveAsPreset();
+                        if (e.key === 'Escape') {
+                          setShowSavePreset(false);
+                          setNewPresetName('');
+                        }
+                      }}
+                      autoFocus
+                    />
+                    <button
+                      className="btn-primary btn-tiny"
+                      onClick={handleSaveAsPreset}
+                      disabled={!newPresetName.trim() || promptSaving}
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="btn-secondary btn-tiny"
+                      onClick={() => {
+                        setShowSavePreset(false);
+                        setNewPresetName('');
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                )}
+              </div>
               <textarea
                 value={basePrompt}
                 onChange={(e) => setBasePrompt(e.target.value)}
@@ -646,25 +846,45 @@ export function PortraitManager({ onRefreshConfig }: PortraitManagerProps) {
                 className="count-input"
               />
             </label>
+            <label className="missing-only-toggle">
+              <input
+                type="checkbox"
+                checked={generateMissingOnly}
+                onChange={(e) => setGenerateMissingOnly(e.target.checked)}
+              />
+              <span>Missing only</span>
+            </label>
             <span className="combination-count">
-              {totalToGenerate > 0
-                ? `${totalToGenerate} portrait${totalToGenerate !== 1 ? 's' : ''} (${baseCombinations} combo${baseCombinations !== 1 ? 's' : ''} × ${countPerCombination})`
-                : 'Select at least one option from each category'
+              {baseCombinations === 0
+                ? 'Select at least one option from each category'
+                : generateMissingOnly
+                  ? (missingInSelection === 0
+                      ? 'All combinations have portraits'
+                      : `${effectiveToGenerate} portrait${effectiveToGenerate !== 1 ? 's' : ''} (${missingInSelection} missing × ${countPerCombination})`)
+                  : `${totalToGenerate} portrait${totalToGenerate !== 1 ? 's' : ''} (${baseCombinations} combo${baseCombinations !== 1 ? 's' : ''} × ${countPerCombination})`
               }
             </span>
+            {baseCombinations > 0 && !generateMissingOnly && (
+              <span className={`missing-in-selection ${missingInSelection === 0 ? 'all-covered' : ''}`}>
+                {missingInSelection === 0
+                  ? '✓ All covered'
+                  : `${missingInSelection} missing`
+                }
+              </span>
+            )}
           </div>
           <div className="generation-buttons">
             <button
               className="btn-primary generate-btn"
               onClick={handleGenerate}
-              disabled={totalToGenerate === 0 || isLoading || generationStatus?.isGenerating}
+              disabled={effectiveToGenerate === 0 || isLoading || generationStatus?.isGenerating}
             >
               {isLoading ? 'Queuing...' : generationStatus?.isGenerating ? 'Generating...' : 'Generate Now'}
             </button>
             <button
               className="btn-secondary batch-btn"
               onClick={handleCreateBatch}
-              disabled={totalToGenerate === 0 || isCreatingBatch}
+              disabled={effectiveToGenerate === 0 || isCreatingBatch}
               title="Create async batch job (50% cheaper, takes hours)"
             >
               {isCreatingBatch ? 'Creating...' : 'Create Batch Job'}

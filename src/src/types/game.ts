@@ -55,6 +55,13 @@ export interface Portrait {
   fate?: number;
 }
 
+// Prompt preset for portrait generation
+export interface PromptPreset {
+  id: string;
+  name: string;
+  basePrompt: string;
+}
+
 // Portrait generation configuration
 export interface PortraitPromptConfig {
   basePrompt: string;
@@ -62,6 +69,7 @@ export interface PortraitPromptConfig {
   aspectRatio: string;
   imageSize: string;
   model?: 'nano-banana-pro' | 'nano-banana';  // Default: nano-banana-pro
+  presets?: PromptPreset[];
 }
 
 // A pending portrait awaiting review

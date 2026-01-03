@@ -31,9 +31,8 @@
         {
           "id": "human",
           "name": "Human",
-          "description": "Adaptable and ambitious, humans excel through determination rather than innate gifts.",
+          "description": "The youngest race, considered the most foolish. Fools or no, they outnumber every other race, and their power waxes yet.",
           "image": "race-human.png",
-          "fate": 0,
           "attributes": {
             "charisma": 1,
             "will": 1
@@ -45,7 +44,7 @@
         {
           "id": "elf",
           "name": "Elf",
-          "description": "Long-lived and graceful, elves possess an innate connection to magic and nature.",
+          "description": "Long-lived and graceful, elves possess an innate connection to magic nature - but do not mistake gracefulness for softness.",
           "image": "race-elf.png",
           "fate": 1,
           "attributes": {
@@ -380,6 +379,9 @@
           },
           "traits": [
             "brave"
+          ],
+          "incompatibleWith": [
+            "vice-coward"
           ]
         },
         {
@@ -408,6 +410,9 @@
           },
           "traits": [
             "compassionate"
+          ],
+          "incompatibleWith": [
+            "vice-greedy"
           ]
         },
         {
@@ -453,6 +458,9 @@
           "traits": [
             "greedy"
           ],
+          "incompatibleWith": [
+            "virtue-compassionate"
+          ],
           "isDrawback": true
         },
         {
@@ -469,6 +477,9 @@
           },
           "traits": [
             "cowardly"
+          ],
+          "incompatibleWith": [
+            "virtue-brave"
           ],
           "isDrawback": true
         },
@@ -619,15 +630,14 @@
           "id": "edge-silver-tongue",
           "name": "Silver Tongue",
           "description": "Words are your weapon. You can talk your way into - or out of - anything.",
+          "image": "edge-edge-silver-tongue.png",
           "fate": 2,
           "attributes": {
             "charisma": 2
           },
           "traits": [
-            "silver-tongued",
-            "persuasive"
-          ],
-          "image": "edge-edge-silver-tongue.png"
+            "silver-tongued"
+          ]
         },
         {
           "id": "edge-shadow",
@@ -648,16 +658,15 @@
           "id": "edge-survivor",
           "name": "Unkillable",
           "description": "You've survived things that should have killed you. Fate isn't done with you.",
+          "image": "edge-edge-survivor.png",
           "fate": 2,
           "attributes": {
             "endurance": 2,
             "will": 1
           },
           "traits": [
-            "hard-to-kill",
-            "scarred"
-          ],
-          "image": "edge-edge-survivor.png"
+            "hard-to-kill"
+          ]
         },
         {
           "id": "edge-leader",
@@ -758,7 +767,7 @@
       "id": "feats",
       "name": "Feats",
       "description": "Exceptional abilities that go beyond normal training.",
-      "minPicks": 0,
+      "minPicks": 1,
       "maxPicks": 2,
       "options": [
         {
@@ -826,7 +835,7 @@
       "id": "spells",
       "name": "Spells",
       "description": "Magical abilities (requires spellcaster trait).",
-      "minPicks": 0,
+      "minPicks": 1,
       "maxPicks": 3,
       "options": [
         {

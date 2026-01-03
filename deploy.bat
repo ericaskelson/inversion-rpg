@@ -11,9 +11,9 @@ REM === CONFIGURE THIS ===
 set REPO_NAME=inversion-rpg
 REM ======================
 
-echo Building with base path: /%REPO_NAME%/
+echo Building with base path: /
 cd src
-set VITE_BASE_PATH=/%REPO_NAME%/
+set VITE_BASE_PATH=/
 call npm run build
 if errorlevel 1 (
     echo Build failed!

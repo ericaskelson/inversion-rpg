@@ -4,6 +4,22 @@ import { TitleScreen } from './TitleScreen';
 import { StoryScreen } from './StoryScreen';
 import { IntroEditorModal } from './IntroEditorModal';
 import { isEditorAvailable, fetchIntroConfig, saveIntroConfig } from '../api/editorApi';
+import { getImageUrl } from '../utils/imagePath';
+
+// Preload an image and return a promise
+function preloadImage(src: string): Promise<void> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve();
+    img.onerror = () => resolve(); // Don't fail on missing images
+    img.src = src;
+  });
+}
+
+// Preload multiple images concurrently
+async function preloadImages(srcs: string[]): Promise<void> {
+  await Promise.all(srcs.map(src => preloadImage(src)));
+}
 
 type IntroPhase =
   | { screen: 'title' }
@@ -56,6 +72,27 @@ export function IntroFlow({ config: initialConfig, onComplete, startAtEnd = fals
       }
     });
   }, []);
+
+  // Preload all intro background images when config changes
+  useEffect(() => {
+    const imagesToPreload: string[] = [];
+
+    // Title screen background
+    if (config.titleScreen.backgroundImage) {
+      imagesToPreload.push(getImageUrl(config.titleScreen.backgroundImage));
+    }
+
+    // All story screen backgrounds
+    for (const screen of config.storyScreens) {
+      if (screen.backgroundImage) {
+        imagesToPreload.push(getImageUrl(screen.backgroundImage));
+      }
+    }
+
+    if (imagesToPreload.length > 0) {
+      preloadImages(imagesToPreload);
+    }
+  }, [config]);
 
   const handleBegin = () => {
     if (sortedStoryScreens.length > 0) {

@@ -3982,3 +3982,834 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* ============================================
+   INTRO SCREEN STYLES
+   ============================================ */
+
+.intro-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0a0f1a 0%, #1a1a2e 50%, #16213e 100%);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 2rem;
+}
+
+.intro-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 26, 0.7);
+  pointer-events: none;
+}
+
+/* Title Screen */
+.title-screen .title-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 600px;
+}
+
+.game-title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #f0c674;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 0 30px rgba(240, 198, 116, 0.5),
+               0 4px 20px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.game-subtitle {
+  font-size: 1.5rem;
+  color: #aaa;
+  margin: 0 0 3rem 0;
+  font-style: italic;
+}
+
+.title-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.begin-button {
+  padding: 1rem 3rem;
+  font-size: 1.25rem;
+  font-family: inherit;
+  background: linear-gradient(135deg, #f0c674 0%, #d4a84b 100%);
+  border: none;
+  border-radius: 8px;
+  color: #0a0f1a;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(240, 198, 116, 0.3);
+}
+
+.begin-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(240, 198, 116, 0.5);
+}
+
+.skip-button {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: transparent;
+  border: 1px solid #555;
+  border-radius: 6px;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.skip-button:hover {
+  border-color: #888;
+  color: #aaa;
+}
+
+/* Story Screen */
+.story-screen .story-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  width: 100%;
+}
+
+.story-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #f0c674;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.story-text {
+  background: rgba(10, 15, 26, 0.8);
+  border: 1px solid #0f3460;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  color: #ddd;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.story-text p {
+  margin: 0 0 1rem 0;
+}
+
+.story-text p:last-child {
+  margin-bottom: 0;
+}
+
+.story-text strong {
+  color: #f0c674;
+}
+
+.story-text em {
+  color: #aaa;
+}
+
+.story-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.story-progress {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.story-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.back-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background: rgba(15, 52, 96, 0.8);
+  border: 1px solid #0f3460;
+  border-radius: 6px;
+  color: #aaa;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background: rgba(15, 52, 96, 1);
+  color: #eee;
+  border-color: #1a4a7a;
+}
+
+.continue-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  border: 1px solid #22c55e;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.continue-button:hover {
+  background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+  transform: translateY(-1px);
+}
+
+/* Mobile adjustments for intro screens */
+@media (max-width: 600px) {
+  .game-title {
+    font-size: 2.5rem;
+  }
+
+  .game-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .story-text {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .story-navigation {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .story-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Intro Flow Container */
+.intro-flow {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Intro Header with Edit Mode Toggle */
+.intro-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  background: linear-gradient(180deg, rgba(10, 15, 26, 0.9) 0%, transparent 100%);
+}
+
+.intro-header .header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.intro-header .edit-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+.intro-header .edit-mode-toggle input {
+  cursor: pointer;
+}
+
+.intro-header .settings-button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  background: rgba(15, 52, 96, 0.8);
+  border: 1px solid #0f3460;
+  border-radius: 4px;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.intro-header .settings-button:hover {
+  background: rgba(15, 52, 96, 1);
+  color: #eee;
+}
+
+/* Edit Overlay */
+.intro-edit-overlay {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(10, 15, 26, 0.95);
+  border: 1px solid #0f3460;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.intro-edit-overlay .edit-button,
+.intro-edit-overlay .add-button {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.intro-edit-overlay .edit-button {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  border: 1px solid #60a5fa;
+  color: #fff;
+}
+
+.intro-edit-overlay .edit-button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
+}
+
+.intro-edit-overlay .add-button {
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  border: 1px solid #22c55e;
+  color: #fff;
+}
+
+.intro-edit-overlay .add-button:hover {
+  background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+}
+
+/* Intro Editor Modal */
+.intro-editor-modal {
+  background: #16213e;
+  border: 1px solid #0f3460;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.intro-editor-modal h2 {
+  margin: 0 0 1.5rem 0;
+  color: #f0c674;
+  font-size: 1.25rem;
+}
+
+.intro-editor-modal .editor-error {
+  background: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  color: #e74c3c;
+}
+
+.intro-editor-modal .editor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.intro-editor-modal .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.intro-editor-modal .form-group label {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.intro-editor-modal .form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.intro-editor-modal .checkbox-group {
+  flex-direction: row;
+  align-items: center;
+}
+
+.intro-editor-modal .checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.intro-editor-modal input[type="text"],
+.intro-editor-modal input[type="number"],
+.intro-editor-modal textarea {
+  background: #0f1729;
+  border: 1px solid #0f3460;
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  color: #eee;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.intro-editor-modal input:focus,
+.intro-editor-modal textarea:focus {
+  outline: none;
+  border-color: #f0c674;
+}
+
+.intro-editor-modal input:disabled {
+  opacity: 0.5;
+}
+
+.intro-editor-modal input[type="number"] {
+  width: 80px;
+}
+
+.intro-editor-modal textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.intro-editor-modal .field-hint {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.intro-editor-modal .modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #0f3460;
+}
+
+.intro-editor-modal .modal-actions .spacer {
+  flex: 1;
+}
+
+.intro-editor-modal .btn-primary,
+.intro-editor-modal .btn-secondary,
+.intro-editor-modal .btn-delete {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.intro-editor-modal .btn-primary {
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  border: 1px solid #22c55e;
+  color: #fff;
+}
+
+.intro-editor-modal .btn-primary:hover {
+  background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+}
+
+.intro-editor-modal .btn-secondary {
+  background: #16213e;
+  border: 1px solid #0f3460;
+  color: #888;
+}
+
+.intro-editor-modal .btn-secondary:hover {
+  background: #1a2744;
+  color: #aaa;
+}
+
+.intro-editor-modal .btn-delete {
+  background: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+}
+
+.intro-editor-modal .btn-delete:hover {
+  background: rgba(231, 76, 60, 0.3);
+}
+
+.intro-editor-modal button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   Background Manager Component
+   ============================================ */
+
+.background-manager {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.background-manager > label {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.background-manager .background-error {
+  background: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  color: #e74c3c;
+}
+
+/* Current background preview */
+.background-manager .current-background {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.background-manager .background-preview {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #0f3460;
+}
+
+.background-manager .background-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.background-manager .background-preview:hover {
+  border-color: #f0c674;
+}
+
+.background-manager .background-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.background-manager .background-path {
+  font-size: 0.75rem;
+  color: #666;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.background-manager .btn-clear {
+  background: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: #e74c3c;
+  cursor: pointer;
+}
+
+.background-manager .btn-clear:hover {
+  background: rgba(231, 76, 60, 0.3);
+}
+
+/* Generate section */
+.background-manager .background-generate {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.background-manager .btn-generate {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f3460 100%);
+  border: 1px solid #2d6a4f;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  color: #4ade80;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.background-manager .btn-generate:hover {
+  background: linear-gradient(135deg, #234a73 0%, #164773 100%);
+}
+
+.background-manager .btn-generate:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Prompt editor */
+.background-manager .prompt-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #0f3460;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.background-manager .prompt-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.background-manager .prompt-editor .prompt-label {
+  font-size: 0.8rem;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.background-manager .placeholder-hint {
+  font-size: 0.7rem;
+  color: #666;
+  font-style: italic;
+}
+
+.background-manager .prompt-editor textarea {
+  background: #0f1729;
+  border: 1px solid #0f3460;
+  border-radius: 6px;
+  padding: 0.5rem;
+  color: #eee;
+  font-family: inherit;
+  font-size: 0.85rem;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.background-manager .prompt-editor textarea:focus {
+  outline: none;
+  border-color: #f0c674;
+}
+
+.background-manager .prompt-preview {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  padding: 0.5rem;
+}
+
+.background-manager .preview-text {
+  font-size: 0.75rem;
+  color: #999;
+  white-space: pre-wrap;
+  max-height: 100px;
+  overflow-y: auto;
+  line-height: 1.4;
+}
+
+.background-manager .prompt-options {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.background-manager .prompt-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.background-manager .prompt-actions .spacer {
+  flex: 1;
+}
+
+.background-manager .prompt-actions button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.background-manager .btn-save-config {
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f3460 100%);
+  border: 1px solid #f0c674;
+  color: #f0c674;
+}
+
+.background-manager .btn-save-config:hover {
+  background: linear-gradient(135deg, #234a73 0%, #164773 100%);
+}
+
+.background-manager .btn-reset-config {
+  background: transparent;
+  border: 1px solid #666;
+  color: #888;
+}
+
+.background-manager .btn-reset-config:hover {
+  border-color: #888;
+  color: #aaa;
+}
+
+.background-manager .prompt-actions .btn-secondary {
+  background: #16213e;
+  border: 1px solid #0f3460;
+  color: #888;
+}
+
+.background-manager .prompt-actions .btn-primary {
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  border: 1px solid #22c55e;
+  color: #fff;
+}
+
+/* Resolution selector */
+.background-manager .resolution-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.background-manager .resolution-selector label {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.background-manager .resolution-selector select {
+  background: #0f1729;
+  border: 1px solid #0f3460;
+  border-radius: 4px;
+  padding: 0.35rem 0.5rem;
+  color: #eee;
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.background-manager .resolution-selector select:focus {
+  outline: none;
+  border-color: #f0c674;
+}
+
+.background-manager .resolution-selector select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Pending backgrounds */
+.background-manager .pending-backgrounds {
+  margin-top: 0.5rem;
+}
+
+.background-manager .pending-backgrounds h4 {
+  font-size: 0.85rem;
+  color: #f0c674;
+  margin: 0 0 0.5rem 0;
+}
+
+.background-manager .pending-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.background-manager .pending-background-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.background-manager .pending-background-preview {
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid #0f3460;
+}
+
+.background-manager .pending-background-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.background-manager .pending-background-preview:hover {
+  border-color: #f0c674;
+}
+
+.background-manager .pending-background-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.background-manager .pending-background-actions button {
+  flex: 1;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.background-manager .btn-accept {
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  border: 1px solid #22c55e;
+  color: #fff;
+}
+
+.background-manager .btn-accept:hover {
+  background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
+}
+
+.background-manager .btn-reject {
+  background: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+}
+
+.background-manager .btn-reject:hover {
+  background: rgba(231, 76, 60, 0.3);
+}
+
+/* Lightbox */
+.background-manager .background-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  cursor: pointer;
+}
+
+.background-manager .background-lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+}

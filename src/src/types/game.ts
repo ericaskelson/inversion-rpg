@@ -222,6 +222,45 @@ export interface NamesConfig {
 }
 
 // ============================================
+// INTRO SCREEN TYPES
+// ============================================
+
+export interface TitleScreenConfig {
+  title: string;
+  subtitle?: string;
+  backgroundImage?: string;
+  buttonText: string;
+}
+
+export interface StoryScreen {
+  id: string;
+  title?: string;
+  content: string;  // Markdown supported
+  backgroundImage?: string;
+  order: number;
+}
+
+export interface IntroSettings {
+  allowSkip: boolean;
+  skipButtonText: string;
+}
+
+export interface BackgroundConfig {
+  basePrompt: string;      // Template with {screenType} and {content} placeholders
+  styleModifiers: string;
+  aspectRatio: string;
+  imageSize: string;
+  model: 'nano-banana-pro' | 'nano-banana';
+}
+
+export interface IntroConfig {
+  backgroundConfig?: BackgroundConfig;
+  titleScreen: TitleScreenConfig;
+  storyScreens: StoryScreen[];
+  settings: IntroSettings;
+}
+
+// ============================================
 // SCENARIO TYPES
 // ============================================
 

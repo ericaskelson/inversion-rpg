@@ -1,0 +1,35 @@
+{
+  "backgroundConfig": {
+    "basePrompt": "Background image for a dark fantasy RPG game's {screenType}.\n\nThe screen will display this text:\n\"{content}\"\n\nCreate a moody, atmospheric scene that sets the tone. Focus on environment, mood, and atmosphere. Do not include any text, letters, words, or writing in the image.",
+    "styleModifiers": "Dark fantasy art style, painterly, atmospheric, moody lighting, cinematic composition, no text, no letters, no words",
+    "aspectRatio": "16:9",
+    "imageSize": "2K",
+    "model": "nano-banana-pro"
+  },
+  "titleScreen": {
+    "title": "Inversion",
+    "subtitle": "Your fate awaits...",
+    "buttonText": "Begin Your Journey",
+    "backgroundImage": "backgrounds/intro/title-bg.png"
+  },
+  "storyScreens": [
+    {
+      "id": "intro-1",
+      "title": "A World of Choices",
+      "content": "In this realm, your destiny is not written in the stars—it is forged in the choices you make before your journey even begins.\n\nEvery scar tells a story. Every skill was hard-won. Every belief shapes how the world sees you.\n\nThe character you create will face trials befitting their fate. Choose power, and the universe will test you. Choose humility, and find peace in simpler struggles.",
+      "backgroundImage": "backgrounds/intro/intro-1-bg.png",
+      "order": 1
+    },
+    {
+      "id": "intro-2",
+      "title": "The Fate Mechanic",
+      "content": "**Fate** measures how much destiny has invested in you.\n\nTake powerful abilities and fortune smiles—but so do ancient evils, eager to test the worthy.\n\nEmbrace flaws and limitations, and fate looks elsewhere. Your path may be quieter, but no less meaningful.\n\nThere is no wrong choice. Only *your* choice.",
+      "backgroundImage": "backgrounds/intro/intro-2-bg.png",
+      "order": 2
+    }
+  ],
+  "settings": {
+    "allowSkip": true,
+    "skipButtonText": "Skip Intro"
+  }
+}

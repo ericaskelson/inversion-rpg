@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
 import { CharacterCreator } from './components/CharacterCreator';
 import { ScenarioPlayer } from './components/ScenarioPlayer';
+import { IntroFlow } from './components/IntroFlow';
+import { introConfig } from './data/introConfig';
 import type { Character, ScenarioBundle, GameState } from './types/game';
 import './App.css';
 
 type AppState =
   | { phase: 'loading' }
   | { phase: 'error'; message: string }
+  | { phase: 'intro' }
   | { phase: 'character-creation' }
   | { phase: 'playing'; gameState: GameState };
 
 function App() {
   const [scenarios, setScenarios] = useState<ScenarioBundle | null>(null);
   const [appState, setAppState] = useState<AppState>({ phase: 'loading' });
+  // Track whether to start intro at the end (for returning from character creation)
+  const [introAtEnd, setIntroAtEnd] = useState(false);
 
   // Load scenarios on mount
   useEffect(() => {
@@ -23,7 +28,7 @@ function App() {
       })
       .then((data: ScenarioBundle) => {
         setScenarios(data);
-        setAppState({ phase: 'character-creation' });
+        setAppState({ phase: 'intro' });
       })
       .catch(err => {
         setAppState({ phase: 'error', message: err.message });
@@ -70,6 +75,16 @@ function App() {
     setAppState({ phase: 'character-creation' });
   };
 
+  const handleIntroComplete = () => {
+    setIntroAtEnd(false);  // Reset for next time
+    setAppState({ phase: 'character-creation' });
+  };
+
+  const handleBackToIntro = () => {
+    setIntroAtEnd(true);  // Start at the last screen
+    setAppState({ phase: 'intro' });
+  };
+
   // Render based on state
   if (appState.phase === 'loading') {
     return <div className="loading">Loading scenarios...</div>;
@@ -84,8 +99,12 @@ function App() {
     );
   }
 
+  if (appState.phase === 'intro') {
+    return <IntroFlow config={introConfig} onComplete={handleIntroComplete} startAtEnd={introAtEnd} />;
+  }
+
   if (appState.phase === 'character-creation') {
-    return <CharacterCreator onComplete={handleCharacterComplete} />;
+    return <CharacterCreator onComplete={handleCharacterComplete} onBack={handleBackToIntro} />;
   }
 
   if (appState.phase === 'playing' && scenarios) {

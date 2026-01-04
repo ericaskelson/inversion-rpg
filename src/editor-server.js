@@ -6,6 +6,8 @@
  *   PUT  /api/character-creation - Writes to characterCreation.json
  *   GET  /api/appearance-config  - Returns appearanceConfig.json
  *   PUT  /api/appearance-config  - Writes to appearanceConfig.json
+ *   GET  /api/intro              - Returns introConfig.json
+ *   PUT  /api/intro              - Writes to introConfig.json
  *   POST /api/portraits/generate - Generate portraits for selected combinations
  *   GET  /api/portraits/pending  - Get list of pending portraits
  *   POST /api/portraits/accept/:id - Accept a pending portrait
@@ -42,6 +44,11 @@ const OPTIONS_DIR = path.join(PUBLIC_DIR, 'images', 'options');
 const OPTIONS_PENDING_DIR = path.join(OPTIONS_DIR, 'pending');
 const OPTIONS_PENDING_META_FILE = path.join(OPTIONS_PENDING_DIR, 'pending.json');
 const OPTIONS_BATCH_JOBS_FILE = path.join(DATA_DIR, 'optionBatchJobs.json');
+
+// Background images paths (generic system for intro, scenarios, categories)
+const BACKGROUNDS_DIR = path.join(PUBLIC_DIR, 'images', 'backgrounds');
+const BACKGROUNDS_PENDING_DIR = path.join(BACKGROUNDS_DIR, 'pending');
+const BACKGROUNDS_PENDING_META_FILE = path.join(BACKGROUNDS_PENDING_DIR, 'pending.json');
 
 // Gemini API base URL
 const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta';
@@ -213,6 +220,32 @@ app.post('/api/names/delete', async (req, res) => {
   } catch (err) {
     console.error('Error deleting name:', err);
     res.status(500).json({ error: 'Failed to delete name' });
+  }
+});
+
+// ============================================
+// INTRO CONFIG ENDPOINTS
+// ============================================
+
+// GET /api/intro - Returns introConfig.json
+app.get('/api/intro', async (req, res) => {
+  try {
+    const data = await readJsonFile('introConfig.json');
+    res.json(data);
+  } catch (err) {
+    console.error('Error reading introConfig.json:', err);
+    res.status(500).json({ error: 'Failed to read intro config' });
+  }
+});
+
+// PUT /api/intro - Write introConfig.json
+app.put('/api/intro', async (req, res) => {
+  try {
+    await writeJsonFile('introConfig.json', req.body);
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error writing introConfig.json:', err);
+    res.status(500).json({ error: 'Failed to write intro config' });
   }
 });
 
@@ -2438,6 +2471,316 @@ app.delete('/api/options/batch/:id(*)', async (req, res) => {
   }
 });
 
+// ============================================
+// BACKGROUND IMAGE GENERATION ENDPOINTS
+// Generic system for intro, scenario, and category backgrounds
+// ============================================
+
+// Ensure background directories exist
+async function ensureBackgroundDirs() {
+  await fs.mkdir(BACKGROUNDS_DIR, { recursive: true });
+  await fs.mkdir(BACKGROUNDS_PENDING_DIR, { recursive: true });
+  // Subdirectories for final images
+  await fs.mkdir(path.join(BACKGROUNDS_DIR, 'intro'), { recursive: true });
+  await fs.mkdir(path.join(BACKGROUNDS_DIR, 'scenarios'), { recursive: true });
+  await fs.mkdir(path.join(BACKGROUNDS_DIR, 'categories'), { recursive: true });
+}
+
+// Read pending backgrounds metadata
+async function readPendingBackgrounds() {
+  try {
+    await ensureBackgroundDirs();
+    const content = await fs.readFile(BACKGROUNDS_PENDING_META_FILE, 'utf-8');
+    return JSON.parse(content);
+  } catch {
+    return [];
+  }
+}
+
+// Write pending backgrounds metadata
+async function writePendingBackgrounds(data) {
+  await ensureBackgroundDirs();
+  await fs.writeFile(BACKGROUNDS_PENDING_META_FILE, JSON.stringify(data, null, 2) + '\n');
+}
+
+// Generate a single background image
+async function generateBackgroundImage(prompt, config) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY environment variable not set');
+  }
+
+  const modelKey = config.model || 'nano-banana-pro';
+  const model = IMAGE_MODELS[modelKey] || IMAGE_MODELS['nano-banana-pro'];
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+  console.log(`  Using model: ${model} (${modelKey})`);
+
+  // Backgrounds use 16:9 widescreen format by default
+  const imageConfig = { aspectRatio: config.aspectRatio || '16:9' };
+  if (modelKey === 'nano-banana-pro' && config.imageSize) {
+    imageConfig.imageSize = config.imageSize;
+  }
+
+  const requestBody = JSON.stringify({
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: {
+      responseModalities: ['TEXT', 'IMAGE'],
+      imageConfig
+    }
+  });
+
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(url);
+    const options = {
+      hostname: urlObj.hostname,
+      path: urlObj.pathname + urlObj.search,
+      method: 'POST',
+      headers: {
+        'x-goog-api-key': apiKey,
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(requestBody)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.error) {
+            reject(new Error(parsed.error.message || 'API error'));
+            return;
+          }
+
+          const parts = parsed.candidates?.[0]?.content?.parts || [];
+          const imagePart = parts.find(p => p.inlineData?.mimeType?.startsWith('image/'));
+          if (imagePart) {
+            resolve({
+              imageData: imagePart.inlineData.data,
+              mimeType: imagePart.inlineData.mimeType
+            });
+          } else {
+            reject(new Error('No image in response'));
+          }
+        } catch (err) {
+          reject(err);
+        }
+      });
+    });
+
+    req.on('error', reject);
+    req.write(requestBody);
+    req.end();
+  });
+}
+
+// GET /api/backgrounds/config - Get background generation config
+app.get('/api/backgrounds/config', async (req, res) => {
+  try {
+    const content = await fs.readFile(INTRO_CONFIG_FILE, 'utf-8');
+    const config = JSON.parse(content);
+    res.json(config.backgroundConfig || {
+      basePrompt: 'Background image for a dark fantasy RPG game\'s {screenType}.\n\nThe screen will display this text:\n"{content}"\n\nCreate a moody, atmospheric scene that sets the tone. Focus on environment, mood, and atmosphere. Do not include any text, letters, words, or writing in the image.',
+      styleModifiers: 'Dark fantasy art style, painterly, atmospheric, moody lighting, cinematic composition, no text, no letters, no words',
+      aspectRatio: '16:9',
+      imageSize: '2K',
+      model: 'nano-banana-pro'
+    });
+  } catch (err) {
+    console.error('Error reading background config:', err);
+    res.status(500).json({ error: 'Failed to read background config' });
+  }
+});
+
+// PUT /api/backgrounds/config - Save background generation config
+app.put('/api/backgrounds/config', async (req, res) => {
+  try {
+    const content = await fs.readFile(INTRO_CONFIG_FILE, 'utf-8');
+    const config = JSON.parse(content);
+    config.backgroundConfig = req.body;
+    await fs.writeFile(INTRO_CONFIG_FILE, JSON.stringify(config, null, 2) + '\n');
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error saving background config:', err);
+    res.status(500).json({ error: 'Failed to save background config' });
+  }
+});
+
+// POST /api/backgrounds/generate - Generate a background image
+app.post('/api/backgrounds/generate', async (req, res) => {
+  try {
+    const { type, targetId, description, config = {} } = req.body;
+
+    // type: 'intro-title', 'intro-story', 'scenario', 'category'
+    // targetId: e.g., 'intro-1' for story screen, 'tavern-enter' for scenario
+    if (!type || !description) {
+      return res.status(400).json({ error: 'type and description are required' });
+    }
+
+    // Build the prompt
+    const basePrompt = config.basePrompt || 'Fantasy RPG background scene. {description}';
+    const styleModifiers = config.styleModifiers || 'Dark fantasy art style, painterly, cinematic lighting, dramatic atmosphere, no text, no characters in focus.';
+    const prompt = basePrompt.replace('{description}', description) + ' ' + styleModifiers;
+
+    console.log(`Generating background for ${type}:${targetId || 'none'}`);
+    console.log(`  Prompt: ${prompt.substring(0, 100)}...`);
+
+    const result = await generateBackgroundImage(prompt, config);
+
+    // Save to pending
+    const id = `bg-${type}-${targetId || 'default'}-${Date.now()}`;
+    const ext = result.mimeType === 'image/jpeg' ? 'jpg' : 'png';
+    const filename = `${id}.${ext}`;
+    const filepath = path.join(BACKGROUNDS_PENDING_DIR, filename);
+
+    await fs.writeFile(filepath, Buffer.from(result.imageData, 'base64'));
+
+    // Add to pending metadata
+    const pending = await readPendingBackgrounds();
+    pending.push({
+      id,
+      type,
+      targetId: targetId || null,
+      filename,
+      tempPath: `backgrounds/pending/${filename}`,
+      description,
+      prompt,
+      generatedAt: new Date().toISOString()
+    });
+    await writePendingBackgrounds(pending);
+
+    console.log(`  Saved pending background: ${filename}`);
+
+    res.json({ success: true, id, tempPath: `backgrounds/pending/${filename}` });
+  } catch (err) {
+    console.error('Error generating background:', err);
+    res.status(500).json({ error: err.message || 'Failed to generate background' });
+  }
+});
+
+// GET /api/backgrounds/pending - Get all pending backgrounds
+app.get('/api/backgrounds/pending', async (req, res) => {
+  try {
+    const pending = await readPendingBackgrounds();
+    res.json(pending);
+  } catch (err) {
+    console.error('Error reading pending backgrounds:', err);
+    res.status(500).json({ error: 'Failed to read pending backgrounds' });
+  }
+});
+
+// POST /api/backgrounds/accept/:id - Accept a pending background
+app.post('/api/backgrounds/accept/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { finalFilename } = req.body; // Optional custom filename
+
+    const pending = await readPendingBackgrounds();
+    const index = pending.findIndex(p => p.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Pending background not found' });
+    }
+
+    const item = pending[index];
+    const pendingPath = path.join(BACKGROUNDS_PENDING_DIR, item.filename);
+
+    // Determine destination based on type
+    let destDir, destFilename;
+    if (item.type.startsWith('intro')) {
+      destDir = path.join(BACKGROUNDS_DIR, 'intro');
+      destFilename = finalFilename || `${item.targetId || item.type}-bg.png`;
+    } else if (item.type === 'scenario') {
+      destDir = path.join(BACKGROUNDS_DIR, 'scenarios');
+      destFilename = finalFilename || `${item.targetId}-bg.png`;
+    } else if (item.type === 'category') {
+      destDir = path.join(BACKGROUNDS_DIR, 'categories');
+      destFilename = finalFilename || `${item.targetId}-bg.png`;
+    } else {
+      destDir = BACKGROUNDS_DIR;
+      destFilename = finalFilename || item.filename;
+    }
+
+    const destPath = path.join(destDir, destFilename);
+    await fs.mkdir(destDir, { recursive: true });
+    await fs.rename(pendingPath, destPath);
+
+    // Remove from pending
+    pending.splice(index, 1);
+    await writePendingBackgrounds(pending);
+
+    // Return the relative path for storing in config (without 'images/' prefix since getImageUrl adds it)
+    const relativePath = `backgrounds/${item.type.startsWith('intro') ? 'intro' : item.type === 'scenario' ? 'scenarios' : item.type === 'category' ? 'categories' : ''}/${destFilename}`.replace(/\/+/g, '/');
+
+    console.log(`Accepted background: ${id} -> ${relativePath}`);
+
+    res.json({ success: true, finalPath: relativePath });
+  } catch (err) {
+    console.error('Error accepting background:', err);
+    res.status(500).json({ error: 'Failed to accept background' });
+  }
+});
+
+// DELETE /api/backgrounds/pending/:id - Reject a pending background
+app.delete('/api/backgrounds/pending/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const pending = await readPendingBackgrounds();
+    const index = pending.findIndex(p => p.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: 'Pending background not found' });
+    }
+
+    const item = pending[index];
+    const pendingPath = path.join(BACKGROUNDS_PENDING_DIR, item.filename);
+
+    // Delete file
+    try {
+      await fs.unlink(pendingPath);
+    } catch (e) {
+      console.log(`Could not delete file ${pendingPath}: ${e.message}`);
+    }
+
+    // Remove from pending
+    pending.splice(index, 1);
+    await writePendingBackgrounds(pending);
+
+    console.log(`Rejected background: ${id}`);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error rejecting background:', err);
+    res.status(500).json({ error: 'Failed to reject background' });
+  }
+});
+
+// DELETE /api/backgrounds/pending - Reject all pending backgrounds
+app.delete('/api/backgrounds/pending', async (req, res) => {
+  try {
+    const pending = await readPendingBackgrounds();
+
+    // Delete all files
+    for (const item of pending) {
+      const pendingPath = path.join(BACKGROUNDS_PENDING_DIR, item.filename);
+      try {
+        await fs.unlink(pendingPath);
+      } catch (e) {
+        console.log(`Could not delete file ${pendingPath}: ${e.message}`);
+      }
+    }
+
+    await writePendingBackgrounds([]);
+    console.log(`Rejected all pending backgrounds (${pending.length} items)`);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error rejecting all backgrounds:', err);
+    res.status(500).json({ error: 'Failed to reject backgrounds' });
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Editor server running at http://localhost:${PORT}`);
@@ -2451,6 +2794,13 @@ app.listen(PORT, () => {
   console.log('  POST    /api/options/generate');
   console.log('  GET     /api/options/pending');
   console.log('  POST    /api/options/batch - Create batch job');
+  console.log('\nBackground image generation:');
+  console.log('  GET     /api/backgrounds/config');
+  console.log('  PUT     /api/backgrounds/config');
+  console.log('  POST    /api/backgrounds/generate');
+  console.log('  GET     /api/backgrounds/pending');
+  console.log('  POST    /api/backgrounds/accept/:id');
+  console.log('  DELETE  /api/backgrounds/pending/:id');
   if (!process.env.GEMINI_API_KEY) {
     console.log('\nWARNING: GEMINI_API_KEY not set - image generation will fail');
   }

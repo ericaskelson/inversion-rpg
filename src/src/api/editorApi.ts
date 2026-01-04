@@ -73,6 +73,35 @@ export async function saveAppearanceConfig(data: unknown): Promise<void> {
 }
 
 // ============================================
+// INTRO CONFIG API
+// ============================================
+
+/**
+ * Fetch intro config from the editor server
+ */
+export async function fetchIntroConfig(): Promise<unknown> {
+  const response = await fetch(`${EDITOR_API_BASE}/intro`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch intro config');
+  }
+  return response.json();
+}
+
+/**
+ * Save intro config to the editor server
+ */
+export async function saveIntroConfig(data: unknown): Promise<void> {
+  const response = await fetch(`${EDITOR_API_BASE}/intro`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to save intro config');
+  }
+}
+
+// ============================================
 // PORTRAIT GENERATION API
 // ============================================
 
@@ -647,4 +676,144 @@ export async function deleteNameFromList(
   if (!response.ok) {
     throw new Error('Failed to delete name');
   }
+}
+
+// ============================================
+// BACKGROUND IMAGE GENERATION API
+// ============================================
+
+export type BackgroundType = 'intro-title' | 'intro-story' | 'scenario' | 'category';
+
+export interface BackgroundGenerationRequest {
+  type: BackgroundType;
+  targetId: string;  // For intro: 'title' or story screen id; for scenario: scenario id; for category: category id
+  description: string;  // Description to generate the image from
+  config?: {
+    aspectRatio?: string;  // Default: '16:9'
+    imageSize?: string;    // Default: '1K'
+    styleModifiers?: string;
+  };
+}
+
+export interface PendingBackground {
+  id: string;
+  type: BackgroundType;
+  targetId: string;
+  description: string;
+  tempPath: string;
+  generatedAt: string;
+  prompt: string;
+}
+
+export interface BackgroundImageConfig {
+  basePrompt: string;
+  styleModifiers: string;
+  aspectRatio: string;
+  imageSize: string;
+  model: 'nano-banana-pro' | 'nano-banana';
+}
+
+/**
+ * Get background image generation config
+ */
+export async function fetchBackgroundConfig(): Promise<BackgroundImageConfig> {
+  const response = await fetch(`${EDITOR_API_BASE}/backgrounds/config`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch background config');
+  }
+  return response.json();
+}
+
+/**
+ * Save background image generation config
+ */
+export async function saveBackgroundConfig(config: BackgroundImageConfig): Promise<void> {
+  const response = await fetch(`${EDITOR_API_BASE}/backgrounds/config`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(config),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to save background config');
+  }
+}
+
+/**
+ * Generate a background image for intro/scenario/category
+ */
+export async function generateBackground(request: BackgroundGenerationRequest): Promise<{
+  success: boolean;
+  id: string;
+  message: string;
+}> {
+  const response = await fetch(`${EDITOR_API_BASE}/backgrounds/generate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(request),
+  });
+  if (!response.ok) {
+    // Try to parse as JSON, fall back to text
+    const text = await response.text();
+    let errorMessage = 'Failed to generate background image';
+    try {
+      const error = JSON.parse(text);
+      errorMessage = error.error || errorMessage;
+    } catch {
+      errorMessage = text || errorMessage;
+    }
+    throw new Error(errorMessage);
+  }
+  return response.json();
+}
+
+/**
+ * Get list of pending background images awaiting review
+ */
+export async function fetchPendingBackgrounds(): Promise<PendingBackground[]> {
+  const response = await fetch(`${EDITOR_API_BASE}/backgrounds/pending`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch pending backgrounds');
+  }
+  return response.json();
+}
+
+/**
+ * Accept a pending background image (moves to final location and updates config)
+ */
+export async function acceptBackground(id: string): Promise<{
+  success: boolean;
+  finalPath: string;
+}> {
+  const response = await fetch(`${EDITOR_API_BASE}/backgrounds/accept/${encodeURIComponent(id)}`, {
+    method: 'POST',
+  });
+  if (!response.ok) {
+    throw new Error('Failed to accept background image');
+  }
+  return response.json();
+}
+
+/**
+ * Reject a pending background image (deletes it)
+ */
+export async function rejectBackground(id: string): Promise<void> {
+  const response = await fetch(`${EDITOR_API_BASE}/backgrounds/pending/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) {
+    throw new Error('Failed to reject background image');
+  }
+}
+
+/**
+ * Reject all pending background images
+ */
+export async function rejectAllBackgrounds(): Promise<{ rejected: number }> {
+  const response = await fetch(`${EDITOR_API_BASE}/backgrounds/pending`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) {
+    throw new Error('Failed to reject all backgrounds');
+  }
+  return response.json();
 }

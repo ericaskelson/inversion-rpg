@@ -31,7 +31,7 @@
         {
           "id": "human",
           "name": "Human",
-          "description": "The youngest race, considered the most foolish. Fools or no, they outnumber every other race, and their power waxes yet.",
+          "description": "The youngest race, considered the weakest and most foolish. Fools or no, they seem to be winning.",
           "image": "race-human.png",
           "attributes": {
             "charisma": 1,
@@ -44,7 +44,7 @@
         {
           "id": "elf",
           "name": "Elf",
-          "description": "Long-lived and graceful, elves possess an innate connection to magic nature - but do not mistake gracefulness for softness.",
+          "description": "Long-lived and graceful, elves possess an innate connection to nature - but do not mistake gracefulness for softness.",
           "image": "race-elf.png",
           "fate": 1,
           "attributes": {
@@ -361,6 +361,470 @@
       ]
     },
     {
+      "id": "edge",
+      "name": "Edge",
+      "description": "Your defining capability - what sets you apart.",
+      "minPicks": 1,
+      "maxPicks": 1,
+      "options": [
+        {
+          "id": "edge-warrior",
+          "name": "Born Fighter",
+          "description": "To you, a fight is a dance. Others drill for thousands of hours, but your heart sees the path the moment you touch a blade.",
+          "subcategory": "1. Sword",
+          "image": "edge-edge-warrior.png",
+          "fate": 2,
+          "attributes": {
+            "strength": 1,
+            "agility": 1,
+            "endurance": 1
+          },
+          "traits": [
+            "combat-instincts"
+          ]
+        },
+        {
+          "id": "edge-spellcaster",
+          "name": "Touched by Magic",
+          "description": "Your soul is a primary source of magic - an arcane font. Others inherit their power, or steal it. You create it.",
+          "subcategory": "2. Sorcery",
+          "image": "edge-edge-spellcaster.png",
+          "fate": 4,
+          "attributes": {
+            "will": 1,
+            "cunning": 1
+          },
+          "traits": [
+            "spellcaster",
+            "arcane-sensitivity"
+          ]
+        },
+        {
+          "id": "edge-silver-tongue",
+          "name": "Silver Tongue",
+          "description": "Words are your weapon. You can talk your way into - or out of - anything.",
+          "subcategory": "3. Word",
+          "image": "edge-edge-silver-tongue.png",
+          "fate": 2,
+          "attributes": {
+            "charisma": 2
+          },
+          "traits": [
+            "silver-tongued"
+          ]
+        },
+        {
+          "id": "edge-shadow",
+          "name": "Shadow Walker",
+          "description": "You move unseen, strike unseen, leave unseen. Magic? The uninitiated might think so.",
+          "subcategory": "1. Sword",
+          "image": "edge-edge-shadow.png",
+          "fate": 2,
+          "attributes": {
+            "agility": 2,
+            "cunning": 1
+          },
+          "traits": [
+            "stealthy",
+            "shadow-walker"
+          ]
+        },
+        {
+          "id": "edge-survivor",
+          "name": "Unkillable",
+          "description": "You've survived things that would have killed anyone else, and you will again. Fate isn't done with you.",
+          "subcategory": "1. Sword",
+          "image": "edge-edge-survivor.png",
+          "fate": 2,
+          "attributes": {
+            "endurance": 2,
+            "will": 1
+          },
+          "traits": [
+            "hard-to-kill"
+          ]
+        },
+        {
+          "id": "edge-leader",
+          "name": "Natural Leader",
+          "description": "Others look to you for guidance. Your presence inspires.",
+          "subcategory": "3. Word",
+          "image": "edge-edge-leader.png",
+          "fate": 2,
+          "attributes": {
+            "charisma": 1,
+            "will": 1
+          },
+          "traits": [
+            "inspiring",
+            "commander"
+          ]
+        },
+        {
+          "id": "edge-augmented",
+          "name": "Augmented",
+          "description": "You have recklessly grafted esoteric technology into your flesh and bone. Magic, but at what cost?",
+          "subcategory": "2. Sorcery",
+          "image": "edge-edge-augmented.png",
+          "fate": 2,
+          "attributes": {
+            "will": 2,
+            "charisma": -2,
+            "cunning": 1
+          },
+          "traits": [
+            "spellcaster"
+          ],
+          "requires": [
+            {
+              "trait": "human"
+            }
+          ]
+        },
+        {
+          "id": "edge-elven-magic",
+          "name": "Elven Memory",
+          "description": "You remember the old ways - the forest, the rivers, the skies. Elven magic is fading, but a spark remains in you.",
+          "subcategory": "2. Sorcery",
+          "fate": 3,
+          "attributes": {
+            "charisma": 1,
+            "will": 1
+          },
+          "traits": [
+            "spellcaster",
+            "arcane-sensitivity"
+          ],
+          "requires": [
+            {
+              "trait": "elf"
+            }
+          ],
+          "incompatibleWith": [
+            "edge-spellcaster"
+          ],
+          "image": "edge-edge-elven-magic.png"
+        },
+        {
+          "id": "edge-seraph-magic",
+          "name": "Light of Heaven",
+          "description": "The Light is strong within you. This heavenly power is not yours, precisely, but it often turns its gaze where you direct. Do not be presumptuous.",
+          "subcategory": "2. Sorcery",
+          "fate": 3,
+          "attributes": {
+            "charisma": 2
+          },
+          "traits": [
+            "spellcaster",
+            "divine-magic"
+          ],
+          "requires": [
+            {
+              "trait": "seraphic"
+            }
+          ],
+          "incompatibleWith": [
+            "edge-elven-magic",
+            "edge-spellcaster",
+            "edge-augmented"
+          ],
+          "image": "edge-edge-seraph-magic.png"
+        },
+        {
+          "id": "edge-dwarven-magic",
+          "name": "Runes",
+          "description": "A dwarf does not wave a wand. You painstakingly carve runes into stone, metal, glass. Program contingencies, logic systems; guide the magic you will never truly touch.",
+          "subcategory": "2. Sorcery",
+          "fate": 3,
+          "attributes": {
+            "endurance": 1,
+            "will": 1
+          },
+          "traits": [
+            "spellcaster"
+          ],
+          "requires": [
+            {
+              "trait": "dwarf"
+            }
+          ],
+          "incompatibleWith": [
+            "edge-spellcaster",
+            "edge-augmented",
+            "edge-elven-magic",
+            "edge-seraph-magic"
+          ],
+          "image": "edge-edge-dwarven-magic.png"
+        },
+        {
+          "id": "edge-infernal-rage",
+          "name": "Demonic Rage",
+          "description": "Give in to the atavistic river in your veins. Forget pain, and weariness, and peace, and love. Let yourself become a weapon, and achieve any goal.",
+          "subcategory": "1. Sword",
+          "image": "edge-edge-infernal-rage.png",
+          "fate": 2,
+          "attributes": {
+            "strength": 3,
+            "endurance": 2,
+            "charisma": -2
+          },
+          "traits": [
+            "berserker",
+            "hot-headed"
+          ],
+          "requires": [
+            {
+              "trait": "infernal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spells",
+      "name": "Spells",
+      "description": "Magical abilities (requires spellcaster trait).",
+      "minPicks": 1,
+      "maxPicks": 3,
+      "options": [
+        {
+          "id": "spell-fire",
+          "name": "Flame Conjuration",
+          "description": "You can summon and control fire.",
+          "image": "spells-spell-fire.png",
+          "fate": 1,
+          "traits": [
+            "pyromancer"
+          ],
+          "requires": [
+            {
+              "trait": "spellcaster"
+            }
+          ]
+        },
+        {
+          "id": "spell-healing",
+          "name": "Healing Light",
+          "description": "You can mend wounds with magical energy.",
+          "image": "spells-spell-healing.png",
+          "fate": 1,
+          "traits": [
+            "healer"
+          ],
+          "requires": [
+            {
+              "trait": "spellcaster"
+            }
+          ]
+        },
+        {
+          "id": "spell-illusion",
+          "name": "Veil of Shadows",
+          "description": "You can create illusions and bend perception. Begin today with a wisp of fog; with a century of effort summon walls and towers of light.",
+          "image": "spells-spell-illusion.png",
+          "fate": 1,
+          "traits": [
+            "illusionist"
+          ],
+          "requires": [
+            {
+              "trait": "spellcaster"
+            }
+          ]
+        },
+        {
+          "id": "spell-divination",
+          "name": "Third Eye",
+          "description": "You see what others do not: signs, portents; prophecies and histories.",
+          "image": "spells-spell-divination.png",
+          "fate": 1,
+          "traits": [
+            "seer"
+          ],
+          "requires": [
+            {
+              "trait": "spellcaster"
+            }
+          ]
+        },
+        {
+          "id": "spell-enchantment",
+          "name": "Mind Touch",
+          "description": "You wrench others wills to align to your own; twist their desires; violate the sanctity of the mind - do you enjoy it?",
+          "image": "spells-spell-enchantment.png",
+          "fate": 2,
+          "traits": [
+            "enchanter"
+          ],
+          "requires": [
+            {
+              "trait": "spellcaster"
+            }
+          ]
+        },
+        {
+          "id": "spell-fly",
+          "name": "Fly",
+          "description": "Fulfill the universal human dream: fall into the sky. Begin with an unnatural long-jump, then a slow hover, and eventually exceed the birds of prey.",
+          "image": "spells-spell-fly.png",
+          "traits": [
+            "flight"
+          ],
+          "requires": [
+            {
+              "trait": "spellcaster"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "feats",
+      "name": "Feats",
+      "description": "Exceptional abilities that go beyond normal training.",
+      "minPicks": 1,
+      "maxPicks": 2,
+      "options": [
+        {
+          "id": "feat-duelist",
+          "name": "Master Duelist",
+          "description": "In single combat, few can match your blade.",
+          "fate": 2,
+          "attributes": {
+            "agility": 1
+          },
+          "traits": [
+            "duelist"
+          ],
+          "image": "feats-feat-duelist.png"
+        },
+        {
+          "id": "feat-berserker",
+          "name": "Berserker Rage",
+          "description": "You can enter a fury that makes you nearly unstoppable.",
+          "fate": 2,
+          "attributes": {
+            "strength": 1
+          },
+          "traits": [
+            "berserker"
+          ],
+          "image": "feats-feat-berserker.png"
+        },
+        {
+          "id": "feat-iron-will",
+          "name": "Iron Will",
+          "description": "Your mind is a fortress. Mental attacks slide off you.",
+          "fate": 2,
+          "attributes": {
+            "will": 2
+          },
+          "traits": [
+            "iron-will"
+          ],
+          "image": "feats-feat-iron-will.png"
+        },
+        {
+          "id": "feat-eagle-eye",
+          "name": "Eagle Eye",
+          "description": "Your ranged attacks find their mark with uncanny precision.",
+          "fate": 2,
+          "traits": [
+            "sharpshooter"
+          ],
+          "image": "feats-feat-eagle-eye.png"
+        },
+        {
+          "id": "feat-linguist",
+          "name": "Polyglot",
+          "description": "Languages come easily to you. You speak many tongues.",
+          "fate": 1,
+          "traits": [
+            "polyglot"
+          ],
+          "image": "feats-feat-linguist.png"
+        }
+      ]
+    },
+    {
+      "id": "skills",
+      "name": "Skills",
+      "description": "Practical abilities you've developed.",
+      "minPicks": 1,
+      "maxPicks": 2,
+      "options": [
+        {
+          "id": "skill-medicine",
+          "name": "Healer's Knowledge",
+          "description": "You know how to treat wounds and illness.",
+          "fate": 1,
+          "traits": [
+            "healer"
+          ],
+          "image": "skills-skill-medicine.png"
+        },
+        {
+          "id": "skill-lockpicking",
+          "name": "Lockbreaker",
+          "description": "Locks are puzzles, and you solve puzzles.",
+          "fate": 1,
+          "traits": [
+            "lockpicker"
+          ],
+          "image": "skills-skill-lockpicking.png"
+        },
+        {
+          "id": "skill-lore",
+          "name": "Lorekeeper",
+          "description": "You have studied history, legends, and forgotten knowledge.",
+          "fate": 1,
+          "attributes": {
+            "cunning": 1
+          },
+          "traits": [
+            "lorekeeper"
+          ],
+          "image": "skills-skill-lore.png"
+        },
+        {
+          "id": "skill-survival",
+          "name": "Wilderness Expert",
+          "description": "The wild holds no terror for you.",
+          "fate": 1,
+          "traits": [
+            "wilderness-survival"
+          ],
+          "image": "skills-skill-survival.png"
+        },
+        {
+          "id": "skill-intimidation",
+          "name": "Fearsome Presence",
+          "description": "You know how to make others fear you.",
+          "fate": 1,
+          "attributes": {
+            "charisma": 1
+          },
+          "traits": [
+            "intimidating"
+          ],
+          "image": "skills-skill-intimidation.png"
+        },
+        {
+          "id": "skill-athletics",
+          "name": "Athletic",
+          "description": "Climbing, swimming, running - your body is a finely tuned instrument.",
+          "fate": 1,
+          "attributes": {
+            "agility": 1
+          },
+          "traits": [
+            "athletic"
+          ],
+          "image": "skills-skill-athletics.png"
+        }
+      ]
+    },
+    {
       "id": "virtueVice",
       "name": "Virtue & Vice",
       "description": "Your defining personality traits - both light and shadow.",
@@ -590,346 +1054,6 @@
       ]
     },
     {
-      "id": "edge",
-      "name": "Edge",
-      "description": "Your defining capability - what sets you apart.",
-      "minPicks": 1,
-      "maxPicks": 1,
-      "options": [
-        {
-          "id": "edge-warrior",
-          "name": "Born Fighter",
-          "description": "Combat comes naturally to you. You see openings others miss.",
-          "fate": 2,
-          "attributes": {
-            "strength": 1,
-            "agility": 1,
-            "endurance": 1
-          },
-          "traits": [
-            "combat-instincts"
-          ],
-          "image": "edge-edge-warrior.png"
-        },
-        {
-          "id": "edge-spellcaster",
-          "name": "Touched by Magic",
-          "description": "The arcane flows through you. You can learn to cast spells.",
-          "fate": 3,
-          "attributes": {
-            "will": 1,
-            "cunning": 1
-          },
-          "traits": [
-            "spellcaster",
-            "arcane-sensitivity"
-          ],
-          "image": "edge-edge-spellcaster.png"
-        },
-        {
-          "id": "edge-silver-tongue",
-          "name": "Silver Tongue",
-          "description": "Words are your weapon. You can talk your way into - or out of - anything.",
-          "image": "edge-edge-silver-tongue.png",
-          "fate": 2,
-          "attributes": {
-            "charisma": 2
-          },
-          "traits": [
-            "silver-tongued"
-          ]
-        },
-        {
-          "id": "edge-shadow",
-          "name": "Shadow Walker",
-          "description": "You move unseen, strike unseen, leave unseen.",
-          "fate": 2,
-          "attributes": {
-            "agility": 2,
-            "cunning": 1
-          },
-          "traits": [
-            "stealthy",
-            "shadow-walker"
-          ],
-          "image": "edge-edge-shadow.png"
-        },
-        {
-          "id": "edge-survivor",
-          "name": "Unkillable",
-          "description": "You've survived things that should have killed you. Fate isn't done with you.",
-          "image": "edge-edge-survivor.png",
-          "fate": 2,
-          "attributes": {
-            "endurance": 2,
-            "will": 1
-          },
-          "traits": [
-            "hard-to-kill"
-          ]
-        },
-        {
-          "id": "edge-leader",
-          "name": "Natural Leader",
-          "description": "Others look to you for guidance. Your presence inspires.",
-          "fate": 2,
-          "attributes": {
-            "charisma": 1,
-            "will": 1
-          },
-          "traits": [
-            "inspiring",
-            "commander"
-          ],
-          "image": "edge-edge-leader.png"
-        }
-      ]
-    },
-    {
-      "id": "skills",
-      "name": "Skills",
-      "description": "Practical abilities you've developed.",
-      "minPicks": 1,
-      "maxPicks": 2,
-      "options": [
-        {
-          "id": "skill-medicine",
-          "name": "Healer's Knowledge",
-          "description": "You know how to treat wounds and illness.",
-          "fate": 1,
-          "traits": [
-            "healer"
-          ],
-          "image": "skills-skill-medicine.png"
-        },
-        {
-          "id": "skill-lockpicking",
-          "name": "Lockbreaker",
-          "description": "Locks are puzzles, and you solve puzzles.",
-          "fate": 1,
-          "traits": [
-            "lockpicker"
-          ],
-          "image": "skills-skill-lockpicking.png"
-        },
-        {
-          "id": "skill-lore",
-          "name": "Lorekeeper",
-          "description": "You have studied history, legends, and forgotten knowledge.",
-          "fate": 1,
-          "attributes": {
-            "cunning": 1
-          },
-          "traits": [
-            "lorekeeper"
-          ],
-          "image": "skills-skill-lore.png"
-        },
-        {
-          "id": "skill-survival",
-          "name": "Wilderness Expert",
-          "description": "The wild holds no terror for you.",
-          "fate": 1,
-          "traits": [
-            "wilderness-survival"
-          ],
-          "image": "skills-skill-survival.png"
-        },
-        {
-          "id": "skill-intimidation",
-          "name": "Fearsome Presence",
-          "description": "You know how to make others fear you.",
-          "fate": 1,
-          "attributes": {
-            "charisma": 1
-          },
-          "traits": [
-            "intimidating"
-          ],
-          "image": "skills-skill-intimidation.png"
-        },
-        {
-          "id": "skill-athletics",
-          "name": "Athletic",
-          "description": "Climbing, swimming, running - your body is a finely tuned instrument.",
-          "fate": 1,
-          "attributes": {
-            "agility": 1
-          },
-          "traits": [
-            "athletic"
-          ],
-          "image": "skills-skill-athletics.png"
-        }
-      ]
-    },
-    {
-      "id": "feats",
-      "name": "Feats",
-      "description": "Exceptional abilities that go beyond normal training.",
-      "minPicks": 1,
-      "maxPicks": 2,
-      "options": [
-        {
-          "id": "feat-duelist",
-          "name": "Master Duelist",
-          "description": "In single combat, few can match your blade.",
-          "fate": 2,
-          "attributes": {
-            "agility": 1
-          },
-          "traits": [
-            "duelist"
-          ],
-          "image": "feats-feat-duelist.png"
-        },
-        {
-          "id": "feat-berserker",
-          "name": "Berserker Rage",
-          "description": "You can enter a fury that makes you nearly unstoppable.",
-          "fate": 2,
-          "attributes": {
-            "strength": 1
-          },
-          "traits": [
-            "berserker"
-          ],
-          "image": "feats-feat-berserker.png"
-        },
-        {
-          "id": "feat-iron-will",
-          "name": "Iron Will",
-          "description": "Your mind is a fortress. Mental attacks slide off you.",
-          "fate": 2,
-          "attributes": {
-            "will": 2
-          },
-          "traits": [
-            "iron-will"
-          ],
-          "image": "feats-feat-iron-will.png"
-        },
-        {
-          "id": "feat-eagle-eye",
-          "name": "Eagle Eye",
-          "description": "Your ranged attacks find their mark with uncanny precision.",
-          "fate": 2,
-          "traits": [
-            "sharpshooter"
-          ],
-          "image": "feats-feat-eagle-eye.png"
-        },
-        {
-          "id": "feat-linguist",
-          "name": "Polyglot",
-          "description": "Languages come easily to you. You speak many tongues.",
-          "fate": 1,
-          "traits": [
-            "polyglot"
-          ],
-          "image": "feats-feat-linguist.png"
-        }
-      ]
-    },
-    {
-      "id": "spells",
-      "name": "Spells",
-      "description": "Magical abilities (requires spellcaster trait).",
-      "minPicks": 1,
-      "maxPicks": 3,
-      "options": [
-        {
-          "id": "spell-fire",
-          "name": "Flame Conjuration",
-          "description": "You can summon and control fire.",
-          "image": "spells-spell-fire.png",
-          "fate": 1,
-          "traits": [
-            "pyromancer"
-          ],
-          "requires": [
-            {
-              "trait": "spellcaster"
-            }
-          ]
-        },
-        {
-          "id": "spell-healing",
-          "name": "Healing Light",
-          "description": "You can mend wounds with magical energy.",
-          "image": "spells-spell-healing.png",
-          "fate": 1,
-          "traits": [
-            "healer"
-          ],
-          "requires": [
-            {
-              "trait": "spellcaster"
-            }
-          ]
-        },
-        {
-          "id": "spell-illusion",
-          "name": "Veil of Shadows",
-          "description": "You can create illusions and bend perception. Begin today with a wisp of fog; with a century of effort summon walls and towers of light.",
-          "image": "spells-spell-illusion.png",
-          "fate": 1,
-          "traits": [
-            "illusionist"
-          ],
-          "requires": [
-            {
-              "trait": "spellcaster"
-            }
-          ]
-        },
-        {
-          "id": "spell-divination",
-          "name": "Third Eye",
-          "description": "You see what others do not: signs, portents; prophecies and histories.",
-          "image": "spells-spell-divination.png",
-          "fate": 1,
-          "traits": [
-            "seer"
-          ],
-          "requires": [
-            {
-              "trait": "spellcaster"
-            }
-          ]
-        },
-        {
-          "id": "spell-enchantment",
-          "name": "Mind Touch",
-          "description": "You wrench others wills to align to your own; twist their desires; violate the sanctity of the mind - do you enjoy it?",
-          "image": "spells-spell-enchantment.png",
-          "fate": 2,
-          "traits": [
-            "enchanter"
-          ],
-          "requires": [
-            {
-              "trait": "spellcaster"
-            }
-          ]
-        },
-        {
-          "id": "spell-fly",
-          "name": "Fly",
-          "description": "Fulfill the universal human dream: fall into the sky. Begin with an unnatural long-jump, then a slow hover, and eventually exceed the birds of prey.",
-          "image": "spells-spell-fly.png",
-          "traits": [
-            "flight"
-          ],
-          "requires": [
-            {
-              "trait": "spellcaster"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "gear",
       "name": "Gear",
       "description": "Your starting equipment.",
@@ -1020,7 +1144,7 @@
     }
   ],
   "optionImageConfig": {
-    "basePrompt": "You are generating option art for a dark fantasy RPG character creator.\nThese are selection cards shown during character creation - the image should be iconic, symbolic of the option, and somewhat abstract, but they should not include any non-diagetic text. No \"Elf\" label on an Elf picture.\nSquare 1:1 format, suitable for a card/button. Fill the image completely: no frame or whitespace.",
+    "basePrompt": "You are generating option art for a dark fantasy RPG character creator.\nThese are selection cards shown during character creation - the image should be iconic, symbolic of the option, and somewhat abstract, but they should not include any non-diagetic text. No \"Elf\" label on an Elf picture.\nFill the image completely: no frame or whitespace.",
     "styleModifiers": "Dark fantasy art style, painterly, dramatic lighting, striking color palette",
     "aspectRatio": "1:1",
     "imageSize": "1K",

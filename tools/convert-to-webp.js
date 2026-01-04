@@ -30,6 +30,9 @@ const FORCE = process.argv.includes('--force');
 const IMAGE_DIRS = [
   join(__dirname, '../src/public/images/portraits'),
   join(__dirname, '../src/public/images/options'),
+  join(__dirname, '../src/public/images/backgrounds/intro'),
+  join(__dirname, '../src/public/images/backgrounds/scenarios'),
+  join(__dirname, '../src/public/images/backgrounds/categories'),
 ];
 
 function getWebpPath(imagePath) {

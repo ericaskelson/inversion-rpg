@@ -51,9 +51,10 @@ async function preloadImages(srcs: string[], concurrency = 4): Promise<void> {
 
 interface CharacterCreatorProps {
   onComplete: (character: Character) => void;
+  onBack?: () => void;  // Called when user goes back from first category
 }
 
-function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
+function CharacterCreatorInner({ onComplete, onBack }: CharacterCreatorProps) {
   const {
     editMode,
     editorAvailable,
@@ -112,6 +113,8 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
   const handlePrevCategory = () => {
     if (currentCategoryIndex > 0) {
       setCurrentCategoryIndex(prev => prev - 1);
+    } else if (onBack) {
+      onBack();
     }
   };
 
@@ -352,7 +355,7 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
             <div className="creator-navigation">
               <button
                 onClick={handlePrevCategory}
-                disabled={currentCategoryIndex === 0}
+                disabled={currentCategoryIndex === 0 && !onBack}
                 className="nav-button"
               >
                 ← Previous
@@ -399,10 +402,10 @@ function CharacterCreatorInner({ onComplete }: CharacterCreatorProps) {
   );
 }
 
-export function CharacterCreator({ onComplete }: CharacterCreatorProps) {
+export function CharacterCreator({ onComplete, onBack }: CharacterCreatorProps) {
   return (
     <EditModeProvider initialData={initialData} initialAppearanceData={appearanceConfig}>
-      <CharacterCreatorInner onComplete={onComplete} />
+      <CharacterCreatorInner onComplete={onComplete} onBack={onBack} />
     </EditModeProvider>
   );
 }
